@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Guild – Défenses difficiles</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+  <h1>Défenses difficiles</h1>
+  <nav>
+    <button id="tab-report" class="active">Signaler une défense</button>
+    <button id="tab-stats">Top défenses</button>
+  </nav>
+</header>
+
+<main>
+  <!-- Onglet 1 : formulaire -->
+  <section id="page-report">
+    <div class="row">
+      <input id="player" placeholder="Pseudo (optionnel)" />
+    </div>
+
+    <div class="row">
+      <input id="search" placeholder="Recherche monstre..." />
+    </div>
+
+    <div id="monster-grid" class="grid"></div>
+
+    <div class="row picks">
+      <div>Ta sélection (3) :</div>
+      <div id="picks"></div>
+    </div>
+
+    <textarea id="notes" placeholder="Notes (optionnel)"></textarea>
+
+    <button id="send">Envoyer</button>
+    <div id="toast"></div>
+  </section>
+
+  <!-- Onglet 2 : stats -->
+  <section id="page-stats" class="hidden">
+    <div id="stats"></div>
+  </section>
+</main>
+
+<script src="monsters.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
