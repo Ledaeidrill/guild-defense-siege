@@ -1,6 +1,7 @@
 // === CONFIG ===
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwSwLs7MdkDR_PgubrCEL7GQvpCL8D0gGYlQ2JSCMHYY4xQ1YKvpTSMN6aDsmCt6xXCvA/exec';
 const TOKEN = 'Chaos_Destiny';
+
 // === UI état ===
 let picks = []; // {id,name,icon}
 
@@ -23,7 +24,7 @@ function matchesQuery(m, qRaw){
   if (!q) return true;
   const tokens = q.split(/\s+/);
 
-  // On cherche dans : nom éveillé, nom non éveillé, élément, aliases
+  // Recherche : nom éveillé, nom non éveillé, élément, aliases
   const hay = new Set([
     normalize(m.name),
     normalize(m.unawakened_name),
@@ -37,11 +38,19 @@ function matchesQuery(m, qRaw){
   });
 }
 
-const ELEMENT_ORDER = ['Fire','Water','Wind','Light','Dark'];
-const elemRank = el => {
-  const i = ELEMENT_ORDER.indexOf(el);
-  return i === -1 ? 999 : i;
-};
+function fixIconUrl(src){
+  if (!src) return src;
+  if (src.startsWith('https://swarfarm.com/unit_icon_')) {
+    return src.replace('https://swarfarm.com/', 'https://swarfarm.com/static/herders/images/monsters/');
+  }
+  if (src.startsWith('/unit_icon_')) {
+    return 'https://swarfarm.com/static/herders/images/monsters' + src;
+  }
+  if (src.startsWith('/static/herders/images/monsters/')) {
+    return 'https://swarfarm.com' + src;
+  }
+  return src;
+}
 
 function makeCard(m){
   const card = document.createElement('div');
@@ -50,40 +59,17 @@ function makeCard(m){
   card.onclick = () => addPick(m);
 
   const img = document.createElement('img');
-
-  // URL initiale
-  let src = m.icon || '';
-
-  // Si c’est un chemin “raccourci”, on reconstruit l’URL swarfarm complète
-  // Cas 1: https://swarfarm.com/unit_icon_XXXX.png
-  if (src.startsWith('https://swarfarm.com/unit_icon_')) {
-    src = src.replace('https://swarfarm.com/', 'https://swarfarm.com/static/herders/images/monsters/');
-  }
-  // Cas 2: chemin relatif /unit_icon_XXXX.png
-  if (src.startsWith('/unit_icon_')) {
-    src = 'https://swarfarm.com/static/herders/images/monsters' + src;
-  }
-  // Cas 3: déjà le bon chemin: /static/herders/images/monsters/...
-  if (src.startsWith('/static/herders/images/monsters/')) {
-    src = 'https://swarfarm.com' + src;
-  }
-
-  img.src = src;
+  img.src = fixIconUrl(m.icon || '');
   img.alt = m.name;
-
   img.onerror = () => {
-    // dernier filet de sécurité: réessayer avec le chemin “monsters/”
     if (!img.dataset.tried && img.src.includes('swarfarm.com/')) {
       img.dataset.tried = '1';
       img.src = img.src.replace('swarfarm.com/', 'swarfarm.com/static/herders/images/monsters/');
     } else {
-      img.remove(); // si ça échoue encore, on masque l’image
+      img.remove();
     }
   };
-
   card.appendChild(img);
-
-  // (On enlève le badge élément pour alléger visuellement)
 
   const span = document.createElement('span');
   span.className = 'name';
@@ -100,42 +86,44 @@ function renderGrid() {
 
   (window.MONSTERS || [])
     .filter(m => matchesQuery(m, q))
-    .sort((a,b) => {
-      const er = elemRank(a.element) - elemRank(b.element);
-      return er !== 0 ? er : a.name.localeCompare(b.name,'en',{sensitivity:'base'});
-    })
     .forEach(m => frag.appendChild(makeCard(m)));
 
   grid.appendChild(frag);
 }
 
-search.removeEventListener?.('input', renderGrid);
-search.addEventListener('input', renderGrid);
+// (3) Débounce sur la recherche pour une UI fluide
+let _searchTimer;
+search.addEventListener('input', () => {
+  clearTimeout(_searchTimer);
+  _searchTimer = setTimeout(renderGrid, 120);
+});
 renderGrid();
 
+// Sélection
 function addPick(m) {
   if (picks.find(p => p.id === m.id)) return;
   if (picks.length >= 3) { toast('Tu as déjà 3 monstres. Retire-en un.'); return; }
   picks.push(m);
   renderPicks();
 }
+
 function renderPicks() {
   const zone = document.getElementById('picks');
   zone.innerHTML = '';
   picks.forEach(p => {
     const div = document.createElement('div');
     div.className = 'pick';
-    div.dataset.id = p.id; // utile au besoin
+    div.dataset.id = p.id;
 
     const btn = document.createElement('button');
     btn.className = 'close';
     btn.type = 'button';
     btn.title = 'Retirer';
     btn.textContent = '✕';
-    btn.setAttribute('data-id', p.id); // <= pour la délégation
+    btn.setAttribute('data-id', p.id);
 
     const img = document.createElement('img');
-    img.src = p.icon; img.alt = p.name;
+    img.src = fixIconUrl(p.icon); img.alt = p.name;
 
     const label = document.createElement('div');
     label.className = 'pname';
@@ -146,17 +134,16 @@ function renderPicks() {
   });
 }
 
-// 1) Délégation: capte les clics sur les boutons .close dans #picks
+// Délégation: capte les clics sur les boutons .close dans #picks
 document.getElementById('picks').addEventListener('click', (e) => {
   const btn = e.target.closest('.close');
-  if (!btn) return;                 // clic ailleurs => on ignore
+  if (!btn) return;
   e.preventDefault();
   e.stopPropagation();
   const id = btn.getAttribute('data-id');
   removePick(Number(id));
 });
 
-// 2) Retirer un pick puis re-render
 function removePick(id) {
   picks = picks.filter(p => p.id !== id);
   renderPicks();
@@ -177,12 +164,15 @@ document.getElementById('send').onclick = async () => {
       body: 'payload=' + encodeURIComponent(payload)
     });
 
-    // Réponse JSON
     const json = await res.json();
     if (!json.ok) throw new Error(json.error || 'Erreur');
 
-    toast('Merci ! Défense enregistrée ✅');
-    picks = []; renderPicks(); document.getElementById('notes').value='';
+    // ✅ retour visuel + reset sélection
+    toast('Défense enregistrée ✅');
+    picks = [];
+    renderPicks();
+    document.getElementById('notes').value = '';
+    // (on garde le pseudo et la recherche tels quels)
   } catch (e) {
     console.error(e);
     toast('Échec de l’envoi. Vérifie l’URL/token ou le déploiement.');
@@ -220,4 +210,13 @@ async function loadStats() {
     console.error(e);
     box.innerHTML = 'Impossible de charger les stats.';
   }
+};
+
+// (1) Toast (feedback visuel)
+function toast(msg) {
+  const t = document.getElementById('toast');
+  if (!t) { alert(msg); return; }
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=> { t.textContent = ''; t.classList.remove('show'); }, 3000);
 }
