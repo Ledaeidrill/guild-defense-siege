@@ -7,14 +7,15 @@ main{
   padding:16px;
   max-width: min(var(--panel-width), 95vw);
   margin: 0 auto;
-  text-align:center;   /* centre les enfants inline/block-inline */
 }
+
 .row,
 .grid,
 #picks,
 textarea{
   margin-left:auto;
   margin-right:auto;   /* centre ces blocs */
+  width:100%;
 }
 .hidden{display:none}
 #toast{margin-top:8px;font-size:13px}
@@ -32,7 +33,8 @@ textarea{
 /* ===== Grille des monstres ===== */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(var(--icon), 1fr));
+  justify-content:center;                        /* centre les colonnes */
+  grid-template-columns: repeat(auto-fill, var(--icon)); /* 1 colonne = 1 icône */
   gap:8px;
   max-height:none;
   overflow:visible;
@@ -40,8 +42,9 @@ textarea{
   padding:10px;
   border-radius:12px;
   background:#0f1520;
-  width:var(--panel-width);
+  width:100%;                                    /* laisse main gérer la largeur */
 }
+
 .card{
   position:relative;
   display:flex;flex-direction:column;align-items:center;
@@ -58,6 +61,16 @@ textarea{
   object-fit:cover;
   background:#0b0f14;
 }
+.name{
+  font-size:10px;
+  line-height:11px;
+  text-align:center;
+  max-width: var(--icon);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 
 /* ===== Sélection des picks ===== */
 #picks{
