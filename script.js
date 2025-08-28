@@ -129,10 +129,21 @@ function renderPicks() {
   picks.forEach(p => {
     const div = document.createElement('div');
     div.className = 'pick';
-    const img = document.createElement('img'); img.src = p.icon; img.alt = p.name;
-    const name = document.createElement('span'); name.textContent = p.name;
-    const x = document.createElement('button'); x.textContent = '✕'; x.onclick = ()=>removePick(p.id);
-    div.append(img,name,x);
+
+    const btn = document.createElement('button');
+    btn.className = 'close';
+    btn.title = 'Retirer';
+    btn.textContent = '✕';
+    btn.onclick = ()=>removePick(p.id);
+
+    const img = document.createElement('img');
+    img.src = p.icon; img.alt = p.name;
+
+    const label = document.createElement('div');
+    label.className = 'pname';
+    label.textContent = p.name;
+
+    div.append(btn, img, label);
     zone.appendChild(div);
   });
 }
