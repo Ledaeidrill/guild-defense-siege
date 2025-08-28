@@ -1,5 +1,5 @@
 // === CONFIG ===
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxw6GzkHTKd4LPxTednMz2cPGTU301GKYHUmen7jCIecV3VPFghjJB1ERMLUZ_8dV0mmQ/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwSwLs7MdkDR_PgubrCEL7GQvpCL8D0gGYlQ2JSCMHYY4xQ1YKvpTSMN6aDsmCt6xXCvA/exec';
 const TOKEN = 'Chaos_Destiny';
 // === UI état ===
 let picks = []; // {id,name,icon}
