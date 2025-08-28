@@ -128,9 +128,14 @@ function renderPicks() {
 
     const btn = document.createElement('button');
     btn.className = 'close';
+    btn.type = 'button';
     btn.title = 'Retirer';
     btn.textContent = '✕';
-    btn.onclick = ()=>removePick(p.id);
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      removePick(p.id);
+    });
 
     const img = document.createElement('img');
     img.src = p.icon; img.alt = p.name;
@@ -143,11 +148,7 @@ function renderPicks() {
     zone.appendChild(div);
   });
 }
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  setTimeout(()=> t.textContent = '', 4000);
-}
+
 
 // Envoi
 document.getElementById('send').onclick = async () => {
