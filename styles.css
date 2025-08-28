@@ -103,6 +103,16 @@ textarea{
 }
 .pick .close:hover{ opacity:.9 }
 
+.name{
+  font-size:10px;
+  line-height:11px;
+  text-align:center;
+  max-width: var(--icon);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
 /* ===== Zone notes ===== */
 textarea{
   width:var(--panel-width);
