@@ -3,20 +3,8 @@ header{padding:14px 16px;border-bottom:1px solid #1f2a36;background:#0f1520;posi
 h1{margin:0 0 8px 0;font-size:20px}
 nav button{margin-right:8px;padding:8px 12px;border:1px solid #2b3b4a;background:#14202d;color:#e8eef5;border-radius:10px;cursor:pointer}
 nav button.active{background:#234567}
-main{
-  padding:16px;
-  max-width: min(var(--panel-width), 95vw);
-  margin: 0 auto;
-}
-
-.row,
-.grid,
-#picks,
-textarea{
-  margin-left:auto;
-  margin-right:auto;   /* centre ces blocs */
-  width:100%;
-}
+main{padding:16px;max-width:1200px;margin:0 auto}
+.row{margin:12px 0}
 .hidden{display:none}
 #toast{margin-top:8px;font-size:13px}
 .table{width:100%;border-collapse:collapse;margin-top:8px}
@@ -25,16 +13,15 @@ textarea{
 
 /* ===== Variables pour contrôler largeur et taille des icônes ===== */
 :root{
-  --panel-width: 1600px;   /* largeur commune grille + notes */
-  --icon: 34px;           /* taille icône dans la grille */
-  --pick-icon: 20px;      /* taille icône dans la sélection */
+  --panel-width: 980px;   /* largeur commune grille + notes */
+  --icon: 44px;           /* taille icône dans la grille */
+  --pick-icon: 34px;      /* taille icône dans la sélection */
 }
 
 /* ===== Grille des monstres ===== */
 .grid{
   display:grid;
-  justify-content:center;                        /* centre les colonnes */
-  grid-template-columns: repeat(auto-fill, var(--icon)); /* 1 colonne = 1 icône */
+  grid-template-columns:repeat(auto-fill, minmax(var(--icon), 1fr));
   gap:8px;
   max-height:none;
   overflow:visible;
@@ -42,9 +29,8 @@ textarea{
   padding:10px;
   border-radius:12px;
   background:#0f1520;
-  width:100%;                                    /* laisse main gérer la largeur */
+  width:var(--panel-width);
 }
-
 .card{
   position:relative;
   display:flex;flex-direction:column;align-items:center;
@@ -65,12 +51,11 @@ textarea{
   font-size:10px;
   line-height:11px;
   text-align:center;
-  max-width: var(--icon);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  max-width:calc(var(--icon) + 12px);
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
 }
-
 
 /* ===== Sélection des picks ===== */
 #picks{
