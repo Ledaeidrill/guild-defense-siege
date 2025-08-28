@@ -15,27 +15,84 @@ tabStats.onclick  = () => { tabStats.classList.add('active'); tabReport.classLis
 // Build grid
 const grid = document.getElementById('monster-grid');
 const search = document.getElementById('search');
-function renderGrid() {
-  const q = (search.value||'').trim().toLowerCase();
-  grid.innerHTML = '';
-  window.MONSTERS
-    .filter(m => !q || m.name.toLowerCase().includes(q))
-    .forEach(m => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.onclick = () => addPick(m);
-      const img = document.createElement('img');
-      img.src = m.icon;
-      img.alt = m.name;
-      img.onerror = () => { img.remove(); };
-      const span = document.createElement('span');
-      span.className = 'name';
-      span.textContent = m.name;
-      card.appendChild(img);
-      card.appendChild(span);
-      grid.appendChild(card);
-    });
+
+function normalize(s){ return (s||'').toString().trim().toLowerCase(); }
+
+function matchesQuery(m, qRaw){
+  const q = normalize(qRaw);
+  if (!q) return true;
+  const tokens = q.split(/\s+/);
+
+  // On cherche dans : nom éveillé, nom non éveillé, élément, aliases
+  const hay = new Set([
+    normalize(m.name),
+    normalize(m.unawakened_name),
+    normalize(m.element),
+    ...(m.aliases||[]).map(normalize),
+  ]);
+
+  return tokens.every(t => {
+    for (const h of hay) if (h.includes(t)) return true;
+    return false;
+  });
 }
+
+const ELEMENT_ORDER = ['Fire','Water','Wind','Light','Dark'];
+const elemRank = el => {
+  const i = ELEMENT_ORDER.indexOf(el);
+  return i === -1 ? 999 : i;
+};
+
+function makeCard(m){
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.title = `${m.name} • ${m.element}${m.unawakened_name ? ` • ${m.unawakened_name}`:''}`;
+  card.onclick = () => addPick(m);
+
+  const img = document.createElement('img');
+  img.src = m.icon; img.alt = m.name;
+  img.onerror = () => { img.remove(); };
+  card.appendChild(img);
+
+  // pastille élément
+  const chip = document.createElement('span');
+  chip.className = 'elem';
+  chip.textContent = m.element;
+  card.appendChild(chip);
+
+  // badge 2A si jamais tu ajoutes des 2nd awakenings plus tard
+  if (m.second_awaken) {
+    const b = document.createElement('span');
+    b.className = 'badge-2a';
+    b.textContent = '2A';
+    card.appendChild(b);
+  }
+
+  const span = document.createElement('span');
+  span.className = 'name';
+  span.textContent = m.name;
+  card.appendChild(span);
+
+  return card;
+}
+
+function renderGrid() {
+  const q = (search.value||'').trim();
+  grid.innerHTML = '';
+  const frag = document.createDocumentFragment();
+
+  (window.MONSTERS || [])
+    .filter(m => matchesQuery(m, q))
+    .sort((a,b) => {
+      const er = elemRank(a.element) - elemRank(b.element);
+      return er !== 0 ? er : a.name.localeCompare(b.name,'en',{sensitivity:'base'});
+    })
+    .forEach(m => frag.appendChild(makeCard(m)));
+
+  grid.appendChild(frag);
+}
+
+search.removeEventListener?.('input', renderGrid);
 search.addEventListener('input', renderGrid);
 renderGrid();
 
