@@ -75,19 +75,24 @@ document.getElementById('send').onclick = async () => {
   const player = document.getElementById('player').value;
   const notes  = document.getElementById('notes').value;
   const monsters = picks.map(p => p.name);
+
   try {
+    const payload = JSON.stringify({ token: TOKEN, player, monsters, notes });
     const res = await fetch(APPS_SCRIPT_URL, {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ token: TOKEN, player, monsters, notes })
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+      body: 'payload=' + encodeURIComponent(payload)
     });
+
+    // Réponse JSON
     const json = await res.json();
     if (!json.ok) throw new Error(json.error || 'Erreur');
+
     toast('Merci ! Défense enregistrée ✅');
     picks = []; renderPicks(); document.getElementById('notes').value='';
   } catch (e) {
     console.error(e);
-    toast('Échec de l’envoi. Vérifie l’URL/token.');
+    toast('Échec de l’envoi. Vérifie l’URL/token ou le déploiement.');
   }
 };
 
