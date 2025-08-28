@@ -102,6 +102,17 @@ function renderGrid() {
   grid.appendChild(frag);
 }
 
+// Index rapide nom -> monstre (lowercase)
+const MONS_BY_NAME = (() => {
+  const m = new Map();
+  (window.MONSTERS || []).forEach(x => m.set((x.name||'').toLowerCase(), x));
+  return m;
+})();
+function findMonsterByName(n){
+  return MONS_BY_NAME.get((n||'').toLowerCase()) || null;
+}
+
+
 
 // (3) Débounce sur la recherche pour une UI fluide
 let _searchTimer;
@@ -200,29 +211,56 @@ async function loadStats() {
     const res = await fetch(url);
     const json = await res.json();
     if (!json.ok) throw new Error(json.error || 'Erreur');
-    const rows = json.stats;
+
+    const rows = json.stats || [];
     if (!rows.length) { box.innerHTML = 'Aucune donnée pour l’instant.'; return; }
-    const tbl = document.createElement('table');
-    tbl.className = 'table';
-    const thead = document.createElement('thead');
-    thead.innerHTML = `<tr><th>Défense (ordre normalisé)</th><th>Count</th><th>Exemple</th></tr>`;
-    tbl.appendChild(thead);
-    const tbody = document.createElement('tbody');
+
+    // Liste visuelle
+    const list = document.createElement('div');
+    list.className = 'def-list';
+
     rows.forEach(r => {
-      const tr = document.createElement('tr');
-      const key = document.createElement('td'); key.className='key'; key.textContent = r.key;
-      const cnt = document.createElement('td'); cnt.textContent = r.count;
-      const ex  = document.createElement('td'); ex.textContent = (r.example||[]).join(' / ');
-      tr.append(key,cnt,ex); tbody.appendChild(tr);
+      const item = document.createElement('div');
+      item.className = 'def-item';
+
+      // Trio (3 vignettes comme les picks, sans la croix)
+      const trio = document.createElement('div');
+      trio.className = 'def-trio';
+
+      (r.trio || r.example || r.key.split(' / ')).forEach(name => {
+        const data = findMonsterByName(name) || { name, icon: '', };
+        const card = document.createElement('div');
+        card.className = 'pick def-pick';
+
+        const img = document.createElement('img');
+        img.src = fixIconUrl(data.icon || '');
+        img.alt = data.name;
+        img.onerror = () => { img.remove(); };
+
+        const label = document.createElement('div');
+        label.className = 'pname';
+        label.textContent = data.name;
+
+        card.append(img, label);
+        trio.appendChild(card);
+      });
+
+      // Compteur
+      const cnt = document.createElement('div');
+      cnt.className = 'def-count';
+      cnt.textContent = r.count;
+
+      item.append(trio, cnt);
+      list.appendChild(item);
     });
-    tbl.appendChild(tbody);
+
     box.innerHTML = '';
-    box.appendChild(tbl);
+    box.appendChild(list);
   } catch (e) {
     console.error(e);
     box.innerHTML = 'Impossible de charger les stats.';
   }
-};
+}
 
 // (1) Toast (feedback visuel)
 function toast(msg) {
