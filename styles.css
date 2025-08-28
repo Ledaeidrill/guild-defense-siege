@@ -58,6 +58,15 @@ textarea{
   object-fit:cover;
   background:#0b0f14;
 }
+.name{
+  font-size:10px;
+  line-height:11px;
+  text-align:center;
+  max-width: var(--icon);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 
 /* ===== Sélection des picks ===== */
 #picks{
@@ -102,16 +111,6 @@ textarea{
   line-height:18px; font-size:12px;
 }
 .pick .close:hover{ opacity:.9 }
-
-.name{
-  font-size:10px;
-  line-height:11px;
-  text-align:center;
-  max-width: var(--icon);
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
 
 /* ===== Zone notes ===== */
 textarea{
