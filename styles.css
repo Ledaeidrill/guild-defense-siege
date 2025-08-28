@@ -13,9 +13,9 @@ main{padding:16px;max-width: min(var(--panel-width), 95vw);margin:0 auto;}
 
 /* ===== Variables pour contrôler largeur et taille des icônes ===== */
 :root{
-  --panel-width: 1500px;   /* largeur commune grille + notes */
-  --icon: 44px;           /* taille icône dans la grille */
-  --pick-icon: 34px;      /* taille icône dans la sélection */
+  --panel-width: 1600px;   /* largeur commune grille + notes */
+  --icon: 34px;           /* taille icône dans la grille */
+  --pick-icon: 24px;      /* taille icône dans la sélection */
 }
 
 /* ===== Grille des monstres ===== */
