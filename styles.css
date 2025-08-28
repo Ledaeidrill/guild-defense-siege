@@ -48,14 +48,16 @@ main{padding:16px;max-width:1200px;margin:0 auto}
   background:#0b0f14;
 }
 .name{
+  width: var(--icon);          /* = largeur de l’icône */
+  max-width: var(--icon);
   font-size:10px;
   line-height:11px;
   text-align:center;
-  max-width:calc(var(--icon) + 12px);
-  white-space:nowrap;
-  text-overflow:ellipsis;
-  overflow:hidden;
+  white-space: nowrap;         /* 1 seule ligne */
+  overflow: hidden;            /* coupe ce qui dépasse */
+  text-overflow: ellipsis;     /* … à la fin */
 }
+
 
 /* ===== Sélection des picks ===== */
 #picks{
