@@ -3,7 +3,7 @@ header{padding:14px 16px;border-bottom:1px solid #1f2a36;background:#0f1520;posi
 h1{margin:0 0 8px 0;font-size:20px}
 nav button{margin-right:8px;padding:8px 12px;border:1px solid #2b3b4a;background:#14202d;color:#e8eef5;border-radius:10px;cursor:pointer}
 nav button.active{background:#234567}
-main{padding:16px;max-width:1200px;margin:0 auto}
+main{padding:16px;max-width: min(var(--panel-width), 95vw;margin:0 auto}
 .row{margin:12px 0}
 .hidden{display:none}
 #toast{margin-top:8px;font-size:13px}
