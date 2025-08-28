@@ -19,6 +19,12 @@ const search = document.getElementById('search');
 
 function normalize(s){ return (s||'').toString().trim().toLowerCase(); }
 
+const ELEMENT_ORDER = ['Fire','Water','Wind','Light','Dark'];
+const elemRank = (el) => {
+  const i = ELEMENT_ORDER.indexOf(el);
+  return i === -1 ? 999 : i;
+};
+
 function matchesQuery(m, qRaw){
   const q = normalize(qRaw);
   if (!q) return true;
@@ -86,10 +92,16 @@ function renderGrid() {
 
   (window.MONSTERS || [])
     .filter(m => matchesQuery(m, q))
+    // ⬇️ tri "comme avant" : élément puis nom
+    .sort((a,b) => {
+      const er = elemRank(a.element) - elemRank(b.element);
+      return er !== 0 ? er : a.name.localeCompare(b.name,'en',{sensitivity:'base'});
+    })
     .forEach(m => frag.appendChild(makeCard(m)));
 
   grid.appendChild(frag);
 }
+
 
 // (3) Débounce sur la recherche pour une UI fluide
 let _searchTimer;
