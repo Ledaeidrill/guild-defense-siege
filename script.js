@@ -46,27 +46,44 @@ const elemRank = el => {
 function makeCard(m){
   const card = document.createElement('div');
   card.className = 'card';
-  card.title = `${m.name} • ${m.element}${m.unawakened_name ? ` • ${m.unawakened_name}`:''}`;
+  card.title = `${m.name}${m.unawakened_name ? ` • ${m.unawakened_name}`:''}`;
   card.onclick = () => addPick(m);
 
   const img = document.createElement('img');
-  img.src = m.icon; img.alt = m.name;
-  img.onerror = () => { img.remove(); };
+
+  // URL initiale
+  let src = m.icon || '';
+
+  // Si c’est un chemin “raccourci”, on reconstruit l’URL swarfarm complète
+  // Cas 1: https://swarfarm.com/unit_icon_XXXX.png
+  if (src.startsWith('https://swarfarm.com/unit_icon_')) {
+    src = src.replace('https://swarfarm.com/', 'https://swarfarm.com/static/herders/images/monsters/');
+  }
+  // Cas 2: chemin relatif /unit_icon_XXXX.png
+  if (src.startsWith('/unit_icon_')) {
+    src = 'https://swarfarm.com/static/herders/images/monsters' + src;
+  }
+  // Cas 3: déjà le bon chemin: /static/herders/images/monsters/...
+  if (src.startsWith('/static/herders/images/monsters/')) {
+    src = 'https://swarfarm.com' + src;
+  }
+
+  img.src = src;
+  img.alt = m.name;
+
+  img.onerror = () => {
+    // dernier filet de sécurité: réessayer avec le chemin “monsters/”
+    if (!img.dataset.tried && img.src.includes('swarfarm.com/')) {
+      img.dataset.tried = '1';
+      img.src = img.src.replace('swarfarm.com/', 'swarfarm.com/static/herders/images/monsters/');
+    } else {
+      img.remove(); // si ça échoue encore, on masque l’image
+    }
+  };
+
   card.appendChild(img);
 
-  // pastille élément
-  const chip = document.createElement('span');
-  chip.className = 'elem';
-  chip.textContent = m.element;
-  card.appendChild(chip);
-
-  // badge 2A si jamais tu ajoutes des 2nd awakenings plus tard
-  if (m.second_awaken) {
-    const b = document.createElement('span');
-    b.className = 'badge-2a';
-    b.textContent = '2A';
-    card.appendChild(b);
-  }
+  // (On enlève le badge élément pour alléger visuellement)
 
   const span = document.createElement('span');
   span.className = 'name';
