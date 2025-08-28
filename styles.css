@@ -13,7 +13,7 @@ main{padding:16px;max-width:1200px;margin:0 auto}
 
 /* ===== Variables pour contrôler largeur et taille des icônes ===== */
 :root{
-  --panel-width: 1500px;   /* largeur commune grille + notes */
+  --panel-width: 1600px;   /* largeur commune grille + notes */
   --icon: 34px;           /* taille icône dans la grille */
   --pick-icon: 20px;      /* taille icône dans la sélection */
 }
@@ -46,15 +46,6 @@ main{padding:16px;max-width:1200px;margin:0 auto}
   border-radius:8px;
   object-fit:cover;
   background:#0b0f14;
-}
-.name{
-  font-size:10px;
-  line-height:11px;
-  text-align:center;
-  max-width:calc(var(--icon) + 12px);
-  white-space:nowrap;
-  text-overflow:ellipsis;
-  overflow:hidden;
 }
 
 /* ===== Sélection des picks ===== */
