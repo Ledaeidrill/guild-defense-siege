@@ -125,17 +125,14 @@ function renderPicks() {
   picks.forEach(p => {
     const div = document.createElement('div');
     div.className = 'pick';
+    div.dataset.id = p.id; // utile au besoin
 
     const btn = document.createElement('button');
     btn.className = 'close';
     btn.type = 'button';
     btn.title = 'Retirer';
     btn.textContent = '✕';
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      removePick(p.id);
-    });
+    btn.setAttribute('data-id', p.id); // <= pour la délégation
 
     const img = document.createElement('img');
     img.src = p.icon; img.alt = p.name;
@@ -149,6 +146,21 @@ function renderPicks() {
   });
 }
 
+// 1) Délégation: capte les clics sur les boutons .close dans #picks
+document.getElementById('picks').addEventListener('click', (e) => {
+  const btn = e.target.closest('.close');
+  if (!btn) return;                 // clic ailleurs => on ignore
+  e.preventDefault();
+  e.stopPropagation();
+  const id = btn.getAttribute('data-id');
+  removePick(Number(id));
+});
+
+// 2) Retirer un pick puis re-render
+function removePick(id) {
+  picks = picks.filter(p => p.id !== id);
+  renderPicks();
+}
 
 // Envoi
 document.getElementById('send').onclick = async () => {
