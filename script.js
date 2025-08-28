@@ -119,10 +119,6 @@ function addPick(m) {
   picks.push(m);
   renderPicks();
 }
-function removePick(id) {
-  picks = picks.filter(p => p.id !== id);
-  renderPicks();
-}
 function renderPicks() {
   const zone = document.getElementById('picks');
   zone.innerHTML = '';
@@ -147,7 +143,6 @@ function renderPicks() {
     zone.appendChild(div);
   });
 }
-
 function toast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
