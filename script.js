@@ -348,13 +348,12 @@ async function moveToHandled(key){
       headers:{ 'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8' },
       body: 'payload=' + encodeURIComponent(payload)
     });
-    const text = await res.text();
-    let json; try { json = JSON.parse(text); } catch { throw new Error('Réponse invalide: ' + text); }
-    if (!json.ok) throw new Error(json.error||'Erreur');
-    toast('Défense déplacée dans "Défenses traitées" ✅');
+    const json = await res.json();
+    if (!json.ok) { toast(json.error || 'Action admin impossible.'); return; }
+    toast('Défense déplacée dans "Défs traitées" ✅');
     await Promise.all([loadStats(), loadHandled()]);
   }catch(err){
-    console.error(err); toast('Action admin impossible: ' + err.message);
+    console.error(err); toast('Action admin impossible.');
   }
 }
 
@@ -366,13 +365,12 @@ async function unhandle(key){
       headers:{ 'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8' },
       body: 'payload=' + encodeURIComponent(payload)
     });
-    const text = await res.text();
-    let json; try { json = JSON.parse(text); } catch { throw new Error('Réponse invalide: ' + text); }
-    if (!json.ok) throw new Error(json.error||'Erreur');
+    const json = await res.json();
+    if (!json.ok) { toast(json.error || 'Action admin impossible.'); return; }
     toast('Défense rétablie dans Top défenses ✅');
     await Promise.all([loadStats(), loadHandled()]);
   }catch(err){
-    console.error(err); toast('Action admin impossible: ' + err.message);
+    console.error(err); toast('Action admin impossible.');
   }
 }
 
