@@ -1,39 +1,96 @@
-// === CONFIG ===
+// =====================
+// CONFIG
+// =====================
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwSwLs7MdkDR_PgubrCEL7GQvpCL8D0gGYlQ2JSCMHYY4xQ1YKvpTSMN6aDsmCt6xXCvA/exec';
 const TOKEN = 'Chaos_Destiny';
-
-// Admin (facultatif) via ?admin=XXXX
-function getParam(name){ const u=new URL(location.href); return u.searchParams.get(name); }
-const ADMIN_TOKEN_PARAM = getParam('admin');
+const ADMIN_TOKEN_PARAM = new URL(location.href).searchParams.get('admin');
 const isAdmin = () => !!ADMIN_TOKEN_PARAM;
 
-// === UI état ===
-let picks = []; // {id,name,icon}
-let inFlight = false;
+// =====================
+// HELPERS (utils UI + API)
+// =====================
+const qs = (sel, root = document) => root.querySelector(sel);
 
-// Onglets
-const tabReport = document.getElementById('tab-report');
-const tabStats  = document.getElementById('tab-stats');
-const tabDone   = document.getElementById('tab-done');
-const pageReport= document.getElementById('page-report');
-const pageStats = document.getElementById('page-stats');
-const pageDone  = document.getElementById('page-done');
-
-function activateTab(tabBtn, pageEl){
-  [tabReport,tabStats,tabDone].forEach(b=>b.classList.remove('active'));
-  tabBtn.classList.add('active');
-  [pageReport,pageStats,pageDone].forEach(p=>p.classList.add('hidden'));
-  pageEl.classList.remove('hidden');
+function toast(msg) {
+  const t = qs('#toast');
+  if (!t) { alert(msg); return; }
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => { t.textContent = ''; t.classList.remove('show'); }, 2800);
 }
-tabReport.onclick = () => activateTab(tabReport, pageReport);
-tabStats.onclick  = () => { activateTab(tabStats, pageStats); loadStats(); };
-tabDone.onclick   = () => { activateTab(tabDone, pageDone);  loadHandled(); };
-
-// Build grid
-const grid = document.getElementById('monster-grid');
-const search = document.getElementById('search');
 
 function normalize(s){ return (s||'').toString().trim().toLowerCase(); }
+
+function fixIconUrl(src){
+  if (!src) return src;
+  if (src.startsWith('https://swarfarm.com/unit_icon_')) {
+    return src.replace('https://swarfarm.com/', 'https://swarfarm.com/static/herders/images/monsters/');
+  }
+  if (src.startsWith('/unit_icon_')) {
+    return 'https://swarfarm.com/static/herders/images/monsters' + src;
+  }
+  if (src.startsWith('/static/herders/images/monsters/')) {
+    return 'https://swarfarm.com' + src;
+  }
+  return src;
+}
+
+async function apiGet(params){ // params: { token, mode }
+  const url = APPS_SCRIPT_URL + '?' + new URLSearchParams(params).toString();
+  const res = await fetch(url);
+  return res.json();
+}
+
+async function apiPost(payloadObj){ // encodé pour éviter le preflight
+  const payload = JSON.stringify(payloadObj);
+  const res = await fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    body: 'payload=' + encodeURIComponent(payload)
+  });
+  const txt = await res.text();
+  try { return JSON.parse(txt); }
+  catch { throw new Error('Réponse invalide: ' + txt); }
+}
+
+// =====================
+// ÉTAT UI + onglets
+// =====================
+let picks = []; // [{id,name,icon}]
+let inFlight = false;
+
+const tabReport = qs('#tab-report');
+const tabStats  = qs('#tab-stats');
+const tabDone   = qs('#tab-done');
+const pageReport= qs('#page-report');
+const pageStats = qs('#page-stats');
+const pageDone  = qs('#page-done');
+
+function activateTab(tabBtn, pageEl){
+  [tabReport,tabStats,tabDone].forEach(b=>b?.classList.remove('active'));
+  tabBtn?.classList.add('active');
+  [pageReport,pageStats,pageDone].forEach(p=>p?.classList.add('hidden'));
+  pageEl?.classList.remove('hidden');
+}
+tabReport?.addEventListener('click', () => activateTab(tabReport, pageReport));
+tabStats ?.addEventListener('click', () => { activateTab(tabStats, pageStats); loadStats(); });
+tabDone  ?.addEventListener('click', () => { activateTab(tabDone, pageDone);  loadHandled(); });
+
+// =====================
+// INDEX MONSTRES pour accès rapide par nom
+// =====================
+const MONS_BY_NAME = (() => {
+  const m = new Map();
+  (window.MONSTERS || []).forEach(x => m.set((x.name||'').toLowerCase(), x));
+  return m;
+})();
+const findMonsterByName = (n) => MONS_BY_NAME.get((n||'').toLowerCase()) || null;
+
+// =====================
+// GRILLE : rendu + recherche
+// =====================
+const grid   = qs('#monster-grid');
+const search = qs('#search');
 
 function matchesQuery(m, qRaw){
   const q = normalize(qRaw);
@@ -51,24 +108,10 @@ function matchesQuery(m, qRaw){
 const ELEMENT_ORDER = ['Fire','Water','Wind','Light','Dark'];
 const elemRank = el => { const i = ELEMENT_ORDER.indexOf(el); return i===-1?999:i; };
 
-function fixIconUrl(src){
-  if (!src) return src;
-  if (src.startsWith('https://swarfarm.com/unit_icon_')) {
-    return src.replace('https://swarfarm.com/', 'https://swarfarm.com/static/herders/images/monsters/');
-  }
-  if (src.startsWith('/unit_icon_')) {
-    return 'https://swarfarm.com/static/herders/images/monsters' + src;
-  }
-  if (src.startsWith('/static/herders/images/monsters/')) {
-    return 'https://swarfarm.com' + src;
-  }
-  return src;
-}
-
 function makeCard(m){
   const card = document.createElement('div');
   card.className = 'card';
-  card.title = `${m.name}`;
+  card.title = m.name;
   card.onclick = () => addPick(m);
 
   const img = document.createElement('img');
@@ -91,7 +134,7 @@ function makeCard(m){
 }
 
 function renderGrid() {
-  const q = (search.value||'').trim();
+  const q = (search?.value||'').trim();
   grid.innerHTML = '';
   const frag = document.createDocumentFragment();
 
@@ -106,38 +149,40 @@ function renderGrid() {
   grid.appendChild(frag);
 }
 
-// Débounce sur la recherche
+// Débounce recherche
 let _searchTimer;
-search.addEventListener('input', () => { clearTimeout(_searchTimer); _searchTimer = setTimeout(renderGrid, 120); });
+search?.addEventListener('input', () => { clearTimeout(_searchTimer); _searchTimer = setTimeout(renderGrid, 120); });
 renderGrid();
 
-// Sélection
+// =====================
+// SÉLECTION + drag & drop (réordonnable)
+// =====================
 function addPick(m) {
   if (picks.find(p => p.id === m.id)) return;
-  if (picks.length >= 3) { 
-    toast('Tu as déjà 3 monstres. Retire-en un.'); 
-    return; 
-  }
+  if (picks.length >= 3) { toast('Tu as déjà 3 monstres. Retire-en un.'); return; }
   picks.push(m);
   renderPicks();
 
-  // ✅ Réinitialiser la recherche et recharger la grille complète
-  search.value = '';
+  // reset recherche + recharger toute la grille (plus fluide)
+  if (search) search.value = '';
   renderGrid();
 }
 
+function removePick(id) {
+  picks = picks.filter(p => p.id !== id);
+  renderPicks();
+}
 
 function renderPicks() {
-  const zone = document.getElementById('picks');
+  const zone = qs('#picks');
   zone.innerHTML = '';
   picks.forEach((p, index) => {
     const div = document.createElement('div');
     div.className = 'pick';
     div.dataset.id = p.id;
     div.dataset.index = index;
-    div.draggable = true;   // ✅ permet le drag
+    div.draggable = true; // drag natif
 
-    // … bouton close + image + label identiques
     const btn = document.createElement('button');
     btn.className = 'close';
     btn.type = 'button';
@@ -155,64 +200,53 @@ function renderPicks() {
     div.append(btn, img, label);
     zone.appendChild(div);
   });
-
   enableDragAndDrop(zone);
 }
 
-document.getElementById('picks').addEventListener('click', (e) => {
+qs('#picks')?.addEventListener('click', (e) => {
   const btn = e.target.closest('.close');
   if (!btn) return;
   e.preventDefault(); e.stopPropagation();
   const id = Number(btn.getAttribute('data-id'));
   removePick(id);
 });
-function removePick(id) {
-  picks = picks.filter(p => p.id !== id);
-  renderPicks();
-}
 
 function enableDragAndDrop(container) {
-  let dragSrcEl = null;
-
   container.querySelectorAll('.pick').forEach(el => {
     el.addEventListener('dragstart', (e) => {
-      dragSrcEl = el;
       e.dataTransfer.effectAllowed = 'move';
       e.dataTransfer.setData('text/plain', el.dataset.index);
       el.classList.add('dragging');
     });
 
-    el.addEventListener('dragend', () => {
-      el.classList.remove('dragging');
-    });
+    el.addEventListener('dragend', () => el.classList.remove('dragging'));
 
-    el.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      e.dataTransfer.dropEffect = 'move';
-    });
+    el.addEventListener('dragover', (e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; });
 
     el.addEventListener('drop', (e) => {
       e.stopPropagation();
-      const srcIndex = parseInt(e.dataTransfer.getData('text/plain'));
+      const srcIndex  = parseInt(e.dataTransfer.getData('text/plain'));
       const destIndex = parseInt(el.dataset.index);
-      if (srcIndex !== destIndex) {
-        // réordonner picks[]
+      if (!Number.isNaN(srcIndex) && !Number.isNaN(destIndex) && srcIndex !== destIndex) {
         const moved = picks.splice(srcIndex, 1)[0];
         picks.splice(destIndex, 0, moved);
-        renderPicks(); // re-render pour indices propres
+        renderPicks(); // re-render pour renuméroter les index
       }
       return false;
     });
   });
 }
 
-// Envoi + protection double clic + feedback
-const sendBtn = document.getElementById('send');
-sendBtn.onclick = async () => {
+// =====================
+// ENVOI
+// =====================
+const sendBtn = qs('#send');
+sendBtn?.addEventListener('click', async () => {
   if (inFlight) return;
   if (picks.length !== 3) return toast('Sélectionne exactement 3 monstres.');
-  const player = document.getElementById('player').value;
-  const notes  = document.getElementById('notes').value;
+
+  const player   = qs('#player')?.value || '';
+  const notes    = qs('#notes') ?.value || '';
   const monsters = picks.map(p => p.name);
 
   try {
@@ -220,31 +254,18 @@ sendBtn.onclick = async () => {
     sendBtn.disabled = true;
     sendBtn.classList.add('sending');
 
-    const payload = JSON.stringify({ token: TOKEN, player, monsters, notes });
-    const res = await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-      body: 'payload=' + encodeURIComponent(payload)
-    });
+    const json = await apiPost({ token: TOKEN, player, monsters, notes });
 
-    const text = await res.text();
-    let json;
-    try { json = JSON.parse(text); } catch { throw new Error('Réponse invalide: ' + text); }
-
-    // ✅ cas "déjà traitée"
+    // déjà traitée
     if (json.already_handled) {
       toast(json.message || 'Défense déjà traitée — va voir ingame les counters.');
-      picks = []; renderPicks(); document.getElementById('notes').value='';
+      picks = []; renderPicks(); if (qs('#notes')) qs('#notes').value='';
       return;
     }
-
-    if (!json.ok) {
-      toast(json.error || 'Erreur');
-      return; // ne pas vider la sélection
-    }
+    if (!json.ok) { toast(json.error || 'Erreur'); return; }
 
     toast('Défense enregistrée ✅');
-    picks = []; renderPicks(); document.getElementById('notes').value='';
+    picks = []; renderPicks(); if (qs('#notes')) qs('#notes').value='';
   } catch (e) {
     console.error(e);
     toast('Échec de l’envoi. Vérifie l’URL/token ou le déploiement.');
@@ -253,24 +274,14 @@ sendBtn.onclick = async () => {
     sendBtn.disabled = false;
     sendBtn.classList.remove('sending');
   }
-};
+});
 
-// ===== Top défenses / Défs traitées =====
-
-// Index rapide nom -> monstre
-const MONS_BY_NAME = (() => {
-  const m = new Map();
-  (window.MONSTERS || []).forEach(x => m.set((x.name||'').toLowerCase(), x));
-  return m;
-})();
-function findMonsterByName(n){ return MONS_BY_NAME.get((n||'').toLowerCase()) || null; }
-
+// =====================
+// TOP DÉFENSES / DÉFS TRAITÉES
+// =====================
 function escapeHtml(s){
-  return (s||'').replace(/[&<>"']/g, c => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-  }[c]));
+  return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
-
 function cardHtmlByName(name){
   const d = findMonsterByName(name) || { name, icon:'' };
   const src = fixIconUrl(d.icon||'');
@@ -282,12 +293,10 @@ function cardHtmlByName(name){
 }
 
 async function loadStats() {
-  const box = document.getElementById('stats');
+  const box = qs('#stats');
   box.innerHTML = 'Chargement…';
   try {
-    const url = `${APPS_SCRIPT_URL}?token=${encodeURIComponent(TOKEN)}&mode=stats`;
-    const res = await fetch(url);
-    const json = await res.json();
+    const json = await apiGet({ token: TOKEN, mode: 'stats' });
     if (!json.ok) throw new Error(json.error || 'Erreur');
 
     const rows = json.stats || [];
@@ -310,14 +319,17 @@ async function loadStats() {
     html += `</div>`;
     box.innerHTML = html;
 
+    // délégation pour boutons "Traiter"
     if (isAdmin()) {
       const list = box.querySelector('.def-list');
-      list.addEventListener('click', (e) => {
+      list.addEventListener('click', async (e) => {
         const btn = e.target.closest('.act-handle');
         if (!btn) return;
         const key = btn.getAttribute('data-key');
-        if (!key) return;
-        moveToHandled(key);
+        const json = await apiPost({ action:'handle', admin_token: ADMIN_TOKEN_PARAM, key });
+        if (!json.ok) return toast(json.error || 'Action admin impossible.');
+        toast('Défense déplacée dans "Défs traitées" ✅');
+        await Promise.all([loadStats(), loadHandled()]);
       });
     }
   } catch (e) {
@@ -327,12 +339,10 @@ async function loadStats() {
 }
 
 async function loadHandled() {
-  const box = document.getElementById('done');
+  const box = qs('#done');
   box.innerHTML = 'Chargement…';
   try {
-    const url = `${APPS_SCRIPT_URL}?token=${encodeURIComponent(TOKEN)}&mode=handled`;
-    const res = await fetch(url);
-    const json = await res.json();
+    const json = await apiGet({ token: TOKEN, mode: 'handled' });
     if (!json.ok) throw new Error(json.error || 'Erreur');
 
     const rows = json.handled || [];
@@ -344,7 +354,6 @@ async function loadHandled() {
     rows.forEach(r => {
       const item = document.createElement('div');
       item.className = 'def-item';
-
       const trio = document.createElement('div');
       trio.className = 'def-trio';
 
@@ -371,13 +380,17 @@ async function loadHandled() {
         const btn = document.createElement('button');
         btn.className = 'btn-ghost';
         btn.textContent = 'Rétablir';
-        btn.onclick = () => unhandle(r.key);
+        btn.onclick = async () => {
+          const json2 = await apiPost({ action:'unhandle', admin_token: ADMIN_TOKEN_PARAM, key: r.key });
+          if (!json2.ok) return toast(json2.error || 'Action admin impossible.');
+          toast('Défense rétablie dans Top défenses ✅');
+          await Promise.all([loadStats(), loadHandled()]);
+        };
         right.appendChild(btn);
         item.append(trio, right);
       } else {
         item.append(trio);
       }
-
       list.appendChild(item);
     });
 
@@ -387,54 +400,4 @@ async function loadHandled() {
     console.error(e);
     box.innerHTML = 'Impossible de charger les défenses traitées.';
   }
-}
-
-// Actions admin
-async function moveToHandled(key){
-  console.log(">>> [moveToHandled] key:", key);
-  try{
-    const payload = JSON.stringify({ action:'handle', admin_token: ADMIN_TOKEN_PARAM, key });
-    const res = await fetch(APPS_SCRIPT_URL, {
-      method:'POST',
-      headers:{ 'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8' },
-      body: 'payload=' + encodeURIComponent(payload)
-    });
-    console.log(">>> [moveToHandled] HTTP:", res.status);
-    const txt = await res.text(); console.log(">>> [moveToHandled] raw:", txt);
-    const json = JSON.parse(txt);
-    if (!json.ok) { toast(json.error || 'Action admin impossible.'); return; }
-    toast('Défense déplacée dans "Défs traitées" ✅');
-    await Promise.all([loadStats(), loadHandled()]);
-  }catch(err){
-    console.error(">>> [moveToHandled] err:", err); toast('Action admin impossible.');
-  }
-}
-
-async function unhandle(key){
-  console.log(">>> [unhandle] key:", key);
-  try{
-    const payload = JSON.stringify({ action:'unhandle', admin_token: ADMIN_TOKEN_PARAM, key });
-    const res = await fetch(APPS_SCRIPT_URL, {
-      method:'POST',
-      headers:{ 'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8' },
-      body: 'payload=' + encodeURIComponent(payload)
-    });
-    console.log(">>> [unhandle] HTTP:", res.status);
-    const txt = await res.text(); console.log(">>> [unhandle] raw:", txt);
-    const json = JSON.parse(txt);
-    if (!json.ok) { toast(json.error || 'Action admin impossible.'); return; }
-    toast('Défense rétablie dans Top défenses ✅');
-    await Promise.all([loadStats(), loadHandled()]);
-  }catch(err){
-    console.error(">>> [unhandle] err:", err); toast('Action admin impossible.');
-  }
-}
-
-// Toast
-function toast(msg) {
-  const t = document.getElementById('toast');
-  if (!t) { alert(msg); return; }
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(()=> { t.textContent = ''; t.classList.remove('show'); }, 2800);
 }
