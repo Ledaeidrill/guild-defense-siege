@@ -68,7 +68,7 @@ function fixIconUrl(src){
 function makeCard(m){
   const card = document.createElement('div');
   card.className = 'card';
-  card.title = `${m.name}`;  // tooltip simple
+  card.title = `${m.name}`;
   card.onclick = () => addPick(m);
 
   const img = document.createElement('img');
@@ -77,7 +77,7 @@ function makeCard(m){
   img.onerror = () => {
     if (!img.dataset.tried && img.src.includes('swarfarm.com/')) {
       img.dataset.tried = '1';
-      img.src = img.src.replace('swarfarm.com/', 'swarfarm.com/static/herders/images/monsters/');
+      img.src = img.src.replace('swarfarm.com/', 'https://swarfarm.com/static/herders/images/monsters/');
     } else { img.remove(); }
   };
   card.appendChild(img);
@@ -182,12 +182,15 @@ sendBtn.onclick = async () => {
     let json;
     try { json = JSON.parse(text); } catch { throw new Error('Réponse invalide: ' + text); }
 
+    // ✅ cas "déjà traitée"
+    if (json.already_handled) {
+      toast(json.message || 'Défense déjà traitée — va voir ingame les counters.');
+      picks = []; renderPicks(); document.getElementById('notes').value='';
+      return;
+    }
+
     if (!json.ok) {
-      if (json.error === 'already_handled') {
-        toast('Défense déjà traitée — va voir ingame les counters.');
-      } else {
-        toast(json.error || 'Erreur');
-      }
+      toast(json.error || 'Erreur');
       return; // ne pas vider la sélection
     }
 
@@ -238,22 +241,9 @@ async function loadStats() {
     const json = await res.json();
     if (!json.ok) throw new Error(json.error || 'Erreur');
 
-    // ✅ si déjà traitée, afficher le message et stopper
-    if (json.already_handled) {
-      toast(json.message || 'Défense déjà traitée.');
-      picks = []; renderPicks();
-      document.getElementById('notes').value = '';
-      return;
-    }
-
-    toast('Défense enregistrée ✅');
-    picks = []; renderPicks();
-    document.getElementById('notes').value = '';
-
     const rows = json.stats || [];
     if (!rows.length) { box.innerHTML = 'Aucune donnée pour l’instant.'; return; }
 
-    // --- Build HTML string (plus rapide) ---
     let html = `<div class="def-list">`;
     for (const r of rows) {
       const trio = (r.trio || r.key.split(' / '));
@@ -271,7 +261,6 @@ async function loadStats() {
     html += `</div>`;
     box.innerHTML = html;
 
-    // Délégation robuste : on écoute sur le conteneur des tops
     if (isAdmin()) {
       const list = box.querySelector('.def-list');
       list.addEventListener('click', (e) => {
@@ -351,7 +340,7 @@ async function loadHandled() {
   }
 }
 
-// Actions admin (avec messages d’erreur plus explicites)
+// Actions admin
 async function moveToHandled(key){
   console.log(">>> [moveToHandled] key:", key);
   try{
