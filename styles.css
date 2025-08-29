@@ -45,15 +45,26 @@ main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
   .field.narrow{ max-width: 100%; } /* mobile: pleine largeur */
 }
 
-
 /* Panneau scrollable (recherche sticky + grille) */
 .panel{
-  border:1px solid #233243; border-radius:12px; background:var(--bg2);
+  border:1px solid #233243;
+  border-radius:12px;
+  background:var(--bg2);
   padding:10px;
-  /* Hauteur responsive : jamais sous le header */
-  max-height: clamp(360px, calc(100vh - 280px), 78vh);
-  overflow:auto;
+  max-height: clamp(360px, calc(100vh - 300px), 78vh);
+  overflow-y: auto;     /* scroll seulement vertical */
+  overflow-x: hidden;   /* jamais de scroll horizontal */
 }
+
+.grid{
+  display:grid;
+  justify-content:center;
+  grid-template-columns: repeat(auto-fill, var(--icon));
+  gap:8px;
+  width:100%;           /* s’adapte au panel */
+  max-width:100%;       /* évite tout dépassement */
+}
+
 .panel .sticky{
   position:sticky; top:0; background:var(--bg2);
   z-index:5; padding-top:6px; margin-top:-6px; /* pour coller proprement */
@@ -62,10 +73,11 @@ main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
 /* Grille */
 .grid{
   display:grid;
-  justify-content:center;                              /* centre les colonnes */
-  grid-template-columns: repeat(auto-fill, var(--icon)); /* colonnes fixes */
+  justify-content:center;
+  grid-template-columns: repeat(auto-fill, var(--icon));
   gap:8px;
-  width:100%;
+  width:100%;           /* s’adapte au panel */
+  max-width:100%;       /* évite tout dépassement */
 }
 .card{
   position:relative;
