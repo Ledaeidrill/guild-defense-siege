@@ -2,26 +2,32 @@
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwSwLs7MdkDR_PgubrCEL7GQvpCL8D0gGYlQ2JSCMHYY4xQ1YKvpTSMN6aDsmCt6xXCvA/exec';
 const TOKEN = 'Chaos_Destiny';
 
+// Admin (facultatif) via ?admin=XXXX
+function getParam(name){ const u=new URL(location.href); return u.searchParams.get(name); }
+const ADMIN_TOKEN_PARAM = getParam('admin');
+const isAdmin = () => !!ADMIN_TOKEN_PARAM;
+
 // === UI état ===
 let picks = []; // {id,name,icon}
+let inFlight = false;
 
-// Tabs
+// Onglets
 const tabReport = document.getElementById('tab-report');
 const tabStats  = document.getElementById('tab-stats');
+const tabDone   = document.getElementById('tab-done');
 const pageReport= document.getElementById('page-report');
 const pageStats = document.getElementById('page-stats');
-const tabDone = document.getElementById('tab-done');
-const pageDone = document.getElementById('page-done');
+const pageDone  = document.getElementById('page-done');
 
-tabReport.onclick = () => { tabReport.classList.add('active'); tabStats.classList.remove('active'); pageReport.classList.remove('hidden'); pageStats.classList.add('hidden'); };
-tabStats.onclick  = () => { tabStats.classList.add('active'); tabReport.classList.remove('active'); pageStats.classList.remove('hidden'); pageReport.classList.add('hidden'); loadStats(); };
-tabDone.onclick = () => {
-  tabDone.classList.add('active');
-  tabReport.classList.remove('active'); tabStats.classList.remove('active');
-  pageDone.classList.remove('hidden');
-  pageReport.classList.add('hidden'); pageStats.classList.add('hidden');
-  loadHandled();
-};
+function activateTab(tabBtn, pageEl){
+  [tabReport,tabStats,tabDone].forEach(b=>b.classList.remove('active'));
+  tabBtn.classList.add('active');
+  [pageReport,pageStats,pageDone].forEach(p=>p.classList.add('hidden'));
+  pageEl.classList.remove('hidden');
+}
+tabReport.onclick = () => activateTab(tabReport, pageReport);
+tabStats.onclick  = () => { activateTab(tabStats, pageStats); loadStats(); };
+tabDone.onclick   = () => { activateTab(tabDone, pageDone);  loadHandled(); };
 
 // Build grid
 const grid = document.getElementById('monster-grid');
@@ -29,30 +35,21 @@ const search = document.getElementById('search');
 
 function normalize(s){ return (s||'').toString().trim().toLowerCase(); }
 
-const ELEMENT_ORDER = ['Fire','Water','Wind','Light','Dark'];
-const elemRank = (el) => {
-  const i = ELEMENT_ORDER.indexOf(el);
-  return i === -1 ? 999 : i;
-};
-
 function matchesQuery(m, qRaw){
   const q = normalize(qRaw);
   if (!q) return true;
   const tokens = q.split(/\s+/);
-
-  // Recherche : nom éveillé, nom non éveillé, élément, aliases
   const hay = new Set([
     normalize(m.name),
     normalize(m.unawakened_name),
     normalize(m.element),
     ...(m.aliases||[]).map(normalize),
   ]);
-
-  return tokens.every(t => {
-    for (const h of hay) if (h.includes(t)) return true;
-    return false;
-  });
+  return tokens.every(t => { for (const h of hay) if (h.includes(t)) return true; return false; });
 }
+
+const ELEMENT_ORDER = ['Fire','Water','Wind','Light','Dark'];
+const elemRank = el => { const i = ELEMENT_ORDER.indexOf(el); return i===-1?999:i; };
 
 function fixIconUrl(src){
   if (!src) return src;
@@ -81,9 +78,7 @@ function makeCard(m){
     if (!img.dataset.tried && img.src.includes('swarfarm.com/')) {
       img.dataset.tried = '1';
       img.src = img.src.replace('swarfarm.com/', 'swarfarm.com/static/herders/images/monsters/');
-    } else {
-      img.remove();
-    }
+    } else { img.remove(); }
   };
   card.appendChild(img);
 
@@ -102,7 +97,6 @@ function renderGrid() {
 
   (window.MONSTERS || [])
     .filter(m => matchesQuery(m, q))
-    // ⬇️ tri "comme avant" : élément puis nom
     .sort((a,b) => {
       const er = elemRank(a.element) - elemRank(b.element);
       return er !== 0 ? er : a.name.localeCompare(b.name,'en',{sensitivity:'base'});
@@ -112,22 +106,9 @@ function renderGrid() {
   grid.appendChild(frag);
 }
 
-// Index rapide nom -> monstre (lowercase)
-const MONS_BY_NAME = (() => {
-  const m = new Map();
-  (window.MONSTERS || []).forEach(x => m.set((x.name||'').toLowerCase(), x));
-  return m;
-})();
-function findMonsterByName(n){
-  return MONS_BY_NAME.get((n||'').toLowerCase()) || null;
-}
-
-// Débounce sur la recherche pour une UI fluide
+// Débounce sur la recherche
 let _searchTimer;
-search.addEventListener('input', () => {
-  clearTimeout(_searchTimer);
-  _searchTimer = setTimeout(renderGrid, 120);
-});
+search.addEventListener('input', () => { clearTimeout(_searchTimer); _searchTimer = setTimeout(renderGrid, 120); });
 renderGrid();
 
 // Sélection
@@ -164,30 +145,32 @@ function renderPicks() {
     zone.appendChild(div);
   });
 }
-
-// Délégation: capte les clics sur les boutons .close dans #picks
 document.getElementById('picks').addEventListener('click', (e) => {
   const btn = e.target.closest('.close');
   if (!btn) return;
-  e.preventDefault();
-  e.stopPropagation();
-  const id = btn.getAttribute('data-id');
-  removePick(Number(id));
+  e.preventDefault(); e.stopPropagation();
+  const id = Number(btn.getAttribute('data-id'));
+  removePick(id);
 });
-
 function removePick(id) {
   picks = picks.filter(p => p.id !== id);
   renderPicks();
 }
 
-// Envoi
-document.getElementById('send').onclick = async () => {
+// Envoi + protection double clic + feedback
+const sendBtn = document.getElementById('send');
+sendBtn.onclick = async () => {
+  if (inFlight) return;
   if (picks.length !== 3) return toast('Sélectionne exactement 3 monstres.');
   const player = document.getElementById('player').value;
   const notes  = document.getElementById('notes').value;
   const monsters = picks.map(p => p.name);
 
   try {
+    inFlight = true;
+    sendBtn.disabled = true;
+    sendBtn.classList.add('sending');
+
     const payload = JSON.stringify({ token: TOKEN, player, monsters, notes });
     const res = await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
@@ -198,19 +181,28 @@ document.getElementById('send').onclick = async () => {
     const json = await res.json();
     if (!json.ok) throw new Error(json.error || 'Erreur');
 
-    // ✅ retour visuel + reset sélection
     toast('Défense enregistrée ✅');
-    picks = [];
-    renderPicks();
-    document.getElementById('notes').value = '';
-    // (on garde le pseudo et la recherche tels quels)
+    picks = []; renderPicks(); document.getElementById('notes').value='';
   } catch (e) {
     console.error(e);
     toast('Échec de l’envoi. Vérifie l’URL/token ou le déploiement.');
+  } finally {
+    inFlight = false;
+    sendBtn.disabled = false;
+    sendBtn.classList.remove('sending');
   }
 };
 
-// Stats
+// ===== Top défenses / Défs traitées =====
+
+// Index rapide nom -> monstre
+const MONS_BY_NAME = (() => {
+  const m = new Map();
+  (window.MONSTERS || []).forEach(x => m.set((x.name||'').toLowerCase(), x));
+  return m;
+})();
+function findMonsterByName(n){ return MONS_BY_NAME.get((n||'').toLowerCase()) || null; }
+
 async function loadStats() {
   const box = document.getElementById('stats');
   box.innerHTML = 'Chargement…';
@@ -316,18 +308,19 @@ async function loadHandled() {
         trio.appendChild(card);
       });
 
-      const right = document.createElement('div');
-      right.className = 'def-actions';
-
       if (isAdmin()) {
+        const right = document.createElement('div');
+        right.className = 'def-actions';
         const btn = document.createElement('button');
         btn.className = 'btn-ghost';
         btn.textContent = '↩︎ Rétablir';
         btn.onclick = () => unhandle(r.key);
         right.appendChild(btn);
+        item.append(trio, right);
+      } else {
+        item.append(trio);
       }
 
-      item.append(trio, right);
       list.appendChild(item);
     });
 
@@ -339,24 +332,7 @@ async function loadHandled() {
   }
 }
 
-
-// Toast (feedback visuel)
-function toast(msg) {
-  const t = document.getElementById('toast');
-  if (!t) { alert(msg); return; }
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(()=> { t.textContent = ''; t.classList.remove('show'); }, 3000);
-}
-
-// Admin mode
-function getParam(name){
-  const url = new URL(window.location.href);
-  return url.searchParams.get(name);
-}
-const ADMIN_TOKEN_PARAM = getParam('admin'); // ex: ?admin=MON_TOKEN_ADMIN
-function isAdmin(){ return !!ADMIN_TOKEN_PARAM; }
-
+// Actions admin
 async function moveToHandled(key){
   try{
     const res = await fetch(APPS_SCRIPT_URL, {
@@ -385,3 +361,14 @@ async function unhandle(key){
     await Promise.all([loadStats(), loadHandled()]);
   }catch(err){
     console.error(err); toast('Action admin impossible.');
+  }
+}
+
+// Toast
+function toast(msg) {
+  const t = document.getElementById('toast');
+  if (!t) { alert(msg); return; }
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=> { t.textContent = ''; t.classList.remove('show'); }, 2800);
+}
