@@ -399,3 +399,36 @@ body { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.12) transparen
   max-height: 68vh;
   overflow: auto;
 }
+
+/* 1) Le panel de la grille ne doit pas scroller ni limiter la hauteur
+      (c’est .grid-scroll qui gère le scroll) */
+#grid-panel.panel{
+  position: static !important;
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+  z-index: 0 !important;
+  margin-bottom: 16px;          /* espace avant les sections suivantes */
+}
+
+/* 2) Le cadre arrondi clippe le contenu de la grille (pas de débord) */
+.grid-wrap{
+  overflow: hidden;             /* empêche les vignettes de “dépasser” */
+  border-radius: 14px;
+}
+
+/* 3) La SEULE zone qui scrolle pour les monstres */
+.grid-scroll{
+  max-height: 68vh;             /* ajuste 60–75vh au besoin */
+  overflow: auto;
+  padding: 8px 12px 8px 8px;
+  scrollbar-gutter: stable;
+}
+
+/* 4) Les pages des onglets restent au-dessus et visibles */
+#page-stats, #page-done{
+  position: relative;
+  z-index: 1;
+  overflow: visible !important;
+  min-height: 200px;            /* évite une réduction à 0px */
+}
