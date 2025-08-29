@@ -302,20 +302,17 @@ async function loadStats() {
     const url = `${APPS_SCRIPT_URL}?token=${encodeURIComponent(TOKEN)}&mode=stats`;
     const res = await fetch(url);
     const raw = await res.text();
-    console.log('[loadStats] RAW:', raw); // ou [loadHandled]
-    const json = JSON.parse(raw);
-    const text = await res.text();
-    console.log('[loadStats] HTTP', res.status, 'RAW:', text);
-    const json = JSON.parse(text);
+    console.log('[loadStats] HTTP', res.status, 'RAW:', raw);
 
-    if (!json.ok) {
-      box.innerHTML = 'Erreur chargement stats : ' + (json.error || 'inconnue');
-      return;
-    }
+    let data;
+    try { data = JSON.parse(raw); }
+    catch { box.innerHTML = 'Réponse invalide du serveur.'; return; }
 
-    const rows = Array.isArray(json.stats) ? json.stats : [];
+    if (!data.ok) { box.innerHTML = 'Erreur chargement stats : ' + (data.error || 'inconnue'); return; }
+
+    const rows = Array.isArray(data.stats) ? data.stats : [];
     if (!rows.length) { box.innerHTML = 'Aucune donnée pour l’instant.'; return; }
-    
+
     let html = `<div class="def-list">`;
     for (const r of rows) {
       const trio = Array.isArray(r.trio) ? r.trio : String(r.key || '').split(' / ');
@@ -339,9 +336,9 @@ async function loadStats() {
         const btn = e.target.closest('.act-handle');
         if (!btn) return;
         const key = btn.getAttribute('data-key');
-        const json2 = await apiPost({ action:'handle', admin_token: ADMIN_TOKEN_PARAM, key });
-        console.log('[handle] response:', json2);
-        if (!json2.ok) return toast(json2.error || 'Action admin impossible.');
+        const resp = await apiPost({ action:'handle', admin_token: ADMIN_TOKEN_PARAM, key });
+        console.log('[handle]', resp);
+        if (!resp.ok) return toast(resp.error || 'Action admin impossible.');
         toast('Défense déplacée dans "Défs traitées" ✅');
         await Promise.all([loadStats(), loadHandled()]);
       });
@@ -358,20 +355,17 @@ async function loadHandled() {
   try {
     const url = `${APPS_SCRIPT_URL}?token=${encodeURIComponent(TOKEN)}&mode=handled`;
     const res = await fetch(url);
-    const text = await res.text();
-    console.log('[loadHandled] HTTP', res.status, 'RAW:', text);
-    const json = JSON.parse(text);
+    const raw = await res.text();
+    console.log('[loadHandled] HTTP', res.status, 'RAW:', raw);
 
-    if (!json.ok) {
-      box.innerHTML = 'Erreur chargement défenses traitées : ' + (json.error || 'inconnue');
-      return;
-    }
+    let data;
+    try { data = JSON.parse(raw); }
+    catch { box.innerHTML = 'Réponse invalide du serveur.'; return; }
 
-    const rows = json.handled || [];
-    if (!rows.length) {
-      box.innerHTML = 'Aucune défense traitée pour le moment.';
-      return;
-    }
+    if (!data.ok) { box.innerHTML = 'Erreur chargement défenses traitées : ' + (data.error || 'inconnue'); return; }
+
+    const rows = Array.isArray(data.handled) ? data.handled : [];
+    if (!rows.length) { box.innerHTML = 'Aucune défense traitée pour le moment.'; return; }
 
     const list = document.createElement('div');
     list.className = 'def-list';
@@ -383,18 +377,18 @@ async function loadHandled() {
       const trio = document.createElement('div');
       trio.className = 'def-trio';
 
-      ( Array.isArray(r.trio) ? r.trio : String(r.key || '').split(' / ') ).forEach(name => {
-        const data = findMonsterByName(name) || { name, icon:'' };
+      (Array.isArray(r.trio) ? r.trio : String(r.key || '').split(' / ')).forEach(name => {
+        const m = findMonsterByName(name) || { name, icon: '' };
         const card = document.createElement('div');
         card.className = 'pick def-pick';
 
         const img = document.createElement('img');
-        img.src = fixIconUrl(data.icon||''); img.alt = data.name;
+        img.src = fixIconUrl(m.icon || ''); img.alt = m.name;
         img.onerror = () => { img.remove(); };
 
         const label = document.createElement('div');
         label.className = 'pname';
-        label.textContent = data.name;
+        label.textContent = m.name;
 
         card.append(img, label);
         trio.appendChild(card);
@@ -407,9 +401,9 @@ async function loadHandled() {
         btn.className = 'btn-ghost';
         btn.textContent = 'Rétablir';
         btn.onclick = async () => {
-          const json2 = await apiPost({ action:'unhandle', admin_token: ADMIN_TOKEN_PARAM, key: r.key });
-          console.log('[unhandle] response:', json2);
-          if (!json2.ok) return toast(json2.error || 'Action admin impossible.');
+          const resp = await apiPost({ action:'unhandle', admin_token: ADMIN_TOKEN_PARAM, key: r.key });
+          console.log('[unhandle]', resp);
+          if (!resp.ok) return toast(resp.error || 'Action admin impossible.');
           toast('Défense rétablie dans Top défenses ✅');
           await Promise.all([loadStats(), loadHandled()]);
         };
@@ -418,7 +412,6 @@ async function loadHandled() {
       } else {
         item.append(trio);
       }
-
       list.appendChild(item);
     });
 
@@ -429,4 +422,3 @@ async function loadHandled() {
     box.innerHTML = 'Impossible de charger les défenses traitées (voir console).';
   }
 }
-
