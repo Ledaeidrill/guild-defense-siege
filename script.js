@@ -114,10 +114,18 @@ renderGrid();
 // Sélection
 function addPick(m) {
   if (picks.find(p => p.id === m.id)) return;
-  if (picks.length >= 3) { toast('Tu as déjà 3 monstres. Retire-en un.'); return; }
+  if (picks.length >= 3) { 
+    toast('Tu as déjà 3 monstres. Retire-en un.'); 
+    return; 
+  }
   picks.push(m);
   renderPicks();
+
+  // ✅ Réinitialiser la recherche et recharger la grille complète
+  search.value = '';
+  renderGrid();
 }
+
 
 function renderPicks() {
   const zone = document.getElementById('picks');
