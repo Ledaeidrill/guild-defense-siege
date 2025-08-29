@@ -12,9 +12,9 @@ main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
 .hint{ 
   opacity:.85; 
   margin:8px 0 10px; 
-  font-size:16px;   /* plus gros */
-  font-weight:500;  /* un peu plus épais si tu veux */
-  text-align:center;/* et centré si tu veux un effet plus "titre" */
+  font-size:16px;
+  font-weight:500;
+  text-align:center;
 }
 
 .table{width:100%;border-collapse:collapse;margin-top:8px}
@@ -25,7 +25,7 @@ main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
 :root{
   --panel-width: 1500px;
   --icon: 44px;
-  --pick-icon: 34px;
+  --pick-icon: 60px;   /* sélection + (défenses si non surchargé) */
   --border: #2b3b4a;
   --bg2: #0f1520;
   --bg3: #101826;
@@ -44,23 +44,23 @@ main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
 
 /* Pseudo plus compact */
 .field.narrow{
-  max-width: 120px;          /* largeur cible du champ Pseudo */
-  margin-left: 0;            /* à gauche par défaut… */
-  margin-right: auto;        /* …et pas centré */
+  max-width: 120px;
+  margin-left: 0;
+  margin-right: auto;
 }
 @media (max-width: 640px){
-  .field.narrow{ max-width: 100%; } /* mobile: pleine largeur */
+  .field.narrow{ max-width: 100%; }
 }
 
-/* Panneau scrollable (recherche sticky + grille) */
+/* Panneau scrollable (recherche + grille) */
 .panel{
   border:1px solid #233243;
   border-radius:12px;
   background:var(--bg2);
   padding:10px;
   max-height: clamp(360px, calc(100vh - 300px), 78vh);
-  overflow-y: auto;     /* scroll seulement vertical */
-  overflow-x: hidden;   /* jamais de scroll horizontal */
+  overflow-y: auto;     /* scroll uniquement vertical */
+  overflow-x: hidden;   /* pas de scroll horizontal */
 }
 
 .grid{
@@ -68,24 +68,11 @@ main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
   justify-content:center;
   grid-template-columns: repeat(auto-fill, var(--icon));
   gap:8px;
-  width:100%;           /* s’adapte au panel */
-  max-width:100%;       /* évite tout dépassement */
-}
-
-.panel .sticky{
-  position:sticky; top:0; background:var(--bg2);
-  z-index:5; padding-top:6px; margin-top:-6px; /* pour coller proprement */
+  width:100%;
+  max-width:100%;
 }
 
 /* Grille */
-.grid{
-  display:grid;
-  justify-content:center;
-  grid-template-columns: repeat(auto-fill, var(--icon));
-  gap:8px;
-  width:100%;           /* s’adapte au panel */
-  max-width:100%;       /* évite tout dépassement */
-}
 .card{
   position:relative;
   display:flex;flex-direction:column;align-items:center;
@@ -166,21 +153,79 @@ textarea:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) 
 .btn-primary.sending .btn-label{ opacity:.9 }
 @keyframes spin{ to{ transform:rotate(360deg) } }
 
-/* Listes défenses (Top & traitées) */
-.def-list{ display:flex; flex-direction:column; gap:10px; width:100%; margin:8px auto 0 }
-.def-item{
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-  border:1px solid #223244; background:#0f1520; border-radius:12px; padding:8px 10px;
+/* ===== Listes défenses (Top & traitées) – version "carte centrée" ===== */
+
+/* Conteneur de la liste : centré, largeur contenue */
+.def-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  width:100%;
+  max-width: 920px;        /* largeur cible d’une carte */
+  margin:12px auto 0;      /* centre la pile de cartes */
 }
-.def-trio{ display:flex; gap:10px; align-items:center }
-.def-pick{ width:86px; padding:8px 6px 6px }
+
+/* Carte : visuelle, plus compacte, sans grand vide au milieu */
+.def-item{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;  /* pas d’étirement inutile */
+  gap:32px;                    /* espace entre trio et compteur/boutons */
+  border:1px solid #223244;
+  background:#0f1520;
+  border-radius:12px;
+  padding:14px 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.22);
+}
+
+/* Trio : icônes plus grosses et lisibles */
+.def-trio{
+  display:flex;
+  gap:16px;
+  align-items:center;
+}
+
+/* Carte de monstre dans la ligne Top défenses */
+.def-pick{
+  width:110px;               /* plus de place pour le nom */
+  padding:8px 6px 6px;
+}
+
+/* Icônes dédiées aux listes : 60px, indépendantes de la sélection */
+.def-pick img{
+  width:60px;
+  height:60px;
+  border-radius:10px;
+}
+
+/* Noms plus visibles */
+.def-pick .pname{
+  font-size:12px;
+  line-height:13px;
+  margin-top:6px;
+  max-width:100px;           /* cohérent avec .def-pick width */
+}
+
+/* Bloc à droite (compteur + actions) — classes existantes conservées */
 .def-actions{ display:flex; gap:6px }
+
+/* Compteur mis en valeur */
+.def-count{
+  min-width:48px;
+  text-align:center;
+  font-weight:800;
+  font-size:16px;
+  color:#fff;
+  background:#234567;
+  border:1px solid #2f5577;
+  border-radius:10px;
+  padding:10px 14px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+
+/* Bouton “Traiter / Rétablir” intact */
 .btn-ghost{
   appearance:none; border:1px solid #2b3b4a; background:#101826; color:#e8eef5;
   padding:6px 10px; border-radius:10px; cursor:pointer; font-size:12px;
 }
 .btn-ghost:hover{ border-color:#3a4c60 }
-.def-count{
-  min-width:42px; text-align:center; font-weight:700;
-  background:#101826; border:1px solid #2d3c4b; border-radius:10px; padding:6px 10px;
-}
