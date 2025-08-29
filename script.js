@@ -68,7 +68,7 @@ function fixIconUrl(src){
 function makeCard(m){
   const card = document.createElement('div');
   card.className = 'card';
-  card.title = `${m.name}${m.unawakened_name ? ` • ${m.unawakened_name}`:''}`;
+  card.title = `${m.name}`;
   card.onclick = () => addPick(m);
 
   const img = document.createElement('img');
