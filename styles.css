@@ -43,7 +43,7 @@ main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
 .field input:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) }
 
 #search {
-  max-width: 400px;   /* largeur maximale souhaitée (ajuste 300/400/500px selon ton goût) */
+  max-width: 200px;   /* largeur maximale souhaitée (ajuste 300/400/500px selon ton goût) */
   width: 100%;        /* garde responsive si écran plus petit */
   display: block;
 }
