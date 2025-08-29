@@ -130,11 +130,14 @@ function addPick(m) {
 function renderPicks() {
   const zone = document.getElementById('picks');
   zone.innerHTML = '';
-  picks.forEach(p => {
+  picks.forEach((p, index) => {
     const div = document.createElement('div');
     div.className = 'pick';
     div.dataset.id = p.id;
+    div.dataset.index = index;
+    div.draggable = true;   // ✅ permet le drag
 
+    // … bouton close + image + label identiques
     const btn = document.createElement('button');
     btn.className = 'close';
     btn.type = 'button';
@@ -152,7 +155,10 @@ function renderPicks() {
     div.append(btn, img, label);
     zone.appendChild(div);
   });
+
+  enableDragAndDrop(zone);
 }
+
 document.getElementById('picks').addEventListener('click', (e) => {
   const btn = e.target.closest('.close');
   if (!btn) return;
@@ -163,6 +169,41 @@ document.getElementById('picks').addEventListener('click', (e) => {
 function removePick(id) {
   picks = picks.filter(p => p.id !== id);
   renderPicks();
+}
+
+function enableDragAndDrop(container) {
+  let dragSrcEl = null;
+
+  container.querySelectorAll('.pick').forEach(el => {
+    el.addEventListener('dragstart', (e) => {
+      dragSrcEl = el;
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', el.dataset.index);
+      el.classList.add('dragging');
+    });
+
+    el.addEventListener('dragend', () => {
+      el.classList.remove('dragging');
+    });
+
+    el.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+    });
+
+    el.addEventListener('drop', (e) => {
+      e.stopPropagation();
+      const srcIndex = parseInt(e.dataTransfer.getData('text/plain'));
+      const destIndex = parseInt(el.dataset.index);
+      if (srcIndex !== destIndex) {
+        // réordonner picks[]
+        const moved = picks.splice(srcIndex, 1)[0];
+        picks.splice(destIndex, 0, moved);
+        renderPicks(); // re-render pour indices propres
+      }
+      return false;
+    });
+  });
 }
 
 // Envoi + protection double clic + feedback
