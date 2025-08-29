@@ -346,3 +346,36 @@ body { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.12) transparen
 /* Supprime toute scrollbar parasite du panel parent */
 #grid-panel.panel { overflow: visible !important; height: auto; }
 
+/* --------- Responsive 1080p (hauteur <= 900px) --------- */
+/* Réduit la fenêtre scrollable et compresse un peu la grille */
+@media (max-height: 900px) {
+  .grid-scroll{
+    max-height: 58vh;        /* avant 68–70vh ; baisse pour éviter le débord */
+  }
+  :root{
+    --icon: 40px;            /* icône plus petite pour densifier */
+  }
+  .monster-grid{
+    grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+    gap: 6px 7px;
+  }
+  .card img{ width: var(--icon); height: var(--icon); border-radius: 7px; }
+  .card .name{ font-size: 10px; }
+}
+
+/* --------- Responsive largeur <= 1280px (souvent associé au 1080p) --------- */
+@media (max-width: 1280px) {
+  main{ max-width: 94vw; }   /* un peu plus de place latérale */
+  .grid-scroll{ max-height: 60vh; }
+  .monster-grid{ grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); }
+}
+
+/* Garde-fous (au cas où des styles plus haut réécrasent) */
+#grid-panel.panel{
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+}
+.grid-wrap{ overflow: hidden; }
+
+
