@@ -46,7 +46,6 @@ main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
   max-width: 400px;   /* largeur maximale souhaitée (ajuste 300/400/500px selon ton goût) */
   width: 100%;        /* garde responsive si écran plus petit */
   display: block;
-  margin: 0 auto;     /* pour le centrer */
 }
 
 
