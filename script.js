@@ -342,14 +342,14 @@ async function loadHandled() {
 // Actions admin (avec messages d’erreur plus explicites)
 async function moveToHandled(key){
   try{
+    const payload = JSON.stringify({ action:'handle', admin_token: ADMIN_TOKEN_PARAM, key });
     const res = await fetch(APPS_SCRIPT_URL, {
       method:'POST',
-      headers:{ 'Content-Type':'application/json' },
-      body: JSON.stringify({ action:'handle', admin_token: ADMIN_TOKEN_PARAM, key })
+      headers:{ 'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8' },
+      body: 'payload=' + encodeURIComponent(payload)
     });
     const text = await res.text();
-    let json;
-    try { json = JSON.parse(text); } catch { throw new Error('Réponse invalide: ' + text); }
+    let json; try { json = JSON.parse(text); } catch { throw new Error('Réponse invalide: ' + text); }
     if (!json.ok) throw new Error(json.error||'Erreur');
     toast('Défense déplacée dans "Défenses traitées" ✅');
     await Promise.all([loadStats(), loadHandled()]);
@@ -357,16 +357,17 @@ async function moveToHandled(key){
     console.error(err); toast('Action admin impossible: ' + err.message);
   }
 }
+
 async function unhandle(key){
   try{
+    const payload = JSON.stringify({ action:'unhandle', admin_token: ADMIN_TOKEN_PARAM, key });
     const res = await fetch(APPS_SCRIPT_URL, {
       method:'POST',
-      headers:{ 'Content-Type':'application/json' },
-      body: JSON.stringify({ action:'unhandle', admin_token: ADMIN_TOKEN_PARAM, key })
+      headers:{ 'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8' },
+      body: 'payload=' + encodeURIComponent(payload)
     });
     const text = await res.text();
-    let json;
-    try { json = JSON.parse(text); } catch { throw new Error('Réponse invalide: ' + text); }
+    let json; try { json = JSON.parse(text); } catch { throw new Error('Réponse invalide: ' + text); }
     if (!json.ok) throw new Error(json.error||'Erreur');
     toast('Défense rétablie dans Top défenses ✅');
     await Promise.all([loadStats(), loadHandled()]);
