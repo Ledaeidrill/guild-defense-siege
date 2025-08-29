@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Défenses Sieges</title>
+  <title>Guild – Défenses Sieges</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -13,43 +13,31 @@
     <button id="tab-report" class="active">Demander une défense</button>
     <button id="tab-stats">Top défenses</button>
     <button id="tab-done">Défenses traitées</button>
-  </nav>
+  </nav>word
 </header>
 
 <main>
   <!-- Onglet 1 : formulaire -->
   <section id="page-report">
-    <div class="row field">
-      <label for="player">Pseudo</label>
-      <input id="player" placeholder="Pseudo (optionnel)" autocomplete="off" />
+    <div class="row">
+      <input id="player" placeholder="Pseudo" />
     </div>
 
-    <!-- Panneau scrollable (recherche sticky + grille) -->
-    <div id="grid-panel" class="panel">
-      <div class="row field sticky">
-        <label for="search">Recherche</label>
-        <input id="search" placeholder="Rechercher un monstre (nom, élément, alias…)" autocomplete="off" />
-      </div>
-      <div id="monster-grid" class="grid"></div>
+    <div class="row">
+      <input id="search" placeholder="Recherche monstre..." />
     </div>
+
+    <div id="monster-grid" class="grid"></div>
 
     <div class="row picks">
-      <div class="picks-title">Ta sélection (3) :</div>
+      <div>Ta sélection :</div>
       <div id="picks"></div>
     </div>
 
-    <div class="row">
-      <textarea id="notes" placeholder="Notes (optionnel)"></textarea>
-    </div>
+    <textarea id="notes" placeholder="Notes (optionnel)"></textarea>
 
-    <div class="row">
-      <button id="send" class="btn-primary">
-        <span class="btn-label">Envoyer</span>
-        <span class="btn-spinner" aria-hidden="true"></span>
-      </button>
-    </div>
-
-    <div id="toast" role="status" aria-live="polite"></div>
+    <button id="send">Envoyer</button>
+    <div id="toast"></div>
   </section>
 
   <!-- Onglet 2 : stats -->
@@ -57,11 +45,11 @@
     <div id="stats"></div>
   </section>
 
-  <!-- Onglet 3 : défenses traitées -->
   <section id="page-done" class="hidden">
-    <p class="hint">Rendez-vous ingame pour connaître les counters.</p>
-    <div id="done"></div>
-  </section>
+  <p class="hint">Rendez-vous ingame pour connaître les counters.</p>
+  <div id="done"></div>
+</section>
+
 </main>
 
 <script src="monsters.js"></script>
