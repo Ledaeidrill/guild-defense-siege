@@ -23,7 +23,7 @@ main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
 
 /* Variables */
 :root{
-  --panel-width: 1500px;
+  --panel-width: 1700px;
   --icon: 44px;
   --pick-icon: 60px;   /* sélection + (défenses si non surchargé) */
   --border: #2b3b4a;
