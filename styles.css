@@ -9,7 +9,14 @@ main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
 .hidden{display:none}
 #toast{margin-top:8px;font-size:13px;min-height:18px;opacity:0;transition:.2s ease}
 #toast.show{opacity:1}
-.hint{ opacity:.85; margin:8px 0 10px; font-size:13px }
+.hint{ 
+  opacity:.85; 
+  margin:8px 0 10px; 
+  font-size:16px;   /* plus gros */
+  font-weight:500;  /* un peu plus épais si tu veux */
+  text-align:center;/* et centré si tu veux un effet plus "titre" */
+}
+
 .table{width:100%;border-collapse:collapse;margin-top:8px}
 .table th,.table td{border-bottom:1px solid #223244;padding:8px;text-align:left}
 .key{font-weight:600}
