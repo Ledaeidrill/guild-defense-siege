@@ -378,4 +378,24 @@ body { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.12) transparen
 }
 .grid-wrap{ overflow: hidden; }
 
+/* Les pages d’onglets ne doivent pas être coupées */
+#page-stats, #page-done {
+  position: relative;
+  z-index: 0;
+  overflow: visible !important;
+  min-height: 200px;   /* empêche la réduction à 0 */
+}
 
+/* Le panel des monstres ne doit PAS déborder sur les onglets suivants */
+#grid-panel.panel {
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+}
+
+/* Le cadre de la grille contient son contenu, la zone scroll gère le défilé */
+.grid-wrap { overflow: hidden; }
+.grid-scroll{
+  max-height: 68vh;
+  overflow: auto;
+}
