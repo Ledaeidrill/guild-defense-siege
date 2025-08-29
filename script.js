@@ -10,8 +10,18 @@ const tabReport = document.getElementById('tab-report');
 const tabStats  = document.getElementById('tab-stats');
 const pageReport= document.getElementById('page-report');
 const pageStats = document.getElementById('page-stats');
+const tabDone = document.getElementById('tab-done');
+const pageDone = document.getElementById('page-done');
+
 tabReport.onclick = () => { tabReport.classList.add('active'); tabStats.classList.remove('active'); pageReport.classList.remove('hidden'); pageStats.classList.add('hidden'); };
 tabStats.onclick  = () => { tabStats.classList.add('active'); tabReport.classList.remove('active'); pageStats.classList.remove('hidden'); pageReport.classList.add('hidden'); loadStats(); };
+tabDone.onclick = () => {
+  tabDone.classList.add('active');
+  tabReport.classList.remove('active'); tabStats.classList.remove('active');
+  pageDone.classList.remove('hidden');
+  pageReport.classList.add('hidden'); pageStats.classList.add('hidden');
+  loadHandled();
+};
 
 // Build grid
 const grid = document.getElementById('monster-grid');
@@ -112,9 +122,7 @@ function findMonsterByName(n){
   return MONS_BY_NAME.get((n||'').toLowerCase()) || null;
 }
 
-
-
-// (3) Débounce sur la recherche pour une UI fluide
+// Débounce sur la recherche pour une UI fluide
 let _searchTimer;
 search.addEventListener('input', () => {
   clearTimeout(_searchTimer);
@@ -215,7 +223,6 @@ async function loadStats() {
     const rows = json.stats || [];
     if (!rows.length) { box.innerHTML = 'Aucune donnée pour l’instant.'; return; }
 
-    // Liste visuelle
     const list = document.createElement('div');
     list.className = 'def-list';
 
@@ -223,18 +230,16 @@ async function loadStats() {
       const item = document.createElement('div');
       item.className = 'def-item';
 
-      // Trio (3 vignettes comme les picks, sans la croix)
       const trio = document.createElement('div');
       trio.className = 'def-trio';
 
-      (r.trio || r.example || r.key.split(' / ')).forEach(name => {
-        const data = findMonsterByName(name) || { name, icon: '', };
+      (r.trio || r.key.split(' / ')).forEach(name => {
+        const data = findMonsterByName(name) || { name, icon:'' };
         const card = document.createElement('div');
         card.className = 'pick def-pick';
 
         const img = document.createElement('img');
-        img.src = fixIconUrl(data.icon || '');
-        img.alt = data.name;
+        img.src = fixIconUrl(data.icon||''); img.alt = data.name;
         img.onerror = () => { img.remove(); };
 
         const label = document.createElement('div');
@@ -245,12 +250,22 @@ async function loadStats() {
         trio.appendChild(card);
       });
 
-      // Compteur
-      const cnt = document.createElement('div');
-      cnt.className = 'def-count';
-      cnt.textContent = r.count;
+      const right = document.createElement('div');
+      right.style.display = 'flex'; right.style.alignItems = 'center'; right.style.gap = '8px';
 
-      item.append(trio, cnt);
+      const cnt = document.createElement('div');
+      cnt.className = 'def-count'; cnt.textContent = r.count;
+      right.appendChild(cnt);
+
+      if (isAdmin()) {
+        const btn = document.createElement('button');
+        btn.className = 'btn-ghost';
+        btn.textContent = '→ Traiter';
+        btn.onclick = () => moveToHandled(r.key);
+        right.appendChild(btn);
+      }
+
+      item.append(trio, right);
       list.appendChild(item);
     });
 
@@ -262,7 +277,70 @@ async function loadStats() {
   }
 }
 
-// (1) Toast (feedback visuel)
+async function loadHandled() {
+  const box = document.getElementById('done');
+  box.innerHTML = 'Chargement…';
+  try {
+    const url = `${APPS_SCRIPT_URL}?token=${encodeURIComponent(TOKEN)}&mode=handled`;
+    const res = await fetch(url);
+    const json = await res.json();
+    if (!json.ok) throw new Error(json.error || 'Erreur');
+
+    const rows = json.handled || [];
+    if (!rows.length) { box.innerHTML = 'Aucune défense traitée pour le moment.'; return; }
+
+    const list = document.createElement('div');
+    list.className = 'def-list';
+
+    rows.forEach(r => {
+      const item = document.createElement('div');
+      item.className = 'def-item';
+
+      const trio = document.createElement('div');
+      trio.className = 'def-trio';
+
+      (r.trio || r.key.split(' / ')).forEach(name => {
+        const data = findMonsterByName(name) || { name, icon:'' };
+        const card = document.createElement('div');
+        card.className = 'pick def-pick';
+
+        const img = document.createElement('img');
+        img.src = fixIconUrl(data.icon||''); img.alt = data.name;
+        img.onerror = () => { img.remove(); };
+
+        const label = document.createElement('div');
+        label.className = 'pname';
+        label.textContent = data.name;
+
+        card.append(img, label);
+        trio.appendChild(card);
+      });
+
+      const right = document.createElement('div');
+      right.className = 'def-actions';
+
+      if (isAdmin()) {
+        const btn = document.createElement('button');
+        btn.className = 'btn-ghost';
+        btn.textContent = '↩︎ Rétablir';
+        btn.onclick = () => unhandle(r.key);
+        right.appendChild(btn);
+      }
+
+      item.append(trio, right);
+      list.appendChild(item);
+    });
+
+    box.innerHTML = '';
+    box.appendChild(list);
+  } catch (e) {
+    console.error(e);
+    box.innerHTML = 'Impossible de charger les défenses traitées.';
+  }
+}
+
+
+// Toast (feedback visuel)
 function toast(msg) {
   const t = document.getElementById('toast');
   if (!t) { alert(msg); return; }
@@ -270,3 +348,44 @@ function toast(msg) {
   t.classList.add('show');
   setTimeout(()=> { t.textContent = ''; t.classList.remove('show'); }, 3000);
 }
+
+// Admin mode
+function getParam(name){
+  const url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
+const ADMIN_TOKEN_PARAM = getParam('admin'); // ex: ?admin=MON_TOKEN_ADMIN
+function isAdmin(){ return !!ADMIN_TOKEN_PARAM; }
+
+async function moveToHandled(key){
+  try{
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ action:'handle', admin_token: ADMIN_TOKEN_PARAM, key })
+    });
+    const json = await res.json();
+    if (!json.ok) throw new Error(json.error||'Erreur');
+    toast('Défense déplacée dans "Défs traitées" ✅');
+    await Promise.all([loadStats(), loadHandled()]);
+  }catch(err){
+    console.error(err); toast('Action admin impossible.');
+  }
+}
+async function unhandle(key){
+  try{
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ action:'unhandle', admin_token: ADMIN_TOKEN_PARAM, key })
+    });
+    const json = await res.json();
+    if (!json.ok) throw new Error(json.error||'Erreur');
+    toast('Défense rétablie dans Top défenses ✅');
+    await Promise.all([loadStats(), loadHandled()]);
+  }catch(err){
+    console.error(err); toast('Action admin impossible.');
+  }
+}
+
+
