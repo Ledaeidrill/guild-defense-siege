@@ -249,12 +249,15 @@ async function loadStats() {
     html += `</div>`;
     box.innerHTML = html;
 
-    // Délégation : un seul listener pour tous les boutons “Traiter”
+    // Délégation robuste : on écoute sur le conteneur des tops
     if (isAdmin()) {
-      box.querySelector('.def-list').addEventListener('click', (e) => {
+      const list = box.querySelector('.def-list');
+      list.addEventListener('click', (e) => {
         const btn = e.target.closest('.act-handle');
         if (!btn) return;
-        moveToHandled(btn.getAttribute('data-key'));
+        const key = btn.getAttribute('data-key');
+        if (!key) return;
+        moveToHandled(key);
       });
     }
   } catch (e) {
