@@ -302,3 +302,47 @@ body {
   overflow: visible !important; /* désactive le scroll du conteneur */
   height: auto;                 /* laisse la hauteur s’adapter */
 }
+
+/* ===== Scrollbar principale (barre tout à droite) — discrète ===== */
+body::-webkit-scrollbar { width: 8px; }
+body::-webkit-scrollbar-track { background: transparent; }
+body::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.12);
+  border-radius: 6px;
+}
+body::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.20); }
+/* Firefox */
+body { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.12) transparent; }
+
+/* ===== Cadre de la grille : clippe le contenu dans les coins arrondis ===== */
+.grid-wrap{
+  border-radius: 14px;
+  background: #0f1824;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.06),
+    0 8px 24px rgba(0,0,0,.35);
+  padding: 8px;
+  overflow: hidden;           /* ⬅️ empêche les monstres de sortir du cadre */
+}
+
+/* La zone qui scrolle (une seule scrollbar ici) */
+.grid-scroll{
+  max-height: 68vh;           /* ajuste 60–75vh selon ton goût */
+  overflow: auto;
+  padding: 8px 12px 8px 8px;  /* espace pour ne pas coller la scrollbar */
+  scrollbar-gutter: stable;   /* évite les à-coups de layout */
+}
+
+/* Grille : s'assurer qu’elle ne dépasse jamais le conteneur */
+.monster-grid{
+  box-sizing: border-box;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+  gap: 6px 8px;
+  align-content: start;
+}
+
+/* Supprime toute scrollbar parasite du panel parent */
+#grid-panel.panel { overflow: visible !important; height: auto; }
+
