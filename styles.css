@@ -9,23 +9,13 @@ main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
 .hidden{display:none}
 #toast{margin-top:8px;font-size:13px;min-height:34px;opacity:0;transition:.2s ease}
 #toast.show{opacity:1}
-.hint{ 
-  opacity:.85; 
-  margin:8px 0 10px; 
-  font-size:16px;
-  font-weight:500;
-  text-align:center;
-}
-
-.table{width:100%;border-collapse:collapse;margin-top:8px}
-.table th,.table td{border-bottom:1px solid #223244;padding:8px;text-align:left}
-.key{font-weight:600}
+.hint{opacity:.85;margin:8px 0 10px;font-size:16px;font-weight:500;text-align:center}
 
 /* Variables */
 :root{
   --panel-width: 1700px;
   --icon: 44px;
-  --pick-icon: 60px;   /* sélection + (défenses si non surchargé) */
+  --pick-icon: 60px;
   --border: #2b3b4a;
   --bg2: #0f1520;
   --bg3: #101826;
@@ -34,401 +24,91 @@ main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
 }
 
 /* Champs */
-.field{max-width:100%}
 .field label{display:block;font-size:12px;opacity:.85;margin:0 0 6px 2px}
 .field input{
-  width:100%; padding:10px 12px; border-radius:10px; border:1px solid var(--border);
-  background: var(--bg2); color: var(--txt); outline:none;
+  width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);
+  background:var(--bg2);color:var(--txt);outline:none;
 }
-.field input:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) }
+.field input:focus{border-color:#3e5a78;box-shadow:0 0 0 2px rgba(46,110,255,.15)}
+.field.narrow{max-width:120px;margin-left:0;margin-right:auto}
+@media (max-width:640px){.field.narrow{max-width:100%}}
+#search{max-width:200px;width:100%;display:block}
 
-/* Barre de recherche plus compacte */
-#search {
-  max-width: 200px;
-  width: 100%;
-  display: block;
-}
-
-/* Pseudo plus compact */
-.field.narrow{
-  max-width: 120px;
-  margin-left: 0;
-  margin-right: auto;
-}
-@media (max-width: 640px){
-  .field.narrow{ max-width: 100%; }
-}
-
-/* Panneau scrollable (recherche + grille) */
+/* Panel (pas de scroll ici) */
 .panel{
-  border:1px solid #233243;
-  border-radius:12px;
-  background:var(--bg2);
-  padding:10px;
-  max-height: clamp(360px, calc(100vh - 300px), 78vh);
-  overflow-y: auto;     /* scroll uniquement vertical */
-  overflow-x: hidden;   /* pas de scroll horizontal */
+  border:1px solid #233243;border-radius:12px;background:var(--bg2);padding:10px;
 }
 
-.grid{
-  display:grid;
-  justify-content:center;
-  grid-template-columns: repeat(auto-fill, var(--icon));
-  gap:8px;
-  width:100%;
-  max-width:100%;
+/* Grille fenêtre (scroll ici) */
+.grid-wrap{
+  border-radius:14px;background:#0f1824;
+  box-shadow:0 0 0 1px rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.35);
+  padding:8px;overflow:hidden; /* clippe les coins */
+}
+.grid-scroll{
+  max-height:68vh;overflow:auto;padding:8px 12px 8px 8px;scrollbar-gutter:stable;
 }
 
 /* Grille */
-.card{
-  position:relative;
-  display:flex;flex-direction:column;align-items:center;
-  gap:4px;
-  padding:4px;
-  border:1px solid transparent;border-radius:10px;
-  cursor:pointer;background: var(--bg3);
+.monster-grid{
+  width:100%;display:grid;grid-template-columns:repeat(auto-fill,minmax(56px,1fr));
+  gap:6px 8px;align-content:start;box-sizing:border-box;
 }
-.card:hover{ border-color:#33506e }
-.card img{
-  width:var(--icon);
-  height:var(--icon);
-  border-radius:8px;
-  object-fit:cover;
-  background:#0b0f14;
-}
-.name{
-  width: var(--icon);
-  max-width: var(--icon);
-  font-size:10px;
-  line-height:11px;
-  text-align:center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+.card{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:4px 3px;border:1px solid transparent;border-radius:9px;background:var(--bg3);cursor:pointer}
+.card:hover{border-color:#33506e}
+.card img{width:44px;height:44px;border-radius:7px;object-fit:cover;background:#0b0f14}
+.name{width:44px;max-width:44px;font-size:10.5px;line-height:1.05;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* Sélection */
-.picks-title{ margin-bottom:6px; opacity:.9 }
-#picks{
-  display:flex; flex-wrap:wrap; gap:10px; min-height:58px; margin-top:6px;
-  width:100%;
-}
-.pick{
-  position:relative;
-  display:flex;flex-direction:column;align-items:center;
-  width:86px; padding:8px 6px 6px;
-  border:1px solid #2d3c4b; border-radius:10px; background: var(--bg3);
-}
-.pick img{
-  width:var(--pick-icon);
-  height:var(--pick-icon);
-  border-radius:7px; object-fit:cover;
-}
-.pick .pname{
-  font-size:10px; line-height:11px; margin-top:4px; text-align:center;
-  max-width:76px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-}
-.pick .close{
-  position:absolute; top:4px; right:4px; width:18px; height:18px; border:none; border-radius:50%;
-  background:#0f1520; color:#cfd8e3; opacity:.6; cursor:pointer; line-height:18px; font-size:12px; z-index:10;
-}
-.pick .close:hover{ opacity:.9 }
+.picks-title{margin-bottom:6px;opacity:.9}
+#picks{display:flex;flex-wrap:wrap;gap:10px;min-height:58px;margin-top:6px;width:100%}
+.pick{position:relative;display:flex;flex-direction:column;align-items:center;width:86px;padding:8px 6px 6px;
+  border:1px solid #2d3c4b;border-radius:10px;background:var(--bg3)}
+.pick img{width:var(--pick-icon);height:var(--pick-icon);border-radius:7px;object-fit:cover}
+.pick .pname{font-size:10px;line-height:11px;margin-top:4px;text-align:center;max-width:76px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pick .close{position:absolute;top:4px;right:4px;width:18px;height:18px;border:none;border-radius:50%;
+  background:#0f1520;color:#cfd8e3;opacity:.6;cursor:pointer;line-height:18px;font-size:12px;z-index:10}
+.pick .close:hover{opacity:.9}
 
 /* Zone notes + bouton */
-textarea{
-  width:100%; min-height:100px; border-radius:12px; border:1px solid var(--border);
-  background: var(--bg2); color: var(--txt); padding:10px; outline:none;
-}
-textarea:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) }
-.btn-primary{
-  appearance:none; border:none; background: linear-gradient(180deg, #2a71ff, #1b55d6);
-  color:white; padding:10px 16px; border-radius:12px; cursor:pointer; font-weight:600;
-  box-shadow: 0 4px 12px rgba(42,113,255,.25); transition: transform .05s ease, filter .15s ease;
-  display:inline-flex; align-items:center; gap:8px;
-}
-.btn-primary:hover{ filter:brightness(1.05) }
-.btn-primary:active{ transform: translateY(1px) }
-.btn-primary[disabled]{ opacity:.6; cursor:default; filter:none }
+textarea{width:100%;min-height:100px;border-radius:12px;border:1px solid var(--border);background:var(--bg2);color:var(--txt);padding:10px;outline:none}
+textarea:focus{border-color:#3e5a78;box-shadow:0 0 0 2px rgba(46,110,255,.15)}
+.btn-primary{appearance:none;border:none;background:linear-gradient(180deg,#2a71ff,#1b55d6);color:#fff;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;box-shadow:0 4px 12px rgba(42,113,255,.25);transition:.05s ease}
+.btn-primary:hover{filter:brightness(1.05)} .btn-primary:active{transform:translateY(1px)} .btn-primary[disabled]{opacity:.6;cursor:default}
+.btn-spinner{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;display:none}
+.btn-primary.sending .btn-spinner{display:inline-block;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-.btn-spinner{
-  width:16px; height:16px; border-radius:50%;
-  border:2px solid rgba(255,255,255,.4);
-  border-top-color:#fff;
-  display:none;
-}
-.btn-primary.sending .btn-spinner{ display:inline-block; animation:spin .8s linear infinite }
-.btn-primary.sending .btn-label{ opacity:.9 }
-@keyframes spin{ to{ transform:rotate(360deg) } }
+/* Listes */
+.def-row{display:flex;align-items:center;gap:10px;width:100%;max-width:920px;margin:0 auto}
+.def-item{flex:1;display:flex;align-items:center;justify-content:space-between;gap:20px;border:1px solid #223244;background:#0f1520;border-radius:12px;padding:14px 16px;box-shadow:0 6px 18px rgba(0,0,0,.22)}
+.def-trio{display:flex;gap:16px;align-items:center}
+.def-pick{width:110px;padding:8px 6px 6px}
+.def-pick img{width:60px;height:60px;border-radius:10px}
+.def-pick .pname{font-size:12px;line-height:13px;margin-top:6px;max-width:100px}
+.def-count{min-width:48px;text-align:center;font-weight:800;font-size:16px;color:#fff;background:#234567;border:1px solid #2f5577;border-radius:10px;padding:10px 14px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.btn-ghost{appearance:none;border:1px solid #2b3b4a;background:#101826;color:#e8eef5;padding:6px 10px;border-radius:10px;cursor:pointer;font-size:12px;white-space:nowrap}
+.btn-ghost:hover{border-color:#3a4c60}
+.def-list{display:flex;flex-direction:column;gap:12px;width:100%;margin:12px auto 0;max-width:940px}
 
-/* ---- LISTE DES DEFENSES : rangée = carte + bouton à droite ---- */
-.def-row{
-  display:flex;
-  align-items:center;
-  gap:10px;             /* espace entre la carte et le bouton Traiter */
-  width:100%;
-  max-width: 920px;     /* même largeur que la carte */
-  margin: 0 auto;
-}
+/* Scrollbar page (discrète) */
+body::-webkit-scrollbar{width:8px}
+body::-webkit-scrollbar-track{background:transparent}
+body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:6px}
+body::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.20)}
+body{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.12) transparent}
 
-/* Carte */
-.def-item{
-  flex:1;
-  display:flex; align-items:center;
-  justify-content:space-between;           /* trio à gauche, compteur à droite */
-  gap:20px;
-  border:1px solid #223244;
-  background:#0f1520;
-  border-radius:12px;
-  padding:14px 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.22);
+/* Responsive pour 1080p */
+@media (max-height:900px){
+  .grid-scroll{max-height:58vh}
+  :root{--icon:40px}
+  .monster-grid{grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:6px 7px}
+  .card img{width:var(--icon);height:var(--icon)}
+  .name{font-size:10px}
 }
-
-.def-trio{ display:flex; gap:16px; align-items:center; }
-
-.def-pick{ width:110px; padding:8px 6px 6px }
-.def-pick img{ width:60px; height:60px; border-radius:10px }
-.def-pick .pname{ font-size:12px; line-height:13px; margin-top:6px; max-width:100px }
-
-/* Compteur à droite dans la carte */
-.def-count{
-  min-width:48px;
-  text-align:center;
-  font-weight:800;
-  font-size:16px;
-  color:#fff;
-  background:#234567;
-  border:1px solid #2f5577;
-  border-radius:10px;
-  padding:10px 14px;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
-}
-
-/* Bouton Traiter (à droite, hors de la carte) */
-.btn-ghost{ appearance:none; border:1px solid #2b3b4a; background:#101826; color:#e8eef5;
-  padding:6px 10px; border-radius:10px; cursor:pointer; font-size:12px; white-space:nowrap; }
-.btn-ghost:hover{ border-color:#3a4c60 }
-
-/* Liste = pile de rangées centrées */
-.def-list{
-  display:flex; flex-direction:column; gap:12px;
-  width:100%; margin:12px auto 0; max-width: 940px; /* léger plus large pour le bouton */
-}
-
-/* --- Taille + densité de la grille --- */
-.monster-grid{
-  width: 100%;
-  display: grid;
-  /* vignettes plus petites -> colonnes plus nombreuses */
-  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
-  gap: 6px 8px;              /* un peu plus serré */
-  align-content: start;
-}
-
-/* Carte compacte */
-.card{
-  padding: 4px 3px;
-  border-radius: 9px;
-}
-
-/* Icône plus petite */
-.card img{
-  width: 44px;               /* ← taille de l’icône */
-  height: 44px;
-  border-radius: 7px;
-}
-
-/* Nom plus discret */
-.card .name{
-  font-size: 10.5px;
-  line-height: 1.05;
-}
-
-/* --- Scrollbar fine & discrète dans la zone scroll --- */
-.grid-scroll{
-  max-height: 70vh;
-  overflow: auto;
-  padding-right: 8px;        /* léger espace pour la scroll */
-  scrollbar-gutter: stable;  /* pas d’à-coups de mise en page */
-  background: transparent;   /* laisse voir le fond de .grid-wrap */
-}
-
-/* WebKit (Chrome/Edge/Safari) */
-.grid-scroll::-webkit-scrollbar{
-  width: 8px;                /* fine */
-}
-.grid-scroll::-webkit-scrollbar-track{
-  background: transparent;
-  margin: 6px;               /* décolle en haut/bas */
-}
-.grid-scroll::-webkit-scrollbar-thumb{
-  background: rgba(255,255,255,.22);  /* discret mais visible */
-  border-radius: 8px;
-  border: 2px solid transparent;      /* amincit le “thumb” */
-  background-clip: content-box;
-}
-.grid-scroll::-webkit-scrollbar-thumb:hover{
-  background: rgba(255,255,255,.30);
-}
-
-/* Firefox */
-.grid-scroll{
-  scrollbar-width: thin;                       /* fine */
-  scrollbar-color: rgba(255,255,255,.25) transparent;
-}
-
-/* Scrollbar principale (page entière) */
-body::-webkit-scrollbar {
-  width: 10px;             /* un peu fine */
-}
-body::-webkit-scrollbar-track {
-  background: transparent;  /* invisible derrière */
-}
-body::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.12); /* discrète */
-  border-radius: 6px;
-}
-body::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,0.2);  /* un peu plus visible au hover */
-}
-
-/* Firefox */
-body {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.12) transparent;
-}
-
-/* === Fix : supprimer la 3ème scrollbar du panel === */
-#grid-panel.panel {
-  overflow: visible !important; /* désactive le scroll du conteneur */
-  height: auto;                 /* laisse la hauteur s’adapter */
-}
-
-/* ===== Scrollbar principale (barre tout à droite) — discrète ===== */
-body::-webkit-scrollbar { width: 8px; }
-body::-webkit-scrollbar-track { background: transparent; }
-body::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.12);
-  border-radius: 6px;
-}
-body::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.20); }
-/* Firefox */
-body { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.12) transparent; }
-
-/* ===== Cadre de la grille : clippe le contenu dans les coins arrondis ===== */
-.grid-wrap{
-  border-radius: 14px;
-  background: #0f1824;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.06),
-    0 8px 24px rgba(0,0,0,.35);
-  padding: 8px;
-  overflow: hidden;           /* ⬅️ empêche les monstres de sortir du cadre */
-}
-
-/* La zone qui scrolle (une seule scrollbar ici) */
-.grid-scroll{
-  max-height: 68vh;           /* ajuste 60–75vh selon ton goût */
-  overflow: auto;
-  padding: 8px 12px 8px 8px;  /* espace pour ne pas coller la scrollbar */
-  scrollbar-gutter: stable;   /* évite les à-coups de layout */
-}
-
-/* Grille : s'assurer qu’elle ne dépasse jamais le conteneur */
-.monster-grid{
-  box-sizing: border-box;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
-  gap: 6px 8px;
-  align-content: start;
-}
-
-/* Supprime toute scrollbar parasite du panel parent */
-#grid-panel.panel { overflow: visible !important; height: auto; }
-
-/* --------- Responsive 1080p (hauteur <= 900px) --------- */
-/* Réduit la fenêtre scrollable et compresse un peu la grille */
-@media (max-height: 900px) {
-  .grid-scroll{
-    max-height: 58vh;        /* avant 68–70vh ; baisse pour éviter le débord */
-  }
-  :root{
-    --icon: 40px;            /* icône plus petite pour densifier */
-  }
-  .monster-grid{
-    grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
-    gap: 6px 7px;
-  }
-  .card img{ width: var(--icon); height: var(--icon); border-radius: 7px; }
-  .card .name{ font-size: 10px; }
-}
-
-/* --------- Responsive largeur <= 1280px (souvent associé au 1080p) --------- */
-@media (max-width: 1280px) {
-  main{ max-width: 94vw; }   /* un peu plus de place latérale */
-  .grid-scroll{ max-height: 60vh; }
-  .monster-grid{ grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); }
-}
-
-/* Garde-fous (au cas où des styles plus haut réécrasent) */
-#grid-panel.panel{
-  overflow: visible !important;
-  max-height: none !important;
-  height: auto !important;
-}
-.grid-wrap{ overflow: hidden; }
-
-/* Les pages d’onglets ne doivent pas être coupées */
-#page-stats, #page-done {
-  position: relative;
-  z-index: 0;
-  overflow: visible !important;
-  min-height: 200px;   /* empêche la réduction à 0 */
-}
-
-/* Le panel des monstres ne doit PAS déborder sur les onglets suivants */
-#grid-panel.panel {
-  overflow: visible !important;
-  max-height: none !important;
-  height: auto !important;
-}
-
-/* Le cadre de la grille contient son contenu, la zone scroll gère le défilé */
-.grid-wrap { overflow: hidden; }
-.grid-scroll{
-  max-height: 68vh;
-  overflow: auto;
-}
-
-/* 1) Le panel de la grille ne doit pas scroller ni limiter la hauteur
-      (c’est .grid-scroll qui gère le scroll) */
-#grid-panel.panel{
-  position: static !important;
-  overflow: visible !important;
-  max-height: none !important;
-  height: auto !important;
-  z-index: 0 !important;
-  margin-bottom: 16px;          /* espace avant les sections suivantes */
-}
-
-/* 2) Le cadre arrondi clippe le contenu de la grille (pas de débord) */
-.grid-wrap{
-  overflow: hidden;             /* empêche les vignettes de “dépasser” */
-  border-radius: 14px;
-}
-
-/* 3) La SEULE zone qui scrolle pour les monstres */
-.grid-scroll{
-  max-height: 68vh;             /* ajuste 60–75vh au besoin */
-  overflow: auto;
-  padding: 8px 12px 8px 8px;
-  scrollbar-gutter: stable;
-}
-
-/* 4) Les pages des onglets restent au-dessus et visibles */
-#page-stats, #page-done{
-  position: relative;
-  z-index: 1;
-  overflow: visible !important;
-  min-height: 200px;            /* évite une réduction à 0px */
+@media (max-width:1280px){
+  main{max-width:94vw}
+  .grid-scroll{max-height:60vh}
+  .monster-grid{grid-template-columns:repeat(auto-fill,minmax(50px,1fr))}
 }
