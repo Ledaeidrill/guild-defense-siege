@@ -35,6 +35,17 @@ main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
 }
 .field input:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) }
 
+/* Pseudo plus compact */
+.field.narrow{
+  max-width: 520px;          /* largeur cible du champ Pseudo */
+  margin-left: 0;            /* à gauche par défaut… */
+  margin-right: auto;        /* …et pas centré */
+}
+@media (max-width: 640px){
+  .field.narrow{ max-width: 100%; } /* mobile: pleine largeur */
+}
+
+
 /* Panneau scrollable (recherche sticky + grille) */
 .panel{
   border:1px solid #233243; border-radius:12px; background:var(--bg2);
