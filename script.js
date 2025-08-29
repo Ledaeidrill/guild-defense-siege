@@ -341,43 +341,27 @@ async function loadHandled() {
 
 // Actions admin (avec messages d’erreur plus explicites)
 async function moveToHandled(key){
-  console.log(">>> [moveToHandled] appelé avec key:", key);
-
-  const payload = JSON.stringify({
-    action: 'handle',
-    admin_token: ADMIN_TOKEN_PARAM,
-    key
-  });
-  console.log(">>> [moveToHandled] payload envoyé:", payload);
-
-  try {
+  console.log(">>> [moveToHandled] key:", key);
+  try{
+    const payload = JSON.stringify({ action:'handle', admin_token: ADMIN_TOKEN_PARAM, key });
     const res = await fetch(APPS_SCRIPT_URL, {
       method:'POST',
       headers:{ 'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8' },
       body: 'payload=' + encodeURIComponent(payload)
     });
-
-    console.log(">>> [moveToHandled] status HTTP:", res.status);
-    const txt = await res.text();
-    console.log(">>> [moveToHandled] réponse brute:", txt);
-
-    let json;
-    try { json = JSON.parse(txt); }
-    catch(e){ throw new Error("Réponse pas JSON: "+txt); }
-
-    if (!json.ok) {
-      toast("Erreur admin: " + (json.error||'inconnue'));
-      return;
-    }
+    console.log(">>> [moveToHandled] HTTP:", res.status);
+    const txt = await res.text(); console.log(">>> [moveToHandled] raw:", txt);
+    const json = JSON.parse(txt);
+    if (!json.ok) { toast(json.error || 'Action admin impossible.'); return; }
     toast('Défense déplacée dans "Défs traitées" ✅');
     await Promise.all([loadStats(), loadHandled()]);
-  } catch (err) {
-    console.error(">>> [moveToHandled] exception:", err);
-    toast("Action admin impossible.");
+  }catch(err){
+    console.error(">>> [moveToHandled] err:", err); toast('Action admin impossible.');
   }
 }
 
 async function unhandle(key){
+  console.log(">>> [unhandle] key:", key);
   try{
     const payload = JSON.stringify({ action:'unhandle', admin_token: ADMIN_TOKEN_PARAM, key });
     const res = await fetch(APPS_SCRIPT_URL, {
@@ -385,12 +369,14 @@ async function unhandle(key){
       headers:{ 'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8' },
       body: 'payload=' + encodeURIComponent(payload)
     });
-    const json = await res.json();
+    console.log(">>> [unhandle] HTTP:", res.status);
+    const txt = await res.text(); console.log(">>> [unhandle] raw:", txt);
+    const json = JSON.parse(txt);
     if (!json.ok) { toast(json.error || 'Action admin impossible.'); return; }
     toast('Défense rétablie dans Top défenses ✅');
     await Promise.all([loadStats(), loadHandled()]);
   }catch(err){
-    console.error(err); toast('Action admin impossible.');
+    console.error(">>> [unhandle] err:", err); toast('Action admin impossible.');
   }
 }
 
