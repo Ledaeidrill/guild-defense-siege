@@ -213,3 +213,35 @@ textarea:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) 
   display:flex; flex-direction:column; gap:12px;
   width:100%; margin:12px auto 0; max-width: 940px; /* léger plus large pour le bouton */
 }
+
+/* Cadre extérieur avec bords arrondis et ombre */
+.grid-wrap {
+  border-radius: 14px;
+  background: #0f1824;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.06),
+    0 8px 24px rgba(0,0,0,.35);
+  padding: 8px;  /* espace pour voir l’arrondi autour */
+}
+
+/* Zone intérieure scrollable */
+.grid-scroll {
+  max-height: 75vh;         /* hauteur max visible */
+  overflow: auto;           /* active la scroll-bar */
+  padding-right: 12px;      /* espace pour ne pas coller la scroll-bar au bord */
+  scrollbar-gutter: stable both-edges; /* garde l’espace réservé */
+  background-clip: padding-box;
+  border-radius: 10px;      /* optionnel : léger arrondi aussi à l’intérieur */
+}
+
+/* Optionnel : styliser la scroll-bar (Chrome/Edge/Safari) */
+.grid-scroll::-webkit-scrollbar { width: 12px; }
+.grid-scroll::-webkit-scrollbar-track { background: transparent; margin: 6px; }
+.grid-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.18);
+  border-radius: 12px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+/* Firefox */
+.grid-scroll { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.25) transparent; }
