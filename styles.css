@@ -37,7 +37,7 @@ main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
 
 /* Pseudo plus compact */
 .field.narrow{
-  max-width: 520px;          /* largeur cible du champ Pseudo */
+  max-width: 220px;          /* largeur cible du champ Pseudo */
   margin-left: 0;            /* à gauche par défaut… */
   margin-right: auto;        /* …et pas centré */
 }
