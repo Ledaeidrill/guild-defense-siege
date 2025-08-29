@@ -293,14 +293,25 @@ function cardHtmlByName(name){
 }
 
 async function loadStats() {
-  const box = qs('#stats');
+  const box = document.getElementById('stats');
   box.innerHTML = 'Chargement…';
   try {
-    const json = await apiGet({ token: TOKEN, mode: 'stats' });
-    if (!json.ok) throw new Error(json.error || 'Erreur');
+    const url = `${APPS_SCRIPT_URL}?token=${encodeURIComponent(TOKEN)}&mode=stats`;
+    const res = await fetch(url);
+    const text = await res.text();
+    console.log('[loadStats] HTTP', res.status, 'RAW:', text);
+    const json = JSON.parse(text);
+
+    if (!json.ok) {
+      box.innerHTML = 'Erreur chargement stats : ' + (json.error || 'inconnue');
+      return;
+    }
 
     const rows = json.stats || [];
-    if (!rows.length) { box.innerHTML = 'Aucune donnée pour l’instant.'; return; }
+    if (!rows.length) {
+      box.innerHTML = 'Aucune donnée pour l’instant.';
+      return;
+    }
 
     let html = `<div class="def-list">`;
     for (const r of rows) {
@@ -319,34 +330,45 @@ async function loadStats() {
     html += `</div>`;
     box.innerHTML = html;
 
-    // délégation pour boutons "Traiter"
     if (isAdmin()) {
       const list = box.querySelector('.def-list');
       list.addEventListener('click', async (e) => {
         const btn = e.target.closest('.act-handle');
         if (!btn) return;
         const key = btn.getAttribute('data-key');
-        const json = await apiPost({ action:'handle', admin_token: ADMIN_TOKEN_PARAM, key });
-        if (!json.ok) return toast(json.error || 'Action admin impossible.');
+        const json2 = await apiPost({ action:'handle', admin_token: ADMIN_TOKEN_PARAM, key });
+        console.log('[handle] response:', json2);
+        if (!json2.ok) return toast(json2.error || 'Action admin impossible.');
         toast('Défense déplacée dans "Défs traitées" ✅');
         await Promise.all([loadStats(), loadHandled()]);
       });
     }
   } catch (e) {
     console.error(e);
-    box.innerHTML = 'Impossible de charger les stats.';
+    box.innerHTML = 'Impossible de charger les stats (voir console).';
   }
 }
 
 async function loadHandled() {
-  const box = qs('#done');
+  const box = document.getElementById('done');
   box.innerHTML = 'Chargement…';
   try {
-    const json = await apiGet({ token: TOKEN, mode: 'handled' });
-    if (!json.ok) throw new Error(json.error || 'Erreur');
+    const url = `${APPS_SCRIPT_URL}?token=${encodeURIComponent(TOKEN)}&mode=handled`;
+    const res = await fetch(url);
+    const text = await res.text();
+    console.log('[loadHandled] HTTP', res.status, 'RAW:', text);
+    const json = JSON.parse(text);
+
+    if (!json.ok) {
+      box.innerHTML = 'Erreur chargement défenses traitées : ' + (json.error || 'inconnue');
+      return;
+    }
 
     const rows = json.handled || [];
-    if (!rows.length) { box.innerHTML = 'Aucune défense traitée pour le moment.'; return; }
+    if (!rows.length) {
+      box.innerHTML = 'Aucune défense traitée pour le moment.';
+      return;
+    }
 
     const list = document.createElement('div');
     list.className = 'def-list';
@@ -354,6 +376,7 @@ async function loadHandled() {
     rows.forEach(r => {
       const item = document.createElement('div');
       item.className = 'def-item';
+
       const trio = document.createElement('div');
       trio.className = 'def-trio';
 
@@ -382,6 +405,7 @@ async function loadHandled() {
         btn.textContent = 'Rétablir';
         btn.onclick = async () => {
           const json2 = await apiPost({ action:'unhandle', admin_token: ADMIN_TOKEN_PARAM, key: r.key });
+          console.log('[unhandle] response:', json2);
           if (!json2.ok) return toast(json2.error || 'Action admin impossible.');
           toast('Défense rétablie dans Top défenses ✅');
           await Promise.all([loadStats(), loadHandled()]);
@@ -391,6 +415,7 @@ async function loadHandled() {
       } else {
         item.append(trio);
       }
+
       list.appendChild(item);
     });
 
@@ -398,6 +423,7 @@ async function loadHandled() {
     box.appendChild(list);
   } catch (e) {
     console.error(e);
-    box.innerHTML = 'Impossible de charger les défenses traitées.';
+    box.innerHTML = 'Impossible de charger les défenses traitées (voir console).';
   }
 }
+
