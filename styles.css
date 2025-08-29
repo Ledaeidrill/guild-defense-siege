@@ -296,3 +296,9 @@ body {
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.12) transparent;
 }
+
+/* === Fix : supprimer la 3ème scrollbar du panel === */
+#grid-panel.panel {
+  overflow: visible !important; /* désactive le scroll du conteneur */
+  height: auto;                 /* laisse la hauteur s’adapter */
+}
