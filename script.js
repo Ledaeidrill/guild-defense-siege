@@ -48,6 +48,9 @@ async function apiPost(payloadObj){ // encodé pour éviter le preflight
     headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
     body: 'payload=' + encodeURIComponent(payload)
   });
+  const raw = await res.text();
+  console.log('[loadStats] RAW:', raw); // ou [loadHandled]
+  const json = JSON.parse(raw);
   const txt = await res.text();
   try { return JSON.parse(txt); }
   catch { throw new Error('Réponse invalide: ' + txt); }
@@ -298,6 +301,9 @@ async function loadStats() {
   try {
     const url = `${APPS_SCRIPT_URL}?token=${encodeURIComponent(TOKEN)}&mode=stats`;
     const res = await fetch(url);
+    const raw = await res.text();
+    console.log('[loadStats] RAW:', raw); // ou [loadHandled]
+    const json = JSON.parse(raw);
     const text = await res.text();
     console.log('[loadStats] HTTP', res.status, 'RAW:', text);
     const json = JSON.parse(text);
@@ -307,22 +313,19 @@ async function loadStats() {
       return;
     }
 
-    const rows = json.stats || [];
-    if (!rows.length) {
-      box.innerHTML = 'Aucune donnée pour l’instant.';
-      return;
-    }
-
+    const rows = Array.isArray(json.stats) ? json.stats : [];
+    if (!rows.length) { box.innerHTML = 'Aucune donnée pour l’instant.'; return; }
+    
     let html = `<div class="def-list">`;
     for (const r of rows) {
-      const trio = (r.trio || r.key.split(' / '));
+      const trio = Array.isArray(r.trio) ? r.trio : String(r.key || '').split(' / ');
       html += `
         <div class="def-row">
           <div class="def-item">
             <div class="def-trio">
               ${trio.map(cardHtmlByName).join('')}
             </div>
-            <div class="def-count">${r.count}</div>
+            <div class="def-count">${r.count ?? 0}</div>
           </div>
           ${isAdmin() ? `<button class="btn-ghost act-handle" data-key="${escapeHtml(r.key)}">Traiter</button>` : ``}
         </div>`;
@@ -380,7 +383,7 @@ async function loadHandled() {
       const trio = document.createElement('div');
       trio.className = 'def-trio';
 
-      (r.trio || r.key.split(' / ')).forEach(name => {
+      ( Array.isArray(r.trio) ? r.trio : String(r.key || '').split(' / ') ).forEach(name => {
         const data = findMonsterByName(name) || { name, icon:'' };
         const card = document.createElement('div');
         card.className = 'pick def-pick';
