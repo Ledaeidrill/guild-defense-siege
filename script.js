@@ -315,7 +315,11 @@ async function loadStats() {
 
     let html = `<div class="def-list">`;
     for (const r of rows) {
-      const trio = Array.isArray(r.trio) ? r.trio : String(r.key || '').split(' / ');
+      const trio = Array.isArray(r.trio)
+        ? r.trio
+        : (r.trio && typeof r.trio === 'object'
+            ? Object.values(r.trio)                 // <-- gère {"0":"A","1":"B","2":"C"}
+            : String(r.key || '').split(' / '));
       html += `
         <div class="def-row">
           <div class="def-item">
@@ -377,7 +381,15 @@ async function loadHandled() {
       const trio = document.createElement('div');
       trio.className = 'def-trio';
 
-      (Array.isArray(r.trio) ? r.trio : String(r.key || '').split(' / ')).forEach(name => {
+      ( Array.isArray(r.trio)
+        ? r.trio
+        : (r.trio && typeof r.trio === 'object'
+            ? Object.values(r.trio)
+            : String(r.key || '').split(' / ')
+          )
+      ).forEach(name => {
+        // ... inchangé ...
+      });
         const m = findMonsterByName(name) || { name, icon: '' };
         const card = document.createElement('div');
         card.className = 'pick def-pick';
