@@ -42,12 +42,12 @@ main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
 }
 .field input:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) }
 
+/* Barre de recherche plus compacte */
 #search {
-  max-width: 200px;   /* largeur maximale souhaitée (ajuste 300/400/500px selon ton goût) */
-  width: 100%;        /* garde responsive si écran plus petit */
+  max-width: 200px;
+  width: 100%;
   display: block;
 }
-
 
 /* Pseudo plus compact */
 .field.narrow{
@@ -170,9 +170,9 @@ textarea:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) 
   margin: 0 auto;
 }
 
-/* (remplace ton .def-item actuel) */
+/* Carte */
 .def-item{
-  flex:1;                                  /* prend toute la largeur disponible */
+  flex:1;
   display:flex; align-items:center;
   justify-content:space-between;           /* trio à gauche, compteur à droite */
   gap:20px;
@@ -189,7 +189,7 @@ textarea:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) 
 .def-pick img{ width:60px; height:60px; border-radius:10px }
 .def-pick .pname{ font-size:12px; line-height:13px; margin-top:6px; max-width:100px }
 
-/* Compteur collé à droite dans la carte */
+/* Compteur à droite dans la carte */
 .def-count{
   min-width:48px;
   text-align:center;
@@ -203,7 +203,7 @@ textarea:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) 
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
 }
 
-/* Bouton Traiter (à droite, en dehors de la carte) */
+/* Bouton Traiter (à droite, hors de la carte) */
 .btn-ghost{ appearance:none; border:1px solid #2b3b4a; background:#101826; color:#e8eef5;
   padding:6px 10px; border-radius:10px; cursor:pointer; font-size:12px; white-space:nowrap; }
 .btn-ghost:hover{ border-color:#3a4c60 }
@@ -211,5 +211,5 @@ textarea:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) 
 /* Liste = pile de rangées centrées */
 .def-list{
   display:flex; flex-direction:column; gap:12px;
-  width:100%; margin:12px auto 0; max-width: 940px; /* léger plus que la carte pour le bouton */
+  width:100%; margin:12px auto 0; max-width: 940px; /* léger plus large pour le bouton */
 }
