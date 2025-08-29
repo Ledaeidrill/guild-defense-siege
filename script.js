@@ -238,6 +238,18 @@ async function loadStats() {
     const json = await res.json();
     if (!json.ok) throw new Error(json.error || 'Erreur');
 
+    // ✅ si déjà traitée, afficher le message et stopper
+    if (json.already_handled) {
+      toast(json.message || 'Défense déjà traitée.');
+      picks = []; renderPicks();
+      document.getElementById('notes').value = '';
+      return;
+    }
+
+    toast('Défense enregistrée ✅');
+    picks = []; renderPicks();
+    document.getElementById('notes').value = '';
+
     const rows = json.stats || [];
     if (!rows.length) { box.innerHTML = 'Aucune donnée pour l’instant.'; return; }
 
