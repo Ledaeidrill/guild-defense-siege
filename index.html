@@ -8,7 +8,7 @@
 </head>
 <body>
 <header>
-  <h1>Défenses Siegest</h1>
+  <h1>Défenses Sieges</h1>
   <nav>
     <button id="tab-report" class="active">Demander une défense</button>
     <button id="tab-stats">Top défenses</button>
@@ -24,31 +24,32 @@
       <input id="player" placeholder="Pseudo" autocomplete="off" />
     </div>
 
-    <!-- Panneau scrollable -->
+    <!-- Panneau (pas de scroll ici) -->
     <div id="grid-panel" class="panel">
       <div class="row field">
         <label for="search">Recherche</label>
         <input id="search" placeholder="Rechercher un monstre" autocomplete="off" />
       </div>
-    
+
+      <!-- Fenêtre de la grille (scroll ici) -->
       <div class="grid-wrap">
         <div class="grid-scroll">
           <div id="monster-grid" class="monster-grid"></div>
         </div>
       </div>
-    </div> <!-- ✅ FIN du panneau scroll -->
-    
-    <!-- ✅ Sélection / Notes / Envoi HORS du panneau scroll -->
+    </div><!-- /panel -->
+
+    <!-- Sélection / Notes / Envoi HORS de la fenêtre scroll -->
     <div class="selection-wrap">
       <div class="row picks">
         <div class="picks-title">Ta sélection :</div>
         <div id="picks"></div>
       </div>
-    
+
       <div class="row">
         <textarea id="notes" placeholder="Notes (optionnelles)"></textarea>
       </div>
-    
+
       <div class="row">
         <button id="send" class="btn-primary">
           <span class="btn-label">Envoyer</span>
@@ -56,8 +57,9 @@
         </button>
       </div>
     </div>
-    
+
     <div id="toast" role="status" aria-live="polite"></div>
+  </section><!-- ✅ on ferme bien page-report -->
 
   <!-- Onglet 2 : stats -->
   <section id="page-stats" class="hidden">
