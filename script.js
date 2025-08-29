@@ -203,6 +203,22 @@ const MONS_BY_NAME = (() => {
 })();
 function findMonsterByName(n){ return MONS_BY_NAME.get((n||'').toLowerCase()) || null; }
 
+function escapeHtml(s){
+  return (s||'').replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+
+function cardHtmlByName(name){
+  const d = findMonsterByName(name) || { name, icon:'' };
+  const src = fixIconUrl(d.icon||'');
+  return `
+    <div class="pick def-pick">
+      <img src="${src}" alt="${escapeHtml(d.name)}" loading="lazy">
+      <div class="pname">${escapeHtml(d.name)}</div>
+    </div>`;
+}
+
 async function loadStats() {
   const box = document.getElementById('stats');
   box.innerHTML = 'Chargement…';
@@ -215,54 +231,32 @@ async function loadStats() {
     const rows = json.stats || [];
     if (!rows.length) { box.innerHTML = 'Aucune donnée pour l’instant.'; return; }
 
-    const list = document.createElement('div');
-    list.className = 'def-list';
+    // --- Build HTML string (plus rapide) ---
+    let html = `<div class="def-list">`;
+    for (const r of rows) {
+      const trio = (r.trio || r.key.split(' / '));
+      html += `
+        <div class="def-row">
+          <div class="def-item">
+            <div class="def-trio">
+              ${trio.map(cardHtmlByName).join('')}
+            </div>
+            <div class="def-count">${r.count}</div>
+          </div>
+          ${isAdmin() ? `<button class="btn-ghost act-handle" data-key="${escapeHtml(r.key)}">Traiter</button>` : ``}
+        </div>`;
+    }
+    html += `</div>`;
+    box.innerHTML = html;
 
-    rows.forEach(r => {
-      const item = document.createElement('div');
-      item.className = 'def-item';
-
-      const trio = document.createElement('div');
-      trio.className = 'def-trio';
-
-      (r.trio || r.key.split(' / ')).forEach(name => {
-        const data = findMonsterByName(name) || { name, icon:'' };
-        const card = document.createElement('div');
-        card.className = 'pick def-pick';
-
-        const img = document.createElement('img');
-        img.src = fixIconUrl(data.icon||''); img.alt = data.name;
-        img.onerror = () => { img.remove(); };
-
-        const label = document.createElement('div');
-        label.className = 'pname';
-        label.textContent = data.name;
-
-        card.append(img, label);
-        trio.appendChild(card);
+    // Délégation : un seul listener pour tous les boutons “Traiter”
+    if (isAdmin()) {
+      box.querySelector('.def-list').addEventListener('click', (e) => {
+        const btn = e.target.closest('.act-handle');
+        if (!btn) return;
+        moveToHandled(btn.getAttribute('data-key'));
       });
-
-      const right = document.createElement('div');
-      right.style.display = 'flex'; right.style.alignItems = 'center'; right.style.gap = '8px';
-
-      const cnt = document.createElement('div');
-      cnt.className = 'def-count'; cnt.textContent = r.count;
-      right.appendChild(cnt);
-
-      if (isAdmin()) {
-        const btn = document.createElement('button');
-        btn.className = 'btn-ghost';
-        btn.textContent = '→ Traiter';
-        btn.onclick = () => moveToHandled(r.key);
-        right.appendChild(btn);
-      }
-
-      item.append(trio, right);
-      list.appendChild(item);
-    });
-
-    box.innerHTML = '';
-    box.appendChild(list);
+    }
   } catch (e) {
     console.error(e);
     box.innerHTML = 'Impossible de charger les stats.';
