@@ -7,7 +7,7 @@ nav button.active{background:#234567}
 main{padding:16px;max-width:min(var(--panel-width),95vw);margin:0 auto}
 .row{margin:12px 0}
 .hidden{display:none}
-#toast{margin-top:8px;font-size:13px;min-height:18px;opacity:0;transition:.2s ease}
+#toast{margin-top:8px;font-size:13px;min-height:34px;opacity:0;transition:.2s ease}
 #toast.show{opacity:1}
 .hint{ 
   opacity:.85; 
