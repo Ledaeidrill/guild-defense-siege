@@ -30,30 +30,34 @@
         <label for="search">Recherche</label>
         <input id="search" placeholder="Rechercher un monstre" autocomplete="off" />
       </div>
+    
       <div class="grid-wrap">
         <div class="grid-scroll">
           <div id="monster-grid" class="monster-grid"></div>
         </div>
       </div>
-
-    <div class="row picks">
-      <div class="picks-title">Ta sélection :</div>
-      <div id="picks"></div>
+    </div> <!-- ✅ FIN du panneau scroll -->
+    
+    <!-- ✅ Sélection / Notes / Envoi HORS du panneau scroll -->
+    <div class="selection-wrap">
+      <div class="row picks">
+        <div class="picks-title">Ta sélection :</div>
+        <div id="picks"></div>
+      </div>
+    
+      <div class="row">
+        <textarea id="notes" placeholder="Notes (optionnelles)"></textarea>
+      </div>
+    
+      <div class="row">
+        <button id="send" class="btn-primary">
+          <span class="btn-label">Envoyer</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </div>
     </div>
-
-    <div class="row">
-      <textarea id="notes" placeholder="Notes (optionnelles)"></textarea>
-    </div>
-
-    <div class="row">
-      <button id="send" class="btn-primary">
-        <span class="btn-label">Envoyer</span>
-        <span class="btn-spinner" aria-hidden="true"></span>
-      </button>
-    </div>
-
+    
     <div id="toast" role="status" aria-live="polite"></div>
-  </section>
 
   <!-- Onglet 2 : stats -->
   <section id="page-stats" class="hidden">
