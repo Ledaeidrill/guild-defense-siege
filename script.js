@@ -7,9 +7,10 @@ const ADMIN_TOKEN_PARAM = new URL(location.href).searchParams.get('admin');
 const isAdmin = () => !!ADMIN_TOKEN_PARAM;
 
 // =====================
-// HELPERS (utils UI + API)
+// HELPERS
 // =====================
 const qs = (sel, root = document) => root.querySelector(sel);
+const normalize = s => (s||'').toString().trim().toLowerCase();
 
 function toast(msg) {
   const t = qs('#toast');
@@ -18,8 +19,6 @@ function toast(msg) {
   t.classList.add('show');
   setTimeout(() => { t.textContent = ''; t.classList.remove('show'); }, 2800);
 }
-
-function normalize(s){ return (s||'').toString().trim().toLowerCase(); }
 
 function fixIconUrl(src){
   if (!src) return src;
@@ -35,29 +34,27 @@ function fixIconUrl(src){
   return src;
 }
 
-async function apiGet(params){ // params: { token, mode }
-  const url = APPS_SCRIPT_URL + '?' + new URLSearchParams(params).toString();
-  const res = await fetch(url);
-  return res.json();
-}
-
-async function apiPost(payloadObj){ // encodé pour éviter le preflight
+async function apiPost(payloadObj){
   const payload = JSON.stringify(payloadObj);
   const res = await fetch(APPS_SCRIPT_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
     body: 'payload=' + encodeURIComponent(payload)
   });
-  const raw = await res.text();
-  console.log('[loadStats] RAW:', raw); // ou [loadHandled]
-  const json = JSON.parse(raw);
   const txt = await res.text();
+  console.log('[apiPost]', res.status, txt);
   try { return JSON.parse(txt); }
-  catch { throw new Error('Réponse invalide: ' + txt); }
+  catch { return { ok:false, error:'Réponse invalide', raw: txt }; }
+}
+
+function ensureTrioArray(trio, key){
+  if (Array.isArray(trio)) return trio;
+  if (trio && typeof trio === 'object') return Object.values(trio);
+  return String(key || '').split(' / ');
 }
 
 // =====================
-// ÉTAT UI + onglets
+// ONGLET / ÉTAT
 // =====================
 let picks = []; // [{id,name,icon}]
 let inFlight = false;
@@ -80,7 +77,7 @@ tabStats ?.addEventListener('click', () => { activateTab(tabStats, pageStats); l
 tabDone  ?.addEventListener('click', () => { activateTab(tabDone, pageDone);  loadHandled(); });
 
 // =====================
-// INDEX MONSTRES pour accès rapide par nom
+// INDEX MONSTRES
 // =====================
 const MONS_BY_NAME = (() => {
   const m = new Map();
@@ -89,8 +86,19 @@ const MONS_BY_NAME = (() => {
 })();
 const findMonsterByName = (n) => MONS_BY_NAME.get((n||'').toLowerCase()) || null;
 
+function cardHtmlByName(name){
+  const d = findMonsterByName(name) || { name, icon:'' };
+  const src = fixIconUrl(d.icon||'');
+  const esc = (s)=> (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  return `
+    <div class="pick def-pick">
+      <img src="${src}" alt="${esc(d.name)}" loading="lazy">
+      <div class="pname">${esc(d.name)}</div>
+    </div>`;
+}
+
 // =====================
-// GRILLE : rendu + recherche
+// GRILLE
 // =====================
 const grid   = qs('#monster-grid');
 const search = qs('#search');
@@ -126,12 +134,12 @@ function makeCard(m){
       img.src = img.src.replace('swarfarm.com/', 'https://swarfarm.com/static/herders/images/monsters/');
     } else { img.remove(); }
   };
-  card.appendChild(img);
+  card.append(img);
 
   const span = document.createElement('span');
   span.className = 'name';
   span.textContent = m.name;
-  card.appendChild(span);
+  card.append(span);
 
   return card;
 }
@@ -158,24 +166,20 @@ search?.addEventListener('input', () => { clearTimeout(_searchTimer); _searchTim
 renderGrid();
 
 // =====================
-// SÉLECTION + drag & drop (réordonnable)
+// SÉLECTION (drag & drop)
 // =====================
 function addPick(m) {
   if (picks.find(p => p.id === m.id)) return;
   if (picks.length >= 3) { toast('Tu as déjà 3 monstres. Retire-en un.'); return; }
   picks.push(m);
   renderPicks();
-
-  // reset recherche + recharger toute la grille (plus fluide)
   if (search) search.value = '';
   renderGrid();
 }
-
 function removePick(id) {
   picks = picks.filter(p => p.id !== id);
   renderPicks();
 }
-
 function renderPicks() {
   const zone = qs('#picks');
   zone.innerHTML = '';
@@ -205,7 +209,6 @@ function renderPicks() {
   });
   enableDragAndDrop(zone);
 }
-
 qs('#picks')?.addEventListener('click', (e) => {
   const btn = e.target.closest('.close');
   if (!btn) return;
@@ -213,7 +216,6 @@ qs('#picks')?.addEventListener('click', (e) => {
   const id = Number(btn.getAttribute('data-id'));
   removePick(id);
 });
-
 function enableDragAndDrop(container) {
   container.querySelectorAll('.pick').forEach(el => {
     el.addEventListener('dragstart', (e) => {
@@ -221,11 +223,8 @@ function enableDragAndDrop(container) {
       e.dataTransfer.setData('text/plain', el.dataset.index);
       el.classList.add('dragging');
     });
-
     el.addEventListener('dragend', () => el.classList.remove('dragging'));
-
     el.addEventListener('dragover', (e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; });
-
     el.addEventListener('drop', (e) => {
       e.stopPropagation();
       const srcIndex  = parseInt(e.dataTransfer.getData('text/plain'));
@@ -233,7 +232,7 @@ function enableDragAndDrop(container) {
       if (!Number.isNaN(srcIndex) && !Number.isNaN(destIndex) && srcIndex !== destIndex) {
         const moved = picks.splice(srcIndex, 1)[0];
         picks.splice(destIndex, 0, moved);
-        renderPicks(); // re-render pour renuméroter les index
+        renderPicks();
       }
       return false;
     });
@@ -259,7 +258,6 @@ sendBtn?.addEventListener('click', async () => {
 
     const json = await apiPost({ token: TOKEN, player, monsters, notes });
 
-    // déjà traitée
     if (json.already_handled) {
       toast(json.message || 'Défense déjà traitée — va voir ingame les counters.');
       picks = []; renderPicks(); if (qs('#notes')) qs('#notes').value='';
@@ -280,21 +278,8 @@ sendBtn?.addEventListener('click', async () => {
 });
 
 // =====================
-// TOP DÉFENSES / DÉFS TRAITÉES
+// TOP DÉFENSES
 // =====================
-function escapeHtml(s){
-  return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-function cardHtmlByName(name){
-  const d = findMonsterByName(name) || { name, icon:'' };
-  const src = fixIconUrl(d.icon||'');
-  return `
-    <div class="pick def-pick">
-      <img src="${src}" alt="${escapeHtml(d.name)}" loading="lazy">
-      <div class="pname">${escapeHtml(d.name)}</div>
-    </div>`;
-}
-
 async function loadStats() {
   const box = document.getElementById('stats');
   box.innerHTML = 'Chargement…';
@@ -304,10 +289,7 @@ async function loadStats() {
     const raw = await res.text();
     console.log('[loadStats] HTTP', res.status, 'RAW:', raw);
 
-    let data;
-    try { data = JSON.parse(raw); }
-    catch { box.innerHTML = 'Réponse invalide du serveur.'; return; }
-
+    let data; try { data = JSON.parse(raw); } catch { box.innerHTML='Réponse invalide du serveur.'; return; }
     if (!data.ok) { box.innerHTML = 'Erreur chargement stats : ' + (data.error || 'inconnue'); return; }
 
     const rows = Array.isArray(data.stats) ? data.stats : [];
@@ -315,11 +297,7 @@ async function loadStats() {
 
     let html = `<div class="def-list">`;
     for (const r of rows) {
-      const trio = Array.isArray(r.trio)
-        ? r.trio
-        : (r.trio && typeof r.trio === 'object'
-            ? Object.values(r.trio)                 // <-- gère {"0":"A","1":"B","2":"C"}
-            : String(r.key || '').split(' / '));
+      const trio = ensureTrioArray(r.trio, r.key);
       html += `
         <div class="def-row">
           <div class="def-item">
@@ -328,7 +306,7 @@ async function loadStats() {
             </div>
             <div class="def-count">${r.count ?? 0}</div>
           </div>
-          ${isAdmin() ? `<button class="btn-ghost act-handle" data-key="${escapeHtml(r.key)}">Traiter</button>` : ``}
+          ${isAdmin() ? `<button class="btn-ghost act-handle" data-key="${r.key.replace(/"/g,'&quot;')}">Traiter</button>` : ``}
         </div>`;
     }
     html += `</div>`;
@@ -353,6 +331,9 @@ async function loadStats() {
   }
 }
 
+// =====================
+// DÉFENSES TRAITÉES
+// =====================
 async function loadHandled() {
   const box = document.getElementById('done');
   box.innerHTML = 'Chargement…';
@@ -362,10 +343,7 @@ async function loadHandled() {
     const raw = await res.text();
     console.log('[loadHandled] HTTP', res.status, 'RAW:', raw);
 
-    let data;
-    try { data = JSON.parse(raw); }
-    catch { box.innerHTML = 'Réponse invalide du serveur.'; return; }
-
+    let data; try { data = JSON.parse(raw); } catch { box.innerHTML='Réponse invalide du serveur.'; return; }
     if (!data.ok) { box.innerHTML = 'Erreur chargement défenses traitées : ' + (data.error || 'inconnue'); return; }
 
     const rows = Array.isArray(data.handled) ? data.handled : [];
@@ -381,15 +359,7 @@ async function loadHandled() {
       const trio = document.createElement('div');
       trio.className = 'def-trio';
 
-      ( Array.isArray(r.trio)
-        ? r.trio
-        : (r.trio && typeof r.trio === 'object'
-            ? Object.values(r.trio)
-            : String(r.key || '').split(' / ')
-          )
-      ).forEach(name => {
-        // ... inchangé ...
-      });
+      ensureTrioArray(r.trio, r.key).forEach(name => {
         const m = findMonsterByName(name) || { name, icon: '' };
         const card = document.createElement('div');
         card.className = 'pick def-pick';
