@@ -195,3 +195,27 @@ textarea:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) 
   padding:6px 10px;
 }
 
+/* ===== Défenses traitées (liste) ===== */
+
+.hint{ opacity:.85; margin:8px 0 10px; font-size:13px }
+
+.def-list{
+  display:flex; flex-direction:column; gap:10px;
+  width:100%; max-width:min(var(--panel-width), 95vw); margin:8px auto 0;
+}
+.def-item{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  border:1px solid #223244; background:#0f1520; border-radius:12px; padding:8px 10px;
+}
+.def-trio{ display:flex; gap:10px; align-items:center; }
+.def-pick{ width:86px; padding:8px 6px 6px; }
+.def-actions{ display:flex; gap:6px; }
+.btn-ghost{
+  appearance:none; border:1px solid #2b3b4a; background:#101826; color:#e8eef5;
+  padding:6px 10px; border-radius:10px; cursor:pointer; font-size:12px;
+}
+.btn-ghost:hover{ border-color:#3a4c60 }
+.def-count{
+  min-width:42px; text-align:center; font-weight:700;
+  background:#101826; border:1px solid #2d3c4b; border-radius:10px; padding:6px 10px;
+}
