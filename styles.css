@@ -160,24 +160,22 @@ textarea:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) 
 .btn-primary.sending .btn-label{ opacity:.9 }
 @keyframes spin{ to{ transform:rotate(360deg) } }
 
-/* ===== Listes défenses (Top & traitées) – version "carte centrée" ===== */
-
-/* Conteneur de la liste : centré, largeur contenue */
-.def-list{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  width:100%;
-  max-width: 920px;        /* largeur cible d’une carte */
-  margin:12px auto 0;      /* centre la pile de cartes */
-}
-
-/* Carte : visuelle, plus compacte, sans grand vide au milieu */
-.def-item{
+/* ---- LISTE DES DEFENSES : rangée = carte + bouton à droite ---- */
+.def-row{
   display:flex;
   align-items:center;
-  justify-content:flex-start;  /* pas d’étirement inutile */
-  gap:32px;                    /* espace entre trio et compteur/boutons */
+  gap:10px;             /* espace entre la carte et le bouton Traiter */
+  width:100%;
+  max-width: 920px;     /* même largeur que la carte */
+  margin: 0 auto;
+}
+
+/* (remplace ton .def-item actuel) */
+.def-item{
+  flex:1;                                  /* prend toute la largeur disponible */
+  display:flex; align-items:center;
+  justify-content:space-between;           /* trio à gauche, compteur à droite */
+  gap:20px;
   border:1px solid #223244;
   background:#0f1520;
   border-radius:12px;
@@ -185,38 +183,13 @@ textarea:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) 
   box-shadow: 0 6px 18px rgba(0,0,0,.22);
 }
 
-/* Trio : icônes plus grosses et lisibles */
-.def-trio{
-  display:flex;
-  gap:16px;
-  align-items:center;
-}
+.def-trio{ display:flex; gap:16px; align-items:center; }
 
-/* Carte de monstre dans la ligne Top défenses */
-.def-pick{
-  width:110px;               /* plus de place pour le nom */
-  padding:8px 6px 6px;
-}
+.def-pick{ width:110px; padding:8px 6px 6px }
+.def-pick img{ width:60px; height:60px; border-radius:10px }
+.def-pick .pname{ font-size:12px; line-height:13px; margin-top:6px; max-width:100px }
 
-/* Icônes dédiées aux listes : 60px, indépendantes de la sélection */
-.def-pick img{
-  width:60px;
-  height:60px;
-  border-radius:10px;
-}
-
-/* Noms plus visibles */
-.def-pick .pname{
-  font-size:12px;
-  line-height:13px;
-  margin-top:6px;
-  max-width:100px;           /* cohérent avec .def-pick width */
-}
-
-/* Bloc à droite (compteur + actions) — classes existantes conservées */
-.def-actions{ display:flex; gap:6px }
-
-/* Compteur mis en valeur */
+/* Compteur collé à droite dans la carte */
 .def-count{
   min-width:48px;
   text-align:center;
@@ -230,9 +203,13 @@ textarea:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) 
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
 }
 
-/* Bouton “Traiter / Rétablir” intact */
-.btn-ghost{
-  appearance:none; border:1px solid #2b3b4a; background:#101826; color:#e8eef5;
-  padding:6px 10px; border-radius:10px; cursor:pointer; font-size:12px;
-}
+/* Bouton Traiter (à droite, en dehors de la carte) */
+.btn-ghost{ appearance:none; border:1px solid #2b3b4a; background:#101826; color:#e8eef5;
+  padding:6px 10px; border-radius:10px; cursor:pointer; font-size:12px; white-space:nowrap; }
 .btn-ghost:hover{ border-color:#3a4c60 }
+
+/* Liste = pile de rangées centrées */
+.def-list{
+  display:flex; flex-direction:column; gap:12px;
+  width:100%; margin:12px auto 0; max-width: 940px; /* léger plus que la carte pour le bouton */
+}
