@@ -276,26 +276,23 @@ textarea:focus{ border-color:#3e5a78; box-shadow:0 0 0 2px rgba(46,110,255,.15) 
   scrollbar-color: rgba(255,255,255,.25) transparent;
 }
 
-/* --- Scrollbar principale (hors grille monstres) --- */
-
-/* Chrome / Edge / Safari */
+/* Scrollbar principale (page entière) */
 body::-webkit-scrollbar {
-  width: 10px;                        /* un peu plus fine que par défaut */
+  width: 10px;             /* un peu fine */
 }
 body::-webkit-scrollbar-track {
-  background: transparent;             /* fond invisible */
+  background: transparent;  /* invisible derrière */
 }
 body::-webkit-scrollbar-thumb {
-  background: rgba(200,200,200,0.15);  /* très discret */
+  background: rgba(255,255,255,0.12); /* discrète */
   border-radius: 6px;
 }
 body::-webkit-scrollbar-thumb:hover {
-  background: rgba(200,200,200,0.25);  /* un peu plus visible au hover */
+  background: rgba(255,255,255,0.2);  /* un peu plus visible au hover */
 }
 
 /* Firefox */
 body {
-  scrollbar-width: thin;                        /* plus fine */
-  scrollbar-color: rgba(200,200,200,0.15) transparent;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.12) transparent;
 }
-
