@@ -1,39 +1,5 @@
 window.MONSTERS = [
   {
-    "id": 8,
-    "com2us_id": 14212,
-    "family_id": 14200,
-    "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0019_1_0.png",
-    "name": "Red Angelmon",
-    "unawakened_name": "Red Angelmon",
-    "second_awaken": false,
-    "aliases": [
-      "feu",
-      "feu red angelmon",
-      "fire",
-      "fire red angelmon",
-      "red angelmon"
-    ]
-  },
-  {
-    "id": 10,
-    "com2us_id": 18212,
-    "family_id": 18200,
-    "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0030_1_2.png",
-    "name": "Red King Angelmon",
-    "unawakened_name": "Red King Angelmon",
-    "second_awaken": false,
-    "aliases": [
-      "feu",
-      "feu red king angelmon",
-      "fire",
-      "fire red king angelmon",
-      "red king angelmon"
-    ]
-  },
-  {
     "id": 12,
     "com2us_id": 12812,
     "family_id": 12800,
@@ -201,40 +167,6 @@ window.MONSTERS = [
       "fire",
       "fire tantra",
       "tantra"
-    ]
-  },
-  {
-    "id": 50,
-    "com2us_id": 14211,
-    "family_id": 14200,
-    "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0019_0_0.png",
-    "name": "Blue Angelmon",
-    "unawakened_name": "Blue Angelmon",
-    "second_awaken": false,
-    "aliases": [
-      "blue angelmon",
-      "eau",
-      "eau blue angelmon",
-      "water",
-      "water blue angelmon"
-    ]
-  },
-  {
-    "id": 51,
-    "com2us_id": 18211,
-    "family_id": 18200,
-    "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0030_0_2.png",
-    "name": "Blue King Angelmon",
-    "unawakened_name": "Blue King Angelmon",
-    "second_awaken": false,
-    "aliases": [
-      "blue king angelmon",
-      "eau",
-      "eau blue king angelmon",
-      "water",
-      "water blue king angelmon"
     ]
   },
   {
@@ -422,40 +354,6 @@ window.MONSTERS = [
       "kunda",
       "water",
       "water kunda"
-    ]
-  },
-  {
-    "id": 81,
-    "com2us_id": 14213,
-    "family_id": 14200,
-    "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0019_2_0.png",
-    "name": "Gold Angelmon",
-    "unawakened_name": "Gold Angelmon",
-    "second_awaken": false,
-    "aliases": [
-      "gold angelmon",
-      "vent",
-      "vent gold angelmon",
-      "wind",
-      "wind gold angelmon"
-    ]
-  },
-  {
-    "id": 83,
-    "com2us_id": 18213,
-    "family_id": 18200,
-    "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0030_2_2.png",
-    "name": "Gold King Angelmon",
-    "unawakened_name": "Gold King Angelmon",
-    "second_awaken": false,
-    "aliases": [
-      "gold king angelmon",
-      "vent",
-      "vent gold king angelmon",
-      "wind",
-      "wind gold king angelmon"
     ]
   },
   {
@@ -680,44 +578,6 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 121,
-    "com2us_id": 14215,
-    "family_id": 14200,
-    "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0019_4_0.png",
-    "name": "Dark Angelmon",
-    "unawakened_name": "Dark Angelmon",
-    "second_awaken": false,
-    "aliases": [
-      "dark",
-      "dark angelmon",
-      "dark dark angelmon",
-      "tenebres",
-      "tenebres dark angelmon",
-      "ténèbres",
-      "ténèbres dark angelmon"
-    ]
-  },
-  {
-    "id": 123,
-    "com2us_id": 18215,
-    "family_id": 18200,
-    "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0030_4_2.png",
-    "name": "Dark King Angelmon",
-    "unawakened_name": "Dark King Angelmon",
-    "second_awaken": false,
-    "aliases": [
-      "dark",
-      "dark dark king angelmon",
-      "dark king angelmon",
-      "tenebres",
-      "tenebres dark king angelmon",
-      "ténèbres",
-      "ténèbres dark king angelmon"
-    ]
-  },
-  {
     "id": 125,
     "com2us_id": 12815,
     "family_id": 12800,
@@ -867,44 +727,6 @@ window.MONSTERS = [
       "tenebres gorgo",
       "ténèbres",
       "ténèbres gorgo"
-    ]
-  },
-  {
-    "id": 143,
-    "com2us_id": 14214,
-    "family_id": 14200,
-    "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0019_3_0.png",
-    "name": "White Angelmon",
-    "unawakened_name": "White Angelmon",
-    "second_awaken": false,
-    "aliases": [
-      "light",
-      "light white angelmon",
-      "lumiere",
-      "lumiere white angelmon",
-      "lumière",
-      "lumière white angelmon",
-      "white angelmon"
-    ]
-  },
-  {
-    "id": 145,
-    "com2us_id": 18214,
-    "family_id": 18200,
-    "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0030_3_2.png",
-    "name": "White King Angelmon",
-    "unawakened_name": "White King Angelmon",
-    "second_awaken": false,
-    "aliases": [
-      "light",
-      "light white king angelmon",
-      "lumiere",
-      "lumiere white king angelmon",
-      "lumière",
-      "lumière white king angelmon",
-      "white king angelmon"
     ]
   },
   {
@@ -8776,25 +8598,6 @@ window.MONSTERS = [
       "tenebres homunculus(support)",
       "ténèbres",
       "ténèbres homunculus(support)"
-    ]
-  },
-  {
-    "id": 1155,
-    "com2us_id": 21714,
-    "family_id": 21700,
-    "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0044_5_0.png",
-    "name": "Super Angelmon",
-    "unawakened_name": "Super Angelmon",
-    "second_awaken": false,
-    "aliases": [
-      "light",
-      "light super angelmon",
-      "lumiere",
-      "lumiere super angelmon",
-      "lumière",
-      "lumière super angelmon",
-      "super angelmon"
     ]
   },
   {
