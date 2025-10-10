@@ -284,13 +284,13 @@ async function loadStats() {
   const box = document.getElementById('stats');
   box.innerHTML = 'Chargement…';
   try {
-    const url = `${APPS_SCRIPT_URL}?token=${encodeURIComponent(TOKEN)}&mode=stats`;
-    const res = await fetch(url);
-    const raw = await res.text();
-    console.log('[loadStats] HTTP', res.status, 'RAW:', raw);
+    const data = await apiPost({ mode: 'stats', token: TOKEN }); // <-- POST form-encoded via apiPost
+    console.log('[loadStats]', data);
 
-    let data; try { data = JSON.parse(raw); } catch { box.innerHTML='Réponse invalide du serveur.'; return; }
-    if (!data.ok) { box.innerHTML = 'Erreur chargement stats : ' + (data.error || 'inconnue'); return; }
+    if (!data || !data.ok) {
+      box.innerHTML = 'Erreur chargement stats : ' + (data?.error || 'inconnue');
+      return;
+    }
 
     const rows = Array.isArray(data.stats) ? data.stats : [];
     if (!rows.length) { box.innerHTML = 'Aucune donnée pour l’instant.'; return; }
@@ -338,13 +338,13 @@ async function loadHandled() {
   const box = document.getElementById('done');
   box.innerHTML = 'Chargement…';
   try {
-    const url = `${APPS_SCRIPT_URL}?token=${encodeURIComponent(TOKEN)}&mode=handled`;
-    const res = await fetch(url);
-    const raw = await res.text();
-    console.log('[loadHandled] HTTP', res.status, 'RAW:', raw);
+    const data = await apiPost({ mode: 'handled', token: TOKEN }); // <-- POST form-encoded via apiPost
+    console.log('[loadHandled]', data);
 
-    let data; try { data = JSON.parse(raw); } catch { box.innerHTML='Réponse invalide du serveur.'; return; }
-    if (!data.ok) { box.innerHTML = 'Erreur chargement défenses traitées : ' + (data.error || 'inconnue'); return; }
+    if (!data || !data.ok) {
+      box.innerHTML = 'Erreur chargement défenses traitées : ' + (data?.error || 'inconnue');
+      return;
+    }
 
     const rows = Array.isArray(data.handled) ? data.handled : [];
     if (!rows.length) { box.innerHTML = 'Aucune défense traitée pour le moment.'; return; }
@@ -372,24 +372,28 @@ async function loadHandled() {
         label.className = 'pname';
         label.textContent = m.name;
 
-        card.append(img, label);
+        card.appendChild(img);
+        card.appendChild(label);
         trio.appendChild(card);
       });
 
-      if (isAdmin()) {
+      // compteur / infos droite
+      if (typeof r.count !== 'undefined' || r.note) {
         const right = document.createElement('div');
-        right.className = 'def-actions';
-        const btn = document.createElement('button');
-        btn.className = 'btn-ghost';
-        btn.textContent = 'Rétablir';
-        btn.onclick = async () => {
-          const resp = await apiPost({ action:'unhandle', admin_token: ADMIN_TOKEN_PARAM, key: r.key });
-          console.log('[unhandle]', resp);
-          if (!resp.ok) return toast(resp.error || 'Action admin impossible.');
-          toast('Défense rétablie dans Top défenses ✅');
-          await Promise.all([loadStats(), loadHandled()]);
-        };
-        right.appendChild(btn);
+        right.style.display='flex'; right.style.gap='10px'; right.style.alignItems='center';
+
+        if (typeof r.count !== 'undefined') {
+          const count = document.createElement('div');
+          count.className = 'def-count';
+          count.textContent = r.count ?? 0;
+          right.appendChild(count);
+        }
+        if (r.note) {
+          const note = document.createElement('div');
+          note.className = 'hint';
+          note.textContent = r.note;
+          right.appendChild(note);
+        }
         item.append(trio, right);
       } else {
         item.append(trio);
