@@ -256,7 +256,7 @@ sendBtn?.addEventListener('click', async () => {
     sendBtn.disabled = true;
     sendBtn.classList.add('sending');
 
-    const json = await apiPost({ token: TOKEN, player, monsters, notes });
+    const json = await apiPost({ mode:'submit', token: TOKEN, player, monsters, notes });
 
     if (json.already_handled) {
       toast(json.message || 'Défense déjà traitée — va voir ingame les counters.');
