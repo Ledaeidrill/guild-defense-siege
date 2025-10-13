@@ -74,34 +74,34 @@
 </main>
 
 <!-- Modal Offenses (DANS le body, avant les scripts) -->
-<div id="offs-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-  <div class="modal-card">
-    <div class="modal-header">
-      <button class="modal-back" id="offs-back" aria-label="Retour">←</button>
-      <h3 id="offs-title">Offenses</h3>
+<div class="modal-body">
+  <!-- Liste -->
+  <div id="offs-list" class="offs-grid">Chargement…</div>
+
+  <!-- Footer : bouton + au centre -->
+  <div class="offs-footer">
+    <button id="offs-add-btn" class="btn-primary">Ajouter une offense</button>
+  </div>
+
+  <!-- Sous-vue: chooser (grille de monstres) -->
+  <div id="offs-chooser" class="hidden">
+    <div class="chooser-bar">
+      <input id="offs-search" type="text" placeholder="Rechercher un monstre…">
+      <button id="offs-validate" class="btn-primary" disabled>Valider</button>
     </div>
 
-    <div class="modal-body">
-      <!-- Liste + carte + -->
-      <div id="offs-list" class="offs-grid">Chargement…</div>
+    <!-- Sélection centrée (avec croix) -->
+    <div class="row picks center">
+      <div class="picks-title">Ta sélection :</div>
+      <div id="offs-picks"></div>
+    </div>
 
-      <!-- Sous-vue: chooser (grille de monstres) -->
-      <div id="offs-chooser" class="hidden">
-        <div class="chooser-bar">
-          <input id="offs-search" type="text" placeholder="Rechercher un monstre…">
-          <div class="chosen">
-            <span id="ch1" class="chip empty">1</span>
-            <span id="ch2" class="chip empty">2</span>
-            <span id="ch3" class="chip empty">3</span>
-          </div>
-          <button id="offs-validate" class="btn primary" disabled>Valider</button>
-        </div>
-        <div id="offs-grid" class="monster-grid"></div>
-        <div class="note-row">
-          <input id="off-note" type="text" placeholder="Note (optionnel)">
-        </div>
-      </div>
+    <!-- Grille -->
+    <div id="offs-grid" class="monster-grid"></div>
+
+    <!-- Note -->
+    <div class="note-row">
+      <input id="off-note" type="text" placeholder="Note (optionnel)">
     </div>
   </div>
 </div>
