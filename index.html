@@ -24,22 +24,19 @@
       <input id="player" placeholder="Pseudo" autocomplete="off" />
     </div>
 
-    <!-- Panneau (pas de scroll ici) -->
     <div id="grid-panel" class="panel">
       <div class="row field">
         <label for="search">Recherche</label>
         <input id="search" placeholder="Rechercher un monstre" autocomplete="off" />
       </div>
 
-      <!-- Fenêtre de la grille (scroll ici) -->
       <div class="grid-wrap">
         <div class="grid-scroll">
           <div id="monster-grid" class="monster-grid"></div>
         </div>
       </div>
-    </div><!-- /panel -->
+    </div>
 
-    <!-- Sélection / Notes / Envoi HORS de la fenêtre scroll -->
     <div class="selection-wrap">
       <div class="row picks">
         <div class="picks-title">Ta sélection :</div>
@@ -59,7 +56,7 @@
     </div>
 
     <div id="toast" role="status" aria-live="polite"></div>
-  </section><!-- ✅ on ferme bien page-report -->
+  </section>
 
   <!-- Onglet 2 : stats -->
   <section id="page-stats" class="hidden">
@@ -68,40 +65,43 @@
 
   <!-- Onglet 3 : défenses traitées -->
   <section id="page-done" class="hidden">
-    <p class="hint">Rendez-vous ingame pour connaître les replays et les runes</p>
+    <p class="hint">Rendez-vous ingame pour connaître les counters</p>
     <div id="done"></div>
   </section>
 </main>
 
-<!-- Modal Offenses (DANS le body, avant les scripts) -->
-<div class="modal-body">
-  <!-- Liste -->
-  <div id="offs-list" class="offs-grid">Chargement…</div>
-
-  <!-- Footer : bouton + au centre -->
-  <div class="offs-footer">
-    <button id="offs-add-btn" class="btn-primary">Ajouter une offense</button>
-  </div>
-
-  <!-- Sous-vue: chooser (grille de monstres) -->
-  <div id="offs-chooser" class="hidden">
-    <div class="chooser-bar">
-      <input id="offs-search" type="text" placeholder="Rechercher un monstre…">
-      <button id="offs-validate" class="btn-primary" disabled>Valider</button>
+<!-- Fenêtre modale Offenses -->
+<div id="offs-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card">
+    <div class="modal-header">
+      <button class="modal-back" id="offs-back" aria-label="Retour">←</button>
+      <h3 id="offs-title">Offenses</h3>
     </div>
 
-    <!-- Sélection centrée (avec croix) -->
-    <div class="row picks center">
-      <div class="picks-title">Ta sélection :</div>
-      <div id="offs-picks"></div>
-    </div>
+    <div class="modal-body">
+      <div id="offs-list" class="offs-grid">Chargement…</div>
+      <div class="offs-footer">
+        <button id="offs-add-btn" class="btn-primary">Ajouter une offense</button>
+      </div>
 
-    <!-- Grille -->
-    <div id="offs-grid" class="monster-grid"></div>
+      <div id="offs-chooser" class="hidden">
+        <div class="chooser-bar">
+          <input id="offs-search" type="text" placeholder="Rechercher un monstre…">
+          <button id="offs-validate" class="btn-primary" disabled>Valider</button>
+        </div>
 
-    <!-- Note -->
-    <div class="note-row">
-      <input id="off-note" type="text" placeholder="Note (optionnel)">
+        <div class="row picks center">
+          <div class="picks-title">Ta sélection :</div>
+          <div id="offs-picks"></div>
+        </div>
+
+        <div id="offs-grid" class="monster-grid"></div>
+
+        <div class="note-row">
+          <input id="off-note" type="text" placeholder="Note (optionnel)">
+        </div>
+      </div>
     </div>
   </div>
 </div>
