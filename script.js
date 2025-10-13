@@ -287,7 +287,7 @@ async function loadStats() {
   const box = document.getElementById('stats');
   box.innerHTML = 'Chargement…';
   try {
-    const data = await apiPost({ mode: 'stats', token: TOKEN }); // <-- POST form-encoded via apiPost
+    const data = await apiPost({ mode: 'stats', token: TOKEN });
     console.log('[loadStats]', data);
 
     if (!data || !data.ok) {
@@ -341,7 +341,7 @@ async function loadHandled() {
   const box = document.getElementById('done');
   box.innerHTML = 'Chargement…';
   try {
-    const data = await apiPost({ mode: 'handled', token: TOKEN }); // <-- POST form-encoded via apiPost
+    const data = await apiPost({ mode: 'handled', token: TOKEN });
     console.log('[loadHandled]', data);
 
     if (!data || !data.ok) {
@@ -380,27 +380,16 @@ async function loadHandled() {
         trio.appendChild(card);
       });
 
-      // compteur / infos droite
-      if (typeof r.count !== 'undefined' || r.note) {
-        const right = document.createElement('div');
-        right.style.display='flex'; right.style.gap='10px'; right.style.alignItems='center';
+      // droite : bouton "voir les offs"
+      const right = document.createElement('div');
+      right.style.display='flex'; right.style.gap='10px'; right.style.alignItems='center';
+      const btnOffs = document.createElement('button');
+      btnOffs.className = 'btn-ghost';
+      btnOffs.textContent = 'Voir les offs';
+      btnOffs.addEventListener('click', () => openOffsModal(r.key));
+      right.appendChild(btnOffs);
 
-        if (typeof r.count !== 'undefined') {
-          const count = document.createElement('div');
-          count.className = 'def-count';
-          count.textContent = r.count ?? 0;
-          right.appendChild(count);
-        }
-        if (r.note) {
-          const note = document.createElement('div');
-          note.className = 'hint';
-          note.textContent = r.note;
-          right.appendChild(note);
-        }
-        item.append(trio, right);
-      } else {
-        item.append(trio);
-      }
+      item.append(trio, right);
       list.appendChild(item);
     });
 
@@ -412,6 +401,9 @@ async function loadHandled() {
   }
 }
 
+// =====================
+// MODALE OFFENSES
+// =====================
 function openOffsModal(defKey){
   CURRENT_DEF_KEY = defKey;
   document.getElementById('offs-title').textContent = `Offenses pour : ${defKey}`;
@@ -425,6 +417,7 @@ function closeOffsModal(){
 }
 document.getElementById('offs-back').addEventListener('click', closeOffsModal);
 document.querySelector('#offs-modal .modal-backdrop').addEventListener('click', closeOffsModal);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeOffsModal(); });
 
 async function loadOffs(defKey){
   const box = document.getElementById('offs-list');
@@ -502,7 +495,7 @@ function openOffsChooser(){
   // remplir la grille
   const grid = document.getElementById('offs-grid');
   grid.innerHTML = '';
-  MONSTERS.forEach(m => grid.appendChild(buildMonsterCard(m)));
+  (window.MONSTERS || []).forEach(m => grid.appendChild(buildMonsterCard(m)));
 
   // recherche
   const input = document.getElementById('offs-search');
@@ -568,7 +561,7 @@ async function submitOffense(){
 
   const resp = await apiPost({
     mode: 'add_off',
-    admin_token: ADMIN_TOKEN_PARAM, // ton param admin existant
+    admin_token: ADMIN_TOKEN_PARAM,  // param admin depuis l’URL
     key: CURRENT_DEF_KEY,
     o1, o2, o3, note,
     by: 'admin'
