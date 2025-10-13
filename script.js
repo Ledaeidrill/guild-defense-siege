@@ -418,6 +418,11 @@ function closeOffsModal(){
 document.getElementById('offs-back').addEventListener('click', closeOffsModal);
 document.querySelector('#offs-modal .modal-backdrop').addEventListener('click', closeOffsModal);
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeOffsModal(); });
+// Ouvrir le chooser depuis le bouton bas
+document.getElementById('offs-add-btn').addEventListener('click', () => {
+  if (!isAdmin()) return toast('Réservé aux admins.');
+  openOffsChooser();
+});
 
 async function loadOffs(defKey){
   const box = document.getElementById('offs-list');
@@ -447,6 +452,11 @@ function buildOffRow(o){
   const row = document.createElement('div');
   row.className = 'off-row';
 
+  const wrap = document.createElement('div');
+  wrap.style.display='flex';
+  wrap.style.flexDirection='column';
+  wrap.style.alignItems='center';
+
   const trio = document.createElement('div');
   trio.className = 'off-trio';
 
@@ -461,19 +471,26 @@ function buildOffRow(o){
     trio.appendChild(card);
   });
 
-  const meta = document.createElement('div');
-  meta.style.display='flex'; meta.style.flexDirection='column'; meta.style.alignItems='flex-end';
-  if (o.note){
-    const note = document.createElement('div'); note.className='off-note'; note.textContent=o.note; meta.appendChild(note);
-  }
-  if (o.by || o.ts){
-    const small = document.createElement('div'); small.className='hint';
-    const ts = o.ts ? new Date(o.ts).toLocaleString() : '';
-    small.textContent = [o.by||'', ts].filter(Boolean).join(' • ');
-    meta.appendChild(small);
+  wrap.appendChild(trio);
+
+  // actions admin : retirer
+  if (isAdmin() && o.row) {
+    const actions = document.createElement('div');
+    actions.className = 'off-actions';
+    const del = document.createElement('button');
+    del.className = 'btn-ghost';
+    del.textContent = 'Retirer';
+    del.addEventListener('click', async () => {
+      const resp = await apiPost({ mode:'del_off', admin_token: ADMIN_TOKEN_PARAM, row: String(o.row) });
+      if (!resp || !resp.ok) return toast(resp?.error || 'Échec suppression');
+      toast('Offense retirée ✅');
+      loadOffs(CURRENT_DEF_KEY);
+    });
+    actions.appendChild(del);
+    wrap.appendChild(actions);
   }
 
-  row.append(trio, meta);
+  row.appendChild(wrap);
   return row;
 }
 
@@ -574,3 +591,100 @@ async function submitOffense(){
   document.getElementById('offs-chooser').classList.add('hidden');
   loadOffs(CURRENT_DEF_KEY);
 }
+
+function openOffsChooser(){
+  OFFS_CHOICES = [];
+  renderOffsPicks();
+
+  const chooser = document.getElementById('offs-chooser');
+  chooser.classList.remove('hidden');
+
+  // remplir la grille
+  const grid = document.getElementById('offs-grid');
+  grid.innerHTML = '';
+  (window.MONSTERS || []).forEach(m => grid.appendChild(buildMonsterCard(m)));
+
+  // recherche
+  const input = document.getElementById('offs-search');
+  input.value = '';
+  input.oninput = () => filterMonsterGrid(input.value.trim().toLowerCase());
+
+  // bouton valider
+  const btn = document.getElementById('offs-validate');
+  btn.disabled = true;
+  btn.onclick = submitOffense;
+}
+
+function buildMonsterCard(m){
+  const div = document.createElement('div');
+  div.className = 'mon-card';
+  div.dataset.name = m.name.toLowerCase();
+  div.innerHTML = `
+    <img src="${fixIconUrl(m.icon||'')}" alt="${m.name}" onerror="this.remove()">
+    <div style="margin-top:6px;font-size:12px;">${m.name}</div>
+  `;
+  div.addEventListener('click', () => toggleOffsPick(m));
+  return div;
+}
+
+function toggleOffsPick(m){
+  const i = OFFS_CHOICES.findIndex(x => x.name === m.name);
+  if (i >= 0) OFFS_CHOICES.splice(i,1);
+  else {
+    if (OFFS_CHOICES.length >= 3) return;
+    OFFS_CHOICES.push(m);
+  }
+  renderOffsPicks();
+}
+
+function renderOffsPicks(){
+  const zone = document.getElementById('offs-picks');
+  zone.innerHTML = '';
+  OFFS_CHOICES.forEach((p, idx) => {
+    const div = document.createElement('div');
+    div.className = 'pick';
+    const btn = document.createElement('button');
+    btn.className = 'close';
+    btn.type = 'button';
+    btn.title = 'Retirer';
+    btn.textContent = '✕';
+    btn.onclick = () => { OFFS_CHOICES.splice(idx,1); renderOffsPicks(); };
+    const img = document.createElement('img');
+    img.src = fixIconUrl(p.icon||''); img.alt = p.name;
+    const label = document.createElement('div');
+    label.className = 'pname';
+    label.textContent = p.name;
+    div.append(btn, img, label);
+    zone.appendChild(div);
+  });
+  document.getElementById('offs-validate').disabled = (OFFS_CHOICES.length !== 3);
+}
+
+function filterMonsterGrid(q){
+  const cards = document.querySelectorAll('#offs-grid .mon-card');
+  cards.forEach(c => c.style.display = (!q || c.dataset.name.includes(q)) ? '' : 'none');
+}
+
+async function submitOffense(){
+  if (!isAdmin()) { toast('Réservé aux admins.'); return; }
+  if (!CURRENT_DEF_KEY) return;
+  if (OFFS_CHOICES.length !== 3) return;
+
+  const [o1,o2,o3] = OFFS_CHOICES.map(x => x.name);
+  const note = document.getElementById('off-note').value.trim();
+
+  const resp = await apiPost({
+    mode: 'add_off',
+    admin_token: ADMIN_TOKEN_PARAM,
+    key: CURRENT_DEF_KEY,
+    o1, o2, o3, note,
+    by: 'admin'
+  });
+
+  if (!resp || !resp.ok) { toast(resp?.error || 'Échec de l’ajout.'); return; }
+
+  toast('Offense ajoutée ✅');
+  document.getElementById('offs-chooser').classList.add('hidden');
+  loadOffs(CURRENT_DEF_KEY);
+}
+
