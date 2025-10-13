@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Défenses Sieges</title>
+  <title>Défenses Sièges</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 <header>
-  <h1>Défenses Sieges</h1>
+  <h1>Défenses Sièges</h1>
   <nav>
     <button id="tab-report" class="active">Demander une défense</button>
     <button id="tab-stats">Top défenses</button>
@@ -19,96 +19,80 @@
 <main>
   <!-- Onglet 1 : formulaire -->
   <section id="page-report">
-    <div class="row field narrow">
-      <label for="player">Pseudo</label>
-      <input id="player" placeholder="Pseudo" autocomplete="off" />
-    </div>
-
-    <!-- Panneau (pas de scroll ici) -->
-    <div id="grid-panel" class="panel">
-      <div class="row field">
-        <label for="search">Recherche</label>
-        <input id="search" placeholder="Rechercher un monstre" autocomplete="off" />
+    <form id="defense-form" autocomplete="off">
+      <div class="row field narrow">
+        <label for="player">Pseudo</label>
+        <input id="player" name="player" placeholder="Pseudo" required />
       </div>
 
-      <!-- Fenêtre de la grille (scroll ici) -->
-      <div class="grid-wrap">
-        <div class="grid-scroll">
-          <div id="monster-grid" class="monster-grid"></div>
+      <div class="grid">
+        <h2>Composition (3 slots)</h2>
+
+        <div class="card">
+          <h3>Slot A</h3>
+          <label>Monstres</label>
+          <input name="slotA_monsters" placeholder="Ex: Nora / Dominic / Kinki" />
+          <label>Runes</label>
+          <input name="slotA_runes" placeholder="Ex: Violent/Volonté, SPD/CRIT/HP" />
+          <label>Notes</label>
+          <textarea name="slotA_notes" rows="2" placeholder="Vitesses, objectifs, remarques"></textarea>
+        </div>
+
+        <div class="card">
+          <h3>Slot B</h3>
+          <label>Monstres</label>
+          <input name="slotB_monsters" placeholder="Ex: Miles / Juno / Carcano" />
+          <label>Runes</label>
+          <input name="slotB_runes" placeholder="Ex: Rage/Volonté, ATK/CRIT/ATK" />
+          <label>Notes</label>
+          <textarea name="slotB_notes" rows="2"></textarea>
+        </div>
+
+        <div class="card">
+          <h3>Slot C</h3>
+          <label>Monstres</label>
+          <input name="slotC_monsters" placeholder="Ex: Clara / Giana / Nephthys" />
+          <label>Runes</label>
+          <input name="slotC_runes" placeholder="Ex: Swift/Nemesis, SPD/HP/HP" />
+          <label>Notes</label>
+          <textarea name="slotC_notes" rows="2"></textarea>
         </div>
       </div>
-    </div><!-- /panel -->
 
-    <!-- Sélection / Notes / Envoi HORS de la fenêtre scroll -->
-    <div class="selection-wrap">
-      <div class="row picks">
-        <div class="picks-title">Ta sélection :</div>
-        <div id="picks"></div>
+      <div class="row">
+        <label for="strategy">Stratégie / Objectifs</label>
+        <textarea id="strategy" name="strategy" rows="3" placeholder="Ex: anti-cleave, anti-RTA meta, conditions de snipe..."></textarea>
       </div>
 
       <div class="row">
-        <textarea id="notes" placeholder="Notes (optionnelles)"></textarea>
+        <label for="links">Liens (images/vidéos)</label>
+        <input id="links" name="links" placeholder="URLs séparées par des virgules" />
       </div>
 
-      <div class="row">
-        <button id="send" class="btn-primary">
-          <span class="btn-label">Envoyer</span>
-          <span class="btn-spinner" aria-hidden="true"></span>
-        </button>
+      <div class="actions">
+        <button type="submit">Envoyer la demande</button>
+        <span id="form-status" class="status"></span>
       </div>
-    </div>
+    </form>
+  </section>
 
-    <div id="toast" role="status" aria-live="polite"></div>
-  </section><!-- ✅ on ferme bien page-report -->
-
-  <!-- Onglet 2 : stats -->
+  <!-- Onglet 2 : top défenses -->
   <section id="page-stats" class="hidden">
-    <div id="stats"></div>
+    <h2>Top défenses (agrégées)</h2>
+    <div id="top-defenses"></div>
   </section>
 
   <!-- Onglet 3 : défenses traitées -->
   <section id="page-done" class="hidden">
-    <p class="hint">Rendez-vous ingame pour connaître les counters</p>
-    <div id="done"></div>
+    <h2>Défenses traitées</h2>
+    <div id="done-list"></div>
   </section>
 </main>
 
-  <!-- Modal Offenses -->
-<div id="offs-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-  <div class="modal-card">
-    <div class="modal-header">
-      <button class="modal-back" id="offs-back" aria-label="Retour">←</button>
-      <h3 id="offs-title">Offenses</h3>
-    </div>
+<footer>
+  <small>Projet guilde — outil de soumission & suivi</small>
+</footer>
 
-    <div class="modal-body">
-      <!-- Liste + carte + -->
-      <div id="offs-list" class="offs-grid">Chargement…</div>
-
-      <!-- Sous-vue: chooser (grille de monstres) -->
-      <div id="offs-chooser" class="hidden">
-        <div class="chooser-bar">
-          <input id="offs-search" type="text" placeholder="Rechercher un monstre…">
-          <div class="chosen">
-            <span id="ch1" class="chip empty">1</span>
-            <span id="ch2" class="chip empty">2</span>
-            <span id="ch3" class="chip empty">3</span>
-          </div>
-          <button id="offs-validate" class="btn primary" disabled>Valider</button>
-        </div>
-        <div id="offs-grid" class="monster-grid"></div>
-        <div class="note-row">
-          <input id="off-note" type="text" placeholder="Note (optionnel)">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script src="monsters.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
-
-
