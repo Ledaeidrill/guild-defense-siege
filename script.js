@@ -12,6 +12,9 @@ const isAdmin = () => !!ADMIN_TOKEN_PARAM;
 const qs = (sel, root = document) => root.querySelector(sel);
 const normalize = s => (s||'').toString().trim().toLowerCase();
 
+let CURRENT_DEF_KEY = null;
+let OFFS_CHOICES = []; // sélection courante [name1,name2,name3]
+
 function toast(msg) {
   const t = qs('#toast');
   if (!t) { alert(msg); return; }
@@ -407,4 +410,174 @@ async function loadHandled() {
     console.error(e);
     box.innerHTML = 'Impossible de charger les défenses traitées (voir console).';
   }
+}
+
+function openOffsModal(defKey){
+  CURRENT_DEF_KEY = defKey;
+  document.getElementById('offs-title').textContent = `Offenses pour : ${defKey}`;
+  document.getElementById('offs-chooser').classList.add('hidden'); // vue liste par défaut
+  document.getElementById('offs-modal').classList.remove('hidden');
+  loadOffs(defKey);
+}
+function closeOffsModal(){
+  CURRENT_DEF_KEY = null;
+  document.getElementById('offs-modal').classList.add('hidden');
+}
+document.getElementById('offs-back').addEventListener('click', closeOffsModal);
+document.querySelector('#offs-modal .modal-backdrop').addEventListener('click', closeOffsModal);
+
+async function loadOffs(defKey){
+  const box = document.getElementById('offs-list');
+  box.innerHTML = 'Chargement…';
+  try {
+    const data = await apiPost({ mode:'get_offs', token: TOKEN, key: defKey });
+    if (!data || !data.ok) { box.innerHTML = 'Erreur de chargement.'; return; }
+
+    const offs = data.offs || [];
+    const frag = document.createDocumentFragment();
+
+    // on mappe chaque offense -> carte
+    offs.forEach(o => frag.appendChild(buildOffRow(o)));
+
+    // carte + ajouter (seulement admin)
+    if (isAdmin()) frag.appendChild(buildAddCard());
+
+    box.innerHTML = '';
+    box.appendChild(frag);
+  } catch (e) {
+    console.error(e);
+    box.innerHTML = 'Erreur de chargement.';
+  }
+}
+
+function buildOffRow(o){
+  const row = document.createElement('div');
+  row.className = 'off-row';
+
+  const trio = document.createElement('div');
+  trio.className = 'off-trio';
+
+  (o.trio||[]).forEach(name=>{
+    const m = findMonsterByName(name) || { name, icon:'' };
+    const card = document.createElement('div');
+    card.className = 'off-pick';
+    const img = document.createElement('img');
+    img.src = fixIconUrl(m.icon||''); img.alt = m.name; img.onerror = () => img.remove();
+    const label = document.createElement('div'); label.textContent = m.name;
+    card.append(img,label);
+    trio.appendChild(card);
+  });
+
+  const meta = document.createElement('div');
+  meta.style.display='flex'; meta.style.flexDirection='column'; meta.style.alignItems='flex-end';
+  if (o.note){
+    const note = document.createElement('div'); note.className='off-note'; note.textContent=o.note; meta.appendChild(note);
+  }
+  if (o.by || o.ts){
+    const small = document.createElement('div'); small.className='hint';
+    const ts = o.ts ? new Date(o.ts).toLocaleString() : '';
+    small.textContent = [o.by||'', ts].filter(Boolean).join(' • ');
+    meta.appendChild(small);
+  }
+
+  row.append(trio, meta);
+  return row;
+}
+
+function buildAddCard(){
+  const wrap = document.createElement('div');
+  wrap.className = 'add-card';
+  wrap.innerHTML = `<div class="add-plus">+</div><div class="add-label">Ajouter une offense</div>`;
+  wrap.addEventListener('click', openOffsChooser);
+  return wrap;
+}
+
+function openOffsChooser(){
+  OFFS_CHOICES = [];
+  updateChosenChips();
+
+  const chooser = document.getElementById('offs-chooser');
+  chooser.classList.remove('hidden');
+
+  // remplir la grille
+  const grid = document.getElementById('offs-grid');
+  grid.innerHTML = '';
+  MONSTERS.forEach(m => grid.appendChild(buildMonsterCard(m)));
+
+  // recherche
+  const input = document.getElementById('offs-search');
+  input.value = '';
+  input.oninput = () => filterMonsterGrid(input.value.trim().toLowerCase());
+
+  // bouton valider
+  const btn = document.getElementById('offs-validate');
+  btn.disabled = true;
+  btn.onclick = submitOffense;
+}
+
+function buildMonsterCard(m){
+  const div = document.createElement('div');
+  div.className = 'mon-card';
+  div.dataset.name = m.name.toLowerCase();
+  div.innerHTML = `
+    <img src="${fixIconUrl(m.icon||'')}" alt="${m.name}" onerror="this.remove()">
+    <div style="margin-top:6px;font-size:12px;">${m.name}</div>
+  `;
+  div.addEventListener('click', () => togglePick(m.name, div));
+  return div;
+}
+
+function filterMonsterGrid(q){
+  const cards = document.querySelectorAll('#offs-grid .mon-card');
+  cards.forEach(c => {
+    const ok = !q || c.dataset.name.includes(q);
+    c.style.display = ok ? '' : 'none';
+  });
+}
+
+function togglePick(name, cardEl){
+  const i = OFFS_CHOICES.indexOf(name);
+  if (i >= 0) {
+    OFFS_CHOICES.splice(i,1);
+    cardEl.classList.remove('selected');
+  } else {
+    if (OFFS_CHOICES.length >= 3) return; // max 3
+    OFFS_CHOICES.push(name);
+    cardEl.classList.add('selected');
+  }
+  updateChosenChips();
+}
+
+function updateChosenChips(){
+  const ids = ['ch1','ch2','ch3'];
+  ids.forEach((id, idx)=>{
+    const chip = document.getElementById(id);
+    const v = OFFS_CHOICES[idx];
+    chip.textContent = v ? v : (idx+1);
+    chip.classList.toggle('empty', !v);
+  });
+  document.getElementById('offs-validate').disabled = (OFFS_CHOICES.length !== 3);
+}
+
+async function submitOffense(){
+  if (!isAdmin()) { toast('Réservé aux admins.'); return; }
+  if (!CURRENT_DEF_KEY) return;
+
+  const [o1,o2,o3] = OFFS_CHOICES;
+  const note = document.getElementById('off-note').value.trim();
+
+  const resp = await apiPost({
+    mode: 'add_off',
+    admin_token: ADMIN_TOKEN_PARAM, // ton param admin existant
+    key: CURRENT_DEF_KEY,
+    o1, o2, o3, note,
+    by: 'admin'
+  });
+
+  if (!resp || !resp.ok) { toast(resp?.error || 'Échec de l’ajout.'); return; }
+
+  toast('Offense ajoutée ✅');
+  // Revenir à la liste et recharger
+  document.getElementById('offs-chooser').classList.add('hidden');
+  loadOffs(CURRENT_DEF_KEY);
 }
