@@ -159,3 +159,22 @@ body{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.12) transparent}
 #offs-modal .mon-card.selected { outline:2px solid #3b82f6; }
 .note-row { margin-top:8px; }
 .note-row input { width:100%; padding:8px; border-radius:8px; border:1px solid #334155; background:#0b1220; color:#e2e8f0; }
+
+/* Corps de modale scrollable */
+.modal-body { max-height: 75vh; overflow: auto; }
+
+/* Footer + bouton centré */
+.offs-footer { display:flex; justify-content:center; margin-top:12px; }
+
+/* Sélection centrée dans le chooser */
+.picks.center { justify-content: center; }
+#offs-picks { display:flex; flex-wrap:wrap; gap:10px; min-height:58px; }
+
+/* Lignes d'offenses : centrées et sans méta */
+.off-row { justify-content:center; }
+.off-row .off-meta { display:none; }
+
+/* Bouton "Retirer" (admin) sous le trio */
+.off-actions { display:flex; justify-content:center; margin-top:6px; }
+.off-actions .btn-ghost { font-size:12px; }
+
