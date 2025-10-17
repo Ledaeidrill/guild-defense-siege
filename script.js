@@ -689,7 +689,7 @@ function renderOffsList(target, offs){
       del.style.marginLeft = '12px';
     
       del.onclick = async () => {
-        const defKey = list.dataset.defKey || '';
+        const defKey = target.dataset.defKey || '';
         const trio = (o.trio || []).map(x => String(x||'').trim());
         if (trio.length !== 3) return;
       
@@ -753,7 +753,7 @@ function openOffPicker(defKey, offsListEl){
   // Actions
   const actions = document.createElement('div'); actions.className='picker-actions';
   const validate = document.createElement('button'); validate.className='btn-primary'; validate.type='button'; validate.textContent='Valider off';
-  actions.append(validate, cancel);
+  actions.append(validate);
   wrap.appendChild(actions);
 
   // Insertion sous la liste
