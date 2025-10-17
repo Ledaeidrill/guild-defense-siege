@@ -465,10 +465,25 @@ function renderHandled(data){
       trio.appendChild(card);
     });
 
-    // (Optionnel) r.count / r.note pas fournis par la route actuelle : laissé vide
+    // compteur / infos droite (tu n'en avais pas ici)
     item.append(trio);
+    
+    // Bouton admin "Offs"
+    if (isAdmin()) {
+      const actions = document.createElement('div');
+      const btnOffs = document.createElement('button');
+      btnOffs.className = 'btn';
+      btnOffs.textContent = 'Offs';
+      btnOffs.dataset.key = r.key;
+      btnOffs.addEventListener('click', (e) => {
+        e.preventDefault();
+        openOffsModal(r.key, ensureTrioArray(r.trio, r.key));
+      });
+      actions.appendChild(btnOffs);
+      item.appendChild(actions);
+    }
+    
     list.appendChild(item);
-  });
 
   box.innerHTML = '';
   box.appendChild(list);
