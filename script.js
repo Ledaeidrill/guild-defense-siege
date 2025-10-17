@@ -489,6 +489,121 @@ function renderHandled(data){
   box.appendChild(list);
 }
 
+function openOffsModal(defKey, trioArr){
+  const root = document.getElementById('modal-root');
+  root.hidden = false;
+
+  // Construire la modale
+  const wrap = document.createElement('div');
+  wrap.className = 'modal-backdrop';
+  wrap.addEventListener('click', (e) => {
+    if (e.target === wrap) closeModal();
+  });
+
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+
+  // Header
+  const header = document.createElement('header');
+  const h2 = document.createElement('h2');
+  h2.textContent = `Offs pour : ${trioArr.join(' / ')}`;
+  const btnX = document.createElement('button');
+  btnX.className = 'btn';
+  btnX.textContent = 'Fermer';
+  btnX.addEventListener('click', closeModal);
+  header.append(h2, btnX);
+
+  // Body
+  const body = document.createElement('div'); body.className = 'm-body';
+
+  // Liste existante
+  const secList = document.createElement('div'); secList.className = 'm-row';
+  const listTitle = document.createElement('div'); listTitle.textContent = 'Offenses existantes :';
+  const offList = document.createElement('div'); offList.className = 'off-list';
+  secList.append(listTitle, offList);
+
+  // Formulaire ajout
+  const secForm = document.createElement('div'); secForm.className = 'm-row';
+  const fTitle = document.createElement('div'); fTitle.textContent = 'Ajouter une offense :';
+  const fWrap = document.createElement('div'); fWrap.style.display='grid'; fWrap.style.gap='8px';
+
+  // Inputs avec datalist (moins risqué que de répliquer la grille complète)
+  const datalistId = 'mons_all_names';
+  if (!document.getElementById(datalistId)) {
+    const dl = document.createElement('datalist'); dl.id = datalistId;
+    (window.MONSTERS||[]).forEach(m => {
+      const opt = document.createElement('option'); opt.value = m.name; dl.appendChild(opt);
+    });
+    document.body.appendChild(dl);
+  }
+  const i1 = document.createElement('input'); i1.setAttribute('list', datalistId); i1.placeholder = 'Monstre 1';
+  const i2 = document.createElement('input'); i2.setAttribute('list', datalistId); i2.placeholder = 'Monstre 2';
+  const i3 = document.createElement('input'); i3.setAttribute('list', datalistId); i3.placeholder = 'Monstre 3';
+  const iNote = document.createElement('textarea'); iNote.placeholder = 'Note (optionnel)';
+  const iBy   = document.createElement('input'); iBy.placeholder = 'Par (optionnel)';
+
+  fWrap.append(i1, i2, i3, iNote, iBy);
+  secForm.append(fTitle, fWrap);
+
+  body.append(secList, secForm);
+
+  // Actions
+  const acts = document.createElement('div'); acts.className = 'm-actions';
+  const btnAdd = document.createElement('button'); btnAdd.className = 'btn btn-primary'; btnAdd.textContent='Ajouter';
+  btnAdd.addEventListener('click', async () => {
+    const o1 = (i1.value||'').trim();
+    const o2 = (i2.value||'').trim();
+    const o3 = (i3.value||'').trim();
+    if (!o1 || !o2 || !o3) return toast('Renseigne 3 monstres.');
+
+    btnAdd.disabled = true;
+    const resp = await apiPost({ mode:'add_off', admin_token: ADMIN_TOKEN_PARAM, key: defKey, o1, o2, o3, note: (iNote.value||'').trim(), by: (iBy.value||'').trim() });
+    btnAdd.disabled = false;
+
+    if (!resp?.ok) return toast(resp?.error || 'Erreur ajout offense');
+    toast('Offense ajoutée ✅');
+    // refresh liste
+    loadExistingOffs();
+    // reset champs
+    i1.value = i2.value = i3.value = '';
+    iNote.value = iBy.value = '';
+  });
+  acts.appendChild(btnAdd);
+
+  // Assembler
+  modal.append(header, body, acts);
+  wrap.appendChild(modal);
+  root.innerHTML = '';
+  root.appendChild(wrap);
+
+  // Charger la liste existante
+  loadExistingOffs();
+
+  async function loadExistingOffs(){
+    offList.innerHTML = 'Chargement…';
+    const data = await apiPost({ mode:'get_offs', token: TOKEN, key: defKey });
+    const rows = (data?.offs||[]);
+    if (!rows.length) { offList.innerHTML = '<div class="small">Aucune offense enregistrée.</div>'; return; }
+
+    offList.innerHTML = '';
+    rows.sort((a,b)=> (b.ts||0) - (a.ts||0)).forEach(r => {
+      const it = document.createElement('div'); it.className = 'off-item';
+      const tri = document.createElement('div'); tri.className = 'off-trio'; tri.textContent = (r.trio||[]).join(' / ');
+      const meta = document.createElement('div'); meta.className = 'small'; 
+      const by = r.by ? ` • ${r.by}` : '';
+      const ts = r.ts ? ` • ${new Date(r.ts).toLocaleString()}` : '';
+      meta.textContent = (r.note ? r.note : '') + by + ts;
+      it.append(tri, meta);
+      offList.appendChild(it);
+    });
+  }
+
+  function closeModal(){
+    root.hidden = true;
+    root.innerHTML = '';
+  }
+}
+
 // Optimistic update (déplacement local d’une clé)
 function moveKeyFromStatsToHandledOptimistic(key){
   const s = cache.stats.data;
