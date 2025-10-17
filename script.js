@@ -866,5 +866,6 @@ function openOffPicker(defKey, offsListEl, onClose){
       validate.textContent = 'Valider off';
     }
   };
+}
 
 
