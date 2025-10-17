@@ -644,7 +644,10 @@ async function openOffsModal(defKey){
   addBtn.type = 'button';
   addBtn.textContent = '+ Ajouter off';
   addBtn.disabled = true;                  // ← désactivé pendant le load
-  addBtn.onclick = () => openOffPicker(defKey, list);
+  addBtn.onclick = () => { 
+    addBtn.disabled = true; 
+    openOffPicker(defKey, list, () => { addBtn.disabled = false; });
+  };
 
   // 👉 ouvrir la modale TOUT DE SUITE (pas après le fetch)
   openModal({ title: 'Offenses — ' + defKey, bodyNode: container, footerNode: addBtn });
@@ -699,8 +702,9 @@ function renderOffsList(target, offs){
           if (!resp?.ok) { toast(resp?.error || 'Suppression impossible'); del.disabled=false; del.textContent='Supprimer'; return; }
       
           // Refresh liste
-          const res = await apiGetOffs(defKey);
-          if (res?.ok) renderOffsList(target, res.offs||[]);
+          offsCache.delete(defKey);
+          const res = await apiGetOffs(defKey, { force: true });
+          if (res?.ok) renderOffsList(target, res.offs || []);
           toast('Offense supprimée ✅');
         } catch (e) {
           console.error(e);
@@ -722,7 +726,7 @@ function renderOffsList(target, offs){
 }
 
 // Mini-picker Off (3 max)
-function openOffPicker(defKey, offsListEl){
+function openOffPicker(defKey, offsListEl, onClose){
   const rootBody = document.querySelector('.modal-body');
   if (!rootBody) return;
 
@@ -840,6 +844,7 @@ function openOffPicker(defKey, offsListEl){
       if (!resp?.ok) { toast(resp?.error || 'Erreur ajout off'); return; }
       toast(resp?.message || 'Offense ajoutée ✅');
       wrap.remove();
+      if (typeof onClose === 'function') onClose();
       
       // MAJ immédiate du cache + de la liste sans re-fetch
       const ent = offsCache.get(defKey);
