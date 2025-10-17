@@ -269,3 +269,29 @@ textarea{ min-height:100px; border-radius:12px; }
   .grid-scroll{ max-height:60vh; }
   .monster-grid{ grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); }
 }
+
+/* === Modal minimal === */
+#modal-root[hidden]{ display:none; }
+.modal-backdrop{
+  position:fixed; inset:0; background:rgba(0,0,0,.5);
+  display:flex; align-items:center; justify-content:center; z-index:1000;
+}
+.modal{
+  width:min(680px, 96vw);
+  background:#0f1520; color:#e8eef5; border:1px solid #233243; border-radius:12px;
+  box-shadow:0 12px 34px rgba(0,0,0,.45);
+}
+.modal header{ display:flex; align-items:center; justify-content:space-between;
+  padding:12px 14px; border-bottom:1px solid #233243; background:#101826; }
+.modal header h2{ font-size:16px; margin:0; }
+.modal .m-body{ padding:14px; display:grid; gap:12px; }
+.modal .m-row{ display:grid; gap:8px; }
+.modal .m-actions{ display:flex; justify-content:flex-end; gap:10px; padding:12px 14px; border-top:1px solid #233243; }
+.modal .btn{ appearance:none; border:1px solid #2b3b4a; background:#101826; color:#e8eef5; padding:8px 12px; border-radius:10px; cursor:pointer; }
+.modal .btn-primary{ border:none; background:linear-gradient(180deg,#2a71ff,#1b55d6); color:#fff; }
+.modal .btn:disabled{ opacity:.6; cursor:default; }
+.modal .off-list{ display:flex; flex-direction:column; gap:8px; }
+.modal .off-item{ display:flex; align-items:center; gap:8px; border:1px solid #233243; border-radius:10px; padding:8px 10px; background:#0f1520; }
+.modal .off-trio{ font-weight:600; }
+.modal .small{ opacity:.85; font-size:12px; }
+
