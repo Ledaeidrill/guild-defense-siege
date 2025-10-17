@@ -33,19 +33,6 @@ body {
   --inset-1: inset 0 0 0 1px rgba(255,255,255,.06);
 }
 
-@media (prefers-color-scheme: light) {
-  :root{
-    --bg1: #f6f8fb;
-    --bg2: #ffffff;
-    --bg3: #f3f6fa;
-    --txt: #0b1220;
-    --border: #d6dee6;
-    --hint: rgba(11,18,32,.7);
-    --shadow-1: 0 8px 24px rgba(0,0,0,.10);
-    --inset-1: inset 0 0 0 1px rgba(0,0,0,.02);
-  }
-}
-
 /* =========================================
    Accessibilité
 ========================================= */
