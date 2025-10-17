@@ -266,7 +266,7 @@ function addPick(m) {
   picks.push(m);
   renderPicks();
   if (search) search.value = '';
-  requestIdleCallback?.(renderGrid, { timeout: 200 }) || renderGrid();
+  if (typeof requestIdleCallback === 'function') { requestIdleCallback(renderGrid, { timeout: 200 }); } else { renderGrid(); }
 }
 function removePick(id) {
   picks = picks.filter(p => p.id !== id);
