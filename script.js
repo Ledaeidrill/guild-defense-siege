@@ -372,7 +372,7 @@ function renderStats(data){
   const list = document.createElement('div');
   list.className = 'def-list';
 
-  rows.forEach(r => {
+  rows.filter(r => !recentlyHandled.has(r.key)).forEach(r => {
     const trio = ensureTrioArray(r.trio, r.key);
     const row = document.createElement('div'); row.className = 'def-row';
 
