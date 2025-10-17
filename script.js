@@ -135,6 +135,9 @@ async function apiGetOffs(key){
 async function apiAddOff({ key, o1, o2, o3, note = '', by = '' }){
   return apiPost({ mode:'add_off', admin_token: ADMIN_TOKEN_PARAM, key, o1, o2, o3, note, by });
 }
+async function apiDelOff({ key, o1, o2, o3 }){
+  return apiPost({ mode:'del_off', admin_token: ADMIN_TOKEN_PARAM, key, o1, o2, o3 });
+}
 
 // =====================
 // ONGLET / ÉTAT
@@ -631,6 +634,7 @@ async function openOffsModal(defKey){
     const res = await apiGetOffs(defKey);
     if (!res?.ok) throw new Error(res?.error || 'Erreur');
     renderOffsList(list, res.offs || []);
+    list.dataset.defKey = defKey;
   } catch (e) {
     list.textContent = 'Impossible de charger les offs.';
   }
@@ -640,7 +644,14 @@ async function openOffsModal(defKey){
   addBtn.className = 'btn-plus';
   addBtn.type = 'button';
   addBtn.textContent = '+ Ajouter off';
+  addBtn.disabled = true; // ← désactivé tant que ça charge
   addBtn.onclick = () => openOffPicker(defKey, list);
+  
+  const modal = openModal({ title: 'Offenses — ' + defKey, bodyNode: container, footerNode: addBtn });
+  
+  // … puis, après avoir reçu la réponse de apiGetOffs :
+  addBtn.disabled = false; // ← réactive quand c’est chargé
+
 
   const modal = openModal({ title: 'Offenses — ' + defKey, bodyNode: container, footerNode: addBtn });
 }
@@ -664,7 +675,42 @@ function renderOffsList(target, offs){
       const label = document.createElement('div'); label.className='pname'; label.textContent = m.name;
       wrap.append(img,label); trio.appendChild(wrap);
     });
-    card.appendChild(trio);
+    if (isAdmin()) {
+      const del = document.createElement('button');
+      del.className = 'btn-ghost';
+      del.type = 'button';
+      del.textContent = 'Supprimer';
+      del.style.marginLeft = '12px';
+    
+      del.onclick = async () => {
+        const defKey = list.dataset.defKey || '';
+        const trio = (o.trio || []).map(x => String(x||'').trim());
+        if (trio.length !== 3) return;
+      
+        try {
+          del.disabled = true; del.textContent = 'Suppression…';
+          const resp = await apiDelOff({ key: defKey, o1: trio[0], o2: trio[1], o3: trio[2] });
+          if (!resp?.ok) { toast(resp?.error || 'Suppression impossible'); del.disabled=false; del.textContent='Supprimer'; return; }
+      
+          // Refresh liste
+          const res = await apiGetOffs(defKey);
+          if (res?.ok) renderOffsList(target, res.offs||[]);
+          toast('Offense supprimée ✅');
+        } catch (e) {
+          console.error(e);
+          toast('Erreur pendant la suppression');
+          del.disabled=false; del.textContent='Supprimer';
+        }
+      };
+
+      const row = document.createElement('div');
+      row.style.display = 'flex';
+      row.style.alignItems = 'center';
+      row.style.justifyContent = 'center';
+      row.append(trio, del);
+      card.replaceChildren(row);
+    }
+    
     target.appendChild(card);
   });
 }
@@ -701,7 +747,6 @@ function openOffPicker(defKey, offsListEl){
   // Actions
   const actions = document.createElement('div'); actions.className='picker-actions';
   const validate = document.createElement('button'); validate.className='btn-primary'; validate.type='button'; validate.textContent='Valider off';
-  const cancel = document.createElement('button'); cancel.className='btn-ghost'; cancel.type='button'; cancel.textContent='Annuler';
   actions.append(validate, cancel);
   wrap.appendChild(actions);
 
@@ -750,7 +795,10 @@ function openOffPicker(defKey, offsListEl){
     const frag = document.createDocumentFragment();
     (window.MONSTERS||[])
       .filter(m => !q || [m.name, m.unawakened_name, m.element, ...(m.aliases||[])].some(s => (s||'').toLowerCase().includes(q)))
-      .sort((a,b) => a.name.localeCompare(b.name,'en',{sensitivity:'base'}))
+      .sort((a,b) => {
+        const er = elemRank(a.element) - elemRank(b.element);
+        return er !== 0 ? er : a.name.localeCompare(b.name,'en',{sensitivity:'base'});
+      })
       .forEach(m => {
         const card = document.createElement('div'); card.className='card'; card.title=m.name;
         const img = document.createElement('img'); img.src=fixIconUrl(m.icon||''); img.alt=m.name; img.loading='lazy'; img.onerror=()=>img.remove();
@@ -770,23 +818,34 @@ function openOffPicker(defKey, offsListEl){
   renderPickerGrid(); renderOffPicks();
 
   // Actions
-  cancel.onclick = () => { wrap.remove(); };
-
+  let _offSubmitting = false;
+  
   validate.onclick = async () => {
+    if (_offSubmitting) return;              // anti double clic
     if (offPicks.length !== 3) { toast('Sélectionne exactement 3 monstres.'); return; }
+  
+    _offSubmitting = true;
+    validate.disabled = true;
+    validate.textContent = 'Validation…';
+  
     const [a,b,c] = offPicks.map(x => x.name);
     try {
       const resp = await apiAddOff({ key:defKey, o1:a, o2:b, o3:c });
       if (!resp?.ok) { toast(resp?.error || 'Erreur ajout off'); return; }
-      toast('Offense ajoutée ✅');
+      toast(resp?.message || 'Offense ajoutée ✅');
       wrap.remove();
-
-      // Recharger la liste
+  
+      // Recharger la liste des offs
       const res = await apiGetOffs(defKey);
       if (res?.ok) renderOffsList(offsListEl, res.offs||[]);
     } catch (e) {
-      console.error(e); toast('Impossible d’ajouter l’offense.');
+      console.error(e);
+      toast('Impossible d’ajouter l’offense.');
+    } finally {
+      _offSubmitting = false;
+      validate.disabled = false;
+      validate.textContent = 'Valider off';
     }
   };
-}
+
 
