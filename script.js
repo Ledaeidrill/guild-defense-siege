@@ -7,7 +7,7 @@ const ADMIN_TOKEN_PARAM = new URL(location.href).searchParams.get('admin');
 const isAdmin = () => !!ADMIN_TOKEN_PARAM;
 
 // Cache mémoire (masque la latence du réseau)
-const CACHE_TTL_MS = 60_000; // 60 s, cohérent avec le cache Apps Script si tu le mets côté serveur
+const CACHE_TTL_MS = 60000; // 60 s, cohérent avec le cache Apps Script si tu le mets côté serveur
 const cache = {
   stats:   { data: null, ts: 0, inflight: null },
   handled: { data: null, ts: 0, inflight: null },
