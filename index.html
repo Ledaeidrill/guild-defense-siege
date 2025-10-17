@@ -2,26 +2,31 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Défenses Sieges</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Défenses Sièges</title>
+
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Performances / UX -->
+  <link rel="preconnect" href="https://swarfarm.com" crossorigin>
 </head>
 <body>
 <header>
-  <h1>Défenses Sieges</h1>
-  <nav>
-    <button id="tab-report" class="active">Demander une défense</button>
-    <button id="tab-stats">Top défenses</button>
-    <button id="tab-done">Défenses traitées</button>
+  <h1>Défenses Sièges</h1>
+  <nav aria-label="Navigation des onglets">
+    <button id="tab-report" class="active" type="button">Demander une défense</button>
+    <button id="tab-stats" type="button">Top défenses</button>
+    <button id="tab-done" type="button">Défenses traitées</button>
   </nav>
 </header>
 
 <main>
   <!-- Onglet 1 : formulaire -->
-  <section id="page-report">
+  <section id="page-report" aria-labelledby="tab-report">
     <div class="row field narrow">
       <label for="player">Pseudo</label>
-      <input id="player" placeholder="Pseudo" autocomplete="off" />
+      <input id="player" placeholder="Pseudo" autocomplete="nickname" />
     </div>
 
     <!-- Panneau (pas de scroll ici) -->
@@ -32,9 +37,9 @@
       </div>
 
       <!-- Fenêtre de la grille (scroll ici) -->
-      <div class="grid-wrap">
+      <div class="grid-wrap" role="region" aria-label="Grille des monstres">
         <div class="grid-scroll">
-          <div id="monster-grid" class="monster-grid"></div>
+          <div id="monster-grid" class="monster-grid" aria-live="polite"></div>
         </div>
       </div>
     </div><!-- /panel -->
@@ -43,37 +48,48 @@
     <div class="selection-wrap">
       <div class="row picks">
         <div class="picks-title">Ta sélection :</div>
-        <div id="picks"></div>
+        <div id="picks" aria-live="polite"></div>
       </div>
 
       <div class="row">
+        <label class="sr-only" for="notes">Notes (optionnelles)</label>
         <textarea id="notes" placeholder="Notes (optionnelles)"></textarea>
       </div>
 
       <div class="row">
-        <button id="send" class="btn-primary">
+        <button id="send" class="btn-primary" type="button" aria-live="polite">
           <span class="btn-label">Envoyer</span>
           <span class="btn-spinner" aria-hidden="true"></span>
         </button>
       </div>
     </div>
 
-    <div id="toast" role="status" aria-live="polite"></div>
+    <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
   </section><!-- ✅ on ferme bien page-report -->
 
   <!-- Onglet 2 : stats -->
-  <section id="page-stats" class="hidden">
-    <div id="stats"></div>
+  <section id="page-stats" class="hidden" aria-labelledby="tab-stats">
+    <div id="stats" aria-live="polite">Chargement…</div>
   </section>
 
   <!-- Onglet 3 : défenses traitées -->
-  <section id="page-done" class="hidden">
+  <section id="page-done" class="hidden" aria-labelledby="tab-done">
     <p class="hint">Rendez-vous ingame pour connaître les counters</p>
-    <div id="done"></div>
+    <div id="done" aria-live="polite">Chargement…</div>
   </section>
 </main>
 
-<script src="monsters.js"></script>
-<script src="script.js"></script>
+<!-- Espace réservé à une modale (Offenses) si tu veux l’activer plus tard -->
+<div id="modal-root" hidden></div>
+
+<noscript>
+  <div style="padding:12px;background:#7c1d1d;color:#fff;text-align:center">
+    Ce site nécessite JavaScript pour fonctionner.
+  </div>
+</noscript>
+
+<!-- Scripts en defer pour ne pas bloquer le rendu -->
+<script src="monsters.js" defer></script>
+<script src="script.js" defer></script>
 </body>
 </html>
