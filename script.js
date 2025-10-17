@@ -13,6 +13,9 @@ const cache = {
   handled: { data: null, ts: 0, inflight: null },
 };
 
+// Clés tout juste traitées, on les masque 5 s pour éviter un flash si un fetch arrive avant l’invalidation serveur
+const recentlyHandled = new Set();
+
 // =====================
 // HELPERS DOM & STRINGS
 // =====================
@@ -412,6 +415,9 @@ function renderStats(data){
 
       // Optimisme UI : déplacer localement la clé dans "traitées"
       moveKeyFromStatsToHandledOptimistic(key);
+      // Masque anti-flash 5 s
+      recentlyHandled.add(key);
+      setTimeout(() => recentlyHandled.delete(key), 5000);
 
       const resp = await apiPost({ mode:'handle', admin_token: ADMIN_TOKEN_PARAM, key });
       if (!resp.ok) {
@@ -442,7 +448,7 @@ function renderHandled(data){
   const list = document.createElement('div');
   list.className = 'def-list';
 
-  rows.forEach(r => {
+  rows.filter(r => !recentlyHandled.has(r.key)).forEach(r => {
     const item = document.createElement('div'); item.className = 'def-item';
     const trio = document.createElement('div'); trio.className = 'def-trio';
 
