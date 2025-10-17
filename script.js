@@ -6,10 +6,18 @@ const TOKEN = 'Chaos_Destiny';
 const ADMIN_TOKEN_PARAM = new URL(location.href).searchParams.get('admin');
 const isAdmin = () => !!ADMIN_TOKEN_PARAM;
 
+// Cache mémoire (masque la latence du réseau)
+const CACHE_TTL_MS = 60_000; // 60 s, cohérent avec le cache Apps Script si tu le mets côté serveur
+const cache = {
+  stats:   { data: null, ts: 0, inflight: null },
+  handled: { data: null, ts: 0, inflight: null },
+};
+
 // =====================
-// HELPERS
+// HELPERS DOM & STRINGS
 // =====================
 const qs = (sel, root = document) => root.querySelector(sel);
+const qsa = (sel, root = document) => [...root.querySelectorAll(sel)];
 const normalize = s => (s||'').toString().trim().toLowerCase();
 
 function toast(msg) {
@@ -17,7 +25,7 @@ function toast(msg) {
   if (!t) { alert(msg); return; }
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => { t.textContent = ''; t.classList.remove('show'); }, 2800);
+  setTimeout(() => { t.textContent = ''; t.classList.remove('show'); }, 2200);
 }
 
 function fixIconUrl(src){
@@ -34,23 +42,45 @@ function fixIconUrl(src){
   return src;
 }
 
-async function apiPost(payloadObj){
-  const payload = JSON.stringify(payloadObj);
-  const res = await fetch(APPS_SCRIPT_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-    body: 'payload=' + encodeURIComponent(payload)
-  });
-  const txt = await res.text();
-  console.log('[apiPost]', res.status, txt);
-  try { return JSON.parse(txt); }
-  catch { return { ok:false, error:'Réponse invalide', raw: txt }; }
-}
-
 function ensureTrioArray(trio, key){
   if (Array.isArray(trio)) return trio;
   if (trio && typeof trio === 'object') return Object.values(trio);
   return String(key || '').split(' / ');
+}
+
+function esc(s){
+  return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+}
+
+// =====================
+// API helper (timeout + retry léger)
+// =====================
+async function apiPost(payloadObj, { timeoutMs = 7000, retries = 1 } = {}){
+  const payload = JSON.stringify(payloadObj);
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+      body: 'payload=' + encodeURIComponent(payload),
+      signal: controller.signal
+    });
+
+    const txt = await res.text();
+    try { return JSON.parse(txt); }
+    catch { return { ok:false, error:'Réponse invalide', raw: txt }; }
+  } catch (e) {
+    if (retries > 0) {
+      // Backoff minimal
+      await new Promise(r => setTimeout(r, 250));
+      return apiPost(payloadObj, { timeoutMs, retries: retries - 1 });
+    }
+    return { ok:false, error: e?.name === 'AbortError' ? 'Timeout' : String(e) };
+  } finally {
+    clearTimeout(id);
+  }
 }
 
 // =====================
@@ -72,9 +102,6 @@ function activateTab(tabBtn, pageEl){
   [pageReport,pageStats,pageDone].forEach(p=>p?.classList.add('hidden'));
   pageEl?.classList.remove('hidden');
 }
-tabReport?.addEventListener('click', () => activateTab(tabReport, pageReport));
-tabStats ?.addEventListener('click', () => { activateTab(tabStats, pageStats); loadStats(); });
-tabDone  ?.addEventListener('click', () => { activateTab(tabDone, pageDone);  loadHandled(); });
 
 // =====================
 // INDEX MONSTRES
@@ -89,9 +116,8 @@ const findMonsterByName = (n) => MONS_BY_NAME.get((n||'').toLowerCase()) || null
 function cardHtmlByName(name){
   const d = findMonsterByName(name) || { name, icon:'' };
   const src = fixIconUrl(d.icon||'');
-  const esc = (s)=> (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   return `
-    <div class="pick def-pick">
+    <div class="pick def-pick" title="${esc(d.name)}">
       <img src="${src}" alt="${esc(d.name)}" loading="lazy">
       <div class="pname">${esc(d.name)}</div>
     </div>`;
@@ -128,6 +154,7 @@ function makeCard(m){
   const img = document.createElement('img');
   img.src = fixIconUrl(m.icon || '');
   img.alt = m.name;
+  img.loading = 'lazy';
   img.onerror = () => {
     if (!img.dataset.tried && img.src.includes('swarfarm.com/')) {
       img.dataset.tried = '1';
@@ -146,6 +173,7 @@ function makeCard(m){
 
 function renderGrid() {
   const q = (search?.value||'').trim();
+  if (!grid) return;
   grid.innerHTML = '';
   const frag = document.createDocumentFragment();
 
@@ -160,9 +188,9 @@ function renderGrid() {
   grid.appendChild(frag);
 }
 
-// Débounce recherche
+// Débounce recherche (léger)
 let _searchTimer;
-search?.addEventListener('input', () => { clearTimeout(_searchTimer); _searchTimer = setTimeout(renderGrid, 120); });
+search?.addEventListener('input', () => { clearTimeout(_searchTimer); _searchTimer = setTimeout(renderGrid, 100); });
 renderGrid();
 
 // =====================
@@ -174,7 +202,7 @@ function addPick(m) {
   picks.push(m);
   renderPicks();
   if (search) search.value = '';
-  renderGrid();
+  requestIdleCallback?.(renderGrid, { timeout: 200 }) || renderGrid();
 }
 function removePick(id) {
   picks = picks.filter(p => p.id !== id);
@@ -182,13 +210,15 @@ function removePick(id) {
 }
 function renderPicks() {
   const zone = qs('#picks');
+  if (!zone) return;
   zone.innerHTML = '';
+  const frag = document.createDocumentFragment();
   picks.forEach((p, index) => {
     const div = document.createElement('div');
     div.className = 'pick';
     div.dataset.id = p.id;
     div.dataset.index = index;
-    div.draggable = true; // drag natif
+    div.draggable = true;
 
     const btn = document.createElement('button');
     btn.className = 'close';
@@ -198,15 +228,16 @@ function renderPicks() {
     btn.setAttribute('data-id', p.id);
 
     const img = document.createElement('img');
-    img.src = fixIconUrl(p.icon); img.alt = p.name;
+    img.src = fixIconUrl(p.icon); img.alt = p.name; img.loading = 'lazy';
 
     const label = document.createElement('div');
     label.className = 'pname';
     label.textContent = p.name;
 
     div.append(btn, img, label);
-    zone.appendChild(div);
+    frag.appendChild(div);
   });
+  zone.appendChild(frag);
   enableDragAndDrop(zone);
 }
 qs('#picks')?.addEventListener('click', (e) => {
@@ -240,7 +271,7 @@ function enableDragAndDrop(container) {
 }
 
 // =====================
-// ENVOI
+// ENVOI (corrigé: mode:'submit')
 // =====================
 const sendBtn = qs('#send');
 sendBtn?.addEventListener('click', async () => {
@@ -256,7 +287,7 @@ sendBtn?.addEventListener('click', async () => {
     sendBtn.disabled = true;
     sendBtn.classList.add('sending');
 
-    const json = await apiPost({ token: TOKEN, player, monsters, notes });
+    const json = await apiPost({ mode:'submit', token: TOKEN, player, monsters, notes });
 
     if (json.already_handled) {
       toast(json.message || 'Défense déjà traitée — va voir ingame les counters.');
@@ -267,6 +298,10 @@ sendBtn?.addEventListener('click', async () => {
 
     toast('Défense enregistrée ✅');
     picks = []; renderPicks(); if (qs('#notes')) qs('#notes').value='';
+
+    // On invalide le cache côté front pour forcer un refresh silencieux des stats
+    cache.stats.ts = 0;
+    void fetchStats().then(updateStatsUIIfVisible);
   } catch (e) {
     console.error(e);
     toast('Échec de l’envoi. Vérifie l’URL/token ou le déploiement.');
@@ -278,133 +313,218 @@ sendBtn?.addEventListener('click', async () => {
 });
 
 // =====================
-// TOP DÉFENSES
+// DATA LAYER (fetch + cache mémoire)
 // =====================
-async function loadStats() {
-  const box = document.getElementById('stats');
-  box.innerHTML = 'Chargement…';
-  try {
-    const data = await apiPost({ mode: 'stats', token: TOKEN }); // <-- POST form-encoded via apiPost
-    console.log('[loadStats]', data);
+function isFresh(ts){ return (Date.now() - ts) < CACHE_TTL_MS; }
 
-    if (!data || !data.ok) {
-      box.innerHTML = 'Erreur chargement stats : ' + (data?.error || 'inconnue');
-      return;
-    }
+async function fetchStats(force = false){
+  if (!force && cache.stats.data && isFresh(cache.stats.ts)) return cache.stats.data;
+  if (cache.stats.inflight) return cache.stats.inflight;
 
-    const rows = Array.isArray(data.stats) ? data.stats : [];
-    if (!rows.length) { box.innerHTML = 'Aucune donnée pour l’instant.'; return; }
+  const p = apiPost({ mode: 'stats', token: TOKEN }).then(res => {
+    cache.stats.inflight = null;
+    if (!res?.ok) throw new Error(res?.error || 'Erreur stats');
+    cache.stats.data = res; cache.stats.ts = Date.now();
+    return res;
+  }).catch(err => {
+    cache.stats.inflight = null;
+    console.error('[fetchStats]', err);
+    return cache.stats.data || { ok:true, stats: [] }; // fallback cache/empty
+  });
 
-    let html = `<div class="def-list">`;
-    for (const r of rows) {
-      const trio = ensureTrioArray(r.trio, r.key);
-      html += `
-        <div class="def-row">
-          <div class="def-item">
-            <div class="def-trio">
-              ${trio.map(cardHtmlByName).join('')}
-            </div>
-            <div class="def-count">${r.count ?? 0}</div>
-          </div>
-          ${isAdmin() ? `<button class="btn-ghost act-handle" data-key="${r.key.replace(/"/g,'&quot;')}">Traiter</button>` : ``}
-        </div>`;
-    }
-    html += `</div>`;
-    box.innerHTML = html;
+  cache.stats.inflight = p;
+  return p;
+}
 
-    if (isAdmin()) {
-      const list = box.querySelector('.def-list');
-      list.addEventListener('click', async (e) => {
-        const btn = e.target.closest('.act-handle');
-        if (!btn) return;
-        const key = btn.getAttribute('data-key');
-        const resp = await apiPost({ action:'handle', admin_token: ADMIN_TOKEN_PARAM, key });
-        console.log('[handle]', resp);
-        if (!resp.ok) return toast(resp.error || 'Action admin impossible.');
-        toast('Défense déplacée dans "Défs traitées" ✅');
-        await Promise.all([loadStats(), loadHandled()]);
-      });
-    }
-  } catch (e) {
-    console.error(e);
-    box.innerHTML = 'Impossible de charger les stats (voir console).';
-  }
+async function fetchHandled(force = false){
+  if (!force && cache.handled.data && isFresh(cache.handled.ts)) return cache.handled.data;
+  if (cache.handled.inflight) return cache.handled.inflight;
+
+  const p = apiPost({ mode: 'handled', token: TOKEN }).then(res => {
+    cache.handled.inflight = null;
+    if (!res?.ok) throw new Error(res?.error || 'Erreur handled');
+    cache.handled.data = res; cache.handled.ts = Date.now();
+    return res;
+  }).catch(err => {
+    cache.handled.inflight = null;
+    console.error('[fetchHandled]', err);
+    return cache.handled.data || { ok:true, handled: [] };
+  });
+
+  cache.handled.inflight = p;
+  return p;
 }
 
 // =====================
-// DÉFENSES TRAITÉES
+// RENDER LAYER (séparée)
 // =====================
-async function loadHandled() {
-  const box = document.getElementById('done');
-  box.innerHTML = 'Chargement…';
-  try {
-    const data = await apiPost({ mode: 'handled', token: TOKEN }); // <-- POST form-encoded via apiPost
-    console.log('[loadHandled]', data);
+function renderStats(data){
+  const box = document.getElementById('stats');
+  if (!box) return;
+  const rows = Array.isArray(data?.stats) ? data.stats : [];
 
-    if (!data || !data.ok) {
-      box.innerHTML = 'Erreur chargement défenses traitées : ' + (data?.error || 'inconnue');
-      return;
-    }
+  if (!rows.length) { box.innerHTML = 'Aucune donnée pour l’instant.'; return; }
 
-    const rows = Array.isArray(data.handled) ? data.handled : [];
-    if (!rows.length) { box.innerHTML = 'Aucune défense traitée pour le moment.'; return; }
+  const frag = document.createDocumentFragment();
+  const list = document.createElement('div');
+  list.className = 'def-list';
 
-    const list = document.createElement('div');
-    list.className = 'def-list';
+  rows.forEach(r => {
+    const trio = ensureTrioArray(r.trio, r.key);
+    const row = document.createElement('div'); row.className = 'def-row';
 
-    rows.forEach(r => {
-      const item = document.createElement('div');
-      item.className = 'def-item';
+    const item = document.createElement('div'); item.className = 'def-item';
 
-      const trio = document.createElement('div');
-      trio.className = 'def-trio';
-
-      ensureTrioArray(r.trio, r.key).forEach(name => {
-        const m = findMonsterByName(name) || { name, icon: '' };
-        const card = document.createElement('div');
-        card.className = 'pick def-pick';
-
-        const img = document.createElement('img');
-        img.src = fixIconUrl(m.icon || ''); img.alt = m.name;
-        img.onerror = () => { img.remove(); };
-
-        const label = document.createElement('div');
-        label.className = 'pname';
-        label.textContent = m.name;
-
-        card.appendChild(img);
-        card.appendChild(label);
-        trio.appendChild(card);
-      });
-
-      // compteur / infos droite
-      if (typeof r.count !== 'undefined' || r.note) {
-        const right = document.createElement('div');
-        right.style.display='flex'; right.style.gap='10px'; right.style.alignItems='center';
-
-        if (typeof r.count !== 'undefined') {
-          const count = document.createElement('div');
-          count.className = 'def-count';
-          count.textContent = r.count ?? 0;
-          right.appendChild(count);
-        }
-        if (r.note) {
-          const note = document.createElement('div');
-          note.className = 'hint';
-          note.textContent = r.note;
-          right.appendChild(note);
-        }
-        item.append(trio, right);
-      } else {
-        item.append(trio);
-      }
-      list.appendChild(item);
+    const trioDiv = document.createElement('div'); trioDiv.className = 'def-trio';
+    trio.forEach(name => {
+      const m = findMonsterByName(name) || { name, icon: '' };
+      const card = document.createElement('div'); card.className = 'pick def-pick';
+      const img = document.createElement('img'); img.src = fixIconUrl(m.icon || ''); img.alt = m.name; img.loading='lazy';
+      img.onerror = () => img.remove();
+      const label = document.createElement('div'); label.className = 'pname'; label.textContent = m.name;
+      card.append(img, label); trioDiv.append(card);
     });
 
-    box.innerHTML = '';
-    box.appendChild(list);
-  } catch (e) {
-    console.error(e);
-    box.innerHTML = 'Impossible de charger les défenses traitées (voir console).';
+    const right = document.createElement('div'); right.style.display='flex'; right.style.gap='10px'; right.style.alignItems='center';
+    const count = document.createElement('div'); count.className = 'def-count'; count.textContent = r.count ?? 0;
+    right.appendChild(count);
+
+    item.append(trioDiv, right);
+    row.appendChild(item);
+
+    if (isAdmin()) {
+      const btn = document.createElement('button'); btn.className = 'btn-ghost act-handle'; btn.textContent = 'Traiter';
+      btn.setAttribute('data-key', r.key.replace(/"/g,'&quot;'));
+      row.appendChild(btn);
+    }
+    list.appendChild(row);
+  });
+
+  box.innerHTML = '';
+  frag.appendChild(list);
+  box.appendChild(frag);
+
+  if (isAdmin()) {
+    box.onclick = async (e) => {
+      const btn = e.target.closest('.act-handle');
+      if (!btn) return;
+      const key = btn.getAttribute('data-key');
+
+      // Optimisme UI : déplacer localement la clé dans "traitées"
+      moveKeyFromStatsToHandledOptimistic(key);
+
+      const resp = await apiPost({ mode:'handle', admin_token: ADMIN_TOKEN_PARAM, key });
+      if (!resp.ok) {
+        toast(resp.error || 'Action admin impossible.');
+        // rollback (rafraîchir depuis serveur)
+        await Promise.all([fetchStats(true), fetchHandled(true)]);
+        updateStatsUIIfVisible();
+        updateHandledUIIfVisible();
+        return;
+      }
+      toast('Défense déplacée dans "Défs traitées" ✅');
+
+      // Refresh silencieux
+      await Promise.all([fetchStats(true), fetchHandled(true)]);
+      updateStatsUIIfVisible();
+      updateHandledUIIfVisible();
+    };
   }
 }
+
+function renderHandled(data){
+  const box = document.getElementById('done');
+  if (!box) return;
+  const rows = Array.isArray(data?.handled) ? data.handled : [];
+
+  if (!rows.length) { box.innerHTML = 'Aucune défense traitée pour le moment.'; return; }
+
+  const list = document.createElement('div');
+  list.className = 'def-list';
+
+  rows.forEach(r => {
+    const item = document.createElement('div'); item.className = 'def-item';
+    const trio = document.createElement('div'); trio.className = 'def-trio';
+
+    ensureTrioArray(r.trio, r.key).forEach(name => {
+      const m = findMonsterByName(name) || { name, icon: '' };
+      const card = document.createElement('div'); card.className = 'pick def-pick';
+      const img = document.createElement('img'); img.src = fixIconUrl(m.icon || ''); img.alt = m.name; img.loading='lazy';
+      img.onerror = () => { img.remove(); };
+      const label = document.createElement('div'); label.className = 'pname'; label.textContent = m.name;
+      card.append(img, label);
+      trio.appendChild(card);
+    });
+
+    // (Optionnel) r.count / r.note pas fournis par la route actuelle : laissé vide
+    item.append(trio);
+    list.appendChild(item);
+  });
+
+  box.innerHTML = '';
+  box.appendChild(list);
+}
+
+// Optimistic update (déplacement local d’une clé)
+function moveKeyFromStatsToHandledOptimistic(key){
+  const s = cache.stats.data;
+  const h = cache.handled.data;
+  if (!s?.stats) return;
+
+  const idx = s.stats.findIndex(x => x.key === key);
+  if (idx !== -1) {
+    const row = s.stats.splice(idx, 1)[0]; // retire de stats
+    if (h?.handled) {
+      // évite doublons
+      if (!h.handled.some(x => x.key === key)) {
+        h.handled.unshift({ key: row.key, trio: ensureTrioArray(row.trio, row.key) });
+        cache.handled.ts = Date.now(); // rafraîchi
+      }
+    } else {
+      cache.handled.data = { ok:true, handled: [{ key: row.key, trio: ensureTrioArray(row.trio, row.key) }] };
+    }
+    cache.stats.ts = Date.now(); // rafraîchi
+    updateStatsUIIfVisible();
+    updateHandledUIIfVisible();
+  }
+}
+
+// Helpers de mise à jour conditionnelle (pour rendu instantané)
+function updateStatsUIIfVisible(){
+  if (!pageStats?.classList.contains('hidden') && cache.stats.data) {
+    renderStats(cache.stats.data);
+  }
+}
+function updateHandledUIIfVisible(){
+  if (!pageDone?.classList.contains('hidden') && cache.handled.data) {
+    renderHandled(cache.handled.data);
+  }
+}
+
+// =====================
+// NAVIGATION + PREFETCH
+// =====================
+tabReport?.addEventListener('click', () => activateTab(tabReport, pageReport));
+
+tabStats?.addEventListener('click', async () => {
+  activateTab(tabStats, pageStats);
+  // Rendu instantané depuis cache si présent
+  if (cache.stats.data) renderStats(cache.stats.data);
+  // Refresh silencieux
+  const fresh = await fetchStats();
+  renderStats(fresh);
+});
+
+tabDone?.addEventListener('click', async () => {
+  activateTab(tabDone, pageDone);
+  if (cache.handled.data) renderHandled(cache.handled.data);
+  const fresh = await fetchHandled();
+  renderHandled(fresh);
+});
+
+// Préfetch à l’ouverture de la page pour masquer la latence au premier clic
+document.addEventListener('DOMContentLoaded', () => {
+  // Préfetch silencieux
+  fetchStats().then(d => { if (!pageStats.classList.contains('hidden')) renderStats(d); });
+  fetchHandled().then(d => { if (!pageDone.classList.contains('hidden')) renderHandled(d); });
+});
