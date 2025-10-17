@@ -12,6 +12,10 @@ const cache = {
   stats:   { data: null, ts: 0, inflight: null },
   handled: { data: null, ts: 0, inflight: null },
 };
+// Cache Offs (60 s)
+const OFFS_CACHE_TTL = 60000;
+const offsCache = new Map(); // key -> { ts, data: {ok:true, offs:[...] } }
+
 
 // Clés tout juste traitées, on les masque 5 s pour éviter un flash si un fetch arrive avant l’invalidation serveur
 const recentlyHandled = new Set();
@@ -129,8 +133,12 @@ async function apiPost(payloadObj, { timeoutMs = 7000, retries = 1 } = {}){
 }
 
 // Helpers Offs API
-async function apiGetOffs(key){
-  return apiPost({ mode:'get_offs', token: TOKEN, key });
+async function apiGetOffs(key, { force = false } = {}){
+  const ent = offsCache.get(key);
+  if (!force && ent && (Date.now() - ent.ts) < OFFS_CACHE_TTL) return ent.data;
+  const res = await apiPost({ mode:'get_offs', token: TOKEN, key });
+  if (res?.ok) offsCache.set(key, { ts: Date.now(), data: res });
+  return res;
 }
 async function apiAddOff({ key, o1, o2, o3, note = '', by = '' }){
   return apiPost({ mode:'add_off', admin_token: ADMIN_TOKEN_PARAM, key, o1, o2, o3, note, by });
@@ -527,6 +535,7 @@ function renderHandled(data){
       btn.type = 'button';
       btn.textContent = 'Voir offs';
       btn.dataset.key = r.key;
+      btn.addEventListener('mouseenter', () => { apiGetOffs(r.key).catch(()=>{}); });
     
       right.appendChild(btn);
       item.append(trio, right);
@@ -629,31 +638,28 @@ async function openOffsModal(defKey){
   list.textContent = 'Chargement…';
   container.appendChild(list);
 
-  // Charger existants
-  try {
-    const res = await apiGetOffs(defKey);
-    if (!res?.ok) throw new Error(res?.error || 'Erreur');
-    renderOffsList(list, res.offs || []);
-    list.dataset.defKey = defKey;
-  } catch (e) {
-    list.textContent = 'Impossible de charger les offs.';
-  }
-
   // Footer avec bouton +
   const addBtn = document.createElement('button');
   addBtn.className = 'btn-plus';
   addBtn.type = 'button';
   addBtn.textContent = '+ Ajouter off';
-  addBtn.disabled = true; // ← désactivé tant que ça charge
+  addBtn.disabled = true;                  // ← désactivé pendant le load
   addBtn.onclick = () => openOffPicker(defKey, list);
-  
-  const modal = openModal({ title: 'Offenses — ' + defKey, bodyNode: container, footerNode: addBtn });
-  
-  // … puis, après avoir reçu la réponse de apiGetOffs :
-  addBtn.disabled = false; // ← réactive quand c’est chargé
 
+  // 👉 ouvrir la modale TOUT DE SUITE (pas après le fetch)
+  openModal({ title: 'Offenses — ' + defKey, bodyNode: container, footerNode: addBtn });
 
-  const modal = openModal({ title: 'Offenses — ' + defKey, bodyNode: container, footerNode: addBtn });
+  // Charger existants (hit cache si préfetch au hover)
+  try {
+    const res = await apiGetOffs(defKey);
+    if (!res?.ok) throw new Error(res?.error || 'Erreur');
+    renderOffsList(list, res.offs || []);
+    list.dataset.defKey = defKey;         // utile pour le bouton "Supprimer"
+  } catch (e) {
+    list.textContent = 'Impossible de charger les offs.';
+  } finally {
+    addBtn.disabled = false;              // ← réactive après chargement
+  }
 }
 
 function renderOffsList(target, offs){
@@ -834,10 +840,18 @@ function openOffPicker(defKey, offsListEl){
       if (!resp?.ok) { toast(resp?.error || 'Erreur ajout off'); return; }
       toast(resp?.message || 'Offense ajoutée ✅');
       wrap.remove();
-  
-      // Recharger la liste des offs
-      const res = await apiGetOffs(defKey);
-      if (res?.ok) renderOffsList(offsListEl, res.offs||[]);
+      
+      // MAJ immédiate du cache + de la liste sans re-fetch
+      const ent = offsCache.get(defKey);
+      if (ent?.data?.ok) {
+        ent.data.offs = (ent.data.offs || []).concat([{ trio: [a, b, c] }]);
+        ent.ts = Date.now();
+        renderOffsList(offsListEl, ent.data.offs);
+      } else {
+        // fallback si pas en cache
+        const res = await apiGetOffs(defKey, { force: true });
+        if (res?.ok) renderOffsList(offsListEl, res.offs || []);
+      }
     } catch (e) {
       console.error(e);
       toast('Impossible d’ajouter l’offense.');
