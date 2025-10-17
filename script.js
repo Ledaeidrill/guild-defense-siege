@@ -55,6 +55,48 @@ function esc(s){
   return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 }
 
+// ===== Modale helpers =====
+function openModal({ title, bodyNode, footerNode }) {
+  const root = document.getElementById('modal-root');
+  if (!root) return;
+  root.innerHTML = '';
+
+  const backdrop = document.createElement('div');
+  backdrop.className = 'modal-backdrop';
+
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+
+  const header = document.createElement('div');
+  header.className = 'modal-header';
+  const h = document.createElement('h3'); h.className = 'modal-title'; h.textContent = title || '';
+  const closeBtn = document.createElement('button'); closeBtn.className = 'modal-close'; closeBtn.textContent = '✕';
+  closeBtn.title = 'Fermer';
+  closeBtn.onclick = closeModal;
+  header.append(h, closeBtn);
+
+  const body = document.createElement('div');
+  body.className = 'modal-body';
+  if (bodyNode) body.appendChild(bodyNode);
+
+  const footer = document.createElement('div');
+  footer.className = 'modal-footer';
+  if (footerNode) footer.appendChild(footerNode);
+
+  modal.append(header, body, footer);
+  backdrop.appendChild(modal);
+  root.replaceChildren(backdrop);
+  root.hidden = false;
+
+  // Close on backdrop click
+  backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
+  return { backdrop, modal, body, footer, closeBtn, header };
+}
+function closeModal(){
+  const root = document.getElementById('modal-root');
+  if (root) { root.hidden = true; root.innerHTML = ''; }
+}
+
 // =====================
 // API helper (timeout + retry léger)
 // =====================
@@ -84,6 +126,14 @@ async function apiPost(payloadObj, { timeoutMs = 7000, retries = 1 } = {}){
   } finally {
     clearTimeout(id);
   }
+}
+
+// Helpers Offs API
+async function apiGetOffs(key){
+  return apiPost({ mode:'get_offs', token: TOKEN, key });
+}
+async function apiAddOff({ key, o1, o2, o3, note = '', by = '' }){
+  return apiPost({ mode:'add_off', admin_token: ADMIN_TOKEN_PARAM, key, o1, o2, o3, note, by });
 }
 
 // =====================
@@ -465,13 +515,36 @@ function renderHandled(data){
       trio.appendChild(card);
     });
 
-    // (Optionnel) r.count / r.note pas fournis par la route actuelle : laissé vide
-    item.append(trio);
+    if (isAdmin()) {
+      const right = document.createElement('div');
+      right.style.display='flex'; right.style.gap='10px'; right.style.alignItems='center';
+    
+      const btn = document.createElement('button');
+      btn.className = 'btn-ghost btn-offs';
+      btn.type = 'button';
+      btn.textContent = 'Voir offs';
+      btn.dataset.key = r.key;
+    
+      right.appendChild(btn);
+      item.append(trio, right);
+    } else {
+      item.append(trio);
+    }
     list.appendChild(item);
+
   });
 
   box.innerHTML = '';
   box.appendChild(list);
+  
+  if (isAdmin()) {
+    box.onclick = (e) => {
+      const btn = e.target.closest('.btn-offs');
+      if (!btn) return;
+      const key = btn.dataset.key;
+      openOffsModal(key);
+    };
+  }
 }
 
 // Optimistic update (déplacement local d’une clé)
@@ -537,3 +610,183 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchStats().then(d => { if (!pageStats.classList.contains('hidden')) renderStats(d); });
   fetchHandled().then(d => { if (!pageDone.classList.contains('hidden')) renderHandled(d); });
 });
+
+// ===== Offs Modal =====
+async function openOffsModal(defKey){
+  const container = document.createElement('div');
+
+  // Titre + liste existante
+  const title = document.createElement('div');
+  title.className = 'picker-title';
+  title.textContent = 'Offenses connues :';
+  container.appendChild(title);
+
+  const list = document.createElement('div');
+  list.className = 'offs-list';
+  list.textContent = 'Chargement…';
+  container.appendChild(list);
+
+  // Charger existants
+  try {
+    const res = await apiGetOffs(defKey);
+    if (!res?.ok) throw new Error(res?.error || 'Erreur');
+    renderOffsList(list, res.offs || []);
+  } catch (e) {
+    list.textContent = 'Impossible de charger les offs.';
+  }
+
+  // Footer avec bouton +
+  const addBtn = document.createElement('button');
+  addBtn.className = 'btn-plus';
+  addBtn.type = 'button';
+  addBtn.textContent = '+ Ajouter off';
+  addBtn.onclick = () => openOffPicker(defKey, list);
+
+  const modal = openModal({ title: 'Offenses — ' + defKey, bodyNode: container, footerNode: addBtn });
+}
+
+function renderOffsList(target, offs){
+  target.innerHTML = '';
+  if (!offs.length) {
+    const p = document.createElement('p');
+    p.className = 'hint';
+    p.textContent = 'Aucune offense enregistrée pour le moment.';
+    target.appendChild(p);
+    return;
+  }
+  offs.forEach(o => {
+    const card = document.createElement('div'); card.className = 'off-card';
+    const trio = document.createElement('div'); trio.className = 'off-trio';
+    (o.trio || []).forEach(name => {
+      const m = findMonsterByName(name) || { name, icon: '' };
+      const wrap = document.createElement('div'); wrap.className = 'pick def-pick';
+      const img = document.createElement('img'); img.src = fixIconUrl(m.icon||''); img.alt = m.name; img.loading='lazy'; img.onerror=()=>img.remove();
+      const label = document.createElement('div'); label.className='pname'; label.textContent = m.name;
+      wrap.append(img,label); trio.appendChild(wrap);
+    });
+    card.appendChild(trio);
+    target.appendChild(card);
+  });
+}
+
+// Mini-picker Off (3 max)
+function openOffPicker(defKey, offsListEl){
+  const rootBody = document.querySelector('.modal-body');
+  if (!rootBody) return;
+
+  // Section picker
+  const wrap = document.createElement('div');
+  wrap.className = 'picker';
+
+  const pickTitle = document.createElement('div');
+  pickTitle.className = 'picker-title';
+  pickTitle.textContent = 'Sélectionne 3 monstres (glisser pour réordonner)';
+  wrap.appendChild(pickTitle);
+
+  // Zone picks
+  const picksBox = document.createElement('div'); picksBox.className = 'off-picks'; wrap.appendChild(picksBox);
+  let offPicks = [];
+
+  // Barre recherche
+  const row = document.createElement('div'); row.className='row field';
+  const lab = document.createElement('label'); lab.textContent='Recherche';
+  const inp = document.createElement('input'); inp.placeholder='Rechercher un monstre'; inp.autocomplete='off';
+  row.append(lab, inp); wrap.appendChild(row);
+
+  // Grille
+  const gwrap = document.createElement('div'); gwrap.className='picker-grid';
+  const grid = document.createElement('div'); grid.className='monster-grid';
+  gwrap.appendChild(grid); wrap.appendChild(gwrap);
+
+  // Actions
+  const actions = document.createElement('div'); actions.className='picker-actions';
+  const validate = document.createElement('button'); validate.className='btn-primary'; validate.type='button'; validate.textContent='Valider off';
+  const cancel = document.createElement('button'); cancel.className='btn-ghost'; cancel.type='button'; cancel.textContent='Annuler';
+  actions.append(validate, cancel);
+  wrap.appendChild(actions);
+
+  // Insertion sous la liste
+  rootBody.appendChild(wrap);
+  // scroll to picker
+  wrap.scrollIntoView({ behavior:'smooth', block:'start' });
+
+  // Rendu picks
+  function renderOffPicks(){
+    picksBox.innerHTML='';
+    offPicks.forEach((p, index) => {
+      const div = document.createElement('div'); div.className='pick'; div.dataset.index = index; div.draggable = true;
+
+      const btn = document.createElement('button'); btn.className='close'; btn.type='button'; btn.title='Retirer'; btn.textContent='✕';
+      btn.onclick = () => { offPicks.splice(index,1); renderOffPicks(); };
+
+      const img = document.createElement('img'); img.src=fixIconUrl(p.icon||''); img.alt=p.name; img.loading='lazy';
+      const label = document.createElement('div'); label.className='pname'; label.textContent=p.name;
+
+      div.append(btn,img,label); picksBox.appendChild(div);
+    });
+
+    // Drag & drop
+    picksBox.querySelectorAll('.pick').forEach(el => {
+      el.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', el.dataset.index); el.classList.add('dragging'); });
+      el.addEventListener('dragend', () => el.classList.remove('dragging'));
+      el.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect='move'; });
+      el.addEventListener('drop', e => {
+        e.preventDefault();
+        const src = parseInt(e.dataTransfer.getData('text/plain'));
+        const dst = parseInt(el.dataset.index);
+        if (!Number.isNaN(src) && !Number.isNaN(dst) && src!==dst) {
+          const mv = offPicks.splice(src,1)[0];
+          offPicks.splice(dst,0,mv);
+          renderOffPicks();
+        }
+      });
+    });
+  }
+
+  // Grille filtres
+  function renderPickerGrid(){
+    const q = (inp.value||'').trim().toLowerCase();
+    grid.innerHTML='';
+    const frag = document.createDocumentFragment();
+    (window.MONSTERS||[])
+      .filter(m => !q || [m.name, m.unawakened_name, m.element, ...(m.aliases||[])].some(s => (s||'').toLowerCase().includes(q)))
+      .sort((a,b) => a.name.localeCompare(b.name,'en',{sensitivity:'base'}))
+      .forEach(m => {
+        const card = document.createElement('div'); card.className='card'; card.title=m.name;
+        const img = document.createElement('img'); img.src=fixIconUrl(m.icon||''); img.alt=m.name; img.loading='lazy'; img.onerror=()=>img.remove();
+        const span = document.createElement('span'); span.className='name'; span.textContent=m.name;
+        card.append(img,span);
+        card.onclick = () => {
+          if (offPicks.find(p => p.id===m.id)) return;
+          if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
+          offPicks.push(m); renderOffPicks();
+        };
+        frag.appendChild(card);
+      });
+    grid.appendChild(frag);
+  }
+
+  inp.addEventListener('input', () => { renderPickerGrid(); });
+  renderPickerGrid(); renderOffPicks();
+
+  // Actions
+  cancel.onclick = () => { wrap.remove(); };
+
+  validate.onclick = async () => {
+    if (offPicks.length !== 3) { toast('Sélectionne exactement 3 monstres.'); return; }
+    const [a,b,c] = offPicks.map(x => x.name);
+    try {
+      const resp = await apiAddOff({ key:defKey, o1:a, o2:b, o3:c });
+      if (!resp?.ok) { toast(resp?.error || 'Erreur ajout off'); return; }
+      toast('Offense ajoutée ✅');
+      wrap.remove();
+
+      // Recharger la liste
+      const res = await apiGetOffs(defKey);
+      if (res?.ok) renderOffsList(offsListEl, res.offs||[]);
+    } catch (e) {
+      console.error(e); toast('Impossible d’ajouter l’offense.');
+    }
+  };
+}
+
