@@ -121,7 +121,7 @@ main{ padding:16px; max-width:min(var(--panel-width),95vw); margin:0 auto; }
   padding:10px;
 }
 .grid-wrap{
-  border-radius:14px; background: var(--bg3);
+  border-radius:14px; background:#0f1824;
   box-shadow: var(--inset-1), var(--shadow-1);
   padding:8px; overflow:hidden; /* clippe les coins */
 }
