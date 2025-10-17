@@ -397,7 +397,7 @@ function renderStats(data){
 
     if (isAdmin()) {
       const btn = document.createElement('button'); btn.className = 'btn-ghost act-handle'; btn.textContent = 'Traiter';
-      btn.setAttribute('data-key', r.key.replace(/"/g,'&quot;'));
+      btn.dataset.key = r.key;
       row.appendChild(btn);
     }
     list.appendChild(row);
@@ -411,7 +411,7 @@ function renderStats(data){
     box.onclick = async (e) => {
       const btn = e.target.closest('.act-handle');
       if (!btn) return;
-      const key = btn.getAttribute('data-key');
+      const key = btn.dataset.key;
 
       // Optimisme UI : déplacer localement la clé dans "traitées"
       moveKeyFromStatsToHandledOptimistic(key);
@@ -429,6 +429,9 @@ function renderStats(data){
         return;
       }
       toast('Défense déplacée dans "Défs traitées" ✅');
+
+      cache.stats.ts = 0;       // invalide cache front
+      cache.handled.ts = 0;
 
       // Refresh silencieux
       await Promise.all([fetchStats(true), fetchHandled(true)]);
