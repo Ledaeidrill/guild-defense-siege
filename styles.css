@@ -269,3 +269,62 @@ textarea{ min-height:100px; border-radius:12px; }
   .grid-scroll{ max-height:60vh; }
   .monster-grid{ grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); }
 }
+
+/* === MODALE Offs =================================================== */
+.modal-backdrop{
+  position:fixed; inset:0; background:rgba(0,0,0,.55);
+  display:flex; align-items:center; justify-content:center;
+  z-index:9999;
+}
+.modal{
+  width:min(980px, 94vw); max-height:90vh; overflow:hidden;
+  background:#0f1520; color:#e8eef5; border:1px solid #223244;
+  border-radius:14px; box-shadow:0 24px 64px rgba(0,0,0,.5);
+  display:flex; flex-direction:column;
+}
+.modal-header{
+  display:flex; align-items:center; gap:10px; padding:12px 14px;
+  border-bottom:1px solid #223244; background:#101826;
+}
+.modal-title{ font-weight:700; font-size:16px; margin:0; }
+.modal-close{
+  margin-left:auto; appearance:none; border:none; cursor:pointer;
+  width:28px; height:28px; border-radius:8px; background:#0f1520; color:#e8eef5;
+}
+.modal-body{
+  padding:14px; overflow:auto; max-height:calc(90vh - 54px - 64px);
+}
+.modal-footer{
+  border-top:1px solid #223244; background:#101826;
+  padding:10px 14px; display:flex; justify-content:center;
+}
+
+/* Liste des Offs affichées dans la modale */
+.offs-list{ display:flex; flex-direction:column; gap:10px; }
+.off-card{
+  border:1px solid #2b3b4a; border-radius:10px; padding:10px 12px; background:#101826;
+  display:flex; justify-content:center;
+}
+.off-trio{ display:flex; gap:16px; align-items:center; }
+
+/* Bouton + */
+.btn-plus{
+  appearance:none; border:1px dashed #2b3b4a; background:#0f1520; color:#e8eef5;
+  padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:600;
+}
+
+/* Sous-modale Picker dans la modale */
+.picker{
+  border-top:1px solid #223244; margin-top:12px; padding-top:12px;
+}
+.picker .row{ margin:8px 0; }
+.picker-title{ font-weight:600; margin-bottom:6px; }
+.picker-grid{
+  border-radius:12px; background:#0f1824; padding:8px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.35);
+  max-height:38vh; overflow:auto;
+}
+.picker-actions{ display:flex; gap:10px; justify-content:center; margin-top:10px; }
+
+/* Zone des picks Off (réutilise ton style .pick) */
+.off-picks{ display:flex; flex-wrap:wrap; gap:10px; min-height:58px; margin:8px 0; }
