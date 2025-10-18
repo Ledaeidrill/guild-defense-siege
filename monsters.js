@@ -1,5 +1,39 @@
 window.MONSTERS = [
   {
+    "id": 8,
+    "com2us_id": 14212,
+    "family_id": 14200,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0019_1_0.png",
+    "name": "Red Angelmon",
+    "unawakened_name": "Red Angelmon",
+    "second_awaken": false,
+    "aliases": [
+      "feu",
+      "feu red angelmon",
+      "fire",
+      "fire red angelmon",
+      "red angelmon"
+    ]
+  },
+  {
+    "id": 10,
+    "com2us_id": 18212,
+    "family_id": 18200,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0030_1_2.png",
+    "name": "Red King Angelmon",
+    "unawakened_name": "Red King Angelmon",
+    "second_awaken": false,
+    "aliases": [
+      "feu",
+      "feu red king angelmon",
+      "fire",
+      "fire red king angelmon",
+      "red king angelmon"
+    ]
+  },
+  {
     "id": 12,
     "com2us_id": 12812,
     "family_id": 12800,
@@ -167,6 +201,40 @@ window.MONSTERS = [
       "fire",
       "fire tantra",
       "tantra"
+    ]
+  },
+  {
+    "id": 50,
+    "com2us_id": 14211,
+    "family_id": 14200,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0019_0_0.png",
+    "name": "Blue Angelmon",
+    "unawakened_name": "Blue Angelmon",
+    "second_awaken": false,
+    "aliases": [
+      "blue angelmon",
+      "eau",
+      "eau blue angelmon",
+      "water",
+      "water blue angelmon"
+    ]
+  },
+  {
+    "id": 51,
+    "com2us_id": 18211,
+    "family_id": 18200,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0030_0_2.png",
+    "name": "Blue King Angelmon",
+    "unawakened_name": "Blue King Angelmon",
+    "second_awaken": false,
+    "aliases": [
+      "blue king angelmon",
+      "eau",
+      "eau blue king angelmon",
+      "water",
+      "water blue king angelmon"
     ]
   },
   {
@@ -354,6 +422,40 @@ window.MONSTERS = [
       "kunda",
       "water",
       "water kunda"
+    ]
+  },
+  {
+    "id": 81,
+    "com2us_id": 14213,
+    "family_id": 14200,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0019_2_0.png",
+    "name": "Gold Angelmon",
+    "unawakened_name": "Gold Angelmon",
+    "second_awaken": false,
+    "aliases": [
+      "gold angelmon",
+      "vent",
+      "vent gold angelmon",
+      "wind",
+      "wind gold angelmon"
+    ]
+  },
+  {
+    "id": 83,
+    "com2us_id": 18213,
+    "family_id": 18200,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0030_2_2.png",
+    "name": "Gold King Angelmon",
+    "unawakened_name": "Gold King Angelmon",
+    "second_awaken": false,
+    "aliases": [
+      "gold king angelmon",
+      "vent",
+      "vent gold king angelmon",
+      "wind",
+      "wind gold king angelmon"
     ]
   },
   {
@@ -578,6 +680,44 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 121,
+    "com2us_id": 14215,
+    "family_id": 14200,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0019_4_0.png",
+    "name": "Dark Angelmon",
+    "unawakened_name": "Dark Angelmon",
+    "second_awaken": false,
+    "aliases": [
+      "dark",
+      "dark angelmon",
+      "dark dark angelmon",
+      "tenebres",
+      "tenebres dark angelmon",
+      "ténèbres",
+      "ténèbres dark angelmon"
+    ]
+  },
+  {
+    "id": 123,
+    "com2us_id": 18215,
+    "family_id": 18200,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0030_4_2.png",
+    "name": "Dark King Angelmon",
+    "unawakened_name": "Dark King Angelmon",
+    "second_awaken": false,
+    "aliases": [
+      "dark",
+      "dark dark king angelmon",
+      "dark king angelmon",
+      "tenebres",
+      "tenebres dark king angelmon",
+      "ténèbres",
+      "ténèbres dark king angelmon"
+    ]
+  },
+  {
     "id": 125,
     "com2us_id": 12815,
     "family_id": 12800,
@@ -727,6 +867,44 @@ window.MONSTERS = [
       "tenebres gorgo",
       "ténèbres",
       "ténèbres gorgo"
+    ]
+  },
+  {
+    "id": 143,
+    "com2us_id": 14214,
+    "family_id": 14200,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0019_3_0.png",
+    "name": "White Angelmon",
+    "unawakened_name": "White Angelmon",
+    "second_awaken": false,
+    "aliases": [
+      "light",
+      "light white angelmon",
+      "lumiere",
+      "lumiere white angelmon",
+      "lumière",
+      "lumière white angelmon",
+      "white angelmon"
+    ]
+  },
+  {
+    "id": 145,
+    "com2us_id": 18214,
+    "family_id": 18200,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0030_3_2.png",
+    "name": "White King Angelmon",
+    "unawakened_name": "White King Angelmon",
+    "second_awaken": false,
+    "aliases": [
+      "light",
+      "light white king angelmon",
+      "lumiere",
+      "lumiere white king angelmon",
+      "lumière",
+      "lumière white king angelmon",
+      "white king angelmon"
     ]
   },
   {
@@ -8601,6 +8779,114 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 1064,
+    "com2us_id": 17111,
+    "family_id": 17100,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0019_0_4.png",
+    "name": "Theomars",
+    "unawakened_name": "Theomars",
+    "second_awaken": false,
+    "aliases": [
+      "eau",
+      "eau theomars",
+      "theomars",
+      "water",
+      "water theomars"
+    ]
+  },
+  {
+    "id": 1065,
+    "com2us_id": 17112,
+    "family_id": 17100,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0019_1_4.png",
+    "name": "Tesarion",
+    "unawakened_name": "Tesarion",
+    "second_awaken": false,
+    "aliases": [
+      "feu",
+      "feu tesarion",
+      "fire",
+      "fire tesarion",
+      "tesarion"
+    ]
+  },
+  {
+    "id": 1066,
+    "com2us_id": 17113,
+    "family_id": 17100,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0019_2_4.png",
+    "name": "Akhamamir",
+    "unawakened_name": "Akhamamir",
+    "second_awaken": false,
+    "aliases": [
+      "akhamamir",
+      "vent",
+      "vent akhamamir",
+      "wind",
+      "wind akhamamir"
+    ]
+  },
+  {
+    "id": 1067,
+    "com2us_id": 17114,
+    "family_id": 17100,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0019_3_4.png",
+    "name": "Elsharion",
+    "unawakened_name": "Elsharion",
+    "second_awaken": false,
+    "aliases": [
+      "elsharion",
+      "light",
+      "light elsharion",
+      "lumiere",
+      "lumiere elsharion",
+      "lumière",
+      "lumière elsharion"
+    ]
+  },
+  {
+    "id": 1068,
+    "com2us_id": 17115,
+    "family_id": 17100,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0019_4_4.png",
+    "name": "Veromos",
+    "unawakened_name": "Veromos",
+    "second_awaken": false,
+    "aliases": [
+      "dark",
+      "dark veromos",
+      "tenebres",
+      "tenebres veromos",
+      "ténèbres",
+      "ténèbres veromos",
+      "veromos"
+    ]
+  },
+  {
+    "id": 1155,
+    "com2us_id": 21714,
+    "family_id": 21700,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0044_5_0.png",
+    "name": "Super Angelmon",
+    "unawakened_name": "Super Angelmon",
+    "second_awaken": false,
+    "aliases": [
+      "light",
+      "light super angelmon",
+      "lumiere",
+      "lumiere super angelmon",
+      "lumière",
+      "lumière super angelmon",
+      "super angelmon"
+    ]
+  },
+  {
     "id": 1163,
     "com2us_id": 21811,
     "family_id": 21800,
@@ -9674,6 +9960,95 @@ window.MONSTERS = [
     "family_id": 23500,
     "element": "Dark",
     "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0054_4_0.png",
+    "name": "Xiana",
+    "unawakened_name": "Xiana",
+    "second_awaken": false,
+    "aliases": [
+      "dark",
+      "dark xiana",
+      "tenebres",
+      "tenebres xiana",
+      "ténèbres",
+      "ténèbres xiana",
+      "xiana"
+    ]
+  },
+  {
+    "id": 1349,
+    "com2us_id": 23611,
+    "family_id": 23600,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0054_0_1.png",
+    "name": "Barbara",
+    "unawakened_name": "Barbara",
+    "second_awaken": false,
+    "aliases": [
+      "barbara",
+      "eau",
+      "eau barbara",
+      "water",
+      "water barbara"
+    ]
+  },
+  {
+    "id": 1350,
+    "com2us_id": 23612,
+    "family_id": 23600,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0054_1_1.png",
+    "name": "Masha",
+    "unawakened_name": "Masha",
+    "second_awaken": false,
+    "aliases": [
+      "feu",
+      "feu masha",
+      "fire",
+      "fire masha",
+      "masha"
+    ]
+  },
+  {
+    "id": 1351,
+    "com2us_id": 23613,
+    "family_id": 23600,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0054_2_1.png",
+    "name": "Savannah",
+    "unawakened_name": "Savannah",
+    "second_awaken": false,
+    "aliases": [
+      "savannah",
+      "vent",
+      "vent savannah",
+      "wind",
+      "wind savannah"
+    ]
+  },
+  {
+    "id": 1352,
+    "com2us_id": 23614,
+    "family_id": 23600,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0054_3_1.png",
+    "name": "Narsha",
+    "unawakened_name": "Narsha",
+    "second_awaken": false,
+    "aliases": [
+      "light",
+      "light narsha",
+      "lumiere",
+      "lumiere narsha",
+      "lumière",
+      "lumière narsha",
+      "narsha"
+    ]
+  },
+  {
+    "id": 1353,
+    "com2us_id": 23615,
+    "family_id": 23600,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0054_4_1.png",
     "name": "Xiana",
     "unawakened_name": "Xiana",
     "second_awaken": false,
@@ -16822,6 +17197,184 @@ window.MONSTERS = [
       "tenebres nina williams",
       "ténèbres",
       "ténèbres nina williams"
+    ]
+  },
+  {
+    "id": 2803,
+    "com2us_id": 34011,
+    "family_id": 34000,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0192_1_1.png",
+    "name": "Cecilia",
+    "unawakened_name": "Cecilia",
+    "second_awaken": false,
+    "aliases": [
+      "cecilia",
+      "eau",
+      "eau cecilia",
+      "water",
+      "water cecilia"
+    ]
+  },
+  {
+    "id": 2804,
+    "com2us_id": 34012,
+    "family_id": 34000,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0192_1_2.png",
+    "name": "Cynthia",
+    "unawakened_name": "Cynthia",
+    "second_awaken": false,
+    "aliases": [
+      "cynthia",
+      "feu",
+      "feu cynthia",
+      "fire",
+      "fire cynthia"
+    ]
+  },
+  {
+    "id": 2805,
+    "com2us_id": 34013,
+    "family_id": 34000,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0192_1_3.png",
+    "name": "Daisy",
+    "unawakened_name": "Daisy",
+    "second_awaken": false,
+    "aliases": [
+      "daisy",
+      "vent",
+      "vent daisy",
+      "wind",
+      "wind daisy"
+    ]
+  },
+  {
+    "id": 2806,
+    "com2us_id": 34014,
+    "family_id": 34000,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0192_1_4.png",
+    "name": "Christine",
+    "unawakened_name": "Christine",
+    "second_awaken": false,
+    "aliases": [
+      "christine",
+      "light",
+      "light christine",
+      "lumiere",
+      "lumiere christine",
+      "lumière",
+      "lumière christine"
+    ]
+  },
+  {
+    "id": 2807,
+    "com2us_id": 34015,
+    "family_id": 34000,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0192_1_5.png",
+    "name": "Elise",
+    "unawakened_name": "Elise",
+    "second_awaken": false,
+    "aliases": [
+      "dark",
+      "dark elise",
+      "elise",
+      "tenebres",
+      "tenebres elise",
+      "ténèbres",
+      "ténèbres elise"
+    ]
+  },
+  {
+    "id": 2813,
+    "com2us_id": 34111,
+    "family_id": 34100,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0193_1_1.png",
+    "name": "Rhoetus",
+    "unawakened_name": "Rhoetus",
+    "second_awaken": false,
+    "aliases": [
+      "eau",
+      "eau rhoetus",
+      "rhoetus",
+      "water",
+      "water rhoetus"
+    ]
+  },
+  {
+    "id": 2814,
+    "com2us_id": 34112,
+    "family_id": 34100,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0193_1_2.png",
+    "name": "Agrius",
+    "unawakened_name": "Agrius",
+    "second_awaken": false,
+    "aliases": [
+      "agrius",
+      "feu",
+      "feu agrius",
+      "fire",
+      "fire agrius"
+    ]
+  },
+  {
+    "id": 2815,
+    "com2us_id": 34113,
+    "family_id": 34100,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0193_1_3.png",
+    "name": "Pholus",
+    "unawakened_name": "Pholus",
+    "second_awaken": false,
+    "aliases": [
+      "pholus",
+      "vent",
+      "vent pholus",
+      "wind",
+      "wind pholus"
+    ]
+  },
+  {
+    "id": 2816,
+    "com2us_id": 34114,
+    "family_id": 34100,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0193_1_4.png",
+    "name": "Chiron",
+    "unawakened_name": "Chiron",
+    "second_awaken": false,
+    "aliases": [
+      "chiron",
+      "light",
+      "light chiron",
+      "lumiere",
+      "lumiere chiron",
+      "lumière",
+      "lumière chiron"
+    ]
+  },
+  {
+    "id": 2817,
+    "com2us_id": 34115,
+    "family_id": 34100,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0193_1_5.png",
+    "name": "Asbolus",
+    "unawakened_name": "Asbolus",
+    "second_awaken": false,
+    "aliases": [
+      "asbolus",
+      "dark",
+      "dark asbolus",
+      "tenebres",
+      "tenebres asbolus",
+      "ténèbres",
+      "ténèbres asbolus"
     ]
   }
 ];
