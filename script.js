@@ -328,25 +328,26 @@ function stars(m){
 
 // Comparateur global demandé
 function monsterComparator(a, b){
-  // 1) 2e éveil d'abord
-  const a2 = !!a.second_awaken, b2 = !!b.second_awaken;
-  if (a2 !== b2) return a2 ? -1 : 1;
-
-  // 2) par étoiles (desc) : 5★ -> 4★ -> ...
-  const sa = stars(a), sb = stars(b);
-  if (sa !== sb) return sb - sa;
-
-  // 3) ordre de sortie (asc = plus ancien en premier)
-  const ra = releaseKey(a), rb = releaseKey(b);
-  if (ra !== rb) return ra - rb;
-
-  // 4) élément
+  // 1) Élément
   const er = elemRank(a.element) - elemRank(b.element);
   if (er !== 0) return er;
 
-  // 5) nom
+  // 2) Niveau d'awake: 2e éveil d'abord
+  const a2 = !!a.second_awaken, b2 = !!b.second_awaken;
+  if (a2 !== b2) return a2 ? -1 : 1;
+
+  // 3) Étoiles (desc): 5★ -> 4★ -> 3★
+  const sa = starsCount(a), sb = starsCount(b);
+  if (sa !== sb) return sb - sa;
+
+  // 4) Ordre de sortie (desc): plus récent -> plus ancien
+  const ra = releaseKey(a), rb = releaseKey(b);
+  if (ra !== rb) return rb - ra;
+
+  // 5) Nom (alpha)
   return a.name.localeCompare(b.name, 'en', { sensitivity:'base' });
 }
+
 
 function renderGrid() {
   const q = (search?.value||'').trim();
