@@ -59,10 +59,10 @@ function esc(s){
 }
 
 // =====================
-// COLLABS — mapping explicite (source: Fandom "Collaborations")
+// COLLABS — mapping explicite + résolution par élément/alias
 // =====================
 
-// Map "collab -> version SW"
+// collab -> famille SW (nom "générique" côté SW, pas le nom éveillé par élément)
 const MAP_COLLAB_TO_SW = {
   // Street Fighter V
   'Ryu': 'Striker',
@@ -78,7 +78,7 @@ const MAP_COLLAB_TO_SW = {
   'Espresso Cookie': 'Black Tea Bunny',
   'Madeleine Cookie': 'Choco Knight',
 
-  // Assassin’s Creed
+  // Assassin's Creed
   'Altaïr': 'Dual Blade',
   'Ezio': 'Steel Commander',
   'Bayek': 'Desert Warrior',
@@ -96,7 +96,6 @@ const MAP_COLLAB_TO_SW = {
   'Satoru Gojo': 'Exorcist Association Resolver',
   'Nobara Kugisaki': 'Exorcist Association Hunter',
   'Megumi Fushiguro': 'Exorcist Association Conjurer',
-  // attention à l’orthographe/diacritiques
   'Ryomen Sukuna': 'Exorcist Association Arbiter',
   'Ryōmen Sukuna': 'Exorcist Association Arbiter',
 
@@ -108,63 +107,58 @@ const MAP_COLLAB_TO_SW = {
   'Inosuke Hashibira': 'White Tiger Blade Master',
 
   // TEKKEN 8 → pas d’équivalent SW (DON’T MERGE)
-  // 'Jin Kazama': null, etc.
+  // 'Jin': null, etc.
 };
 
-// Construire la map inverse "SW -> collab"
+// SW (famille) -> collab (inverse)
 const MAP_SW_TO_COLLAB = (() => {
   const m = {};
   for (const [collab, sw] of Object.entries(MAP_COLLAB_TO_SW)) {
     if (!sw) continue;
+    // si plusieurs collab mappaient le même SW (rare), on garde le 1er
     if (!m[sw]) m[sw] = collab;
   }
   return m;
 })();
 
-// Normalisation “souple” (lowercase + diacritiques + ponctuation légère)
-const fold = (s) => (s || '')
-  .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-  .replace(/[.\u2019']/g, '') // ex: "M. Bison", apostrophes
-  .trim().toLowerCase();
+const nrm = (s) => (s||'').toString().trim().toLowerCase();
 
-// Index (element|name) -> monstre (déjà présent chez toi, on garde)
-const MONS_BY_KEY = MONS_BY_KEY || (() => {
-  const m = new Map();
-  for (const r of (window.MONSTERS || [])) {
-    m.set((r.element + '|' + r.name).toLowerCase(), r);
-  }
-  return m;
-})();
+// Résout *par élément* un monstre dont le nom ou les ALIASES matchent une des clés données
+function findByElementAndAnyName(element, candidates){
+  const want = new Set(candidates.map(nrm));
+  const el = nrm(element);
+  return (window.MONSTERS || []).find(x => {
+    if (nrm(x.element) !== el) return false;
+    if (want.has(nrm(x.name))) return true;
+    const aliases = (x.aliases || []).map(nrm);
+    return aliases.some(a => want.has(a));
+  }) || null;
+}
 
-// Trouve le partenaire par élément via les maps (sans heuristique d’alias)
+// Renvoie le duo { sw, collab } pour le même élément, ou null si pas de pair
 function findMappedPair(mon) {
-  // 1) si 'mon' est collab → rechercher son nom SW
-  let partnerName = MAP_COLLAB_TO_SW[mon.name];
-  let collabName = mon.name;
-  let swName = partnerName;
-
-  // 2) sinon si 'mon' est une version SW → retrouver son collab
-  if (!partnerName) {
-    const c = MAP_SW_TO_COLLAB[mon.name];
-    if (!c) return null; // pas de pair connu (TEKKEN etc.)
-    collabName = c;
-    swName = mon.name;
-    partnerName = c; // on met le nom collab pour lookup, mais on saura distinguer après
+  // Cas 1 : 'mon' est un collab → on cherche la version SW (famille) dans le même élément.
+  if (MAP_COLLAB_TO_SW[mon.name]) {
+    const swFamily = MAP_COLLAB_TO_SW[mon.name]; // ex: 'Slayer'
+    // Dans ton dataset, le SW réel s’appelle par ex. 'Karnal' (Feu), mais il a un alias 'Slayer'
+    const swMon = findByElementAndAnyName(mon.element, [swFamily]);
+    if (!swMon) return null;
+    return { sw: swMon, collab: mon };
   }
 
-  // 3) lookup partenaire *même élément* ; si mon est collab → on cherche SW ; si mon est SW → on cherche collab
-  const keySW     = (mon.element + '|' + swName).toLowerCase();
-  const keyCollab = (mon.element + '|' + collabName).toLowerCase();
+  // Cas 2 : 'mon' est une version SW → il doit avoir un alias de famille (ex: 'Slayer')
+  // On parcourt les familles SW connues et on vérifie si son nom ou ses aliases les contiennent.
+  const aliases = new Set([nrm(mon.name), ...(mon.aliases||[]).map(nrm)]);
+  for (const [swFamily, collabName] of Object.entries(MAP_SW_TO_COLLAB)) {
+    if (aliases.has(nrm(swFamily))) {
+      const collabMon = findByElementAndAnyName(mon.element, [collabName]);
+      if (!collabMon) return null;
+      return { sw: mon, collab: collabMon };
+    }
+  }
 
-  const isMonCollab = !!MAP_COLLAB_TO_SW[mon.name];
-  const partner = isMonCollab ? MONS_BY_KEY.get(keySW) : MONS_BY_KEY.get(keyCollab);
-  if (!partner) return null;
-
-  // Ranger l’ordre d’affichage : SW à gauche, Collab à droite
-  const sw     = isMonCollab ? partner : mon;
-  const collab = isMonCollab ? mon     : partner;
-
-  return { sw, collab };
+  // Sinon : pas de pair (TEKKEN ou monstre hors mapping)
+  return null;
 }
 
 // Rend l’icône + libellé fusionnés
