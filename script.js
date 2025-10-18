@@ -337,7 +337,7 @@ function monsterComparator(a, b){
   if (a2 !== b2) return a2 ? -1 : 1;
 
   // 3) Étoiles (desc): 5★ -> 4★ -> 3★
-  const sa = starsCount(a), sb = starsCount(b);
+  const sa = stars(a), sb = stars(b);
   if (sa !== sb) return sb - sa;
 
   // 4) Ordre de sortie (desc): plus récent -> plus ancien
