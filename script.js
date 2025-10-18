@@ -314,6 +314,44 @@ function makeCard(m){
   return card;
 }
 
+// Ordre des éléments (déjà présent chez toi)
+const ELEMENT_ORDER = ['Fire','Water','Wind','Light','Dark'];
+const elemRank = el => { const i = ELEMENT_ORDER.indexOf(el); return i===-1?999:i; };
+
+// Renvoie un "score d'ordre de sortie" (plus petit = plus ancien)
+function releaseKey(m){
+  // Utilise release_ts si tu l’ajoutes côté Python, sinon com2us_id, sinon family_id, sinon id
+  if (m.release_ts != null) return m.release_ts;        // nombre (timestamp)
+  if (m.com2us_id != null)  return m.com2us_id;
+  if (m.family_id != null)  return m.family_id;
+  return m.id || 0;
+}
+function stars(m){
+  return m.natural_stars ?? m.base_stars ?? 0;
+}
+
+// Comparateur global demandé
+function monsterComparator(a, b){
+  // 1) 2e éveil d'abord
+  const a2 = !!a.second_awaken, b2 = !!b.second_awaken;
+  if (a2 !== b2) return a2 ? -1 : 1;
+
+  // 2) par étoiles (desc) : 5★ -> 4★ -> ...
+  const sa = stars(a), sb = stars(b);
+  if (sa !== sb) return sb - sa;
+
+  // 3) ordre de sortie (asc = plus ancien en premier)
+  const ra = releaseKey(a), rb = releaseKey(b);
+  if (ra !== rb) return ra - rb;
+
+  // 4) élément
+  const er = elemRank(a.element) - elemRank(b.element);
+  if (er !== 0) return er;
+
+  // 5) nom
+  return a.name.localeCompare(b.name, 'en', { sensitivity:'base' });
+}
+
 function renderGrid() {
   const q = (search?.value||'').trim();
   if (!grid) return;
@@ -323,7 +361,7 @@ function renderGrid() {
   (window.MONSTERS || [])
     .filter(m => matchesQuery(m, q))
     .filter(m => !shouldHideInGrid(m)) // ⬅️ cache le doublon SW
-    .sort((a,b) => { /* ... */ })
+    .sort(monsterComparator)
     .forEach(m => frag.appendChild(makeCard(m)));
   
   grid.appendChild(frag);
@@ -885,10 +923,7 @@ function openOffPicker(defKey, offsListEl, onClose){
     const frag = document.createDocumentFragment();
     (window.MONSTERS||[])
       .filter(m => !q || [m.name, m.unawakened_name, m.element, ...(m.aliases||[])].some(s => (s||'').toLowerCase().includes(q)))
-      .sort((a,b) => {
-        const er = elemRank(a.element) - elemRank(b.element);
-        return er !== 0 ? er : a.name.localeCompare(b.name,'en',{sensitivity:'base'});
-      })
+      .sort(monsterComparator)
       .forEach(m => {
         const card = document.createElement('div'); card.className='card'; card.title=m.name;
         const v = renderMergedVisual(m);
