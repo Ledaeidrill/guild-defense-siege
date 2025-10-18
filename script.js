@@ -7,7 +7,7 @@ const ADMIN_TOKEN_PARAM = new URL(location.href).searchParams.get('admin');
 const isAdmin = () => !!ADMIN_TOKEN_PARAM;
 
 // Cache mémoire (masque la latence du réseau)
-const CACHE_TTL_MS = 60000; // 60 s, cohérent avec le cache Apps Script si tu le mets côté serveur
+const CACHE_TTL_MS = 60000; // 60 s
 const cache = {
   stats:   { data: null, ts: 0, inflight: null },
   handled: { data: null, ts: 0, inflight: null },
@@ -15,7 +15,6 @@ const cache = {
 // Cache Offs (60 s)
 const OFFS_CACHE_TTL = 60000;
 const offsCache = new Map(); // key -> { ts, data: {ok:true, offs:[...] } }
-
 
 // Clés tout juste traitées, on les masque 5 s pour éviter un flash si un fetch arrive avant l’invalidation serveur
 const recentlyHandled = new Set();
@@ -59,151 +58,92 @@ function esc(s){
   return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 }
 
-// ===== Duo collab <-> version SW (fusion image + label) =====
-const PAIR_NAME_MAP = {
-  'Madeleine Cookie': 'Praline',
-  'Praline': 'Madeleine Cookie',
-  // Ajoute d'autres paires ici si besoin (nom collab <-> nom SW), on matche par élément
-};
+// =====================
+// COLLABS — rendu fusion SW | COLLAB (gauche/droite)
+// =====================
 
-function findByNameAndElement(name, element){
-  const n = normalize(name), e = normalize(element);
-  return (window.MONSTERS||[]).find(m => normalize(m.name)===n && normalize(m.element)===e) || null;
-}
+// Liste des noms *collab* (les autres seront considérés comme "version SW" potentielle)
+const COLLAB_NAMES = new Set([
+  // Street Fighter
+  'Ryu','Ken','M. Bison','Dhalsim','Chun-Li',
+  // Cookie Run
+  'GingerBrave','Pure Vanilla Cookie','Hollyberry Cookie','Espresso Cookie','Madeleine Cookie',
+  // Assassin’s Creed
+  'Altaïr','Ezio','Bayek','Kassandra','Eivor',
+  // The Witcher
+  'Geralt','Ciri','Yennefer','Triss',
+  // Jujutsu Kaisen
+  'Yuji Itadori','Satoru Gojo','Nobara Kugisaki','Megumi Fushiguro','Ryomen Sukuna',
+  // Demon Slayer
+  'Tanjiro Kamado','Gyomei Himejima','Nezuko Kamado','Zenitsu Agatsuma','Inosuke Hashibira',
+  // TEKKEN
+  'Jin','Paul Phoenix','Hwoarang','Nina Williams','Heihachi Mishima',
+]);
 
-function getDuoForMonster(m){
-  const partnerName = PAIR_NAME_MAP[m.name];
-  if (!partnerName) return null;
-  const partner = findByNameAndElement(partnerName, m.element);
-  if (!partner) return null;
-  return { a: m, b: partner, label: `${partner.name} / ${m.name}` };
-}
-
-// Si tu n'as pas exporté window.COLLAB_MAP depuis monsters.js, colle ici la même map que dans Recup_monsters.py
-const COLLAB = window.COLLAB_MAP || {
-  "Ryu": {en:"Striker", fr:"Striker"},
-  "Ken": {en:"Shadow Claw", fr:"Griffes de l'ombre"},
-  "M. Bison": {en:"Slayer", fr:"Slayer"},
-  "Dhalsim": {en:"Poison Master", fr:"Maître des poisons"},
-  "Chun-Li": {en:"Blade Dancer", fr:"Danseuse aux lames"},
-  "GingerBrave": {en:"Lollipop Warrior", fr:"Guerrier Sucette"},
-  "Pure Vanilla Cookie": {en:"Pudding Princess", fr:"Princesse Pudding"},
-  "Hollyberry Cookie": {en:"Macaron Guard", fr:"Garde Macaron"},
-  "Espresso Cookie": {en:"Black Tea Bunny", fr:"Dame Thé Noir"},
-  "Madeleine Cookie": {en:"Choco Knight", fr:"Guerrier Choco"},
-  "Altaïr": {en:"Dual Blade", fr:"Double Lame"},
-  "Ezio": {en:"Steel Commander", fr:"Commandeur d'acier"},
-  "Bayek": {en:"Desert Warrior", fr:"Guerrier du désert"},
-  "Kassandra": {en:"Gladiatrix", fr:"Gladiatrice"},
-  "Eivor": {en:"Mercenary Queen", fr:"Reine des mercenaires"},
-  "Geralt": {en:"Magic Order Guardian", fr:"Gardien de l'Ordre mage"},
-  "Ciri": {en:"Magic Order Swordsinger", fr:"Épéiste de l'Ordre mage"},
-  "Yennefer": {en:"Magic Order Enchantress", fr:"Enchanteresse de l'Ordre mage"},
-  "Triss": {en:"Magic Order Elementalist", fr:"Élémentaliste de l'Ordre mage"},
-  "Yuji Itadori": {en:"Exorcist Association Fighter", fr:"Combattant de l'Ordre exorciste"},
-  "Satoru Gojo": {en:"Exorcist Association Resolver", fr:"Résolveur de l'Ordre exorciste"},
-  "Nobara Kugisaki": {en:"Exorcist Association Hunter", fr:"Chasseur de l'Ordre exorciste"},
-  "Megumi Fushiguro": {en:"Exorcist Association Conjurer", fr:"Invocateur de l'Ordre exorciste"},
-  "Ryōmen Sukuna": {en:"Exorcist Association Arbiter", fr:"Juge de l'Ordre exorciste"},
-  "Tanjiro Kamado": {en:"Azure Dragon Swordman", fr:"Épéiste du Dragon azur"},
-  "Gyōmei Himejima": {en:"Black Tortoise Champion", fr:"Lancier de la Tortue Noire"},
-  "Nezuko Kamado": {en:"Vermilion Bird Dancer", fr:"Danseuse de l'Oiseau vermillon"},
-  "Zenitsu Agatsuma": {en:"Qilin Slasher", fr:"Spadassin du Qilin"},
-  "Inosuke Hashibira": {en:"White Tiger Blade Master", fr:"Guerrier du Tigre blanc"},
-  // Tekken: pas d’alternative SW
-};
-
+// Index (element|name) -> monstre
 const MONS_BY_KEY = (() => {
   const m = new Map();
-  for (const r of window.MONSTERS) {
-    m.set((r.element+"|"+r.name).toLowerCase(), r);
+  for (const r of (window.MONSTERS || [])) {
+    m.set((r.element + '|' + r.name).toLowerCase(), r);
   }
   return m;
 })();
 
-function getAltPair(mon) {
-  // Si 'mon' est un collab, on cherche son équivalent SW ; si c'est un SW alt, on cherche le collab
-  const alt = COLLAB[mon.name];
-  let targetName = alt?.en || alt?.fr || null;
+function findPairForMonster(mon){
+  // On ne "merge" que s'il existe un JUMEAU même élément avec un autre nom relié par alias.
+  // Hypothèse: ton monsters.js inclut déjà les alias croisés collab <-> SW.
+  const sameEl = (window.MONSTERS || []).filter(x => x.element === mon.element && x.id !== mon.id);
+  const norm = s => (s||'').toString().trim().toLowerCase();
 
-  if (!targetName) {
-    // Peut-être que mon.name est le "nom SW", il faut retrouver la clé collab correspondante
-    for (const [collabName, v] of Object.entries(COLLAB)) {
-      if ([v.en, v.fr].filter(Boolean).some(n => n === mon.name)) {
-        targetName = collabName;
-        break;
-      }
-    }
+  const nameSet = new Set([norm(mon.name), ...(mon.aliases||[]).map(norm)]);
+  let partner = null;
+
+  for (const x of sameEl) {
+    const xNames = new Set([norm(x.name), ...(x.aliases||[]).map(norm)]);
+    // Intersection non vide -> ce sont des doublons de "famille" (collab vs sw)
+    const linked = [...xNames].some(n => nameSet.has(n));
+    if (linked) { partner = x; break; }
   }
-  if (!targetName) return null;
+  if (!partner) return null;
 
-  const pair = MONS_BY_KEY.get((mon.element+"|"+targetName).toLowerCase());
-  return pair ? { name: targetName, icon: pair.icon } : null;
+  // Décider qui est SW vs COLLAB (collab à droite)
+  const monIsCollab = COLLAB_NAMES.has(mon.name);
+  const partnerIsCollab = COLLAB_NAMES.has(partner.name);
+
+  let sw = mon, collab = partner;
+  if (monIsCollab && !partnerIsCollab) { sw = partner; collab = mon; }
+  else if (!monIsCollab && partnerIsCollab) { sw = mon; collab = partner; }
+  else {
+    // Cas ambigus (deux collabs ou deux non-collabs) -> on ne merge pas
+    return null;
+  }
+  return { sw, collab };
 }
 
-// Renvoie un {label, htmlIcon} pour la carte
-function renderMergedVisual(mon) {
-  const pair = getAltPair(mon);
-  if (!pair) {
+// Sortie unifiée pour les composants d’affichage
+function renderMergedVisual(mon){
+  const duo = findPairForMonster(mon);
+  if (!duo) {
     return {
       label: mon.name,
       title: mon.name,
-      htmlIcon: `<img src="${mon.icon}" alt="${mon.name}">`,
+      htmlIcon: `<img src="${fixIconUrl(mon.icon||'')}" alt="${esc(mon.name)}" loading="lazy">`,
     };
   }
-  const label = `${pair.name} / ${mon.name}`;
+  const swName = duo.sw.name;
+  const collabName = duo.collab.name.toUpperCase(); // collab en MAJ
+  const label = `${swName} / ${collabName}`;
+
   return {
     label,
     title: label,
     htmlIcon: `
-      <div class="duo" aria-label="${label}">
-        <img class="base" src="${mon.icon}" alt="${mon.name}">
-        <img class="top"  src="${pair.icon}" alt="${pair.name}">
+      <div class="duo-hsplit" aria-label="${esc(label)}" title="${esc(label)}">
+        <img class="left"  src="${fixIconUrl(duo.sw.icon||'')}"     alt="${esc(swName)}"     loading="lazy">
+        <img class="right" src="${fixIconUrl(duo.collab.icon||'')}" alt="${esc(collabName)}" loading="lazy">
       </div>
     `,
   };
-}
-
-// ===== Modale helpers =====
-function openModal({ title, bodyNode, footerNode }) {
-  const root = document.getElementById('modal-root');
-  if (!root) return;
-  root.innerHTML = '';
-
-  const backdrop = document.createElement('div');
-  backdrop.className = 'modal-backdrop';
-
-  const modal = document.createElement('div');
-  modal.className = 'modal';
-
-  const header = document.createElement('div');
-  header.className = 'modal-header';
-  const h = document.createElement('h3'); h.className = 'modal-title'; h.textContent = title || '';
-  const closeBtn = document.createElement('button'); closeBtn.className = 'modal-close'; closeBtn.textContent = '✕';
-  closeBtn.title = 'Fermer';
-  closeBtn.onclick = closeModal;
-  header.append(h, closeBtn);
-
-  const body = document.createElement('div');
-  body.className = 'modal-body';
-  if (bodyNode) body.appendChild(bodyNode);
-
-  const footer = document.createElement('div');
-  footer.className = 'modal-footer';
-  if (footerNode) footer.appendChild(footerNode);
-
-  modal.append(header, body, footer);
-  backdrop.appendChild(modal);
-  root.replaceChildren(backdrop);
-  root.hidden = false;
-
-  // Close on backdrop click
-  backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
-  return { backdrop, modal, body, footer, closeBtn, header };
-}
-function closeModal(){
-  const root = document.getElementById('modal-root');
-  if (root) { root.hidden = true; root.innerHTML = ''; }
 }
 
 // =====================
@@ -227,7 +167,6 @@ async function apiPost(payloadObj, { timeoutMs = 7000, retries = 1 } = {}){
     catch { return { ok:false, error:'Réponse invalide', raw: txt }; }
   } catch (e) {
     if (retries > 0) {
-      // Backoff minimal
       await new Promise(r => setTimeout(r, 250));
       return apiPost(payloadObj, { timeoutMs, retries: retries - 1 });
     }
@@ -282,13 +221,14 @@ const MONS_BY_NAME = (() => {
 })();
 const findMonsterByName = (n) => MONS_BY_NAME.get((n||'').toLowerCase()) || null;
 
+// ==> Utiliser le rendu fusionné aussi pour les cartes "déf/offs"
 function cardHtmlByName(name){
-  const d = findMonsterByName(name) || { name, icon:'' };
-  const src = fixIconUrl(d.icon||'');
+  const d = findMonsterByName(name) || { name, icon:'', element:'' };
+  const v = renderMergedVisual(d);
   return `
-    <div class="pick def-pick" title="${esc(d.name)}">
-      <img src="${src}" alt="${esc(d.name)}" loading="lazy">
-      <div class="pname">${esc(d.name)}</div>
+    <div class="pick def-pick" title="${esc(v.title)}">
+      ${v.htmlIcon}
+      <div class="pname">${esc(v.label)}</div>
     </div>`;
 }
 
@@ -320,23 +260,12 @@ function makeCard(m){
   card.title = m.name;
   card.onclick = () => addPick(m);
 
-  const img = document.createElement('img');
-  img.src = fixIconUrl(m.icon || '');
-  img.alt = m.name;
-  img.loading = 'lazy';
-  img.onerror = () => {
-    if (!img.dataset.tried && img.src.includes('swarfarm.com/')) {
-      img.dataset.tried = '1';
-      img.src = img.src.replace('swarfarm.com/', 'https://swarfarm.com/static/herders/images/monsters/');
-    } else { img.remove(); }
-  };
-  card.append(img);
-
-  const span = document.createElement('span');
-  span.className = 'name';
-  span.textContent = m.name;
-  card.append(span);
-
+  // 👉 rendu fusionné SW|COLLAB si applicable
+  const v = renderMergedVisual(m);
+  card.innerHTML = `
+    ${v.htmlIcon}
+    <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
+  `;
   return card;
 }
 
@@ -548,10 +477,12 @@ function renderStats(data){
     trio.forEach(name => {
       const m = findMonsterByName(name) || { name, icon: '' };
       const card = document.createElement('div'); card.className = 'pick def-pick';
-      const img = document.createElement('img'); img.src = fixIconUrl(m.icon || ''); img.alt = m.name; img.loading='lazy';
-      img.onerror = () => img.remove();
-      const label = document.createElement('div'); label.className = 'pname'; label.textContent = m.name;
-      card.append(img, label); trioDiv.append(card);
+      const v = renderMergedVisual(m);
+      card.innerHTML = `
+        ${v.htmlIcon}
+        <div class="pname">${esc(v.label)}</div>
+      `;
+      trioDiv.append(card);
     });
 
     const right = document.createElement('div'); right.style.display='flex'; right.style.gap='10px'; right.style.alignItems='center';
@@ -624,10 +555,11 @@ function renderHandled(data){
     ensureTrioArray(r.trio, r.key).forEach(name => {
       const m = findMonsterByName(name) || { name, icon: '' };
       const card = document.createElement('div'); card.className = 'pick def-pick';
-      const img = document.createElement('img'); img.src = fixIconUrl(m.icon || ''); img.alt = m.name; img.loading='lazy';
-      img.onerror = () => { img.remove(); };
-      const label = document.createElement('div'); label.className = 'pname'; label.textContent = m.name;
-      card.append(img, label);
+      const v = renderMergedVisual(m);
+      card.innerHTML = `
+        ${v.htmlIcon}
+        <div class="pname">${esc(v.label)}</div>
+      `;
       trio.appendChild(card);
     });
 
@@ -707,10 +639,8 @@ tabReport?.addEventListener('click', () => activateTab(tabReport, pageReport));
 
 tabStats?.addEventListener('click', async () => {
   activateTab(tabStats, pageStats);
-  // Rendu instantané depuis cache si présent
-  if (cache.stats.data) renderStats(cache.stats.data);
-  // Refresh silencieux
-  const fresh = await fetchStats();
+  if (cache.stats.data) renderStats(cache.stats.data); // Rendu instantané
+  const fresh = await fetchStats(); // Refresh silencieux
   renderStats(fresh);
 });
 
@@ -723,12 +653,13 @@ tabDone?.addEventListener('click', async () => {
 
 // Préfetch à l’ouverture de la page pour masquer la latence au premier clic
 document.addEventListener('DOMContentLoaded', () => {
-  // Préfetch silencieux
   fetchStats().then(d => { if (!pageStats.classList.contains('hidden')) renderStats(d); });
   fetchHandled().then(d => { if (!pageDone.classList.contains('hidden')) renderHandled(d); });
 });
 
-// ===== Offs Modal =====
+// =====================
+// Offs Modal
+// =====================
 async function openOffsModal(defKey){
   const container = document.createElement('div');
 
@@ -748,13 +679,13 @@ async function openOffsModal(defKey){
   addBtn.className = 'btn-plus';
   addBtn.type = 'button';
   addBtn.textContent = '+ Ajouter off';
-  addBtn.disabled = true;                  // ← désactivé pendant le load
+  addBtn.disabled = true;
   addBtn.onclick = () => { 
     addBtn.disabled = true; 
     openOffPicker(defKey, list, () => { addBtn.disabled = false; });
   };
 
-  // 👉 ouvrir la modale TOUT DE SUITE (pas après le fetch)
+  // Ouvrir la modale tout de suite
   openModal({ title: 'Offenses — ' + defKey, bodyNode: container, footerNode: addBtn });
 
   // Charger existants (hit cache si préfetch au hover)
@@ -762,11 +693,11 @@ async function openOffsModal(defKey){
     const res = await apiGetOffs(defKey);
     if (!res?.ok) throw new Error(res?.error || 'Erreur');
     renderOffsList(list, res.offs || []);
-    list.dataset.defKey = defKey;         // utile pour le bouton "Supprimer"
+    list.dataset.defKey = defKey; // utile pour "Supprimer"
   } catch (e) {
     list.textContent = 'Impossible de charger les offs.';
   } finally {
-    addBtn.disabled = false;              // ← réactive après chargement
+    addBtn.disabled = false;
   }
 }
 
@@ -785,9 +716,12 @@ function renderOffsList(target, offs){
     (o.trio || []).forEach(name => {
       const m = findMonsterByName(name) || { name, icon: '' };
       const wrap = document.createElement('div'); wrap.className = 'pick def-pick';
-      const img = document.createElement('img'); img.src = fixIconUrl(m.icon||''); img.alt = m.name; img.loading='lazy'; img.onerror=()=>img.remove();
-      const label = document.createElement('div'); label.className='pname'; label.textContent = m.name;
-      wrap.append(img,label); trio.appendChild(wrap);
+      const v = renderMergedVisual(m);
+      wrap.innerHTML = `
+        ${v.htmlIcon}
+        <div class="pname">${esc(v.label)}</div>
+      `;
+      trio.appendChild(wrap);
     });
     if (isAdmin()) {
       const del = document.createElement('button');
@@ -800,13 +734,11 @@ function renderOffsList(target, offs){
         const defKey = target.dataset.defKey || '';
         const trio = (o.trio || []).map(x => String(x||'').trim());
         if (trio.length !== 3) return;
-      
         try {
           del.disabled = true; del.textContent = 'Suppression…';
           const resp = await apiDelOff({ key: defKey, o1: trio[0], o2: trio[1], o3: trio[2] });
           if (!resp?.ok) { toast(resp?.error || 'Suppression impossible'); del.disabled=false; del.textContent='Supprimer'; return; }
-      
-          // Refresh liste
+          // Refresh liste (cache local invalidé)
           offsCache.delete(defKey);
           const res = await apiGetOffs(defKey, { force: true });
           if (res?.ok) renderOffsList(target, res.offs || []);
@@ -824,8 +756,9 @@ function renderOffsList(target, offs){
       row.style.justifyContent = 'center';
       row.append(trio, del);
       card.replaceChildren(row);
+    } else {
+      card.appendChild(trio);
     }
-    
     target.appendChild(card);
   });
 }
@@ -867,7 +800,6 @@ function openOffPicker(defKey, offsListEl, onClose){
 
   // Insertion sous la liste
   rootBody.appendChild(wrap);
-  // scroll to picker
   wrap.scrollIntoView({ behavior:'smooth', block:'start' });
 
   // Rendu picks
@@ -916,9 +848,11 @@ function openOffPicker(defKey, offsListEl, onClose){
       })
       .forEach(m => {
         const card = document.createElement('div'); card.className='card'; card.title=m.name;
-        const img = document.createElement('img'); img.src=fixIconUrl(m.icon||''); img.alt=m.name; img.loading='lazy'; img.onerror=()=>img.remove();
-        const span = document.createElement('span'); span.className='name'; span.textContent=m.name;
-        card.append(img,span);
+        const v = renderMergedVisual(m);
+        card.innerHTML = `
+          ${v.htmlIcon}
+          <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
+        `;
         card.onclick = () => {
           if (offPicks.find(p => p.id===m.id)) return;
           if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
@@ -934,7 +868,6 @@ function openOffPicker(defKey, offsListEl, onClose){
 
   // Actions
   let _offSubmitting = false;
-  
   validate.onclick = async () => {
     if (_offSubmitting) return;              // anti double clic
     if (offPicks.length !== 3) { toast('Sélectionne exactement 3 monstres.'); return; }
@@ -972,5 +905,3 @@ function openOffPicker(defKey, offsListEl, onClose){
     }
   };
 }
-
-
