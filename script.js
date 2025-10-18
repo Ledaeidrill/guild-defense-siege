@@ -59,29 +59,76 @@ function esc(s){
 }
 
 // =====================
-// COLLABS — rendu fusion SW | COLLAB (gauche/droite)
+// COLLABS — mapping explicite (source: Fandom "Collaborations")
 // =====================
 
-// Liste des noms *collab* (les autres seront considérés comme "version SW" potentielle)
-const COLLAB_NAMES = new Set([
-  // Street Fighter
-  'Ryu','Ken','M. Bison','Dhalsim','Chun-Li',
-  // Cookie Run
-  'GingerBrave','Pure Vanilla Cookie','Hollyberry Cookie','Espresso Cookie','Madeleine Cookie',
-  // Assassin’s Creed
-  'Altaïr','Ezio','Bayek','Kassandra','Eivor',
-  // The Witcher
-  'Geralt','Ciri','Yennefer','Triss',
-  // Jujutsu Kaisen
-  'Yuji Itadori','Satoru Gojo','Nobara Kugisaki','Megumi Fushiguro','Ryomen Sukuna',
-  // Demon Slayer
-  'Tanjiro Kamado','Gyomei Himejima','Nezuko Kamado','Zenitsu Agatsuma','Inosuke Hashibira',
-  // TEKKEN
-  'Jin','Paul Phoenix','Hwoarang','Nina Williams','Heihachi Mishima',
-]);
+// Map "collab -> version SW"
+const MAP_COLLAB_TO_SW = {
+  // Street Fighter V
+  'Ryu': 'Striker',
+  'Ken': 'Shadow Claw',
+  'M. Bison': 'Slayer',
+  'Dhalsim': 'Poison Master',
+  'Chun-Li': 'Blade Dancer',
 
-// Index (element|name) -> monstre
-const MONS_BY_KEY = (() => {
+  // Cookie Run
+  'GingerBrave': 'Lollipop Warrior',
+  'Pure Vanilla Cookie': 'Pudding Princess',
+  'Hollyberry Cookie': 'Macaron Guard',
+  'Espresso Cookie': 'Black Tea Bunny',
+  'Madeleine Cookie': 'Choco Knight',
+
+  // Assassin’s Creed
+  'Altaïr': 'Dual Blade',
+  'Ezio': 'Steel Commander',
+  'Bayek': 'Desert Warrior',
+  'Kassandra': 'Gladiatrix',
+  'Eivor': 'Mercenary Queen',
+
+  // The Witcher
+  'Geralt': 'Magic Order Guardian',
+  'Ciri': 'Magic Order Swordsinger',
+  'Yennefer': 'Magic Order Enchantress',
+  'Triss': 'Magic Order Elementalist',
+
+  // Jujutsu Kaisen
+  'Yuji Itadori': 'Exorcist Association Fighter',
+  'Satoru Gojo': 'Exorcist Association Resolver',
+  'Nobara Kugisaki': 'Exorcist Association Hunter',
+  'Megumi Fushiguro': 'Exorcist Association Conjurer',
+  // attention à l’orthographe/diacritiques
+  'Ryomen Sukuna': 'Exorcist Association Arbiter',
+  'Ryōmen Sukuna': 'Exorcist Association Arbiter',
+
+  // Demon Slayer
+  'Tanjiro Kamado': 'Azure Dragon Swordman',
+  'Gyomei Himejima': 'Black Tortoise Champion',
+  'Nezuko Kamado': 'Vermilion Bird Dancer',
+  'Zenitsu Agatsuma': 'Qilin Slasher',
+  'Inosuke Hashibira': 'White Tiger Blade Master',
+
+  // TEKKEN 8 → pas d’équivalent SW (DON’T MERGE)
+  // 'Jin Kazama': null, etc.
+};
+
+// Construire la map inverse "SW -> collab"
+const MAP_SW_TO_COLLAB = (() => {
+  const m = {};
+  for (const [collab, sw] of Object.entries(MAP_COLLAB_TO_SW)) {
+    if (!sw) continue;
+    if (!m[sw]) m[sw] = collab;
+  }
+  return m;
+})();
+
+// Normalisation “souple” (lowercase + diacritiques + ponctuation légère)
+const fold = (s) => (s || '')
+  .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  .replace(/[.\u2019']/g, '') // ex: "M. Bison", apostrophes
+  .trim().toLowerCase();
+
+// Index (element|name) -> monstre (déjà présent chez toi, on garde)
+const MONS_BY_KEY = MONS_BY_KEY || (() => {
   const m = new Map();
   for (const r of (window.MONSTERS || [])) {
     m.set((r.element + '|' + r.name).toLowerCase(), r);
@@ -89,40 +136,40 @@ const MONS_BY_KEY = (() => {
   return m;
 })();
 
-function findPairForMonster(mon){
-  // On ne "merge" que s'il existe un JUMEAU même élément avec un autre nom relié par alias.
-  // Hypothèse: ton monsters.js inclut déjà les alias croisés collab <-> SW.
-  const sameEl = (window.MONSTERS || []).filter(x => x.element === mon.element && x.id !== mon.id);
-  const norm = s => (s||'').toString().trim().toLowerCase();
+// Trouve le partenaire par élément via les maps (sans heuristique d’alias)
+function findMappedPair(mon) {
+  // 1) si 'mon' est collab → rechercher son nom SW
+  let partnerName = MAP_COLLAB_TO_SW[mon.name];
+  let collabName = mon.name;
+  let swName = partnerName;
 
-  const nameSet = new Set([norm(mon.name), ...(mon.aliases||[]).map(norm)]);
-  let partner = null;
-
-  for (const x of sameEl) {
-    const xNames = new Set([norm(x.name), ...(x.aliases||[]).map(norm)]);
-    // Intersection non vide -> ce sont des doublons de "famille" (collab vs sw)
-    const linked = [...xNames].some(n => nameSet.has(n));
-    if (linked) { partner = x; break; }
+  // 2) sinon si 'mon' est une version SW → retrouver son collab
+  if (!partnerName) {
+    const c = MAP_SW_TO_COLLAB[mon.name];
+    if (!c) return null; // pas de pair connu (TEKKEN etc.)
+    collabName = c;
+    swName = mon.name;
+    partnerName = c; // on met le nom collab pour lookup, mais on saura distinguer après
   }
+
+  // 3) lookup partenaire *même élément* ; si mon est collab → on cherche SW ; si mon est SW → on cherche collab
+  const keySW     = (mon.element + '|' + swName).toLowerCase();
+  const keyCollab = (mon.element + '|' + collabName).toLowerCase();
+
+  const isMonCollab = !!MAP_COLLAB_TO_SW[mon.name];
+  const partner = isMonCollab ? MONS_BY_KEY.get(keySW) : MONS_BY_KEY.get(keyCollab);
   if (!partner) return null;
 
-  // Décider qui est SW vs COLLAB (collab à droite)
-  const monIsCollab = COLLAB_NAMES.has(mon.name);
-  const partnerIsCollab = COLLAB_NAMES.has(partner.name);
+  // Ranger l’ordre d’affichage : SW à gauche, Collab à droite
+  const sw     = isMonCollab ? partner : mon;
+  const collab = isMonCollab ? mon     : partner;
 
-  let sw = mon, collab = partner;
-  if (monIsCollab && !partnerIsCollab) { sw = partner; collab = mon; }
-  else if (!monIsCollab && partnerIsCollab) { sw = mon; collab = partner; }
-  else {
-    // Cas ambigus (deux collabs ou deux non-collabs) -> on ne merge pas
-    return null;
-  }
   return { sw, collab };
 }
 
-// Sortie unifiée pour les composants d’affichage
+// Rend l’icône + libellé fusionnés
 function renderMergedVisual(mon){
-  const duo = findPairForMonster(mon);
+  const duo = findMappedPair(mon);
   if (!duo) {
     return {
       label: mon.name,
@@ -130,17 +177,14 @@ function renderMergedVisual(mon){
       htmlIcon: `<img src="${fixIconUrl(mon.icon||'')}" alt="${esc(mon.name)}" loading="lazy">`,
     };
   }
-  const swName = duo.sw.name;
-  const collabName = duo.collab.name.toUpperCase(); // collab en MAJ
-  const label = `${swName} / ${collabName}`;
-
+  const label = `${duo.sw.name} / ${duo.collab.name.toUpperCase()}`;
   return {
     label,
     title: label,
     htmlIcon: `
       <div class="duo-hsplit" aria-label="${esc(label)}" title="${esc(label)}">
-        <img class="left"  src="${fixIconUrl(duo.sw.icon||'')}"     alt="${esc(swName)}"     loading="lazy">
-        <img class="right" src="${fixIconUrl(duo.collab.icon||'')}" alt="${esc(collabName)}" loading="lazy">
+        <img class="left"  src="${fixIconUrl(duo.sw.icon||'')}"     alt="${esc(duo.sw.name)}"     loading="lazy">
+        <img class="right" src="${fixIconUrl(duo.collab.icon||'')}" alt="${esc(duo.collab.name)}" loading="lazy">
       </div>
     `,
   };
