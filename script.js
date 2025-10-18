@@ -59,6 +59,111 @@ function esc(s){
   return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 }
 
+// ===== Duo collab <-> version SW (fusion image + label) =====
+const PAIR_NAME_MAP = {
+  'Madeleine Cookie': 'Praline',
+  'Praline': 'Madeleine Cookie',
+  // Ajoute d'autres paires ici si besoin (nom collab <-> nom SW), on matche par élément
+};
+
+function findByNameAndElement(name, element){
+  const n = normalize(name), e = normalize(element);
+  return (window.MONSTERS||[]).find(m => normalize(m.name)===n && normalize(m.element)===e) || null;
+}
+
+function getDuoForMonster(m){
+  const partnerName = PAIR_NAME_MAP[m.name];
+  if (!partnerName) return null;
+  const partner = findByNameAndElement(partnerName, m.element);
+  if (!partner) return null;
+  return { a: m, b: partner, label: `${partner.name} / ${m.name}` };
+}
+
+// Si tu n'as pas exporté window.COLLAB_MAP depuis monsters.js, colle ici la même map que dans Recup_monsters.py
+const COLLAB = window.COLLAB_MAP || {
+  "Ryu": {en:"Striker", fr:"Striker"},
+  "Ken": {en:"Shadow Claw", fr:"Griffes de l'ombre"},
+  "M. Bison": {en:"Slayer", fr:"Slayer"},
+  "Dhalsim": {en:"Poison Master", fr:"Maître des poisons"},
+  "Chun-Li": {en:"Blade Dancer", fr:"Danseuse aux lames"},
+  "GingerBrave": {en:"Lollipop Warrior", fr:"Guerrier Sucette"},
+  "Pure Vanilla Cookie": {en:"Pudding Princess", fr:"Princesse Pudding"},
+  "Hollyberry Cookie": {en:"Macaron Guard", fr:"Garde Macaron"},
+  "Espresso Cookie": {en:"Black Tea Bunny", fr:"Dame Thé Noir"},
+  "Madeleine Cookie": {en:"Choco Knight", fr:"Guerrier Choco"},
+  "Altaïr": {en:"Dual Blade", fr:"Double Lame"},
+  "Ezio": {en:"Steel Commander", fr:"Commandeur d'acier"},
+  "Bayek": {en:"Desert Warrior", fr:"Guerrier du désert"},
+  "Kassandra": {en:"Gladiatrix", fr:"Gladiatrice"},
+  "Eivor": {en:"Mercenary Queen", fr:"Reine des mercenaires"},
+  "Geralt": {en:"Magic Order Guardian", fr:"Gardien de l'Ordre mage"},
+  "Ciri": {en:"Magic Order Swordsinger", fr:"Épéiste de l'Ordre mage"},
+  "Yennefer": {en:"Magic Order Enchantress", fr:"Enchanteresse de l'Ordre mage"},
+  "Triss": {en:"Magic Order Elementalist", fr:"Élémentaliste de l'Ordre mage"},
+  "Yuji Itadori": {en:"Exorcist Association Fighter", fr:"Combattant de l'Ordre exorciste"},
+  "Satoru Gojo": {en:"Exorcist Association Resolver", fr:"Résolveur de l'Ordre exorciste"},
+  "Nobara Kugisaki": {en:"Exorcist Association Hunter", fr:"Chasseur de l'Ordre exorciste"},
+  "Megumi Fushiguro": {en:"Exorcist Association Conjurer", fr:"Invocateur de l'Ordre exorciste"},
+  "Ryōmen Sukuna": {en:"Exorcist Association Arbiter", fr:"Juge de l'Ordre exorciste"},
+  "Tanjiro Kamado": {en:"Azure Dragon Swordman", fr:"Épéiste du Dragon azur"},
+  "Gyōmei Himejima": {en:"Black Tortoise Champion", fr:"Lancier de la Tortue Noire"},
+  "Nezuko Kamado": {en:"Vermilion Bird Dancer", fr:"Danseuse de l'Oiseau vermillon"},
+  "Zenitsu Agatsuma": {en:"Qilin Slasher", fr:"Spadassin du Qilin"},
+  "Inosuke Hashibira": {en:"White Tiger Blade Master", fr:"Guerrier du Tigre blanc"},
+  // Tekken: pas d’alternative SW
+};
+
+const MONS_BY_KEY = (() => {
+  const m = new Map();
+  for (const r of window.MONSTERS) {
+    m.set((r.element+"|"+r.name).toLowerCase(), r);
+  }
+  return m;
+})();
+
+function getAltPair(mon) {
+  // Si 'mon' est un collab, on cherche son équivalent SW ; si c'est un SW alt, on cherche le collab
+  const alt = COLLAB[mon.name];
+  let targetName = alt?.en || alt?.fr || null;
+
+  if (!targetName) {
+    // Peut-être que mon.name est le "nom SW", il faut retrouver la clé collab correspondante
+    for (const [collabName, v] of Object.entries(COLLAB)) {
+      if ([v.en, v.fr].filter(Boolean).some(n => n === mon.name)) {
+        targetName = collabName;
+        break;
+      }
+    }
+  }
+  if (!targetName) return null;
+
+  const pair = MONS_BY_KEY.get((mon.element+"|"+targetName).toLowerCase());
+  return pair ? { name: targetName, icon: pair.icon } : null;
+}
+
+// Renvoie un {label, htmlIcon} pour la carte
+function renderMergedVisual(mon) {
+  const pair = getAltPair(mon);
+  if (!pair) {
+    return {
+      label: mon.name,
+      title: mon.name,
+      htmlIcon: `<img src="${mon.icon}" alt="${mon.name}">`,
+    };
+  }
+  const label = `${pair.name} / ${mon.name}`;
+  return {
+    label,
+    title: label,
+    htmlIcon: `
+      <div class="duo" aria-label="${label}">
+        <img class="base" src="${mon.icon}" alt="${mon.name}">
+        <img class="top"  src="${pair.icon}" alt="${pair.name}">
+      </div>
+    `,
+  };
+}
+
 // ===== Modale helpers =====
 function openModal({ title, bodyNode, footerNode }) {
   const root = document.getElementById('modal-root');
