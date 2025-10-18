@@ -100,7 +100,7 @@ const MAP_COLLAB_TO_SW = {
   'Ryōmen Sukuna': 'Exorcist Association Arbiter',
 
   // Demon Slayer
-  'Tanjiro Kamado': 'Azure Dragon Swordman',
+  'Tanjiro Kamado': 'Azure Dragon Swordsman',
   'Gyomei Himejima': 'Black Tortoise Champion',
   'Nezuko Kamado': 'Vermilion Bird Dancer',
   'Zenitsu Agatsuma': 'Qilin Slasher',
@@ -124,10 +124,11 @@ const MAP_SW_TO_COLLAB = (() => {
 const nrm = (s) => (s||'').toString().trim().toLowerCase();
 
 // Résout *par élément* un monstre dont le nom ou les ALIASES matchent une des clés données
-function findByElementAndAnyName(element, candidates){
+function findByElementAndAnyName(element, candidates, excludeId){
   const want = new Set(candidates.map(nrm));
   const el = nrm(element);
   return (window.MONSTERS || []).find(x => {
+    if (excludeId && x.id === excludeId) return false; // ⬅️ évite self-merge
     if (nrm(x.element) !== el) return false;
     if (want.has(nrm(x.name))) return true;
     const aliases = (x.aliases || []).map(nrm);
@@ -141,7 +142,7 @@ function findMappedPair(mon) {
   if (MAP_COLLAB_TO_SW[mon.name]) {
     const swFamily = MAP_COLLAB_TO_SW[mon.name]; // ex: 'Slayer'
     // Dans ton dataset, le SW réel s’appelle par ex. 'Karnal' (Feu), mais il a un alias 'Slayer'
-    const swMon = findByElementAndAnyName(mon.element, [swFamily]);
+    const swMon = findByElementAndAnyName(mon.element, [swFamily], mon.id);
     if (!swMon) return null;
     return { sw: swMon, collab: mon };
   }
@@ -151,7 +152,7 @@ function findMappedPair(mon) {
   const aliases = new Set([nrm(mon.name), ...(mon.aliases||[]).map(nrm)]);
   for (const [swFamily, collabName] of Object.entries(MAP_SW_TO_COLLAB)) {
     if (aliases.has(nrm(swFamily))) {
-      const collabMon = findByElementAndAnyName(mon.element, [collabName]);
+      const collabMon = findByElementAndAnyName(mon.element, [collabName], mon.id);
       if (!collabMon) return null;
       return { sw: mon, collab: collabMon };
     }
@@ -159,6 +160,12 @@ function findMappedPair(mon) {
 
   // Sinon : pas de pair (TEKKEN ou monstre hors mapping)
   return null;
+}
+
+function shouldHideInGrid(mon){
+  const duo = findMappedPair(mon);
+  if (!duo) return false;            // pas de pair → on affiche
+  return mon.id === duo.sw.id;       // si c’est la version SW → on cache
 }
 
 // Rend l’icône + libellé fusionnés
@@ -315,12 +322,10 @@ function renderGrid() {
 
   (window.MONSTERS || [])
     .filter(m => matchesQuery(m, q))
-    .sort((a,b) => {
-      const er = elemRank(a.element) - elemRank(b.element);
-      return er !== 0 ? er : a.name.localeCompare(b.name,'en',{sensitivity:'base'});
-    })
+    .filter(m => !shouldHideInGrid(m)) // ⬅️ cache le doublon SW
+    .sort((a,b) => { /* ... */ })
     .forEach(m => frag.appendChild(makeCard(m)));
-
+  
   grid.appendChild(frag);
 }
 
