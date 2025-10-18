@@ -314,10 +314,6 @@ function makeCard(m){
   return card;
 }
 
-// Ordre des éléments (déjà présent chez toi)
-const ELEMENT_ORDER = ['Fire','Water','Wind','Light','Dark'];
-const elemRank = el => { const i = ELEMENT_ORDER.indexOf(el); return i===-1?999:i; };
-
 // Renvoie un "score d'ordre de sortie" (plus petit = plus ancien)
 function releaseKey(m){
   // Utilise release_ts si tu l’ajoutes côté Python, sinon com2us_id, sinon family_id, sinon id
