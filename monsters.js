@@ -255,14 +255,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 137,
-    "com2us_id": 10315,
+    "id": 1290,
+    "com2us_id": 10335,
     "family_id": 10300,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0001_4_0.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_4_1.png",
     "name": "Camaryn",
     "unawakened_name": "pixie",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "ténèbres",
       "dark",
@@ -345,6 +345,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 1760,
+    "com2us_id": 13235,
+    "family_id": 13200,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0070_3_4.png",
+    "name": "Chacha and Friends",
+    "unawakened_name": "howl chacha",
+    "second_awaken": true,
+    "aliases": [
+      "ténèbres",
+      "dark",
+      "howl chacha"
+    ]
+  },
+  {
     "id": 1671,
     "com2us_id": 24415,
     "family_id": 24400,
@@ -390,14 +405,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 954,
-    "com2us_id": 20815,
+    "id": 2254,
+    "com2us_id": 20835,
     "family_id": 20800,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0039_4_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0126_3_5.png",
     "name": "Crawler",
     "unawakened_name": "frankenstein",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "ténèbres",
       "dark",
@@ -903,14 +918,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 506,
-    "com2us_id": 15915,
+    "id": 1910,
+    "com2us_id": 15935,
     "family_id": 15900,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0023_4_3.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0083_3_5.png",
     "name": "Gina",
     "unawakened_name": "mystic witch",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "ténèbres",
       "dark",
@@ -933,14 +948,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 141,
-    "com2us_id": 10715,
+    "id": 1295,
+    "com2us_id": 10735,
     "family_id": 10700,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0002_4_3.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_4_2.png",
     "name": "Gorgo",
     "unawakened_name": "warbear",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1368,14 +1383,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 514,
-    "com2us_id": 15215,
+    "id": 1905,
+    "com2us_id": 15235,
     "family_id": 15200,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0021_4_0.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0082_3_5.png",
     "name": "Jubelle",
     "unawakened_name": "vagabond",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1383,14 +1398,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 518,
-    "com2us_id": 14015,
+    "id": 1327,
+    "com2us_id": 14035,
     "family_id": 14000,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0015_4_1.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0053_4_1.png",
     "name": "Jultan",
     "unawakened_name": "werewolf",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1398,14 +1413,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 490,
-    "com2us_id": 12015,
+    "id": 1821,
+    "com2us_id": 12035,
     "family_id": 12000,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0007_4_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0074_3_5.png",
     "name": "Jumaline",
     "unawakened_name": "high elemental",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1534,14 +1549,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 496,
-    "com2us_id": 11015,
+    "id": 1300,
+    "com2us_id": 11035,
     "family_id": 11000,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0003_4_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_4_3.png",
     "name": "Kro",
     "unawakened_name": "inugami",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1880,14 +1895,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 502,
-    "com2us_id": 15015,
+    "id": 1332,
+    "com2us_id": 15035,
     "family_id": 15000,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0018_4_2.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0053_4_2.png",
     "name": "Miho",
     "unawakened_name": "martial cat",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2315,14 +2330,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 484,
-    "com2us_id": 12115,
+    "id": 2543,
+    "com2us_id": 12135,
     "family_id": 12100,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0009_4_2.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0160_3_5.png",
     "name": "Seren",
     "unawakened_name": "harpu",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2390,14 +2405,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 129,
-    "com2us_id": 10115,
+    "id": 1285,
+    "com2us_id": 10135,
     "family_id": 10100,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0000_4_1.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_4_0.png",
     "name": "Sorin",
     "unawakened_name": "fairy",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2451,14 +2466,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 482,
-    "com2us_id": 16015,
+    "id": 1765,
+    "com2us_id": 16035,
     "family_id": 16000,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0018_4_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0071_3_4.png",
     "name": "Thrain",
     "unawakened_name": "grim reaper",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2572,14 +2587,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 480,
-    "com2us_id": 11515,
+    "id": 1581,
+    "com2us_id": 11535,
     "family_id": 11500,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0005_4_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0055_0_4.png",
     "name": "Varus",
     "unawakened_name": "griffon",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2860,14 +2875,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 498,
-    "com2us_id": 16515,
+    "id": 2249,
+    "com2us_id": 16535,
     "family_id": 16500,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0025_4_2.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0125_3_5.png",
     "name": "Zinc",
     "unawakened_name": "living armor",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "ténèbres",
       "dark",
@@ -3220,14 +3235,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 946,
-    "com2us_id": 20812,
+    "id": 2251,
+    "com2us_id": 20832,
     "family_id": 20800,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0039_1_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0126_3_2.png",
     "name": "Bulldozer",
     "unawakened_name": "frankenstein",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "feu",
       "fire",
@@ -3460,14 +3475,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 23,
-    "com2us_id": 12112,
+    "id": 2540,
+    "com2us_id": 12132,
     "family_id": 12100,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0009_1_2.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0160_3_2.png",
     "name": "Colleen",
     "unawakened_name": "harpu",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "feu",
       "fire",
@@ -3777,14 +3792,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 226,
-    "com2us_id": 14012,
+    "id": 1324,
+    "com2us_id": 14032,
     "family_id": 14000,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0015_1_1.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0053_1_1.png",
     "name": "Garoche",
     "unawakened_name": "werewolf",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "feu",
       "fire",
@@ -4063,14 +4078,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 202,
-    "com2us_id": 16512,
+    "id": 2246,
+    "com2us_id": 16532,
     "family_id": 16500,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0025_1_2.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0125_3_2.png",
     "name": "Iron",
     "unawakened_name": "living armor",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "feu",
       "fire",
@@ -4078,14 +4093,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 184,
-    "com2us_id": 10112,
+    "id": 1282,
+    "com2us_id": 10132,
     "family_id": 10100,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0000_1_1.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_1_0.png",
     "name": "Iselia",
     "unawakened_name": "fairy",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "feu",
       "fire",
@@ -4197,14 +4212,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 194,
-    "com2us_id": 12012,
+    "id": 1818,
+    "com2us_id": 12032,
     "family_id": 12000,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0007_1_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0074_3_2.png",
     "name": "Kahli",
     "unawakened_name": "high elemental",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "feu",
       "fire",
@@ -4212,14 +4227,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 222,
-    "com2us_id": 15212,
+    "id": 1902,
+    "com2us_id": 15232,
     "family_id": 15200,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0021_1_0.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0082_3_2.png",
     "name": "Kai'en",
     "unawakened_name": "vagabond kaien",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "feu",
       "fire",
@@ -4422,6 +4437,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 1757,
+    "com2us_id": 13232,
+    "family_id": 13200,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0070_3_1.png",
+    "name": "Lala and Friends",
+    "unawakened_name": "howl lala",
+    "second_awaken": true,
+    "aliases": [
+      "feu",
+      "fire",
+      "howl lala"
+    ]
+  },
+  {
     "id": 12,
     "com2us_id": 12812,
     "family_id": 12800,
@@ -4618,14 +4648,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 208,
-    "com2us_id": 15012,
+    "id": 1329,
+    "com2us_id": 15032,
     "family_id": 15000,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0018_1_2.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0053_1_2.png",
     "name": "Mei",
     "unawakened_name": "martial cat",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "feu",
       "fire",
@@ -4979,14 +5009,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 200,
-    "com2us_id": 11012,
+    "id": 1297,
+    "com2us_id": 11032,
     "family_id": 11000,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0003_1_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_1_3.png",
     "name": "Raoq",
     "unawakened_name": "inugami",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "feu",
       "fire",
@@ -4994,14 +5024,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 212,
-    "com2us_id": 15912,
+    "id": 1907,
+    "com2us_id": 15932,
     "family_id": 15900,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0023_1_3.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0083_3_2.png",
     "name": "Rebecca",
     "unawakened_name": "mystic witch",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "feu",
       "fire",
@@ -5098,14 +5128,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 190,
-    "com2us_id": 16012,
+    "id": 1762,
+    "com2us_id": 16032,
     "family_id": 16000,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0018_1_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0071_3_1.png",
     "name": "Sath",
     "unawakened_name": "grim reaper",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "feu",
       "fire",
@@ -5264,14 +5294,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 188,
-    "com2us_id": 11512,
+    "id": 1578,
+    "com2us_id": 11532,
     "family_id": 11500,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0005_1_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0055_0_1.png",
     "name": "Spectra",
     "unawakened_name": "griffon",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "feu",
       "fire",
@@ -5355,14 +5385,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 31,
-    "com2us_id": 10312,
+    "id": 1287,
+    "com2us_id": 10332,
     "family_id": 10300,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0001_1_0.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_1_1.png",
     "name": "Tatu",
     "unawakened_name": "pixie",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "feu",
       "fire",
@@ -5476,14 +5506,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 33,
-    "com2us_id": 10712,
+    "id": 1292,
+    "com2us_id": 10732,
     "family_id": 10700,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0002_1_3.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_1_2.png",
     "name": "Ursha",
     "unawakened_name": "warbear",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "feu",
       "fire",
@@ -6036,14 +6066,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 438,
-    "com2us_id": 11014,
+    "id": 1299,
+    "com2us_id": 11034,
     "family_id": 11000,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0003_3_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_3_3.png",
     "name": "Belladeon",
     "unawakened_name": "inugami",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "lumière",
       "light",
@@ -6141,14 +6171,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 156,
-    "com2us_id": 10314,
+    "id": 1289,
+    "com2us_id": 10334,
     "family_id": 10300,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0001_3_0.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_3_1.png",
     "name": "Cheryl",
     "unawakened_name": "pixie",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "lumière",
       "light",
@@ -6291,14 +6321,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 454,
-    "com2us_id": 15214,
+    "id": 1904,
+    "com2us_id": 15234,
     "family_id": 15200,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0021_3_0.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0082_3_4.png",
     "name": "Darion",
     "unawakened_name": "vagabond",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "lumière",
       "light",
@@ -6410,14 +6440,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 952,
-    "com2us_id": 20814,
+    "id": 2253,
+    "com2us_id": 20834,
     "family_id": 20800,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0039_3_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0126_3_4.png",
     "name": "Driller",
     "unawakened_name": "frankenstein",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "lumière",
       "light",
@@ -6606,14 +6636,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 458,
-    "com2us_id": 14014,
+    "id": 1326,
+    "com2us_id": 14034,
     "family_id": 14000,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0015_3_1.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0053_3_1.png",
     "name": "Eshir",
     "unawakened_name": "werewolf",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "lumière",
       "light",
@@ -7435,14 +7465,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 448,
-    "com2us_id": 15914,
+    "id": 1909,
+    "com2us_id": 15934,
     "family_id": 15900,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0023_3_3.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0083_3_4.png",
     "name": "Linda",
     "unawakened_name": "mystic witch",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "lumière",
       "light",
@@ -7555,14 +7585,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 456,
-    "com2us_id": 10714,
+    "id": 1294,
+    "com2us_id": 10734,
     "family_id": 10700,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0002_3_3.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_3_2.png",
     "name": "Lusha",
     "unawakened_name": "warbear",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "lumière",
       "light",
@@ -7796,14 +7826,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 416,
-    "com2us_id": 10114,
+    "id": 1284,
+    "com2us_id": 10134,
     "family_id": 10100,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0000_3_1.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_3_0.png",
     "name": "Neal",
     "unawakened_name": "fairy",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "lumière",
       "light",
@@ -7961,14 +7991,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 426,
-    "com2us_id": 16014,
+    "id": 1764,
+    "com2us_id": 16034,
     "family_id": 16000,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0018_3_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0071_3_3.png",
     "name": "Prom",
     "unawakened_name": "grim reaper",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "lumière",
       "light",
@@ -8142,14 +8172,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 424,
-    "com2us_id": 11514,
+    "id": 1580,
+    "com2us_id": 11534,
     "family_id": 11500,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0005_3_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0055_0_3.png",
     "name": "Shamann",
     "unawakened_name": "griffon",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "lumière",
       "light",
@@ -8217,14 +8247,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 432,
-    "com2us_id": 12014,
+    "id": 1820,
+    "com2us_id": 12034,
     "family_id": 12000,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0007_3_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0074_3_4.png",
     "name": "Shren",
     "unawakened_name": "high elemental",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "lumière",
       "light",
@@ -8262,14 +8292,29 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 428,
-    "com2us_id": 12114,
+    "id": 1759,
+    "com2us_id": 13234,
+    "family_id": 13200,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0070_3_3.png",
+    "name": "Shushu and Friends",
+    "unawakened_name": "howl shushu",
+    "second_awaken": true,
+    "aliases": [
+      "lumière",
+      "light",
+      "howl shushu"
+    ]
+  },
+  {
+    "id": 2542,
+    "com2us_id": 12134,
     "family_id": 12100,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0009_3_2.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0160_3_4.png",
     "name": "Sia",
     "unawakened_name": "harpu",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "lumière",
       "light",
@@ -8292,14 +8337,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 440,
-    "com2us_id": 16514,
+    "id": 2248,
+    "com2us_id": 16534,
     "family_id": 16500,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0025_3_2.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0125_3_4.png",
     "name": "Silver",
     "unawakened_name": "living armor",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "lumière",
       "light",
@@ -8549,14 +8594,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 444,
-    "com2us_id": 15014,
+    "id": 1331,
+    "com2us_id": 15034,
     "family_id": 15000,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0018_3_2.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0053_3_2.png",
     "name": "Xiao Ling",
     "unawakened_name": "martial cat",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "lumière",
       "light",
@@ -8732,14 +8777,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 70,
-    "com2us_id": 15211,
+    "id": 1901,
+    "com2us_id": 15231,
     "family_id": 15200,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0021_0_0.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0082_3_1.png",
     "name": "Allen",
     "unawakened_name": "vagabond",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "eau",
       "water",
@@ -9137,14 +9182,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 346,
-    "com2us_id": 10711,
+    "id": 1291,
+    "com2us_id": 10731,
     "family_id": 10700,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0002_0_3.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_0_2.png",
     "name": "Dagora",
     "unawakened_name": "warbear",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "eau",
       "water",
@@ -9197,14 +9242,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 322,
-    "com2us_id": 12011,
+    "id": 1817,
+    "com2us_id": 12031,
     "family_id": 12000,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0007_0_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0074_3_1.png",
     "name": "Ellena",
     "unawakened_name": "high elemental",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "eau",
       "water",
@@ -9227,14 +9272,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 312,
-    "com2us_id": 10111,
+    "id": 1281,
+    "com2us_id": 10131,
     "family_id": 10100,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0000_0_1.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_0_0.png",
     "name": "Elucia",
     "unawakened_name": "fairy",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "eau",
       "water",
@@ -9515,14 +9560,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 318,
-    "com2us_id": 16011,
+    "id": 1761,
+    "com2us_id": 16031,
     "family_id": 16000,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0018_0_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0071_3_0.png",
     "name": "Hemos",
     "unawakened_name": "grim reaper",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "eau",
       "water",
@@ -9605,14 +9650,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 328,
-    "com2us_id": 11011,
+    "id": 1296,
+    "com2us_id": 11031,
     "family_id": 11000,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0003_0_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_0_3.png",
     "name": "Icaru",
     "unawakened_name": "inugami",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "eau",
       "water",
@@ -9755,14 +9800,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 66,
-    "com2us_id": 10311,
+    "id": 1286,
+    "com2us_id": 10331,
     "family_id": 10300,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0001_0_0.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_0_1.png",
     "name": "Kacey",
     "unawakened_name": "pixie",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "eau",
       "water",
@@ -9770,14 +9815,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 316,
-    "com2us_id": 11511,
+    "id": 1577,
+    "com2us_id": 11531,
     "family_id": 11500,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0005_0_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0055_0_0.png",
     "name": "Kahn",
     "unawakened_name": "griffon",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "eau",
       "water",
@@ -10071,6 +10116,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 1756,
+    "com2us_id": 13231,
+    "family_id": 13200,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0070_3_0.png",
+    "name": "Lulu and Friends",
+    "unawakened_name": "howl lulu",
+    "second_awaken": true,
+    "aliases": [
+      "eau",
+      "water",
+      "howl lulu"
+    ]
+  },
+  {
     "id": 2448,
     "com2us_id": 29911,
     "family_id": 29900,
@@ -10191,14 +10251,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 340,
-    "com2us_id": 15911,
+    "id": 1906,
+    "com2us_id": 15931,
     "family_id": 15900,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0023_0_3.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0083_3_1.png",
     "name": "Megan",
     "unawakened_name": "mystic witch",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "eau",
       "water",
@@ -10267,14 +10327,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 336,
-    "com2us_id": 15011,
+    "id": 1328,
+    "com2us_id": 15031,
     "family_id": 15000,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0018_0_2.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0053_0_2.png",
     "name": "Mina",
     "unawakened_name": "martial cat",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "eau",
       "water",
@@ -10388,14 +10448,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 330,
-    "com2us_id": 16511,
+    "id": 2245,
+    "com2us_id": 16531,
     "family_id": 16500,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0025_0_2.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0125_3_1.png",
     "name": "Nickel",
     "unawakened_name": "living armor",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "eau",
       "water",
@@ -10928,14 +10988,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 58,
-    "com2us_id": 12111,
+    "id": 2539,
+    "com2us_id": 12131,
     "family_id": 12100,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0009_0_2.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0160_3_1.png",
     "name": "Sisroo",
     "unawakened_name": "harpu",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "eau",
       "water",
@@ -11229,14 +11289,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 948,
-    "com2us_id": 20811,
+    "id": 2250,
+    "com2us_id": 20831,
     "family_id": 20800,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0039_0_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0126_3_1.png",
     "name": "Tractor",
     "unawakened_name": "frankenstein",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "eau",
       "water",
@@ -11320,14 +11380,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 348,
-    "com2us_id": 14011,
+    "id": 1323,
+    "com2us_id": 14031,
     "family_id": 14000,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0015_0_1.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0053_0_1.png",
     "name": "Vigor",
     "unawakened_name": "werewolf",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "eau",
       "water",
@@ -11503,14 +11563,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 93,
-    "com2us_id": 10113,
+    "id": 1283,
+    "com2us_id": 10133,
     "family_id": 10100,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0000_2_1.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_2_0.png",
     "name": "Aeilene",
     "unawakened_name": "fairy",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "vent",
       "wind",
@@ -11683,14 +11743,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 368,
-    "com2us_id": 11513,
+    "id": 1579,
+    "com2us_id": 11533,
     "family_id": 11500,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0005_2_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0055_0_2.png",
     "name": "Bernard",
     "unawakened_name": "griffon",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "vent",
       "wind",
@@ -11863,6 +11923,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 1758,
+    "com2us_id": 13233,
+    "family_id": 13200,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0070_3_2.png",
+    "name": "Chichi and Friends",
+    "unawakened_name": "howl chichi",
+    "second_awaken": true,
+    "aliases": [
+      "vent",
+      "wind",
+      "howl chichi"
+    ]
+  },
+  {
     "id": 1276,
     "com2us_id": 22913,
     "family_id": 22900,
@@ -11923,14 +11998,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 382,
-    "com2us_id": 16513,
+    "id": 2247,
+    "com2us_id": 16533,
     "family_id": 16500,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0025_2_2.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0125_3_3.png",
     "name": "Copper",
     "unawakened_name": "living armor",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "vent",
       "wind",
@@ -11953,14 +12028,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 950,
-    "com2us_id": 20813,
+    "id": 2252,
+    "com2us_id": 20833,
     "family_id": 20800,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0039_2_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0126_3_3.png",
     "name": "Crane",
     "unawakened_name": "frankenstein",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "vent",
       "wind",
@@ -12541,14 +12616,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 370,
-    "com2us_id": 16013,
+    "id": 1763,
+    "com2us_id": 16033,
     "family_id": 16000,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0018_2_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0071_3_2.png",
     "name": "Hiva",
     "unawakened_name": "grim reaper",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "vent",
       "wind",
@@ -13128,14 +13203,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 374,
-    "com2us_id": 12013,
+    "id": 1819,
+    "com2us_id": 12033,
     "family_id": 12000,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0007_2_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0074_3_3.png",
     "name": "Moria",
     "unawakened_name": "high elemental",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "vent",
       "wind",
@@ -13173,14 +13248,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 388,
-    "com2us_id": 15013,
+    "id": 1330,
+    "com2us_id": 15033,
     "family_id": 15000,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0018_2_2.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0053_2_2.png",
     "name": "Naomi",
     "unawakened_name": "martial cat",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "vent",
       "wind",
@@ -13519,14 +13594,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 112,
-    "com2us_id": 10713,
+    "id": 1293,
+    "com2us_id": 10733,
     "family_id": 10700,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0002_2_3.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_2_2.png",
     "name": "Ramagos",
     "unawakened_name": "warbear",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "vent",
       "wind",
@@ -13534,14 +13609,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 380,
-    "com2us_id": 11013,
+    "id": 1298,
+    "com2us_id": 11033,
     "family_id": 11000,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0003_2_4.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_2_3.png",
     "name": "Ramahan",
     "unawakened_name": "inugami",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "vent",
       "wind",
@@ -13624,14 +13699,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 110,
-    "com2us_id": 15213,
+    "id": 1903,
+    "com2us_id": 15233,
     "family_id": 15200,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0021_2_0.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0082_3_3.png",
     "name": "Roid",
     "unawakened_name": "vagabond",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "vent",
       "wind",
@@ -13729,14 +13804,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 98,
-    "com2us_id": 12113,
+    "id": 2541,
+    "com2us_id": 12133,
     "family_id": 12100,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0009_2_2.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0160_3_3.png",
     "name": "Seal",
     "unawakened_name": "harpu",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "vent",
       "wind",
@@ -13789,14 +13864,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 398,
-    "com2us_id": 14013,
+    "id": 1325,
+    "com2us_id": 14033,
     "family_id": 14000,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0015_2_1.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0053_2_1.png",
     "name": "Shakan",
     "unawakened_name": "werewolf",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "vent",
       "wind",
@@ -13804,14 +13879,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 106,
-    "com2us_id": 10313,
+    "id": 1288,
+    "com2us_id": 10333,
     "family_id": 10300,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0001_2_0.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0051_2_1.png",
     "name": "Shannon",
     "unawakened_name": "pixie",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "vent",
       "wind",
@@ -13834,14 +13909,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 392,
-    "com2us_id": 15913,
+    "id": 1908,
+    "com2us_id": 15933,
     "family_id": 15900,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0023_2_3.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0083_3_3.png",
     "name": "Silia",
     "unawakened_name": "mystic witch",
-    "second_awaken": false,
+    "second_awaken": true,
     "aliases": [
       "vent",
       "wind",
