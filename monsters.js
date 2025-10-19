@@ -8,6 +8,7 @@ window.MONSTERS = [
     "name": "Actaeon",
     "unawakened_name": "beetle guardian",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -23,6 +24,7 @@ window.MONSTERS = [
     "name": "Alexandra",
     "unawakened_name": "unicorn",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -38,6 +40,7 @@ window.MONSTERS = [
     "name": "Amduat",
     "unawakened_name": "horus",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -53,6 +56,7 @@ window.MONSTERS = [
     "name": "Asbolus",
     "unawakened_name": "centaur knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -68,6 +72,7 @@ window.MONSTERS = [
     "name": "Aschubel",
     "unawakened_name": "sylph",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -83,6 +88,7 @@ window.MONSTERS = [
     "name": "Azure Dragon Swordsman",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark"
@@ -97,6 +103,7 @@ window.MONSTERS = [
     "name": "Basalt",
     "unawakened_name": "battle mammoth",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -112,6 +119,7 @@ window.MONSTERS = [
     "name": "Bayek",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -128,6 +136,7 @@ window.MONSTERS = [
     "name": "Beelzebub",
     "unawakened_name": "demon",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -143,6 +152,7 @@ window.MONSTERS = [
     "name": "Belita",
     "unawakened_name": "chakram dancer",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -158,6 +168,7 @@ window.MONSTERS = [
     "name": "Bella",
     "unawakened_name": "cannon girl",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -173,6 +184,7 @@ window.MONSTERS = [
     "name": "Bering",
     "unawakened_name": "kobold bomber",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -188,6 +200,7 @@ window.MONSTERS = [
     "name": "Bethony",
     "unawakened_name": "magical archer",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -203,6 +216,7 @@ window.MONSTERS = [
     "name": "Betta",
     "unawakened_name": "mermaid",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -218,6 +232,7 @@ window.MONSTERS = [
     "name": "Bombay",
     "unawakened_name": "hypnomeow",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -233,6 +248,7 @@ window.MONSTERS = [
     "name": "Cadiz",
     "unawakened_name": "vampire",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -248,6 +264,7 @@ window.MONSTERS = [
     "name": "Calicus",
     "unawakened_name": "charger shark",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -263,6 +280,7 @@ window.MONSTERS = [
     "name": "Camaryn",
     "unawakened_name": "pixie",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "ténèbres",
       "dark",
@@ -278,6 +296,7 @@ window.MONSTERS = [
     "name": "Camules",
     "unawakened_name": "elemental",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -293,6 +312,7 @@ window.MONSTERS = [
     "name": "Cassie",
     "unawakened_name": "cow girl",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -308,6 +328,7 @@ window.MONSTERS = [
     "name": "Cayde",
     "unawakened_name": "poison master",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -323,6 +344,7 @@ window.MONSTERS = [
     "name": "Celestara",
     "unawakened_name": "magic order elementalist",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -338,6 +360,7 @@ window.MONSTERS = [
     "name": "Chacha",
     "unawakened_name": "howl",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "ténèbres",
       "dark",
@@ -353,6 +376,7 @@ window.MONSTERS = [
     "name": "Chacha and Friends",
     "unawakened_name": "howl chacha",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "ténèbres",
       "dark",
@@ -368,6 +392,7 @@ window.MONSTERS = [
     "name": "CHUN-LI",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark"
@@ -382,6 +407,7 @@ window.MONSTERS = [
     "name": "Ciri",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -398,6 +424,7 @@ window.MONSTERS = [
     "name": "Craka",
     "unawakened_name": "hell lady",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -413,6 +440,7 @@ window.MONSTERS = [
     "name": "Crawler",
     "unawakened_name": "frankenstein",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -428,6 +456,7 @@ window.MONSTERS = [
     "name": "Damee and Sapsaree",
     "unawakened_name": "dokkaebi princess and sapsaree",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -443,6 +472,7 @@ window.MONSTERS = [
     "name": "Deborah",
     "unawakened_name": "rune blacksmith",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -458,6 +488,7 @@ window.MONSTERS = [
     "name": "Decamaron",
     "unawakened_name": "salamander",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "ténèbres",
       "dark",
@@ -473,6 +504,7 @@ window.MONSTERS = [
     "name": "Destiny",
     "unawakened_name": "battle angel",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -488,6 +520,7 @@ window.MONSTERS = [
     "name": "Devaraja",
     "unawakened_name": "indra",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -503,6 +536,7 @@ window.MONSTERS = [
     "name": "Devinodon",
     "unawakened_name": "lizardman",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -518,6 +552,7 @@ window.MONSTERS = [
     "name": "DHALSIM",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark"
@@ -532,6 +567,7 @@ window.MONSTERS = [
     "name": "Dias",
     "unawakened_name": "death knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -547,6 +583,7 @@ window.MONSTERS = [
     "name": "Douman",
     "unawakened_name": "onmyouji",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -562,6 +599,7 @@ window.MONSTERS = [
     "name": "Dragunov",
     "unawakened_name": "sniper mki",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -577,6 +615,7 @@ window.MONSTERS = [
     "name": "Drakar",
     "unawakened_name": "drakan warrior",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -592,6 +631,7 @@ window.MONSTERS = [
     "name": "Drogan",
     "unawakened_name": "inferno",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -607,6 +647,7 @@ window.MONSTERS = [
     "name": "Dusky",
     "unawakened_name": "jack o lantern",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -622,6 +663,7 @@ window.MONSTERS = [
     "name": "Eirgar",
     "unawakened_name": "vampire lord",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -637,6 +679,7 @@ window.MONSTERS = [
     "name": "Eivor",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -653,6 +696,7 @@ window.MONSTERS = [
     "name": "Elena",
     "unawakened_name": "pudding princess",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -668,6 +712,7 @@ window.MONSTERS = [
     "name": "Elise",
     "unawakened_name": "arcane weapon",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -683,6 +728,7 @@ window.MONSTERS = [
     "name": "Espresso Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -699,6 +745,7 @@ window.MONSTERS = [
     "name": "Evan",
     "unawakened_name": "steel commander",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -714,6 +761,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Arbiter",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -729,6 +777,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Conjurer",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -744,6 +793,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Fighter",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -759,6 +809,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Hunter",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -774,6 +825,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Resolver",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -789,6 +841,7 @@ window.MONSTERS = [
     "name": "Ezio",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -805,6 +858,7 @@ window.MONSTERS = [
     "name": "Fei",
     "unawakened_name": "kung fu girl",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -820,6 +874,7 @@ window.MONSTERS = [
     "name": "Fermion",
     "unawakened_name": "archangel",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -835,6 +890,7 @@ window.MONSTERS = [
     "name": "Fiona",
     "unawakened_name": "magic order swordsinger",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -850,6 +906,7 @@ window.MONSTERS = [
     "name": "Frigate",
     "unawakened_name": "pirate captain",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -865,6 +922,7 @@ window.MONSTERS = [
     "name": "Gapsoo",
     "unawakened_name": "dokkaebi lord",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -880,6 +938,7 @@ window.MONSTERS = [
     "name": "Garok",
     "unawakened_name": "imp",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "ténèbres",
       "dark",
@@ -895,6 +954,7 @@ window.MONSTERS = [
     "name": "Geralt",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -911,6 +971,7 @@ window.MONSTERS = [
     "name": "Giana",
     "unawakened_name": "oracle",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -926,6 +987,7 @@ window.MONSTERS = [
     "name": "Gina",
     "unawakened_name": "mystic witch",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -941,6 +1003,7 @@ window.MONSTERS = [
     "name": "Giselle",
     "unawakened_name": "macaron guard",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -956,6 +1019,7 @@ window.MONSTERS = [
     "name": "Gorgo",
     "unawakened_name": "warbear",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "ténèbres",
       "dark",
@@ -971,6 +1035,7 @@ window.MONSTERS = [
     "name": "Grego",
     "unawakened_name": "lich",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -986,6 +1051,7 @@ window.MONSTERS = [
     "name": "Grogen",
     "unawakened_name": "dragon",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1001,6 +1067,7 @@ window.MONSTERS = [
     "name": "Guillaume",
     "unawakened_name": "phantom thief",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1016,6 +1083,7 @@ window.MONSTERS = [
     "name": "Gurkha",
     "unawakened_name": "slayer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1031,6 +1099,7 @@ window.MONSTERS = [
     "name": "Haken",
     "unawakened_name": "bearman",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1046,6 +1115,7 @@ window.MONSTERS = [
     "name": "Han",
     "unawakened_name": "ninja",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1061,6 +1131,7 @@ window.MONSTERS = [
     "name": "Hanra",
     "unawakened_name": "beast hunter",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1076,6 +1147,7 @@ window.MONSTERS = [
     "name": "Havana",
     "unawakened_name": "low elemental",
     "second_awaken": false,
+    "natural_stars": 1,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1091,6 +1163,7 @@ window.MONSTERS = [
     "name": "Hellea",
     "unawakened_name": "harpy",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1106,6 +1179,7 @@ window.MONSTERS = [
     "name": "Herteit",
     "unawakened_name": "lightning emperor",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1121,6 +1195,7 @@ window.MONSTERS = [
     "name": "Hilda",
     "unawakened_name": "magic order enchantress",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1136,6 +1211,7 @@ window.MONSTERS = [
     "name": "Hollyberry Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1152,6 +1228,7 @@ window.MONSTERS = [
     "name": "Homunculus(Support)",
     "unawakened_name": "homunculussupport homunculussupport",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1167,6 +1244,7 @@ window.MONSTERS = [
     "name": "Hrungnir",
     "unawakened_name": "barbaric king",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1182,6 +1260,7 @@ window.MONSTERS = [
     "name": "Hwoarang",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark"
@@ -1196,6 +1275,7 @@ window.MONSTERS = [
     "name": "Hyanes",
     "unawakened_name": "dryad",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1211,6 +1291,7 @@ window.MONSTERS = [
     "name": "Icares",
     "unawakened_name": "sylphid",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1226,6 +1307,7 @@ window.MONSTERS = [
     "name": "Inosuke Hashibira",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1242,6 +1324,7 @@ window.MONSTERS = [
     "name": "Isabelle",
     "unawakened_name": "assassin",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1257,6 +1340,7 @@ window.MONSTERS = [
     "name": "Isael",
     "unawakened_name": "succubus",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1272,6 +1356,7 @@ window.MONSTERS = [
     "name": "Isillen",
     "unawakened_name": "elven ranger",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1287,6 +1372,7 @@ window.MONSTERS = [
     "name": "Jaara",
     "unawakened_name": "phoenix",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1302,6 +1388,7 @@ window.MONSTERS = [
     "name": "Jackie",
     "unawakened_name": "martial artist",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1317,6 +1404,7 @@ window.MONSTERS = [
     "name": "Jackson",
     "unawakened_name": "sky surfer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1332,6 +1420,7 @@ window.MONSTERS = [
     "name": "Jaduel and Aepiah",
     "unawakened_name": "twin angels",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1347,6 +1436,7 @@ window.MONSTERS = [
     "name": "Jamie",
     "unawakened_name": "bounty hunter",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1362,6 +1452,7 @@ window.MONSTERS = [
     "name": "Janssen",
     "unawakened_name": "viking",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1377,6 +1468,7 @@ window.MONSTERS = [
     "name": "Jin Kazama",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark"
@@ -1391,6 +1483,7 @@ window.MONSTERS = [
     "name": "Jubelle",
     "unawakened_name": "vagabond",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1406,6 +1499,7 @@ window.MONSTERS = [
     "name": "Jultan",
     "unawakened_name": "werewolf",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1421,6 +1515,7 @@ window.MONSTERS = [
     "name": "Jumaline",
     "unawakened_name": "high elemental",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1436,6 +1531,7 @@ window.MONSTERS = [
     "name": "Kamatau",
     "unawakened_name": "minotauros",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1451,6 +1547,7 @@ window.MONSTERS = [
     "name": "Kamiya",
     "unawakened_name": "nine tailed fox",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1466,6 +1563,7 @@ window.MONSTERS = [
     "name": "Karakum",
     "unawakened_name": "mummy",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1481,6 +1579,7 @@ window.MONSTERS = [
     "name": "Karl",
     "unawakened_name": "neostone fighter",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1496,6 +1595,7 @@ window.MONSTERS = [
     "name": "Kassandra",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1512,6 +1612,7 @@ window.MONSTERS = [
     "name": "Kiara",
     "unawakened_name": "gladiatrix",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1527,6 +1628,7 @@ window.MONSTERS = [
     "name": "Kiki",
     "unawakened_name": "mage",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1542,6 +1644,7 @@ window.MONSTERS = [
     "name": "Korona",
     "unawakened_name": "brownie magician",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1557,6 +1660,7 @@ window.MONSTERS = [
     "name": "Kro",
     "unawakened_name": "inugami",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1572,6 +1676,7 @@ window.MONSTERS = [
     "name": "Kroa",
     "unawakened_name": "harg",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1587,6 +1692,7 @@ window.MONSTERS = [
     "name": "Kumae",
     "unawakened_name": "yeti",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1602,6 +1708,7 @@ window.MONSTERS = [
     "name": "Kuna",
     "unawakened_name": "penguin knight",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1617,6 +1724,7 @@ window.MONSTERS = [
     "name": "Lanett",
     "unawakened_name": "magic knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1632,6 +1740,7 @@ window.MONSTERS = [
     "name": "Lavender",
     "unawakened_name": "black tea bunny",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1647,6 +1756,7 @@ window.MONSTERS = [
     "name": "Leona",
     "unawakened_name": "paladin",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1662,6 +1772,7 @@ window.MONSTERS = [
     "name": "Liebli",
     "unawakened_name": "joker",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1677,6 +1788,7 @@ window.MONSTERS = [
     "name": "Liliana",
     "unawakened_name": "devil maiden",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1692,6 +1804,7 @@ window.MONSTERS = [
     "name": "Loque",
     "unawakened_name": "imp champion",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1707,6 +1820,7 @@ window.MONSTERS = [
     "name": "Luna",
     "unawakened_name": "pierret",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1722,6 +1836,7 @@ window.MONSTERS = [
     "name": "Lydia",
     "unawakened_name": "polar queen",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1737,6 +1852,7 @@ window.MONSTERS = [
     "name": "M. BISON",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark"
@@ -1751,6 +1867,7 @@ window.MONSTERS = [
     "name": "Madeleine Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1767,6 +1884,7 @@ window.MONSTERS = [
     "name": "Maggi",
     "unawakened_name": "golem",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1782,6 +1900,7 @@ window.MONSTERS = [
     "name": "Manannan",
     "unawakened_name": "sea emperor",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1797,6 +1916,7 @@ window.MONSTERS = [
     "name": "Mantura",
     "unawakened_name": "serpent",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1812,6 +1932,7 @@ window.MONSTERS = [
     "name": "Mara",
     "unawakened_name": "amazon",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1827,6 +1948,7 @@ window.MONSTERS = [
     "name": "Martina",
     "unawakened_name": "boomerang warrior",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1842,6 +1964,7 @@ window.MONSTERS = [
     "name": "Maximilian",
     "unawakened_name": "weapon master",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1857,6 +1980,7 @@ window.MONSTERS = [
     "name": "Maya",
     "unawakened_name": "totemist",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1872,6 +1996,7 @@ window.MONSTERS = [
     "name": "Megumi Fushiguro",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1888,6 +2013,7 @@ window.MONSTERS = [
     "name": "Mi Ying",
     "unawakened_name": "panda warrior",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1903,6 +2029,7 @@ window.MONSTERS = [
     "name": "Miho",
     "unawakened_name": "martial cat",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1918,6 +2045,7 @@ window.MONSTERS = [
     "name": "Mirinae",
     "unawakened_name": "string master",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1933,6 +2061,7 @@ window.MONSTERS = [
     "name": "Monte",
     "unawakened_name": "dice magician",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1948,6 +2077,7 @@ window.MONSTERS = [
     "name": "Mookwol",
     "unawakened_name": "art master",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1963,6 +2093,7 @@ window.MONSTERS = [
     "name": "N1X",
     "unawakened_name": "hacker",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1978,6 +2109,7 @@ window.MONSTERS = [
     "name": "Nephthys",
     "unawakened_name": "desert queen",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -1993,6 +2125,7 @@ window.MONSTERS = [
     "name": "Nezuko Kamado",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2009,6 +2142,7 @@ window.MONSTERS = [
     "name": "Nicki",
     "unawakened_name": "occult girl",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2024,6 +2158,7 @@ window.MONSTERS = [
     "name": "Nina Williams",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark"
@@ -2038,6 +2173,7 @@ window.MONSTERS = [
     "name": "Nobara Kugisaki",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2054,6 +2190,7 @@ window.MONSTERS = [
     "name": "Nyx",
     "unawakened_name": "fairy king",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2069,6 +2206,7 @@ window.MONSTERS = [
     "name": "Ongyouki",
     "unawakened_name": "onimusha",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2084,6 +2222,7 @@ window.MONSTERS = [
     "name": "Onyx",
     "unawakened_name": "gargoyle",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2099,6 +2238,7 @@ window.MONSTERS = [
     "name": "Pater",
     "unawakened_name": "druid",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2114,6 +2254,7 @@ window.MONSTERS = [
     "name": "Paul Phoenix",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark"
@@ -2128,6 +2269,7 @@ window.MONSTERS = [
     "name": "Pure Vanilla Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2144,6 +2286,7 @@ window.MONSTERS = [
     "name": "Qilin Slasher",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2159,6 +2302,7 @@ window.MONSTERS = [
     "name": "Ragdoll",
     "unawakened_name": "dragon knight",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2174,6 +2318,7 @@ window.MONSTERS = [
     "name": "Rahul",
     "unawakened_name": "beast monk",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2189,6 +2334,7 @@ window.MONSTERS = [
     "name": "Ran",
     "unawakened_name": "rakshasa",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2204,6 +2350,7 @@ window.MONSTERS = [
     "name": "Rasheed",
     "unawakened_name": "epikion priest",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2219,6 +2366,7 @@ window.MONSTERS = [
     "name": "Ritsu",
     "unawakened_name": "shadowcaster",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2234,6 +2382,7 @@ window.MONSTERS = [
     "name": "Rizak",
     "unawakened_name": "garuda",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2249,6 +2398,7 @@ window.MONSTERS = [
     "name": "Roberta",
     "unawakened_name": "cyborg",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2264,6 +2414,7 @@ window.MONSTERS = [
     "name": "ROBO-F29",
     "unawakened_name": "robo",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2279,6 +2430,7 @@ window.MONSTERS = [
     "name": "Ryomen Sukuna",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark"
@@ -2293,6 +2445,7 @@ window.MONSTERS = [
     "name": "RYU",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark"
@@ -2307,6 +2460,7 @@ window.MONSTERS = [
     "name": "Salah",
     "unawakened_name": "desert warrior",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2322,6 +2476,7 @@ window.MONSTERS = [
     "name": "Satoru Gojo",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2338,6 +2493,7 @@ window.MONSTERS = [
     "name": "Seren",
     "unawakened_name": "harpu",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2353,6 +2509,7 @@ window.MONSTERS = [
     "name": "Shumar",
     "unawakened_name": "hellhound",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2368,6 +2525,7 @@ window.MONSTERS = [
     "name": "Sige",
     "unawakened_name": "samurai",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2383,6 +2541,7 @@ window.MONSTERS = [
     "name": "Sigrid",
     "unawakened_name": "mercenary queen",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2398,6 +2557,7 @@ window.MONSTERS = [
     "name": "Son Zhang Lao",
     "unawakened_name": "monkey king",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2413,6 +2573,7 @@ window.MONSTERS = [
     "name": "Sorin",
     "unawakened_name": "fairy",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2428,6 +2589,7 @@ window.MONSTERS = [
     "name": "Sylvia",
     "unawakened_name": "neostone agent",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2443,6 +2605,7 @@ window.MONSTERS = [
     "name": "Tanjiro Kamado",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2459,6 +2622,7 @@ window.MONSTERS = [
     "name": "Thebae",
     "unawakened_name": "anubis",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2474,6 +2638,7 @@ window.MONSTERS = [
     "name": "Thrain",
     "unawakened_name": "grim reaper",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2489,6 +2654,7 @@ window.MONSTERS = [
     "name": "Tilasha",
     "unawakened_name": "undine",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2504,6 +2670,7 @@ window.MONSTERS = [
     "name": "Trasar",
     "unawakened_name": "giant warrior",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2519,6 +2686,7 @@ window.MONSTERS = [
     "name": "Trinity",
     "unawakened_name": "valkyrja",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2534,6 +2702,7 @@ window.MONSTERS = [
     "name": "Triss",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2550,6 +2719,7 @@ window.MONSTERS = [
     "name": "Truffle",
     "unawakened_name": "choco knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2565,6 +2735,7 @@ window.MONSTERS = [
     "name": "Valdemar",
     "unawakened_name": "magic order guardian",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2580,6 +2751,7 @@ window.MONSTERS = [
     "name": "Vancliffe",
     "unawakened_name": "striker",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2595,6 +2767,7 @@ window.MONSTERS = [
     "name": "Varus",
     "unawakened_name": "griffon",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2610,6 +2783,7 @@ window.MONSTERS = [
     "name": "Velaska",
     "unawakened_name": "specter princess",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2625,6 +2799,7 @@ window.MONSTERS = [
     "name": "Vereesa",
     "unawakened_name": "blade dancer",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2640,6 +2815,7 @@ window.MONSTERS = [
     "name": "Vermilion Bird Dancer",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2655,6 +2831,7 @@ window.MONSTERS = [
     "name": "Veromos",
     "unawakened_name": "ifrit",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2670,6 +2847,7 @@ window.MONSTERS = [
     "name": "Vivachel",
     "unawakened_name": "harp magician",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2685,6 +2863,7 @@ window.MONSTERS = [
     "name": "Volg",
     "unawakened_name": "tomb warden",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2700,6 +2879,7 @@ window.MONSTERS = [
     "name": "Vritra",
     "unawakened_name": "asura",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2715,6 +2895,7 @@ window.MONSTERS = [
     "name": "Wei Shin",
     "unawakened_name": "drunken master",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2730,6 +2911,7 @@ window.MONSTERS = [
     "name": "White Tiger Blade Master",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2745,6 +2927,7 @@ window.MONSTERS = [
     "name": "Wolyung",
     "unawakened_name": "sky dancer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2760,6 +2943,7 @@ window.MONSTERS = [
     "name": "Woonhak",
     "unawakened_name": "taoist",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2775,6 +2959,7 @@ window.MONSTERS = [
     "name": "Woonsa",
     "unawakened_name": "pioneer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2790,6 +2975,7 @@ window.MONSTERS = [
     "name": "Xiana",
     "unawakened_name": "beast rider",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2805,6 +2991,7 @@ window.MONSTERS = [
     "name": "Yennefer",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2821,6 +3008,7 @@ window.MONSTERS = [
     "name": "Yuji Itadori",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2837,6 +3025,7 @@ window.MONSTERS = [
     "name": "Zenisek",
     "unawakened_name": "puppeteer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2852,6 +3041,7 @@ window.MONSTERS = [
     "name": "Zenitsu Agatsuma",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2868,6 +3058,7 @@ window.MONSTERS = [
     "name": "Zeratu",
     "unawakened_name": "chimera",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2883,6 +3074,7 @@ window.MONSTERS = [
     "name": "Zinc",
     "unawakened_name": "living armor",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
@@ -2898,6 +3090,7 @@ window.MONSTERS = [
     "name": "7R1X",
     "unawakened_name": "hacker",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -2913,6 +3106,7 @@ window.MONSTERS = [
     "name": "Adrian",
     "unawakened_name": "elven ranger",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -2928,6 +3122,7 @@ window.MONSTERS = [
     "name": "Agrius",
     "unawakened_name": "centaur knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -2943,6 +3138,7 @@ window.MONSTERS = [
     "name": "Akia",
     "unawakened_name": "succubus",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -2958,6 +3154,7 @@ window.MONSTERS = [
     "name": "Alice",
     "unawakened_name": "macaron guard",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -2973,6 +3170,7 @@ window.MONSTERS = [
     "name": "Amanda",
     "unawakened_name": "magical archer cassandra",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -2988,6 +3186,7 @@ window.MONSTERS = [
     "name": "Anne",
     "unawakened_name": "cow girl",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -3003,6 +3202,7 @@ window.MONSTERS = [
     "name": "Antares",
     "unawakened_name": "lich",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3018,6 +3218,7 @@ window.MONSTERS = [
     "name": "Arnold",
     "unawakened_name": "death knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3033,6 +3234,7 @@ window.MONSTERS = [
     "name": "Ashour",
     "unawakened_name": "desert warrior",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3048,6 +3250,7 @@ window.MONSTERS = [
     "name": "Astar",
     "unawakened_name": "magic knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3063,6 +3266,7 @@ window.MONSTERS = [
     "name": "Atenai",
     "unawakened_name": "undine",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3078,6 +3282,7 @@ window.MONSTERS = [
     "name": "Azure Dragon Swordsman",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire"
@@ -3092,6 +3297,7 @@ window.MONSTERS = [
     "name": "Bael",
     "unawakened_name": "demon",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3107,6 +3313,7 @@ window.MONSTERS = [
     "name": "Baleygr",
     "unawakened_name": "lightning emperor",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3122,6 +3329,7 @@ window.MONSTERS = [
     "name": "Baretta",
     "unawakened_name": "sylph",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3137,6 +3345,7 @@ window.MONSTERS = [
     "name": "Bayek",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3153,6 +3362,7 @@ window.MONSTERS = [
     "name": "Bellenus",
     "unawakened_name": "druid",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3168,6 +3378,7 @@ window.MONSTERS = [
     "name": "Berenice",
     "unawakened_name": "blade dancer",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3183,6 +3394,7 @@ window.MONSTERS = [
     "name": "Bernadotte",
     "unawakened_name": "shadow claw",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3198,6 +3410,7 @@ window.MONSTERS = [
     "name": "Bloodya",
     "unawakened_name": "devil maiden",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3213,6 +3426,7 @@ window.MONSTERS = [
     "name": "Brandia",
     "unawakened_name": "polar queen",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3228,6 +3442,7 @@ window.MONSTERS = [
     "name": "Bremis",
     "unawakened_name": "elemental",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "feu",
       "fire",
@@ -3243,6 +3458,7 @@ window.MONSTERS = [
     "name": "Bulldozer",
     "unawakened_name": "frankenstein",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -3258,6 +3474,7 @@ window.MONSTERS = [
     "name": "Burentau",
     "unawakened_name": "minotauros",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -3273,6 +3490,7 @@ window.MONSTERS = [
     "name": "Cahule",
     "unawakened_name": "garuda",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "feu",
       "fire",
@@ -3288,6 +3506,7 @@ window.MONSTERS = [
     "name": "Carcano",
     "unawakened_name": "sniper mki",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3303,6 +3522,7 @@ window.MONSTERS = [
     "name": "Carlos",
     "unawakened_name": "weapon master",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3318,6 +3538,7 @@ window.MONSTERS = [
     "name": "Carmella",
     "unawakened_name": "cyborg",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3333,6 +3554,7 @@ window.MONSTERS = [
     "name": "Carrack",
     "unawakened_name": "pirate captain",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3348,6 +3570,7 @@ window.MONSTERS = [
     "name": "Ceres",
     "unawakened_name": "amazon",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -3363,6 +3586,7 @@ window.MONSTERS = [
     "name": "Chiwu",
     "unawakened_name": "pioneer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3378,6 +3602,7 @@ window.MONSTERS = [
     "name": "Chloe",
     "unawakened_name": "epikion priest",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3393,6 +3618,7 @@ window.MONSTERS = [
     "name": "CHUN-LI",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire"
@@ -3407,6 +3633,7 @@ window.MONSTERS = [
     "name": "Ciri",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3423,6 +3650,7 @@ window.MONSTERS = [
     "name": "Claire",
     "unawakened_name": "battle angel",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3438,6 +3666,7 @@ window.MONSTERS = [
     "name": "Clara",
     "unawakened_name": "pierret",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3453,6 +3682,7 @@ window.MONSTERS = [
     "name": "Coco",
     "unawakened_name": "mage",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3468,6 +3698,7 @@ window.MONSTERS = [
     "name": "Cogma",
     "unawakened_name": "imp",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "feu",
       "fire",
@@ -3483,6 +3714,7 @@ window.MONSTERS = [
     "name": "Colleen",
     "unawakened_name": "harpu",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "feu",
       "fire",
@@ -3498,6 +3730,7 @@ window.MONSTERS = [
     "name": "Cynthia",
     "unawakened_name": "arcane weapon",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3513,6 +3746,7 @@ window.MONSTERS = [
     "name": "Daphnis",
     "unawakened_name": "fairy king",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3528,6 +3762,7 @@ window.MONSTERS = [
     "name": "Deragron",
     "unawakened_name": "drakan warrior",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3543,6 +3778,7 @@ window.MONSTERS = [
     "name": "DHALSIM",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire"
@@ -3557,6 +3793,7 @@ window.MONSTERS = [
     "name": "Douglas",
     "unawakened_name": "striker",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3572,6 +3809,7 @@ window.MONSTERS = [
     "name": "Draco",
     "unawakened_name": "brownie magician",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3587,6 +3825,7 @@ window.MONSTERS = [
     "name": "Duamutef",
     "unawakened_name": "horus",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3602,6 +3841,7 @@ window.MONSTERS = [
     "name": "Eivor",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3618,6 +3858,7 @@ window.MONSTERS = [
     "name": "Enshia",
     "unawakened_name": "magic order elementalist",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3633,6 +3874,7 @@ window.MONSTERS = [
     "name": "Espresso Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3649,6 +3891,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Conjurer",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3664,6 +3907,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Fighter",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3679,6 +3923,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Hunter",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3694,6 +3939,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Resolver",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3709,6 +3955,7 @@ window.MONSTERS = [
     "name": "Ezio",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3725,6 +3972,7 @@ window.MONSTERS = [
     "name": "Fairo",
     "unawakened_name": "imp champion",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -3740,6 +3988,7 @@ window.MONSTERS = [
     "name": "Fao",
     "unawakened_name": "serpent",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -3755,6 +4004,7 @@ window.MONSTERS = [
     "name": "Federica",
     "unawakened_name": "gladiatrix",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3770,6 +4020,7 @@ window.MONSTERS = [
     "name": "Fria",
     "unawakened_name": "sylphid",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3785,6 +4036,7 @@ window.MONSTERS = [
     "name": "Garo",
     "unawakened_name": "ninja",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3800,6 +4052,7 @@ window.MONSTERS = [
     "name": "Garoche",
     "unawakened_name": "werewolf",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -3815,6 +4068,7 @@ window.MONSTERS = [
     "name": "Geoffrey",
     "unawakened_name": "viking",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -3830,6 +4084,7 @@ window.MONSTERS = [
     "name": "Geralt",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3846,6 +4101,7 @@ window.MONSTERS = [
     "name": "Granite",
     "unawakened_name": "battle mammoth",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -3861,6 +4117,7 @@ window.MONSTERS = [
     "name": "Gunpyeong",
     "unawakened_name": "taoist",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -3876,6 +4133,7 @@ window.MONSTERS = [
     "name": "Harmonia",
     "unawakened_name": "harp magician",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3891,6 +4149,7 @@ window.MONSTERS = [
     "name": "Heihachi Mishima",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire"
@@ -3905,6 +4164,7 @@ window.MONSTERS = [
     "name": "Helena",
     "unawakened_name": "unicorn",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3920,6 +4180,7 @@ window.MONSTERS = [
     "name": "Hibiscus",
     "unawakened_name": "black tea bunny",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3935,6 +4196,7 @@ window.MONSTERS = [
     "name": "Hollyberry Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3951,6 +4213,7 @@ window.MONSTERS = [
     "name": "Homunculus(Attack)",
     "unawakened_name": "homunculusattack homunculusattack",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -3966,6 +4229,7 @@ window.MONSTERS = [
     "name": "Hong Hua",
     "unawakened_name": "kung fu girl",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3981,6 +4245,7 @@ window.MONSTERS = [
     "name": "Hongyeon",
     "unawakened_name": "string master",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -3996,6 +4261,7 @@ window.MONSTERS = [
     "name": "Hwa",
     "unawakened_name": "rakshasa",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4011,6 +4277,7 @@ window.MONSTERS = [
     "name": "Hwahee",
     "unawakened_name": "sky dancer",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4026,6 +4293,7 @@ window.MONSTERS = [
     "name": "Hwoarang",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire"
@@ -4040,6 +4308,7 @@ window.MONSTERS = [
     "name": "Igmanodon",
     "unawakened_name": "lizardman",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -4055,6 +4324,7 @@ window.MONSTERS = [
     "name": "Ignicus",
     "unawakened_name": "charger shark",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -4070,6 +4340,7 @@ window.MONSTERS = [
     "name": "Inosuke Hashibira",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4086,6 +4357,7 @@ window.MONSTERS = [
     "name": "Iron",
     "unawakened_name": "living armor",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -4101,6 +4373,7 @@ window.MONSTERS = [
     "name": "Iselia",
     "unawakened_name": "fairy",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -4116,6 +4389,7 @@ window.MONSTERS = [
     "name": "Jean",
     "unawakened_name": "phantom thief",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4131,6 +4405,7 @@ window.MONSTERS = [
     "name": "Jeogun",
     "unawakened_name": "art master",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4146,6 +4421,7 @@ window.MONSTERS = [
     "name": "Jin Kazama",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire"
@@ -4160,6 +4436,7 @@ window.MONSTERS = [
     "name": "John",
     "unawakened_name": "sky surfer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4175,6 +4452,7 @@ window.MONSTERS = [
     "name": "Jojo",
     "unawakened_name": "joker",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4190,6 +4468,7 @@ window.MONSTERS = [
     "name": "Jun",
     "unawakened_name": "samurai",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4205,6 +4484,7 @@ window.MONSTERS = [
     "name": "Juno",
     "unawakened_name": "oracle",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4220,6 +4500,7 @@ window.MONSTERS = [
     "name": "Kahli",
     "unawakened_name": "high elemental",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -4235,6 +4516,7 @@ window.MONSTERS = [
     "name": "Kai'en",
     "unawakened_name": "vagabond kaien",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -4250,6 +4532,7 @@ window.MONSTERS = [
     "name": "Kaki",
     "unawakened_name": "onimusha",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4265,6 +4548,7 @@ window.MONSTERS = [
     "name": "Karnal",
     "unawakened_name": "slayer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4280,6 +4564,7 @@ window.MONSTERS = [
     "name": "Karuel and Lanoah",
     "unawakened_name": "twin angels",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4295,6 +4580,7 @@ window.MONSTERS = [
     "name": "Kassandra",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4311,6 +4597,7 @@ window.MONSTERS = [
     "name": "KEN",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire"
@@ -4325,6 +4612,7 @@ window.MONSTERS = [
     "name": "Khmun",
     "unawakened_name": "anubis",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4340,6 +4628,7 @@ window.MONSTERS = [
     "name": "Krakdon",
     "unawakened_name": "salamander",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -4355,6 +4644,7 @@ window.MONSTERS = [
     "name": "Kugo",
     "unawakened_name": "golem",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -4370,6 +4660,7 @@ window.MONSTERS = [
     "name": "Kumar",
     "unawakened_name": "beast monk",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4385,6 +4676,7 @@ window.MONSTERS = [
     "name": "Kungen",
     "unawakened_name": "bearman",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -4400,6 +4692,7 @@ window.MONSTERS = [
     "name": "Kunite",
     "unawakened_name": "gargoyle",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4415,6 +4708,7 @@ window.MONSTERS = [
     "name": "Laika",
     "unawakened_name": "dragon knight",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4430,6 +4724,7 @@ window.MONSTERS = [
     "name": "Lala",
     "unawakened_name": "howl",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "feu",
       "fire",
@@ -4445,6 +4740,7 @@ window.MONSTERS = [
     "name": "Lala and Friends",
     "unawakened_name": "howl lala",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "feu",
       "fire",
@@ -4460,6 +4756,7 @@ window.MONSTERS = [
     "name": "Lamor",
     "unawakened_name": "low elemental",
     "second_awaken": false,
+    "natural_stars": 1,
     "aliases": [
       "feu",
       "fire",
@@ -4475,6 +4772,7 @@ window.MONSTERS = [
     "name": "Lexy",
     "unawakened_name": "assassin",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4490,6 +4788,7 @@ window.MONSTERS = [
     "name": "Lisa",
     "unawakened_name": "neostone agent",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4505,6 +4804,7 @@ window.MONSTERS = [
     "name": "Lucasha",
     "unawakened_name": "harpy",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -4520,6 +4820,7 @@ window.MONSTERS = [
     "name": "Lucia",
     "unawakened_name": "pudding princess",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4535,6 +4836,7 @@ window.MONSTERS = [
     "name": "Ludo",
     "unawakened_name": "dice magician",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4550,6 +4852,7 @@ window.MONSTERS = [
     "name": "M. BISON",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire"
@@ -4564,6 +4867,7 @@ window.MONSTERS = [
     "name": "Madeleine Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4580,6 +4884,7 @@ window.MONSTERS = [
     "name": "Magnus",
     "unawakened_name": "magic order guardian",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4595,6 +4900,7 @@ window.MONSTERS = [
     "name": "Manx",
     "unawakened_name": "hypnomeow",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4610,6 +4916,7 @@ window.MONSTERS = [
     "name": "Maruna",
     "unawakened_name": "boomerang warrior",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4625,6 +4932,7 @@ window.MONSTERS = [
     "name": "Masha",
     "unawakened_name": "beast rider",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4640,6 +4948,7 @@ window.MONSTERS = [
     "name": "Megumi Fushiguro",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4656,6 +4965,7 @@ window.MONSTERS = [
     "name": "Mei",
     "unawakened_name": "martial cat",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -4671,6 +4981,7 @@ window.MONSTERS = [
     "name": "Mei Hou Wang",
     "unawakened_name": "monkey king",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4686,6 +4997,7 @@ window.MONSTERS = [
     "name": "Miriam",
     "unawakened_name": "rune blacksmith",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4701,6 +5013,7 @@ window.MONSTERS = [
     "name": "Moogwang",
     "unawakened_name": "dokkaebi lord",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4716,6 +5029,7 @@ window.MONSTERS = [
     "name": "Naki",
     "unawakened_name": "penguin knight",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -4731,6 +5045,7 @@ window.MONSTERS = [
     "name": "Nangrim",
     "unawakened_name": "beast hunter",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -4746,6 +5061,7 @@ window.MONSTERS = [
     "name": "Nezuko Kamado",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4762,6 +5078,7 @@ window.MONSTERS = [
     "name": "Nina Williams",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire"
@@ -4776,6 +5093,7 @@ window.MONSTERS = [
     "name": "Nisha",
     "unawakened_name": "dryad",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4791,6 +5109,7 @@ window.MONSTERS = [
     "name": "Nobara Kugisaki",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4807,6 +5126,7 @@ window.MONSTERS = [
     "name": "Nora",
     "unawakened_name": "totemist",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4822,6 +5142,7 @@ window.MONSTERS = [
     "name": "Okeanos",
     "unawakened_name": "sea emperor",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4837,6 +5158,7 @@ window.MONSTERS = [
     "name": "Ophilia",
     "unawakened_name": "paladin",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4852,6 +5174,7 @@ window.MONSTERS = [
     "name": "Patrick",
     "unawakened_name": "steel commander",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4867,6 +5190,7 @@ window.MONSTERS = [
     "name": "Paul Phoenix",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire"
@@ -4881,6 +5205,7 @@ window.MONSTERS = [
     "name": "Pavé",
     "unawakened_name": "choco knight pave",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4896,6 +5221,7 @@ window.MONSTERS = [
     "name": "Perna",
     "unawakened_name": "phoenix",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4911,6 +5237,7 @@ window.MONSTERS = [
     "name": "Platy",
     "unawakened_name": "mermaid",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4926,6 +5253,7 @@ window.MONSTERS = [
     "name": "Pure Vanilla Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4942,6 +5270,7 @@ window.MONSTERS = [
     "name": "Qilin Slasher",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -4957,6 +5286,7 @@ window.MONSTERS = [
     "name": "Racuni",
     "unawakened_name": "harg",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -4972,6 +5302,7 @@ window.MONSTERS = [
     "name": "Rakan",
     "unawakened_name": "chimera",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -4987,6 +5318,7 @@ window.MONSTERS = [
     "name": "Raki",
     "unawakened_name": "hell lady",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5002,6 +5334,7 @@ window.MONSTERS = [
     "name": "Randy",
     "unawakened_name": "bounty hunter",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -5017,6 +5350,7 @@ window.MONSTERS = [
     "name": "Raoq",
     "unawakened_name": "inugami",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -5032,6 +5366,7 @@ window.MONSTERS = [
     "name": "Rebecca",
     "unawakened_name": "mystic witch",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -5047,6 +5382,7 @@ window.MONSTERS = [
     "name": "Ren",
     "unawakened_name": "shadowcaster",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5062,6 +5398,7 @@ window.MONSTERS = [
     "name": "Rex",
     "unawakened_name": "tomb warden",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5077,6 +5414,7 @@ window.MONSTERS = [
     "name": "Reyka",
     "unawakened_name": "magic order swordsinger",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5092,6 +5430,7 @@ window.MONSTERS = [
     "name": "Rica",
     "unawakened_name": "occult girl",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5107,6 +5446,7 @@ window.MONSTERS = [
     "name": "ROBO-P27",
     "unawakened_name": "robo",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5122,6 +5462,7 @@ window.MONSTERS = [
     "name": "RYU",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire"
@@ -5136,6 +5477,7 @@ window.MONSTERS = [
     "name": "Sath",
     "unawakened_name": "grim reaper",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -5151,6 +5493,7 @@ window.MONSTERS = [
     "name": "Satoru Gojo",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5167,6 +5510,7 @@ window.MONSTERS = [
     "name": "Scarlett",
     "unawakened_name": "cannon girl",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5182,6 +5526,7 @@ window.MONSTERS = [
     "name": "Sekhmet",
     "unawakened_name": "desert queen",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5197,6 +5542,7 @@ window.MONSTERS = [
     "name": "Shaina",
     "unawakened_name": "chakram dancer",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5212,6 +5558,7 @@ window.MONSTERS = [
     "name": "Shihwa",
     "unawakened_name": "nine tailed fox",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5227,6 +5574,7 @@ window.MONSTERS = [
     "name": "Sieq",
     "unawakened_name": "hellhound",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "feu",
       "fire",
@@ -5242,6 +5590,7 @@ window.MONSTERS = [
     "name": "Sin",
     "unawakened_name": "martial artist",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -5257,6 +5606,7 @@ window.MONSTERS = [
     "name": "Smokey",
     "unawakened_name": "jack o lantern",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5272,6 +5622,7 @@ window.MONSTERS = [
     "name": "Solveig",
     "unawakened_name": "mercenary queen",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5287,6 +5638,7 @@ window.MONSTERS = [
     "name": "Sonora",
     "unawakened_name": "mummy",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -5302,6 +5654,7 @@ window.MONSTERS = [
     "name": "Spectra",
     "unawakened_name": "griffon",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -5317,6 +5670,7 @@ window.MONSTERS = [
     "name": "Surtr",
     "unawakened_name": "barbaric king",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5332,6 +5686,7 @@ window.MONSTERS = [
     "name": "Tagaros",
     "unawakened_name": "inferno",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -5347,6 +5702,7 @@ window.MONSTERS = [
     "name": "Tanjiro Kamado",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5363,6 +5719,7 @@ window.MONSTERS = [
     "name": "Tantra",
     "unawakened_name": "yeti",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "feu",
       "fire",
@@ -5378,6 +5735,7 @@ window.MONSTERS = [
     "name": "Tarnisha",
     "unawakened_name": "magic order enchantress",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5393,6 +5751,7 @@ window.MONSTERS = [
     "name": "Tatu",
     "unawakened_name": "pixie",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "feu",
       "fire",
@@ -5408,6 +5767,7 @@ window.MONSTERS = [
     "name": "Tesarion",
     "unawakened_name": "ifrit",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5423,6 +5783,7 @@ window.MONSTERS = [
     "name": "Theodora",
     "unawakened_name": "specter princess",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5438,6 +5799,7 @@ window.MONSTERS = [
     "name": "Tityus",
     "unawakened_name": "beetle guardian",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5453,6 +5815,7 @@ window.MONSTERS = [
     "name": "Todd",
     "unawakened_name": "poison master",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5468,6 +5831,7 @@ window.MONSTERS = [
     "name": "Tomoe",
     "unawakened_name": "onmyouji",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5483,6 +5847,7 @@ window.MONSTERS = [
     "name": "Trevor",
     "unawakened_name": "neostone fighter",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5498,6 +5863,7 @@ window.MONSTERS = [
     "name": "Triss",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5514,6 +5880,7 @@ window.MONSTERS = [
     "name": "Ursha",
     "unawakened_name": "warbear",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "feu",
       "fire",
@@ -5529,6 +5896,7 @@ window.MONSTERS = [
     "name": "Vanessa",
     "unawakened_name": "valkyrja",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5544,6 +5912,7 @@ window.MONSTERS = [
     "name": "Varuna",
     "unawakened_name": "asura",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5559,6 +5928,7 @@ window.MONSTERS = [
     "name": "Velajuel",
     "unawakened_name": "archangel",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5574,6 +5944,7 @@ window.MONSTERS = [
     "name": "Vendhan",
     "unawakened_name": "indra",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5589,6 +5960,7 @@ window.MONSTERS = [
     "name": "Verdehile",
     "unawakened_name": "vampire",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5604,6 +5976,7 @@ window.MONSTERS = [
     "name": "Vermilion Bird Dancer",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5619,6 +5992,7 @@ window.MONSTERS = [
     "name": "Vidurr",
     "unawakened_name": "giant warrior",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -5634,6 +6008,7 @@ window.MONSTERS = [
     "name": "White Tiger Blade Master",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5649,6 +6024,7 @@ window.MONSTERS = [
     "name": "Xiao Chun",
     "unawakened_name": "drunken master",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
@@ -5664,6 +6040,7 @@ window.MONSTERS = [
     "name": "Xiong Fei",
     "unawakened_name": "panda warrior",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5679,6 +6056,7 @@ window.MONSTERS = [
     "name": "Yeji and Sapsaree",
     "unawakened_name": "dokkaebi princess and sapsaree",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5694,6 +6072,7 @@ window.MONSTERS = [
     "name": "Yennefer",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5710,6 +6089,7 @@ window.MONSTERS = [
     "name": "Yuji Itadori",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5726,6 +6106,7 @@ window.MONSTERS = [
     "name": "Zaiross",
     "unawakened_name": "dragon",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5741,6 +6122,7 @@ window.MONSTERS = [
     "name": "Zenitsu Agatsuma",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5757,6 +6139,7 @@ window.MONSTERS = [
     "name": "Zibrolta",
     "unawakened_name": "kobold bomber",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
@@ -5772,6 +6155,7 @@ window.MONSTERS = [
     "name": "Zima",
     "unawakened_name": "puppeteer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "feu",
       "fire",
@@ -5787,6 +6171,7 @@ window.MONSTERS = [
     "name": "51LV3R",
     "unawakened_name": "hacker",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -5802,6 +6187,7 @@ window.MONSTERS = [
     "name": "Ahman",
     "unawakened_name": "bearman",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -5817,6 +6203,7 @@ window.MONSTERS = [
     "name": "Ahmed",
     "unawakened_name": "desert warrior",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -5832,6 +6219,7 @@ window.MONSTERS = [
     "name": "Akroma",
     "unawakened_name": "valkyrja",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -5847,6 +6235,7 @@ window.MONSTERS = [
     "name": "Alesia",
     "unawakened_name": "cyborg lucia",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -5862,6 +6251,7 @@ window.MONSTERS = [
     "name": "Altaïr",
     "unawakened_name": "altair",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -5879,6 +6269,7 @@ window.MONSTERS = [
     "name": "Amarna",
     "unawakened_name": "anubis",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -5894,6 +6285,7 @@ window.MONSTERS = [
     "name": "Arcana",
     "unawakened_name": "magic order enchantress",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -5909,6 +6301,7 @@ window.MONSTERS = [
     "name": "Aria",
     "unawakened_name": "succubus",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -5924,6 +6317,7 @@ window.MONSTERS = [
     "name": "Ariana",
     "unawakened_name": "pudding princess",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -5939,6 +6333,7 @@ window.MONSTERS = [
     "name": "Arkajan",
     "unawakened_name": "yeti",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "lumière",
       "light",
@@ -5954,6 +6349,7 @@ window.MONSTERS = [
     "name": "Artamiel",
     "unawakened_name": "archangel",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -5969,6 +6365,7 @@ window.MONSTERS = [
     "name": "Asima",
     "unawakened_name": "hell lady",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -5984,6 +6381,7 @@ window.MONSTERS = [
     "name": "Audrey",
     "unawakened_name": "macaron guard",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -5999,6 +6397,7 @@ window.MONSTERS = [
     "name": "Aurelia",
     "unawakened_name": "gladiatrix",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6014,6 +6413,7 @@ window.MONSTERS = [
     "name": "Azure Dragon Swordsman",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light"
@@ -6028,6 +6428,7 @@ window.MONSTERS = [
     "name": "Baekdu",
     "unawakened_name": "beast hunter",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -6043,6 +6444,7 @@ window.MONSTERS = [
     "name": "Bailey",
     "unawakened_name": "boomerang warrior",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6058,6 +6460,7 @@ window.MONSTERS = [
     "name": "Bayek",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6074,6 +6477,7 @@ window.MONSTERS = [
     "name": "Belladeon",
     "unawakened_name": "inugami",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -6089,6 +6493,7 @@ window.MONSTERS = [
     "name": "Benedict",
     "unawakened_name": "weapon master",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6104,6 +6509,7 @@ window.MONSTERS = [
     "name": "Berghild",
     "unawakened_name": "mercenary queen",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6119,6 +6525,7 @@ window.MONSTERS = [
     "name": "Birgitta",
     "unawakened_name": "magic order swordsinger",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6134,6 +6541,7 @@ window.MONSTERS = [
     "name": "Brig",
     "unawakened_name": "pirate captain",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6149,6 +6557,7 @@ window.MONSTERS = [
     "name": "Celia",
     "unawakened_name": "harp magician",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6164,6 +6573,7 @@ window.MONSTERS = [
     "name": "Chamie",
     "unawakened_name": "nine tailed fox",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6179,6 +6589,7 @@ window.MONSTERS = [
     "name": "Cheryl",
     "unawakened_name": "pixie",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "lumière",
       "light",
@@ -6194,6 +6605,7 @@ window.MONSTERS = [
     "name": "Chiron",
     "unawakened_name": "centaur knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6209,6 +6621,7 @@ window.MONSTERS = [
     "name": "Chris",
     "unawakened_name": "magical archer",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6224,6 +6637,7 @@ window.MONSTERS = [
     "name": "Christine",
     "unawakened_name": "arcane weapon",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6239,6 +6653,7 @@ window.MONSTERS = [
     "name": "CHUN-LI",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light"
@@ -6253,6 +6668,7 @@ window.MONSTERS = [
     "name": "Ciri",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6269,6 +6685,7 @@ window.MONSTERS = [
     "name": "Conrad",
     "unawakened_name": "death knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6284,6 +6701,7 @@ window.MONSTERS = [
     "name": "Craig",
     "unawakened_name": "slayer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6299,6 +6717,7 @@ window.MONSTERS = [
     "name": "Daniel",
     "unawakened_name": "sky surfer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6314,6 +6733,7 @@ window.MONSTERS = [
     "name": "Danu",
     "unawakened_name": "asura",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6329,6 +6749,7 @@ window.MONSTERS = [
     "name": "Darion",
     "unawakened_name": "vagabond",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -6344,6 +6765,7 @@ window.MONSTERS = [
     "name": "Deva",
     "unawakened_name": "chakram dancer",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6359,6 +6781,7 @@ window.MONSTERS = [
     "name": "DHALSIM",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light"
@@ -6373,6 +6796,7 @@ window.MONSTERS = [
     "name": "Dona",
     "unawakened_name": "penguin knight",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -6388,6 +6812,7 @@ window.MONSTERS = [
     "name": "Dongbaek",
     "unawakened_name": "string master",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6403,6 +6828,7 @@ window.MONSTERS = [
     "name": "Dorothy",
     "unawakened_name": "mage",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6418,6 +6844,7 @@ window.MONSTERS = [
     "name": "Dova",
     "unawakened_name": "harg",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6433,6 +6860,7 @@ window.MONSTERS = [
     "name": "Dover",
     "unawakened_name": "kobold bomber",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6448,6 +6876,7 @@ window.MONSTERS = [
     "name": "Driller",
     "unawakened_name": "frankenstein",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -6463,6 +6892,7 @@ window.MONSTERS = [
     "name": "Dyeus",
     "unawakened_name": "indra",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6478,6 +6908,7 @@ window.MONSTERS = [
     "name": "Einheri",
     "unawakened_name": "giant warrior",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6493,6 +6924,7 @@ window.MONSTERS = [
     "name": "Eivor",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6509,6 +6941,7 @@ window.MONSTERS = [
     "name": "Eleanor",
     "unawakened_name": "unicorn",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6524,6 +6957,7 @@ window.MONSTERS = [
     "name": "Elenoa",
     "unawakened_name": "polar queen",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6539,6 +6973,7 @@ window.MONSTERS = [
     "name": "Ella",
     "unawakened_name": "totemist",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6554,6 +6989,7 @@ window.MONSTERS = [
     "name": "Elpuria",
     "unawakened_name": "serpent",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -6569,6 +7005,7 @@ window.MONSTERS = [
     "name": "Elsharion",
     "unawakened_name": "ifrit",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6584,6 +7021,7 @@ window.MONSTERS = [
     "name": "Eludain",
     "unawakened_name": "inferno",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -6599,6 +7037,7 @@ window.MONSTERS = [
     "name": "Eludia",
     "unawakened_name": "phoenix",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6614,6 +7053,7 @@ window.MONSTERS = [
     "name": "Emily",
     "unawakened_name": "cannon girl",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6629,6 +7069,7 @@ window.MONSTERS = [
     "name": "Eredas",
     "unawakened_name": "sylph",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6644,6 +7085,7 @@ window.MONSTERS = [
     "name": "Eshir",
     "unawakened_name": "werewolf",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -6659,6 +7101,7 @@ window.MONSTERS = [
     "name": "Espresso Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6675,6 +7118,7 @@ window.MONSTERS = [
     "name": "Euldong",
     "unawakened_name": "dokkaebi lord",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6690,6 +7134,7 @@ window.MONSTERS = [
     "name": "Eunbee and Sapsaree",
     "unawakened_name": "dokkaebi princess and sapsaree",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6705,6 +7150,7 @@ window.MONSTERS = [
     "name": "Eva",
     "unawakened_name": "pierret",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6720,6 +7166,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Conjurer",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6735,6 +7182,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Fighter",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6750,6 +7198,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Hunter",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6765,6 +7214,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Resolver",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6780,6 +7230,7 @@ window.MONSTERS = [
     "name": "Ezio",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6796,6 +7247,7 @@ window.MONSTERS = [
     "name": "Fami",
     "unawakened_name": "magical archer",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -6811,6 +7263,7 @@ window.MONSTERS = [
     "name": "Felleria",
     "unawakened_name": "dryad",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6826,6 +7279,7 @@ window.MONSTERS = [
     "name": "Figaro",
     "unawakened_name": "joker",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6841,6 +7295,7 @@ window.MONSTERS = [
     "name": "Fran",
     "unawakened_name": "fairy queen",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -6856,6 +7311,7 @@ window.MONSTERS = [
     "name": "Frederic",
     "unawakened_name": "dual blade",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6871,6 +7327,7 @@ window.MONSTERS = [
     "name": "Fridrion",
     "unawakened_name": "drakan warrior",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6886,6 +7343,7 @@ window.MONSTERS = [
     "name": "Fudge",
     "unawakened_name": "choco knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6901,6 +7359,7 @@ window.MONSTERS = [
     "name": "Geldnir",
     "unawakened_name": "lightning emperor",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6916,6 +7375,7 @@ window.MONSTERS = [
     "name": "Gemini",
     "unawakened_name": "brownie magician",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6931,6 +7391,7 @@ window.MONSTERS = [
     "name": "Geralt",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6947,6 +7408,7 @@ window.MONSTERS = [
     "name": "Gin",
     "unawakened_name": "ninja",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -6962,6 +7424,7 @@ window.MONSTERS = [
     "name": "Glinodon",
     "unawakened_name": "lizardman",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -6977,6 +7440,7 @@ window.MONSTERS = [
     "name": "Groa",
     "unawakened_name": "magic order elementalist",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -6992,6 +7456,7 @@ window.MONSTERS = [
     "name": "Groggo",
     "unawakened_name": "golem",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -7007,6 +7472,7 @@ window.MONSTERS = [
     "name": "Grotau",
     "unawakened_name": "minotauros",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -7022,6 +7488,7 @@ window.MONSTERS = [
     "name": "Halphas",
     "unawakened_name": "lich",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7037,6 +7504,7 @@ window.MONSTERS = [
     "name": "Hanwul",
     "unawakened_name": "art master",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7052,6 +7520,7 @@ window.MONSTERS = [
     "name": "Hekerson",
     "unawakened_name": "poison master",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7067,6 +7536,7 @@ window.MONSTERS = [
     "name": "Hiro",
     "unawakened_name": "martial artist",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -7082,6 +7552,7 @@ window.MONSTERS = [
     "name": "Hollyberry Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7098,6 +7569,7 @@ window.MONSTERS = [
     "name": "Homunculus(Support)",
     "unawakened_name": "homunculussupport homunculussupport",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7113,6 +7585,7 @@ window.MONSTERS = [
     "name": "Hwadam",
     "unawakened_name": "taoist",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7128,6 +7601,7 @@ window.MONSTERS = [
     "name": "Hwoarang",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light"
@@ -7142,6 +7616,7 @@ window.MONSTERS = [
     "name": "Hyllus",
     "unawakened_name": "beetle guardian",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7157,6 +7632,7 @@ window.MONSTERS = [
     "name": "Ian",
     "unawakened_name": "steel commander",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7172,6 +7648,7 @@ window.MONSTERS = [
     "name": "Icasha",
     "unawakened_name": "undine",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7187,6 +7664,7 @@ window.MONSTERS = [
     "name": "Illianna",
     "unawakened_name": "neostone agent",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7202,6 +7680,7 @@ window.MONSTERS = [
     "name": "Inosuke Hashibira",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7218,6 +7697,7 @@ window.MONSTERS = [
     "name": "Iona",
     "unawakened_name": "epikion priest",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7233,6 +7713,7 @@ window.MONSTERS = [
     "name": "Iris",
     "unawakened_name": "magic knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7248,6 +7729,7 @@ window.MONSTERS = [
     "name": "Isis",
     "unawakened_name": "desert queen",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7263,6 +7745,7 @@ window.MONSTERS = [
     "name": "Jager",
     "unawakened_name": "dragon knight",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7278,6 +7761,7 @@ window.MONSTERS = [
     "name": "Jansson",
     "unawakened_name": "viking",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "lumière",
       "light",
@@ -7293,6 +7777,7 @@ window.MONSTERS = [
     "name": "Jasmine",
     "unawakened_name": "black tea bunny",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7308,6 +7793,7 @@ window.MONSTERS = [
     "name": "Jeanne",
     "unawakened_name": "paladin",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7323,6 +7809,7 @@ window.MONSTERS = [
     "name": "Jessica",
     "unawakened_name": "devil maiden",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7338,6 +7825,7 @@ window.MONSTERS = [
     "name": "Jin Kazama",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light"
@@ -7352,6 +7840,7 @@ window.MONSTERS = [
     "name": "Julianne",
     "unawakened_name": "vampire",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7367,6 +7856,7 @@ window.MONSTERS = [
     "name": "Kabilla",
     "unawakened_name": "harpy",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -7382,6 +7872,7 @@ window.MONSTERS = [
     "name": "Kassandra",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7398,6 +7889,7 @@ window.MONSTERS = [
     "name": "Kinki",
     "unawakened_name": "onimusha",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7413,6 +7905,7 @@ window.MONSTERS = [
     "name": "Kovarci",
     "unawakened_name": "puppeteer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7428,6 +7921,7 @@ window.MONSTERS = [
     "name": "Laima",
     "unawakened_name": "oracle",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7443,6 +7937,7 @@ window.MONSTERS = [
     "name": "Lars",
     "unawakened_name": "magic order guardian",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7458,6 +7953,7 @@ window.MONSTERS = [
     "name": "Leah",
     "unawakened_name": "blade dancer",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7473,6 +7969,7 @@ window.MONSTERS = [
     "name": "Linda",
     "unawakened_name": "mystic witch",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -7488,6 +7985,7 @@ window.MONSTERS = [
     "name": "Liu Mei",
     "unawakened_name": "kung fu girl",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7503,6 +8001,7 @@ window.MONSTERS = [
     "name": "Lora",
     "unawakened_name": "occult girl",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7518,6 +8017,7 @@ window.MONSTERS = [
     "name": "Loren",
     "unawakened_name": "cow girl",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -7533,6 +8033,7 @@ window.MONSTERS = [
     "name": "Louis",
     "unawakened_name": "phantom thief",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7548,6 +8049,7 @@ window.MONSTERS = [
     "name": "Lucas",
     "unawakened_name": "neostone fighter",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7563,6 +8065,7 @@ window.MONSTERS = [
     "name": "Lucien",
     "unawakened_name": "elven ranger",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -7578,6 +8081,7 @@ window.MONSTERS = [
     "name": "Lucifer",
     "unawakened_name": "demon",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7593,6 +8097,7 @@ window.MONSTERS = [
     "name": "Lusha",
     "unawakened_name": "warbear",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -7608,6 +8113,7 @@ window.MONSTERS = [
     "name": "Lyn",
     "unawakened_name": "amazon",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -7623,6 +8129,7 @@ window.MONSTERS = [
     "name": "M. BISON",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light"
@@ -7637,6 +8144,7 @@ window.MONSTERS = [
     "name": "Madeleine",
     "unawakened_name": "rune blacksmith",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7652,6 +8160,7 @@ window.MONSTERS = [
     "name": "Madeleine Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7668,6 +8177,7 @@ window.MONSTERS = [
     "name": "Magnum",
     "unawakened_name": "sniper mki",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7683,6 +8193,7 @@ window.MONSTERS = [
     "name": "Marble",
     "unawakened_name": "battle mammoth",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -7698,6 +8209,7 @@ window.MONSTERS = [
     "name": "Megumi Fushiguro",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7714,6 +8226,7 @@ window.MONSTERS = [
     "name": "Mihael",
     "unawakened_name": "sylphid",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7729,6 +8242,7 @@ window.MONSTERS = [
     "name": "Mimirr",
     "unawakened_name": "barbaric king",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7744,6 +8258,7 @@ window.MONSTERS = [
     "name": "Miruel and Graciah",
     "unawakened_name": "twin angels",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7759,6 +8274,7 @@ window.MONSTERS = [
     "name": "Misty",
     "unawakened_name": "jack o lantern",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7774,6 +8290,7 @@ window.MONSTERS = [
     "name": "Molly",
     "unawakened_name": "mermaid",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7789,6 +8306,7 @@ window.MONSTERS = [
     "name": "Mortera",
     "unawakened_name": "specter princess",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7804,6 +8322,7 @@ window.MONSTERS = [
     "name": "Narsha",
     "unawakened_name": "beast rider",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7819,6 +8338,7 @@ window.MONSTERS = [
     "name": "Natalie",
     "unawakened_name": "assassin",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7834,6 +8354,7 @@ window.MONSTERS = [
     "name": "Neal",
     "unawakened_name": "fairy",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -7849,6 +8370,7 @@ window.MONSTERS = [
     "name": "Nezuko Kamado",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7865,6 +8387,7 @@ window.MONSTERS = [
     "name": "Nigong",
     "unawakened_name": "pioneer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7880,6 +8403,7 @@ window.MONSTERS = [
     "name": "Nina Williams",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light"
@@ -7894,6 +8418,7 @@ window.MONSTERS = [
     "name": "Nobara Kugisaki",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7910,6 +8435,7 @@ window.MONSTERS = [
     "name": "Oberon",
     "unawakened_name": "fairy king",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7925,6 +8451,7 @@ window.MONSTERS = [
     "name": "Pang",
     "unawakened_name": "rakshasa",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7940,6 +8467,7 @@ window.MONSTERS = [
     "name": "Paul Phoenix",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light"
@@ -7954,6 +8482,7 @@ window.MONSTERS = [
     "name": "Phenaka",
     "unawakened_name": "gargoyle",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -7969,6 +8498,7 @@ window.MONSTERS = [
     "name": "Pontos",
     "unawakened_name": "sea emperor",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -7984,6 +8514,7 @@ window.MONSTERS = [
     "name": "Priz",
     "unawakened_name": "elemental",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -7999,6 +8530,7 @@ window.MONSTERS = [
     "name": "Prom",
     "unawakened_name": "grim reaper",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -8014,6 +8546,7 @@ window.MONSTERS = [
     "name": "Pure Vanilla Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8030,6 +8563,7 @@ window.MONSTERS = [
     "name": "Qilin Slasher",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -8045,6 +8579,7 @@ window.MONSTERS = [
     "name": "Qitian Dasheng",
     "unawakened_name": "monkey king",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8060,6 +8595,7 @@ window.MONSTERS = [
     "name": "Ramon",
     "unawakened_name": "tomb warden",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -8075,6 +8611,7 @@ window.MONSTERS = [
     "name": "ROBO-E65",
     "unawakened_name": "robo",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -8090,6 +8627,7 @@ window.MONSTERS = [
     "name": "Rumicus",
     "unawakened_name": "charger shark",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -8105,6 +8643,7 @@ window.MONSTERS = [
     "name": "RYU",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light"
@@ -8119,6 +8658,7 @@ window.MONSTERS = [
     "name": "Sahara",
     "unawakened_name": "mummy",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -8134,6 +8674,7 @@ window.MONSTERS = [
     "name": "Satoru Gojo",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8150,6 +8691,7 @@ window.MONSTERS = [
     "name": "Seimei",
     "unawakened_name": "onmyouji",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8165,6 +8707,7 @@ window.MONSTERS = [
     "name": "Shaffron",
     "unawakened_name": "imp champion",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -8180,6 +8723,7 @@ window.MONSTERS = [
     "name": "Shamann",
     "unawakened_name": "griffon",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -8195,6 +8739,7 @@ window.MONSTERS = [
     "name": "Shamar",
     "unawakened_name": "hellhound",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "lumière",
       "light",
@@ -8210,6 +8755,7 @@ window.MONSTERS = [
     "name": "Shan",
     "unawakened_name": "chimera",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8225,6 +8771,7 @@ window.MONSTERS = [
     "name": "Sharman",
     "unawakened_name": "salamander",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "lumière",
       "light",
@@ -8240,6 +8787,7 @@ window.MONSTERS = [
     "name": "Shazam",
     "unawakened_name": "beast monk",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8255,6 +8803,7 @@ window.MONSTERS = [
     "name": "Shren",
     "unawakened_name": "high elemental",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -8270,6 +8819,7 @@ window.MONSTERS = [
     "name": "Shun",
     "unawakened_name": "shadowcaster",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8285,6 +8835,7 @@ window.MONSTERS = [
     "name": "Shushu",
     "unawakened_name": "howl",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "lumière",
       "light",
@@ -8300,6 +8851,7 @@ window.MONSTERS = [
     "name": "Shushu and Friends",
     "unawakened_name": "howl shushu",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "lumière",
       "light",
@@ -8315,6 +8867,7 @@ window.MONSTERS = [
     "name": "Sia",
     "unawakened_name": "harpu",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -8330,6 +8883,7 @@ window.MONSTERS = [
     "name": "Siamese",
     "unawakened_name": "hypnomeow",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -8345,6 +8899,7 @@ window.MONSTERS = [
     "name": "Silver",
     "unawakened_name": "living armor",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -8360,6 +8915,7 @@ window.MONSTERS = [
     "name": "Tablo",
     "unawakened_name": "dice magician",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -8375,6 +8931,7 @@ window.MONSTERS = [
     "name": "Talisman",
     "unawakened_name": "striker",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8390,6 +8947,7 @@ window.MONSTERS = [
     "name": "Tanjiro Kamado",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8406,6 +8964,7 @@ window.MONSTERS = [
     "name": "Taru",
     "unawakened_name": "imp",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "lumière",
       "light",
@@ -8421,6 +8980,7 @@ window.MONSTERS = [
     "name": "Teon",
     "unawakened_name": "garuda",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -8436,6 +8996,7 @@ window.MONSTERS = [
     "name": "Tian Lang",
     "unawakened_name": "panda warrior",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8451,6 +9012,7 @@ window.MONSTERS = [
     "name": "Tien Qin",
     "unawakened_name": "drunken master",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -8466,6 +9028,7 @@ window.MONSTERS = [
     "name": "Tosi",
     "unawakened_name": "samurai",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -8481,6 +9044,7 @@ window.MONSTERS = [
     "name": "Triss",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8497,6 +9061,7 @@ window.MONSTERS = [
     "name": "Valantis",
     "unawakened_name": "druid",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8512,6 +9077,7 @@ window.MONSTERS = [
     "name": "Varis",
     "unawakened_name": "low elemental",
     "second_awaken": false,
+    "natural_stars": 1,
     "aliases": [
       "lumière",
       "light",
@@ -8527,6 +9093,7 @@ window.MONSTERS = [
     "name": "Vermilion Bird Dancer",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -8542,6 +9109,7 @@ window.MONSTERS = [
     "name": "Veronica",
     "unawakened_name": "battle angel",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8557,6 +9125,7 @@ window.MONSTERS = [
     "name": "Walkers",
     "unawakened_name": "bounty hunter",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -8572,6 +9141,7 @@ window.MONSTERS = [
     "name": "Wedjat",
     "unawakened_name": "horus",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8587,6 +9157,7 @@ window.MONSTERS = [
     "name": "White Tiger Blade Master",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8602,6 +9173,7 @@ window.MONSTERS = [
     "name": "Xiao Ling",
     "unawakened_name": "martial cat",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "lumière",
       "light",
@@ -8617,6 +9189,7 @@ window.MONSTERS = [
     "name": "Yennefer",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -8633,6 +9206,7 @@ window.MONSTERS = [
     "name": "Yeonhong",
     "unawakened_name": "sky dancer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8648,6 +9222,7 @@ window.MONSTERS = [
     "name": "Yuji Itadori",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -8664,6 +9239,7 @@ window.MONSTERS = [
     "name": "Zenitsu Agatsuma",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "lumière",
       "light",
@@ -8680,6 +9256,7 @@ window.MONSTERS = [
     "name": "Zerath",
     "unawakened_name": "dragon",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
@@ -8695,6 +9272,7 @@ window.MONSTERS = [
     "name": "Aaliyah",
     "unawakened_name": "totemist",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -8710,6 +9288,7 @@ window.MONSTERS = [
     "name": "Abellio",
     "unawakened_name": "druid",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -8725,6 +9304,7 @@ window.MONSTERS = [
     "name": "Abigail",
     "unawakened_name": "cannon girl",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -8740,6 +9320,7 @@ window.MONSTERS = [
     "name": "Adriana",
     "unawakened_name": "pudding princess",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -8755,6 +9336,7 @@ window.MONSTERS = [
     "name": "Aegir",
     "unawakened_name": "barbaric king",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -8770,6 +9352,7 @@ window.MONSTERS = [
     "name": "Alicia",
     "unawakened_name": "polar queen",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -8785,6 +9368,7 @@ window.MONSTERS = [
     "name": "Allen",
     "unawakened_name": "vagabond",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "eau",
       "water",
@@ -8800,6 +9384,7 @@ window.MONSTERS = [
     "name": "Amber",
     "unawakened_name": "battle angel",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -8815,6 +9400,7 @@ window.MONSTERS = [
     "name": "Amelia",
     "unawakened_name": "unicorn",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -8830,6 +9416,7 @@ window.MONSTERS = [
     "name": "Anavel",
     "unawakened_name": "occult girl",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -8845,6 +9432,7 @@ window.MONSTERS = [
     "name": "Anders",
     "unawakened_name": "magic order guardian",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -8860,6 +9448,7 @@ window.MONSTERS = [
     "name": "Aqcus",
     "unawakened_name": "charger shark",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -8875,6 +9464,7 @@ window.MONSTERS = [
     "name": "Ariel",
     "unawakened_name": "archangel",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -8890,6 +9480,7 @@ window.MONSTERS = [
     "name": "Avaris",
     "unawakened_name": "anubis",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -8905,6 +9496,7 @@ window.MONSTERS = [
     "name": "Azure Dragon Swordsman",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water"
@@ -8919,6 +9511,7 @@ window.MONSTERS = [
     "name": "Bagir",
     "unawakened_name": "giant warrior",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -8934,6 +9527,7 @@ window.MONSTERS = [
     "name": "Barbara",
     "unawakened_name": "beast rider",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -8949,6 +9543,7 @@ window.MONSTERS = [
     "name": "Bastet",
     "unawakened_name": "desert queen",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -8964,6 +9559,7 @@ window.MONSTERS = [
     "name": "Bayek",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -8980,6 +9576,7 @@ window.MONSTERS = [
     "name": "Belial",
     "unawakened_name": "demon",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -8995,6 +9592,7 @@ window.MONSTERS = [
     "name": "Beth",
     "unawakened_name": "hell lady",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9010,6 +9608,7 @@ window.MONSTERS = [
     "name": "Birman",
     "unawakened_name": "hypnomeow",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9025,6 +9624,7 @@ window.MONSTERS = [
     "name": "Bolverk",
     "unawakened_name": "lightning emperor",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9040,6 +9640,7 @@ window.MONSTERS = [
     "name": "Borgnine",
     "unawakened_name": "slayer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9055,6 +9656,7 @@ window.MONSTERS = [
     "name": "Brita",
     "unawakened_name": "mercenary queen",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9070,6 +9672,7 @@ window.MONSTERS = [
     "name": "Camilla",
     "unawakened_name": "valkyrja",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9085,6 +9688,7 @@ window.MONSTERS = [
     "name": "Cecilia",
     "unawakened_name": "arcane weapon",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9100,6 +9704,7 @@ window.MONSTERS = [
     "name": "Chandra",
     "unawakened_name": "beast monk",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9115,6 +9720,7 @@ window.MONSTERS = [
     "name": "Chilling",
     "unawakened_name": "jack o lantern",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9130,6 +9736,7 @@ window.MONSTERS = [
     "name": "Chow",
     "unawakened_name": "dragon knight",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9145,6 +9752,7 @@ window.MONSTERS = [
     "name": "CHUN-LI",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water"
@@ -9159,6 +9767,7 @@ window.MONSTERS = [
     "name": "Ciri",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9175,6 +9784,7 @@ window.MONSTERS = [
     "name": "Covenant",
     "unawakened_name": "sniper mki",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9190,6 +9800,7 @@ window.MONSTERS = [
     "name": "Dagora",
     "unawakened_name": "warbear",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -9205,6 +9816,7 @@ window.MONSTERS = [
     "name": "Daharenos",
     "unawakened_name": "elemental",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "eau",
       "water",
@@ -9220,6 +9832,7 @@ window.MONSTERS = [
     "name": "DHALSIM",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water"
@@ -9234,6 +9847,7 @@ window.MONSTERS = [
     "name": "Eivor",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9250,6 +9864,7 @@ window.MONSTERS = [
     "name": "Ellena",
     "unawakened_name": "high elemental",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -9265,6 +9880,7 @@ window.MONSTERS = [
     "name": "Ellin",
     "unawakened_name": "amazon",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -9280,6 +9896,7 @@ window.MONSTERS = [
     "name": "Elucia",
     "unawakened_name": "fairy",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -9295,6 +9912,7 @@ window.MONSTERS = [
     "name": "Eluin",
     "unawakened_name": "elven ranger",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -9310,6 +9928,7 @@ window.MONSTERS = [
     "name": "Emma",
     "unawakened_name": "neostone agent",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9325,6 +9944,7 @@ window.MONSTERS = [
     "name": "Espresso Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9341,6 +9961,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Conjurer",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9356,6 +9977,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Fighter",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9371,6 +9993,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Hunter",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9386,6 +10009,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Resolver",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9401,6 +10025,7 @@ window.MONSTERS = [
     "name": "Ezio",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9417,6 +10042,7 @@ window.MONSTERS = [
     "name": "Fedora",
     "unawakened_name": "death knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9432,6 +10058,7 @@ window.MONSTERS = [
     "name": "Fynn",
     "unawakened_name": "imp",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "eau",
       "water",
@@ -9447,6 +10074,7 @@ window.MONSTERS = [
     "name": "Galleon",
     "unawakened_name": "pirate captain",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9462,6 +10090,7 @@ window.MONSTERS = [
     "name": "Ganache",
     "unawakened_name": "choco knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9477,6 +10106,7 @@ window.MONSTERS = [
     "name": "Gangchun",
     "unawakened_name": "beast hunter",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -9492,6 +10122,7 @@ window.MONSTERS = [
     "name": "Geralt",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9508,6 +10139,7 @@ window.MONSTERS = [
     "name": "Gideon",
     "unawakened_name": "beetle guardian",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9523,6 +10155,7 @@ window.MONSTERS = [
     "name": "Gildong",
     "unawakened_name": "taoist",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9538,6 +10171,7 @@ window.MONSTERS = [
     "name": "Gruda",
     "unawakened_name": "bearman",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -9553,6 +10187,7 @@ window.MONSTERS = [
     "name": "Haegang",
     "unawakened_name": "art master",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9568,6 +10203,7 @@ window.MONSTERS = [
     "name": "Hemos",
     "unawakened_name": "grim reaper",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -9583,6 +10219,7 @@ window.MONSTERS = [
     "name": "Herne",
     "unawakened_name": "dryad",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9598,6 +10235,7 @@ window.MONSTERS = [
     "name": "Hollyberry Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9614,6 +10252,7 @@ window.MONSTERS = [
     "name": "Homunculus(Attack)",
     "unawakened_name": "homunculusattack homunculusattack",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9629,6 +10268,7 @@ window.MONSTERS = [
     "name": "Huga",
     "unawakened_name": "viking",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "eau",
       "water",
@@ -9644,6 +10284,7 @@ window.MONSTERS = [
     "name": "Hwoarang",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water"
@@ -9658,6 +10299,7 @@ window.MONSTERS = [
     "name": "Icaru",
     "unawakened_name": "inugami",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -9673,6 +10315,7 @@ window.MONSTERS = [
     "name": "Inosuke Hashibira",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9689,6 +10332,7 @@ window.MONSTERS = [
     "name": "Irène",
     "unawakened_name": "devil maiden",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9704,6 +10348,7 @@ window.MONSTERS = [
     "name": "Izaria",
     "unawakened_name": "succubus",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9719,6 +10364,7 @@ window.MONSTERS = [
     "name": "Jeongnam",
     "unawakened_name": "dokkaebi lord",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9734,6 +10380,7 @@ window.MONSTERS = [
     "name": "Jin Kazama",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water"
@@ -9748,6 +10395,7 @@ window.MONSTERS = [
     "name": "Johanna",
     "unawakened_name": "magic order enchantress",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9763,6 +10411,7 @@ window.MONSTERS = [
     "name": "Josephine",
     "unawakened_name": "paladin",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9778,6 +10427,7 @@ window.MONSTERS = [
     "name": "Julie",
     "unawakened_name": "pierret",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9793,6 +10443,7 @@ window.MONSTERS = [
     "name": "K1D",
     "unawakened_name": "hacker",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9808,6 +10459,7 @@ window.MONSTERS = [
     "name": "Kacey",
     "unawakened_name": "pixie",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "eau",
       "water",
@@ -9823,6 +10475,7 @@ window.MONSTERS = [
     "name": "Kahn",
     "unawakened_name": "griffon",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -9838,6 +10491,7 @@ window.MONSTERS = [
     "name": "Kaimann",
     "unawakened_name": "salamander",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "eau",
       "water",
@@ -9853,6 +10507,7 @@ window.MONSTERS = [
     "name": "Kalantatze",
     "unawakened_name": "gladiatrix",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9868,6 +10523,7 @@ window.MONSTERS = [
     "name": "Kassandra",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9884,6 +10540,7 @@ window.MONSTERS = [
     "name": "Kaz",
     "unawakened_name": "samurai",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9899,6 +10556,7 @@ window.MONSTERS = [
     "name": "Kernodon",
     "unawakened_name": "lizardman",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -9914,6 +10572,7 @@ window.MONSTERS = [
     "name": "Konamiya",
     "unawakened_name": "garuda",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "eau",
       "water",
@@ -9929,6 +10588,7 @@ window.MONSTERS = [
     "name": "Kuhn",
     "unawakened_name": "golem",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -9944,6 +10604,7 @@ window.MONSTERS = [
     "name": "Kunda",
     "unawakened_name": "yeti",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "eau",
       "water",
@@ -9959,6 +10620,7 @@ window.MONSTERS = [
     "name": "Kyle",
     "unawakened_name": "poison master",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -9974,6 +10636,7 @@ window.MONSTERS = [
     "name": "Lamiella",
     "unawakened_name": "specter princess",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -9989,6 +10652,7 @@ window.MONSTERS = [
     "name": "Lapis",
     "unawakened_name": "magic knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10004,6 +10668,7 @@ window.MONSTERS = [
     "name": "Lariel",
     "unawakened_name": "blade dancer",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10019,6 +10684,7 @@ window.MONSTERS = [
     "name": "Liam",
     "unawakened_name": "weapon master",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10034,6 +10700,7 @@ window.MONSTERS = [
     "name": "Liesel",
     "unawakened_name": "vampire",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10049,6 +10716,7 @@ window.MONSTERS = [
     "name": "Lionel",
     "unawakened_name": "steel commander",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10064,6 +10732,7 @@ window.MONSTERS = [
     "name": "Lorenza",
     "unawakened_name": "cyborg",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10079,6 +10748,7 @@ window.MONSTERS = [
     "name": "Luan",
     "unawakened_name": "martial artist",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -10094,6 +10764,7 @@ window.MONSTERS = [
     "name": "Luer",
     "unawakened_name": "phantom thief",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10109,6 +10780,7 @@ window.MONSTERS = [
     "name": "Lulu",
     "unawakened_name": "howl",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "eau",
       "water",
@@ -10124,6 +10796,7 @@ window.MONSTERS = [
     "name": "Lulu and Friends",
     "unawakened_name": "howl lulu",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "eau",
       "water",
@@ -10139,6 +10812,7 @@ window.MONSTERS = [
     "name": "Lumina",
     "unawakened_name": "magic order elementalist",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10154,6 +10828,7 @@ window.MONSTERS = [
     "name": "Lumirecia",
     "unawakened_name": "sylphid",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10169,6 +10844,7 @@ window.MONSTERS = [
     "name": "M. BISON",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water"
@@ -10183,6 +10859,7 @@ window.MONSTERS = [
     "name": "Madeleine Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10199,6 +10876,7 @@ window.MONSTERS = [
     "name": "Malaka",
     "unawakened_name": "kobold bomber",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10214,6 +10892,7 @@ window.MONSTERS = [
     "name": "Manon",
     "unawakened_name": "macaron guard",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10229,6 +10908,7 @@ window.MONSTERS = [
     "name": "Mao",
     "unawakened_name": "drunken master",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -10244,6 +10924,7 @@ window.MONSTERS = [
     "name": "Mayasura",
     "unawakened_name": "asura",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10259,6 +10940,7 @@ window.MONSTERS = [
     "name": "Megan",
     "unawakened_name": "mystic witch",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -10274,6 +10956,7 @@ window.MONSTERS = [
     "name": "Megumi Fushiguro",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10290,6 +10973,7 @@ window.MONSTERS = [
     "name": "Mihyang",
     "unawakened_name": "sky dancer",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10305,6 +10989,7 @@ window.MONSTERS = [
     "name": "Mikene",
     "unawakened_name": "undine",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10320,6 +11005,7 @@ window.MONSTERS = [
     "name": "Miles",
     "unawakened_name": "sky surfer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10335,6 +11021,7 @@ window.MONSTERS = [
     "name": "Mina",
     "unawakened_name": "martial cat",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -10350,6 +11037,7 @@ window.MONSTERS = [
     "name": "Minato",
     "unawakened_name": "shadowcaster",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10365,6 +11053,7 @@ window.MONSTERS = [
     "name": "Minji and Sapsaree",
     "unawakened_name": "dokkaebi princess and sapsaree",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10380,6 +11069,7 @@ window.MONSTERS = [
     "name": "Mo Long",
     "unawakened_name": "panda warrior",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10395,6 +11085,7 @@ window.MONSTERS = [
     "name": "Moore",
     "unawakened_name": "striker",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10410,6 +11101,7 @@ window.MONSTERS = [
     "name": "Mork",
     "unawakened_name": "tomb warden",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10425,6 +11117,7 @@ window.MONSTERS = [
     "name": "Nana",
     "unawakened_name": "mage",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10440,6 +11133,7 @@ window.MONSTERS = [
     "name": "Nezuko Kamado",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10456,6 +11150,7 @@ window.MONSTERS = [
     "name": "Nickel",
     "unawakened_name": "living armor",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -10471,6 +11166,7 @@ window.MONSTERS = [
     "name": "Nina Williams",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water"
@@ -10485,6 +11181,7 @@ window.MONSTERS = [
     "name": "Nobara Kugisaki",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10501,6 +11198,7 @@ window.MONSTERS = [
     "name": "Nubia",
     "unawakened_name": "mummy",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -10516,6 +11214,7 @@ window.MONSTERS = [
     "name": "Omar",
     "unawakened_name": "desert warrior",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10531,6 +11230,7 @@ window.MONSTERS = [
     "name": "Orion",
     "unawakened_name": "brownie magician",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10546,6 +11246,7 @@ window.MONSTERS = [
     "name": "Parjanya",
     "unawakened_name": "indra",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10561,6 +11262,7 @@ window.MONSTERS = [
     "name": "Paul Phoenix",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water"
@@ -10575,6 +11277,7 @@ window.MONSTERS = [
     "name": "Poseidon",
     "unawakened_name": "sea emperor",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10590,6 +11293,7 @@ window.MONSTERS = [
     "name": "Praha",
     "unawakened_name": "oracle",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10605,6 +11309,7 @@ window.MONSTERS = [
     "name": "Psamathe",
     "unawakened_name": "fairy king",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10620,6 +11325,7 @@ window.MONSTERS = [
     "name": "Pure Vanilla Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10636,6 +11342,7 @@ window.MONSTERS = [
     "name": "Purian",
     "unawakened_name": "inferno",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -10651,6 +11358,7 @@ window.MONSTERS = [
     "name": "Qebehsenuef",
     "unawakened_name": "horus",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10666,6 +11374,7 @@ window.MONSTERS = [
     "name": "Qilin Slasher",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10681,6 +11390,7 @@ window.MONSTERS = [
     "name": "Ramael and Judiah",
     "unawakened_name": "twin angels",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10696,6 +11406,7 @@ window.MONSTERS = [
     "name": "Ramira",
     "unawakened_name": "harpy",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -10711,6 +11422,7 @@ window.MONSTERS = [
     "name": "Remy",
     "unawakened_name": "harg",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -10726,6 +11438,7 @@ window.MONSTERS = [
     "name": "Reno",
     "unawakened_name": "dice magician",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10741,6 +11454,7 @@ window.MONSTERS = [
     "name": "Rhoetus",
     "unawakened_name": "centaur knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10756,6 +11470,7 @@ window.MONSTERS = [
     "name": "Rigel",
     "unawakened_name": "lich",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10771,6 +11486,7 @@ window.MONSTERS = [
     "name": "Rigna",
     "unawakened_name": "magic order swordsinger",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10786,6 +11502,7 @@ window.MONSTERS = [
     "name": "Rina",
     "unawakened_name": "epikion priest",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -10801,6 +11518,7 @@ window.MONSTERS = [
     "name": "ROBO-R40",
     "unawakened_name": "robo",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10816,6 +11534,7 @@ window.MONSTERS = [
     "name": "Rosemary",
     "unawakened_name": "black tea bunny",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10831,6 +11550,7 @@ window.MONSTERS = [
     "name": "Ryan",
     "unawakened_name": "neostone fighter",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10846,6 +11566,7 @@ window.MONSTERS = [
     "name": "RYU",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water"
@@ -10860,6 +11581,7 @@ window.MONSTERS = [
     "name": "Sabrina",
     "unawakened_name": "boomerang warrior",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10875,6 +11597,7 @@ window.MONSTERS = [
     "name": "Satoru Gojo",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10891,6 +11614,7 @@ window.MONSTERS = [
     "name": "Sera",
     "unawakened_name": "cow girl",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -10906,6 +11630,7 @@ window.MONSTERS = [
     "name": "Shailoq",
     "unawakened_name": "serpent",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -10921,6 +11646,7 @@ window.MONSTERS = [
     "name": "Sharron",
     "unawakened_name": "magical archer",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -10936,6 +11662,7 @@ window.MONSTERS = [
     "name": "Shi Hou",
     "unawakened_name": "monkey king",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10951,6 +11678,7 @@ window.MONSTERS = [
     "name": "Shizuka",
     "unawakened_name": "onmyouji",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10966,6 +11694,7 @@ window.MONSTERS = [
     "name": "Sian",
     "unawakened_name": "joker",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -10981,6 +11710,7 @@ window.MONSTERS = [
     "name": "Sigmarus",
     "unawakened_name": "phoenix",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -10996,6 +11726,7 @@ window.MONSTERS = [
     "name": "Sisroo",
     "unawakened_name": "harpu",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "eau",
       "water",
@@ -11011,6 +11742,7 @@ window.MONSTERS = [
     "name": "Soha",
     "unawakened_name": "nine tailed fox",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -11026,6 +11758,7 @@ window.MONSTERS = [
     "name": "Solvark",
     "unawakened_name": "drakan warrior",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -11041,6 +11774,7 @@ window.MONSTERS = [
     "name": "Songseol",
     "unawakened_name": "string master",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -11056,6 +11790,7 @@ window.MONSTERS = [
     "name": "Sonnet",
     "unawakened_name": "harp magician",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -11071,6 +11806,7 @@ window.MONSTERS = [
     "name": "Stella",
     "unawakened_name": "assassin",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -11086,6 +11822,7 @@ window.MONSTERS = [
     "name": "Su",
     "unawakened_name": "rakshasa",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -11101,6 +11838,7 @@ window.MONSTERS = [
     "name": "Suiki",
     "unawakened_name": "onimusha",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -11116,6 +11854,7 @@ window.MONSTERS = [
     "name": "Susan",
     "unawakened_name": "rune blacksmith",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -11131,6 +11870,7 @@ window.MONSTERS = [
     "name": "Susano",
     "unawakened_name": "ninja",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -11146,6 +11886,7 @@ window.MONSTERS = [
     "name": "Talc",
     "unawakened_name": "battle mammoth",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -11161,6 +11902,7 @@ window.MONSTERS = [
     "name": "Talia",
     "unawakened_name": "chakram dancer",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -11176,6 +11918,7 @@ window.MONSTERS = [
     "name": "Tanjiro Kamado",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -11192,6 +11935,7 @@ window.MONSTERS = [
     "name": "Tanzaite",
     "unawakened_name": "gargoyle",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -11207,6 +11951,7 @@ window.MONSTERS = [
     "name": "Taor",
     "unawakened_name": "chimera",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -11222,6 +11967,7 @@ window.MONSTERS = [
     "name": "Tarq",
     "unawakened_name": "hellhound",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "eau",
       "water",
@@ -11237,6 +11983,7 @@ window.MONSTERS = [
     "name": "Tetra",
     "unawakened_name": "mermaid",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -11252,6 +11999,7 @@ window.MONSTERS = [
     "name": "Theomars",
     "unawakened_name": "ifrit",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -11267,6 +12015,7 @@ window.MONSTERS = [
     "name": "Tigresse",
     "unawakened_name": "low elemental",
     "second_awaken": false,
+    "natural_stars": 1,
     "aliases": [
       "eau",
       "water",
@@ -11282,6 +12031,7 @@ window.MONSTERS = [
     "name": "Toma",
     "unawakened_name": "penguin knight",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -11297,6 +12047,7 @@ window.MONSTERS = [
     "name": "Tractor",
     "unawakened_name": "frankenstein",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -11312,6 +12063,7 @@ window.MONSTERS = [
     "name": "Triss",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -11328,6 +12080,7 @@ window.MONSTERS = [
     "name": "Tyron",
     "unawakened_name": "sylph",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -11343,6 +12096,7 @@ window.MONSTERS = [
     "name": "Urtau",
     "unawakened_name": "minotauros",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -11358,6 +12112,7 @@ window.MONSTERS = [
     "name": "Verad",
     "unawakened_name": "dragon",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -11373,6 +12128,7 @@ window.MONSTERS = [
     "name": "Vermilion Bird Dancer",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -11388,6 +12144,7 @@ window.MONSTERS = [
     "name": "Vigor",
     "unawakened_name": "werewolf",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -11403,6 +12160,7 @@ window.MONSTERS = [
     "name": "Wayne",
     "unawakened_name": "bounty hunter",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -11418,6 +12176,7 @@ window.MONSTERS = [
     "name": "White Tiger Blade Master",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -11433,6 +12192,7 @@ window.MONSTERS = [
     "name": "Woosa",
     "unawakened_name": "pioneer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -11448,6 +12208,7 @@ window.MONSTERS = [
     "name": "Xiao Lin",
     "unawakened_name": "kung fu girl",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "eau",
       "water",
@@ -11463,6 +12224,7 @@ window.MONSTERS = [
     "name": "Yaku",
     "unawakened_name": "imp champion",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "eau",
       "water",
@@ -11478,6 +12240,7 @@ window.MONSTERS = [
     "name": "Yennefer",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -11494,6 +12257,7 @@ window.MONSTERS = [
     "name": "Yuji Itadori",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -11510,6 +12274,7 @@ window.MONSTERS = [
     "name": "Zenitsu Agatsuma",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -11526,6 +12291,7 @@ window.MONSTERS = [
     "name": "Zibala",
     "unawakened_name": "puppeteer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "eau",
       "water",
@@ -11541,6 +12307,7 @@ window.MONSTERS = [
     "name": "570RM",
     "unawakened_name": "hacker",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -11556,6 +12323,7 @@ window.MONSTERS = [
     "name": "Acasis",
     "unawakened_name": "sylphid",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -11571,6 +12339,7 @@ window.MONSTERS = [
     "name": "Aeilene",
     "unawakened_name": "fairy",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "vent",
       "wind",
@@ -11586,6 +12355,7 @@ window.MONSTERS = [
     "name": "Akhamamir",
     "unawakened_name": "ifrit",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -11601,6 +12371,7 @@ window.MONSTERS = [
     "name": "Anduril",
     "unawakened_name": "inferno",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -11616,6 +12387,7 @@ window.MONSTERS = [
     "name": "Angela",
     "unawakened_name": "pudding princess",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -11631,6 +12403,7 @@ window.MONSTERS = [
     "name": "Aquila",
     "unawakened_name": "brownie magician",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -11646,6 +12419,7 @@ window.MONSTERS = [
     "name": "Arang",
     "unawakened_name": "nine tailed fox",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -11661,6 +12435,7 @@ window.MONSTERS = [
     "name": "Ardella",
     "unawakened_name": "magical archer",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -11676,6 +12451,7 @@ window.MONSTERS = [
     "name": "Argen",
     "unawakened_name": "vampire",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -11691,6 +12467,7 @@ window.MONSTERS = [
     "name": "Astrid",
     "unawakened_name": "mercenary queen",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -11706,6 +12483,7 @@ window.MONSTERS = [
     "name": "Azure Dragon Swordsman",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind"
@@ -11720,6 +12498,7 @@ window.MONSTERS = [
     "name": "Barque",
     "unawakened_name": "pirate captain",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -11735,6 +12514,7 @@ window.MONSTERS = [
     "name": "Bayek",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -11751,6 +12531,7 @@ window.MONSTERS = [
     "name": "Bernard",
     "unawakened_name": "griffon",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -11766,6 +12547,7 @@ window.MONSTERS = [
     "name": "Black Tortoise Champion",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -11781,6 +12563,7 @@ window.MONSTERS = [
     "name": "Briand",
     "unawakened_name": "death knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -11796,6 +12579,7 @@ window.MONSTERS = [
     "name": "Byungchul",
     "unawakened_name": "dokkaebi lord",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -11811,6 +12595,7 @@ window.MONSTERS = [
     "name": "Carbine",
     "unawakened_name": "sniper mki",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -11826,6 +12611,7 @@ window.MONSTERS = [
     "name": "Celine",
     "unawakened_name": "rune blacksmith",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -11841,6 +12627,7 @@ window.MONSTERS = [
     "name": "Chakra",
     "unawakened_name": "indra",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -11856,6 +12643,7 @@ window.MONSTERS = [
     "name": "Chamomile",
     "unawakened_name": "black tea bunny",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -11871,6 +12659,7 @@ window.MONSTERS = [
     "name": "Charlotte",
     "unawakened_name": "occult girl",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -11886,6 +12675,7 @@ window.MONSTERS = [
     "name": "Chasun",
     "unawakened_name": "sky dancer",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -11901,6 +12691,7 @@ window.MONSTERS = [
     "name": "Cheongpung",
     "unawakened_name": "art master",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -11916,6 +12707,7 @@ window.MONSTERS = [
     "name": "Chichi",
     "unawakened_name": "howl",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "vent",
       "wind",
@@ -11931,6 +12723,7 @@ window.MONSTERS = [
     "name": "Chichi and Friends",
     "unawakened_name": "howl chichi",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "vent",
       "wind",
@@ -11946,6 +12739,7 @@ window.MONSTERS = [
     "name": "Christina",
     "unawakened_name": "cannon girl",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -11961,6 +12755,7 @@ window.MONSTERS = [
     "name": "CHUN-LI",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind"
@@ -11975,6 +12770,7 @@ window.MONSTERS = [
     "name": "Cichlid",
     "unawakened_name": "mermaid",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -11990,6 +12786,7 @@ window.MONSTERS = [
     "name": "Ciri",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12006,6 +12803,7 @@ window.MONSTERS = [
     "name": "Copper",
     "unawakened_name": "living armor",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -12021,6 +12819,7 @@ window.MONSTERS = [
     "name": "Cordelia",
     "unawakened_name": "blade dancer",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12036,6 +12835,7 @@ window.MONSTERS = [
     "name": "Crane",
     "unawakened_name": "frankenstein",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -12051,6 +12851,7 @@ window.MONSTERS = [
     "name": "Dagorr",
     "unawakened_name": "bearman",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -12066,6 +12867,7 @@ window.MONSTERS = [
     "name": "Daisy",
     "unawakened_name": "arcane weapon",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12081,6 +12883,7 @@ window.MONSTERS = [
     "name": "Delphoi",
     "unawakened_name": "undine",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12096,6 +12899,7 @@ window.MONSTERS = [
     "name": "DHALSIM",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind"
@@ -12110,6 +12914,7 @@ window.MONSTERS = [
     "name": "Diana",
     "unawakened_name": "unicorn",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12125,6 +12930,7 @@ window.MONSTERS = [
     "name": "Dominic",
     "unawakened_name": "weapon master",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12140,6 +12946,7 @@ window.MONSTERS = [
     "name": "Eintau",
     "unawakened_name": "minotauros",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -12155,6 +12962,7 @@ window.MONSTERS = [
     "name": "Eivor",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12171,6 +12979,7 @@ window.MONSTERS = [
     "name": "Eladriel",
     "unawakened_name": "archangel",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12186,6 +12995,7 @@ window.MONSTERS = [
     "name": "Eleni",
     "unawakened_name": "gladiatrix",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12201,6 +13011,7 @@ window.MONSTERS = [
     "name": "Elephas",
     "unawakened_name": "beetle guardian",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12216,6 +13027,7 @@ window.MONSTERS = [
     "name": "Eliza",
     "unawakened_name": "cyborg",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12231,6 +13043,7 @@ window.MONSTERS = [
     "name": "Ereshion",
     "unawakened_name": "drakan warrior",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12246,6 +13059,7 @@ window.MONSTERS = [
     "name": "Ermeda",
     "unawakened_name": "serpent",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -12261,6 +13075,7 @@ window.MONSTERS = [
     "name": "Erwin",
     "unawakened_name": "elven ranger",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -12276,6 +13091,7 @@ window.MONSTERS = [
     "name": "Espresso Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12292,6 +13108,7 @@ window.MONSTERS = [
     "name": "Ethna",
     "unawakened_name": "hell lady",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12307,6 +13124,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Conjurer",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12322,6 +13140,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Fighter",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12337,6 +13156,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Hunter",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12352,6 +13172,7 @@ window.MONSTERS = [
     "name": "Exorcist Association Resolver",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12367,6 +13188,7 @@ window.MONSTERS = [
     "name": "Ezio",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12383,6 +13205,7 @@ window.MONSTERS = [
     "name": "Feng Yan",
     "unawakened_name": "panda warrior",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12398,6 +13221,7 @@ window.MONSTERS = [
     "name": "Fuco",
     "unawakened_name": "lich",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12413,6 +13237,7 @@ window.MONSTERS = [
     "name": "Fuuki",
     "unawakened_name": "onimusha",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12428,6 +13253,7 @@ window.MONSTERS = [
     "name": "Gamir",
     "unawakened_name": "hellhound",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "vent",
       "wind",
@@ -12443,6 +13269,7 @@ window.MONSTERS = [
     "name": "Ganymede",
     "unawakened_name": "fairy king",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12458,6 +13285,7 @@ window.MONSTERS = [
     "name": "Geralt",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12474,6 +13302,7 @@ window.MONSTERS = [
     "name": "GingerBrave",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12490,6 +13319,7 @@ window.MONSTERS = [
     "name": "Giou",
     "unawakened_name": "onmyouji",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12505,6 +13335,7 @@ window.MONSTERS = [
     "name": "Gronn",
     "unawakened_name": "tomb warden",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12520,6 +13351,7 @@ window.MONSTERS = [
     "name": "Gyomei Himejima",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind"
@@ -12534,6 +13366,7 @@ window.MONSTERS = [
     "name": "Hannah",
     "unawakened_name": "cow girl",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -12549,6 +13382,7 @@ window.MONSTERS = [
     "name": "Hathor",
     "unawakened_name": "desert queen",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12564,6 +13398,7 @@ window.MONSTERS = [
     "name": "Hector",
     "unawakened_name": "steel commander",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12579,6 +13414,7 @@ window.MONSTERS = [
     "name": "Henrik",
     "unawakened_name": "magic order guardian",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12594,6 +13430,7 @@ window.MONSTERS = [
     "name": "Hexarina",
     "unawakened_name": "magic order enchantress",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12609,6 +13446,7 @@ window.MONSTERS = [
     "name": "Hina",
     "unawakened_name": "amazon",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -12624,6 +13462,7 @@ window.MONSTERS = [
     "name": "Hiva",
     "unawakened_name": "grim reaper",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -12639,6 +13478,7 @@ window.MONSTERS = [
     "name": "Hollyberry Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12655,6 +13495,7 @@ window.MONSTERS = [
     "name": "Homunculus(Attack)",
     "unawakened_name": "homunculusattack homunculusattack",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12670,6 +13511,7 @@ window.MONSTERS = [
     "name": "Hraesvelg",
     "unawakened_name": "barbaric king",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12685,6 +13527,7 @@ window.MONSTERS = [
     "name": "Huan",
     "unawakened_name": "drunken master",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -12700,6 +13543,7 @@ window.MONSTERS = [
     "name": "Hwoarang",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind"
@@ -12714,6 +13558,7 @@ window.MONSTERS = [
     "name": "Imesety",
     "unawakened_name": "horus",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12729,6 +13574,7 @@ window.MONSTERS = [
     "name": "Inosuke Hashibira",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12745,6 +13591,7 @@ window.MONSTERS = [
     "name": "Iunu",
     "unawakened_name": "anubis",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12760,6 +13607,7 @@ window.MONSTERS = [
     "name": "Jade",
     "unawakened_name": "macaron guard",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12775,6 +13623,7 @@ window.MONSTERS = [
     "name": "Jamire",
     "unawakened_name": "dragon",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12790,6 +13639,7 @@ window.MONSTERS = [
     "name": "Jarrett",
     "unawakened_name": "poison master",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12805,6 +13655,7 @@ window.MONSTERS = [
     "name": "Jin Kazama",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind"
@@ -12819,6 +13670,7 @@ window.MONSTERS = [
     "name": "Julien",
     "unawakened_name": "phantom thief",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12834,6 +13686,7 @@ window.MONSTERS = [
     "name": "Kaito",
     "unawakened_name": "samurai",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12849,6 +13702,7 @@ window.MONSTERS = [
     "name": "Kashmir",
     "unawakened_name": "striker",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12864,6 +13718,7 @@ window.MONSTERS = [
     "name": "Kassandra",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12880,6 +13735,7 @@ window.MONSTERS = [
     "name": "Katarina",
     "unawakened_name": "valkyrja",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12895,6 +13751,7 @@ window.MONSTERS = [
     "name": "Lagmaron",
     "unawakened_name": "chimera",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12910,6 +13767,7 @@ window.MONSTERS = [
     "name": "Layla",
     "unawakened_name": "devil maiden",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12925,6 +13783,7 @@ window.MONSTERS = [
     "name": "Leo",
     "unawakened_name": "dragon knight",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -12940,6 +13799,7 @@ window.MONSTERS = [
     "name": "Lindermen",
     "unawakened_name": "garuda",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "vent",
       "wind",
@@ -12955,6 +13815,7 @@ window.MONSTERS = [
     "name": "Ling Ling",
     "unawakened_name": "kung fu girl",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -12970,6 +13831,7 @@ window.MONSTERS = [
     "name": "Lo",
     "unawakened_name": "martial artist",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -12985,6 +13847,7 @@ window.MONSTERS = [
     "name": "Logan",
     "unawakened_name": "neostone fighter",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13000,6 +13863,7 @@ window.MONSTERS = [
     "name": "Louise",
     "unawakened_name": "paladin",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13015,6 +13879,7 @@ window.MONSTERS = [
     "name": "Lukan",
     "unawakened_name": "salamander",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "vent",
       "wind",
@@ -13030,6 +13895,7 @@ window.MONSTERS = [
     "name": "Lupinus",
     "unawakened_name": "magic knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13045,6 +13911,7 @@ window.MONSTERS = [
     "name": "Lushen",
     "unawakened_name": "joker",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13060,6 +13927,7 @@ window.MONSTERS = [
     "name": "M. BISON",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind"
@@ -13074,6 +13942,7 @@ window.MONSTERS = [
     "name": "Madeleine Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13090,6 +13959,7 @@ window.MONSTERS = [
     "name": "Malite",
     "unawakened_name": "gargoyle",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13105,6 +13975,7 @@ window.MONSTERS = [
     "name": "Mav",
     "unawakened_name": "penguin knight",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -13120,6 +13991,7 @@ window.MONSTERS = [
     "name": "Megumi Fushiguro",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13136,6 +14008,7 @@ window.MONSTERS = [
     "name": "Melissa",
     "unawakened_name": "chakram dancer",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13151,6 +14024,7 @@ window.MONSTERS = [
     "name": "Mellia",
     "unawakened_name": "dryad",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13166,6 +14040,7 @@ window.MONSTERS = [
     "name": "Mephisto",
     "unawakened_name": "demon",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13181,6 +14056,7 @@ window.MONSTERS = [
     "name": "Michelle",
     "unawakened_name": "epikion priest",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -13196,6 +14072,7 @@ window.MONSTERS = [
     "name": "Momo",
     "unawakened_name": "mage",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13211,6 +14088,7 @@ window.MONSTERS = [
     "name": "Moria",
     "unawakened_name": "high elemental",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -13226,6 +14104,7 @@ window.MONSTERS = [
     "name": "Morris",
     "unawakened_name": "dice magician",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13241,6 +14120,7 @@ window.MONSTERS = [
     "name": "Namib",
     "unawakened_name": "mummy",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -13256,6 +14136,7 @@ window.MONSTERS = [
     "name": "Naomi",
     "unawakened_name": "martial cat",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -13271,6 +14152,7 @@ window.MONSTERS = [
     "name": "Nebelung",
     "unawakened_name": "hypnomeow",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13286,6 +14168,7 @@ window.MONSTERS = [
     "name": "Nezuko Kamado",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13302,6 +14185,7 @@ window.MONSTERS = [
     "name": "Nina Williams",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind"
@@ -13316,6 +14200,7 @@ window.MONSTERS = [
     "name": "Nobara Kugisaki",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13332,6 +14217,7 @@ window.MONSTERS = [
     "name": "Nobella",
     "unawakened_name": "magic order elementalist",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13347,6 +14233,7 @@ window.MONSTERS = [
     "name": "Odin",
     "unawakened_name": "lightning emperor",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13362,6 +14249,7 @@ window.MONSTERS = [
     "name": "Oliver",
     "unawakened_name": "sky surfer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13377,6 +14265,7 @@ window.MONSTERS = [
     "name": "Olivia",
     "unawakened_name": "neostone agent",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13392,6 +14281,7 @@ window.MONSTERS = [
     "name": "Olivine",
     "unawakened_name": "battle mammoth",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -13407,6 +14297,7 @@ window.MONSTERS = [
     "name": "Orochi",
     "unawakened_name": "ninja",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13422,6 +14313,7 @@ window.MONSTERS = [
     "name": "Orphina",
     "unawakened_name": "specter princess",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13437,6 +14329,7 @@ window.MONSTERS = [
     "name": "Paul Phoenix",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind"
@@ -13451,6 +14344,7 @@ window.MONSTERS = [
     "name": "Pholus",
     "unawakened_name": "centaur knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13466,6 +14360,7 @@ window.MONSTERS = [
     "name": "Pigma",
     "unawakened_name": "imp champion",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -13481,6 +14376,7 @@ window.MONSTERS = [
     "name": "Praline",
     "unawakened_name": "choco knight",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13496,6 +14392,7 @@ window.MONSTERS = [
     "name": "Prilea",
     "unawakened_name": "harpy",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -13511,6 +14408,7 @@ window.MONSTERS = [
     "name": "Pungbaek",
     "unawakened_name": "pioneer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13526,6 +14424,7 @@ window.MONSTERS = [
     "name": "Pure Vanilla Cookie",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13542,6 +14441,7 @@ window.MONSTERS = [
     "name": "Qilin Slasher",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13557,6 +14457,7 @@ window.MONSTERS = [
     "name": "Ragion",
     "unawakened_name": "golem",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -13572,6 +14473,7 @@ window.MONSTERS = [
     "name": "Rakaja",
     "unawakened_name": "yeti",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "vent",
       "wind",
@@ -13587,6 +14489,7 @@ window.MONSTERS = [
     "name": "Ralph",
     "unawakened_name": "imp",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "vent",
       "wind",
@@ -13602,6 +14505,7 @@ window.MONSTERS = [
     "name": "Ramagos",
     "unawakened_name": "warbear",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "vent",
       "wind",
@@ -13617,6 +14521,7 @@ window.MONSTERS = [
     "name": "Ramahan",
     "unawakened_name": "inugami",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -13632,6 +14537,7 @@ window.MONSTERS = [
     "name": "Raviti",
     "unawakened_name": "harg",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13647,6 +14553,7 @@ window.MONSTERS = [
     "name": "Riley",
     "unawakened_name": "totemist",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13662,6 +14569,7 @@ window.MONSTERS = [
     "name": "Ritesh",
     "unawakened_name": "beast monk",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13677,6 +14585,7 @@ window.MONSTERS = [
     "name": "ROBO-G92",
     "unawakened_name": "robo",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13692,6 +14601,7 @@ window.MONSTERS = [
     "name": "Roger",
     "unawakened_name": "bounty hunter",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -13707,6 +14617,7 @@ window.MONSTERS = [
     "name": "Roid",
     "unawakened_name": "vagabond",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "vent",
       "wind",
@@ -13722,6 +14633,7 @@ window.MONSTERS = [
     "name": "RYU",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind"
@@ -13736,6 +14648,7 @@ window.MONSTERS = [
     "name": "Sadiel and Zeryah",
     "unawakened_name": "twin angels",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13751,6 +14664,7 @@ window.MONSTERS = [
     "name": "Sagar",
     "unawakened_name": "slayer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13766,6 +14680,7 @@ window.MONSTERS = [
     "name": "Samour",
     "unawakened_name": "low elemental",
     "second_awaken": false,
+    "natural_stars": 1,
     "aliases": [
       "vent",
       "wind",
@@ -13781,6 +14696,7 @@ window.MONSTERS = [
     "name": "Satoru Gojo",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13797,6 +14713,7 @@ window.MONSTERS = [
     "name": "Savannah",
     "unawakened_name": "beast rider",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13812,6 +14729,7 @@ window.MONSTERS = [
     "name": "Seal",
     "unawakened_name": "harpu",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "vent",
       "wind",
@@ -13827,6 +14745,7 @@ window.MONSTERS = [
     "name": "Seara",
     "unawakened_name": "oracle",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13842,6 +14761,7 @@ window.MONSTERS = [
     "name": "Selena",
     "unawakened_name": "succubus",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13857,6 +14777,7 @@ window.MONSTERS = [
     "name": "Shahat",
     "unawakened_name": "desert warrior",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13872,6 +14793,7 @@ window.MONSTERS = [
     "name": "Shakan",
     "unawakened_name": "werewolf",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -13887,6 +14809,7 @@ window.MONSTERS = [
     "name": "Shannon",
     "unawakened_name": "pixie",
     "second_awaken": true,
+    "natural_stars": 2,
     "aliases": [
       "vent",
       "wind",
@@ -13902,6 +14825,7 @@ window.MONSTERS = [
     "name": "Shimitae",
     "unawakened_name": "sylph",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13917,6 +14841,7 @@ window.MONSTERS = [
     "name": "Silia",
     "unawakened_name": "mystic witch",
     "second_awaken": true,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -13932,6 +14857,7 @@ window.MONSTERS = [
     "name": "Skogul",
     "unawakened_name": "giant warrior",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13947,6 +14873,7 @@ window.MONSTERS = [
     "name": "Smicer",
     "unawakened_name": "puppeteer",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13962,6 +14889,7 @@ window.MONSTERS = [
     "name": "Sonia",
     "unawakened_name": "battle angel",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -13977,6 +14905,7 @@ window.MONSTERS = [
     "name": "Sophia",
     "unawakened_name": "pierret",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -13992,6 +14921,7 @@ window.MONSTERS = [
     "name": "Suri",
     "unawakened_name": "beast hunter",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -14007,6 +14937,7 @@ window.MONSTERS = [
     "name": "Taharus",
     "unawakened_name": "elemental",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "vent",
       "wind",
@@ -14022,6 +14953,7 @@ window.MONSTERS = [
     "name": "Tanjiro Kamado",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -14038,6 +14970,7 @@ window.MONSTERS = [
     "name": "Tanya",
     "unawakened_name": "assassin",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -14053,6 +14986,7 @@ window.MONSTERS = [
     "name": "Taranys",
     "unawakened_name": "druid",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -14068,6 +15002,7 @@ window.MONSTERS = [
     "name": "Taurus",
     "unawakened_name": "kobold bomber",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -14083,6 +15018,7 @@ window.MONSTERS = [
     "name": "Teshar",
     "unawakened_name": "phoenix",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -14098,6 +15034,7 @@ window.MONSTERS = [
     "name": "Thomas",
     "unawakened_name": "lollipop warrior",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -14113,6 +15050,7 @@ window.MONSTERS = [
     "name": "Tiana",
     "unawakened_name": "polar queen",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -14128,6 +15066,7 @@ window.MONSTERS = [
     "name": "Tirsa",
     "unawakened_name": "magic order swordsinger",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -14143,6 +15082,7 @@ window.MONSTERS = [
     "name": "Triana",
     "unawakened_name": "harp magician",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -14158,6 +15098,7 @@ window.MONSTERS = [
     "name": "Triss",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -14174,6 +15115,7 @@ window.MONSTERS = [
     "name": "Triton",
     "unawakened_name": "sea emperor",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -14189,6 +15131,7 @@ window.MONSTERS = [
     "name": "Usha",
     "unawakened_name": "asura",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -14204,6 +15147,7 @@ window.MONSTERS = [
     "name": "Velfinodon",
     "unawakened_name": "lizardman",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
@@ -14219,6 +15163,7 @@ window.MONSTERS = [
     "name": "Vermilion Bird Dancer",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -14234,6 +15179,7 @@ window.MONSTERS = [
     "name": "Walter",
     "unawakened_name": "viking",
     "second_awaken": false,
+    "natural_stars": 2,
     "aliases": [
       "vent",
       "wind",
@@ -14249,6 +15195,7 @@ window.MONSTERS = [
     "name": "White Tiger Blade Master",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -14264,6 +15211,7 @@ window.MONSTERS = [
     "name": "Windy",
     "unawakened_name": "jack o lantern",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -14279,6 +15227,7 @@ window.MONSTERS = [
     "name": "Woochi",
     "unawakened_name": "taoist",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -14294,6 +15243,7 @@ window.MONSTERS = [
     "name": "Xing Zhe",
     "unawakened_name": "monkey king",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -14309,6 +15259,7 @@ window.MONSTERS = [
     "name": "Yen",
     "unawakened_name": "rakshasa",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -14324,6 +15275,7 @@ window.MONSTERS = [
     "name": "Yennefer",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -14340,6 +15292,7 @@ window.MONSTERS = [
     "name": "Yeonhwa",
     "unawakened_name": "string master",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -14355,6 +15308,7 @@ window.MONSTERS = [
     "name": "Yuji Itadori",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -14371,6 +15325,7 @@ window.MONSTERS = [
     "name": "Yuna and Sapsaree",
     "unawakened_name": "dokkaebi princess and sapsaree",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -14386,6 +15341,7 @@ window.MONSTERS = [
     "name": "Zen",
     "unawakened_name": "shadowcaster",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -14401,6 +15357,7 @@ window.MONSTERS = [
     "name": "Zenitsu Agatsuma",
     "unawakened_name": "",
     "second_awaken": false,
+    "natural_stars": 5,
     "aliases": [
       "vent",
       "wind",
@@ -14417,6 +15374,7 @@ window.MONSTERS = [
     "name": "Zenobia",
     "unawakened_name": "boomerang warrior",
     "second_awaken": false,
+    "natural_stars": 4,
     "aliases": [
       "vent",
       "wind",
@@ -14432,6 +15390,7 @@ window.MONSTERS = [
     "name": "Zephicus",
     "unawakened_name": "charger shark",
     "second_awaken": false,
+    "natural_stars": 3,
     "aliases": [
       "vent",
       "wind",
