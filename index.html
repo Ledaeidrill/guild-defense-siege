@@ -92,14 +92,15 @@
 <script src="monsters.js" defer></script>
 <script src="script.js" defer></script>
 
-<button id="btnVoirOffs" class="btn">Voir offs</button>
-
+<button id="btnVoirOffs" class="btn" type="button">Voir offs</button>
+  
 <div id="offsModal" class="modal" aria-hidden="true">
-  <div class="modal__dialog">
-    <div class="modal__header">
-      <h3>Offenses</h3>
-      <button class="modal__close" id="closeOffs">&times;</button>
-    </div>
+  <div id="offsModal" class="modal" aria-hidden="true">
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="offsTitle">
+      <div class="modal__header">
+        <h3 id="offsTitle">Offenses</h3>
+        <button class="modal__close" id="closeOffs" type="button" aria-label="Fermer">&times;</button>
+      </div>
     <div class="modal__body">
       <div class="adminBar">
         <button id="enterAdmin" class="btn btn--ghost">Admin mode</button>
