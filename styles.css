@@ -346,3 +346,39 @@ textarea{ min-height:100px; border-radius:12px; }
   max-height:52vh; overflow:auto;
 }
 
+/* Picks du PICKER : une seule ligne + scroll horizontal */
+.off-picks{
+  display:flex;
+  flex-wrap:nowrap;
+  gap:10px;
+  align-items:center;
+  min-height:58px;
+  margin:8px 0;
+  overflow:auto;            /* scroll horizontal si besoin */
+  padding-bottom:4px;       /* un peu d’air pour la scrollbar */
+}
+.off-picks .pick{
+  width:auto;
+  padding:6px;
+  flex-direction:row;       /* image + label côte à côte */
+  gap:8px;
+}
+.off-picks .pick img{
+  width:40px;
+  height:40px;
+}
+
+/* Chaque offense listée = 3 icônes alignées sur une ligne */
+.off-trio{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+/* Afficher le spinner quand le bouton a .sending et que le spinner est son frère immédiat */
+.btn-primary.sending + .btn-spinner{
+  display:inline-block;
+  animation: spin .8s linear infinite;
+}
+
+
