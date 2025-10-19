@@ -949,7 +949,7 @@ function openOffPicker(defKey, offsListEl, onClose){
 
   const pickTitle = document.createElement('div');
   pickTitle.className = 'picker-title';
-  pickTitle.textContent = 'Sélectionne 3 monstres (glisser pour réordonner)';
+  pickTitle.textContent = 'Sélectionne 3 monstres';
   wrap.appendChild(pickTitle);
 
   const picksBox = document.createElement('div');
