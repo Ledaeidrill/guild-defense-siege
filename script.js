@@ -68,30 +68,64 @@ function esc(s){
 }
 
 // ===== Modal Offs (markup existant dans index.html) =====
-const offsModal = qs('#offsModal');
-const closeOffsBtn = qs('#closeOffs');
-const offsTitle = qs('#offsTitle');
-const offsListEl = qs('#offsList');
-const offsForm = qs('#offsForm');
-const enterAdminBtn = qs('#enterAdmin');
-const adminBadge = qs('#adminBadge');
+const offsModal   = qs('#offsModal');
+const closeOffsBtn= qs('#closeOffs');
+const offsTitle   = qs('#offsTitle');
+const offsListEl  = qs('#offsList');
 
-let IS_ADMIN = false; // piloté par ?admin=... dans l'URL (ADMIN_TOKEN_PARAM)
+const ADMIN_TOKEN_PARAM = new URL(location.href).searchParams.get('admin');
+let IS_ADMIN = false;
 
 function showOffsModal(){ offsModal?.setAttribute('aria-hidden','false'); }
 function hideOffsModal(){ offsModal?.setAttribute('aria-hidden','true'); }
 closeOffsBtn?.addEventListener('click', hideOffsModal);
 offsModal?.addEventListener('click', (e)=>{ if (e.target === offsModal) hideOffsModal(); });
 
-async function refreshAdminUI(){
-  IS_ADMIN = !!ADMIN_TOKEN_PARAM;                 // simple: token en query string
-  if (adminBadge) adminBadge.hidden = !IS_ADMIN;
-  if (offsForm) offsForm.hidden = !IS_ADMIN;
-  if (enterAdminBtn) enterAdminBtn.textContent = IS_ADMIN ? 'Admin (URL)' : 'Admin mode';
+// Vérifie côté serveur si le token admin est valide (recommandé)
+async function detectAdmin(){
+  if (!ADMIN_TOKEN_PARAM) { IS_ADMIN = false; return; }
+  try{
+    const res = await apiPost({ mode:'whoami', token: TOKEN, admin_token: ADMIN_TOKEN_PARAM });
+    IS_ADMIN = !!res?.is_admin;
+  }catch{ IS_ADMIN = false; }
 }
-enterAdminBtn?.addEventListener('click', ()=> {
-  alert(IS_ADMIN ? 'Mode admin via ?admin=... déjà actif.' : 'Pour activer admin: ajoute ?admin=VOTRE_TOKEN à l’URL.');
-});
+
+// Ouvre le modal pour une DEF précise (clé) et charge ses offs
+async function openOffsModal(defKey){
+  if (offsTitle) offsTitle.textContent = 'Offenses — ' + (defKey || '');
+  showOffsModal();
+
+  // détection admin à l’ouverture (évite stocker quoi que ce soit)
+  await detectAdmin();
+
+  offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Chargement…</div></div>';
+  offsListEl.dataset.defKey = defKey || '';
+
+  try{
+    const res = await apiGetOffs(defKey);
+    if (!res?.ok) throw new Error(res?.error || 'Erreur');
+    renderOffsList(offsListEl, res.offs || []);
+  }catch(e){
+    offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Impossible de charger les offenses.</div></div>';
+  }
+
+  // Si admin → ajoute le bouton “+ Ajouter off” sous la liste
+  if (IS_ADMIN){
+    const addWrap = document.createElement('div');
+    addWrap.style.display='flex';
+    addWrap.style.justifyContent='center';
+    addWrap.style.marginTop = '10px';
+
+    const addBtn = document.createElement('button');
+    addBtn.className = 'btn btn--primary';
+    addBtn.type = 'button';
+    addBtn.textContent = '+ Ajouter une offense';
+    addBtn.onclick = () => openOffPicker(defKey, offsListEl, () => { /* no-op */ });
+
+    addWrap.appendChild(addBtn);
+    offsListEl.parentElement.appendChild(addWrap);
+  }
+}
 
 // =====================
 // COLLABS — mapping explicite + résolution par élément/alias
