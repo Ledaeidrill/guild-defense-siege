@@ -119,51 +119,65 @@ const MAP_COLLAB_TO_SW = {
   // 'Jin': null, etc.
 };
 
+// Helpers de normalisation (accents/ponctuation/casse)
+const nrm = (s) =>
+  (s ?? '')
+    .toString()
+    .normalize('NFD')                    // sépare accents
+    .replace(/\p{Diacritic}/gu, '')      // retire accents
+    .replace(/[\s._-]+/g, ' ')           // homogénéise séparateurs
+    .replace(/[’'"]/g, '')               // retire apostrophes/quotes/points
+    .trim()
+    .toLowerCase();
+
+// mapping collab -> SW en lowercase/normalisé
+const MAP_COLLAB_TO_SW_LC = Object.fromEntries(
+  Object.entries(MAP_COLLAB_TO_SW).map(([k, v]) => [nrm(k), v])
+);
+
 // SW (famille) -> collab (inverse)
 const MAP_SW_TO_COLLAB = (() => {
   const m = {};
   for (const [collab, sw] of Object.entries(MAP_COLLAB_TO_SW)) {
     if (!sw) continue;
-    // si plusieurs collab mappaient le même SW (rare), on garde le 1er
-    if (!m[sw]) m[sw] = collab;
+    if (!m[sw]) m[sw] = collab; // si doublon, garde le premier
   }
   return m;
 })();
 
-const nrm = (s) => (s||'').toString().trim().toLowerCase();
-
-// Résout *par élément* un monstre dont le nom ou les ALIASES matchent une des clés données
-function findByElementAndAnyName(element, candidates, excludeId){
+// Résout *par élément* un monstre dont le (name | unawakened_name | aliases) matche une des clés
+function findByElementAndAnyName(element, candidates, excludeId) {
   const want = new Set(candidates.map(nrm));
   const el = nrm(element);
-  return (window.MONSTERS || []).find(x => {
-    if (excludeId && x.id === excludeId) return false; // ⬅️ évite self-merge
+  return (window.MONSTERS || []).find((x) => {
+    if (excludeId && x.id === excludeId) return false; // évite self-merge
     if (nrm(x.element) !== el) return false;
     if (want.has(nrm(x.name))) return true;
+    if (x.unawakened_name && want.has(nrm(x.unawakened_name))) return true;
     const aliases = (x.aliases || []).map(nrm);
-    return aliases.some(a => want.has(a));
+    return aliases.some((a) => want.has(a));
   }) || null;
 }
 
 // Renvoie le duo { sw, collab } pour le même élément, ou null si pas de pair
 function findMappedPair(mon) {
-  // Cas 1 : 'mon' est un collab → on cherche la version SW (famille) dans le même élément.
-  if (MAP_COLLAB_TO_SW[mon.name]) {
-    const swFamily = MAP_COLLAB_TO_SW[mon.name]; // ex: 'Slayer'
-    // Dans ton dataset, le SW réel s’appelle par ex. 'Karnal' (Feu), mais il a un alias 'Slayer'
+  // Cas 1 : mon est un collab
+  const swFamily = MAP_COLLAB_TO_SW_LC[nrm(mon.name)];
+  if (swFamily) {
     const swMon = findByElementAndAnyName(mon.element, [swFamily], mon.id);
-    if (!swMon) return null;
-    return { sw: swMon, collab: mon };
+    if (swMon) return { sw: swMon, collab: mon };
   }
 
-  // Cas 2 : 'mon' est une version SW → il doit avoir un alias de famille (ex: 'Slayer')
-  // On parcourt les familles SW connues et on vérifie si son nom ou ses aliases les contiennent.
-  const aliases = new Set([nrm(mon.name), ...(mon.aliases||[]).map(nrm)]);
+  // Cas 2 : mon est la version SW
+  const aliasSet = new Set([
+    nrm(mon.name),
+    nrm(mon.unawakened_name),
+    ...(mon.aliases || []).map(nrm),
+  ]);
   for (const [swFamily, collabName] of Object.entries(MAP_SW_TO_COLLAB)) {
-    if (aliases.has(nrm(swFamily))) {
+    if (aliasSet.has(nrm(swFamily))) {
       const collabMon = findByElementAndAnyName(mon.element, [collabName], mon.id);
-      if (!collabMon) return null;
-      return { sw: mon, collab: collabMon };
+      if (collabMon) return { sw: mon, collab: collabMon };
     }
   }
 
