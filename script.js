@@ -323,7 +323,8 @@ function releaseKey(m){
   return m.id || 0;
 }
 function stars(m){
-  return m.natural_stars ?? m.base_stars ?? 0;
+  // natural_stars d’abord, sinon base_stars, sinon 0
+  return (m.natural_stars != null ? m.natural_stars : (m.base_stars != null ? m.base_stars : 0));
 }
 
 // Comparateur global demandé
@@ -347,7 +348,6 @@ function monsterComparator(a, b){
   // 5) Nom (alpha)
   return a.name.localeCompare(b.name, 'en', { sensitivity:'base' });
 }
-
 
 function renderGrid() {
   const q = (search?.value||'').trim();
@@ -640,38 +640,32 @@ function renderHandled(data){
       `;
       trio.appendChild(card);
     });
-
+    
     if (isAdmin()) {
       const right = document.createElement('div');
       right.style.display='flex'; right.style.gap='10px'; right.style.alignItems='center';
-    
+      
       const btn = document.createElement('button');
       btn.className = 'btn-ghost btn-offs';
       btn.type = 'button';
       btn.textContent = 'Voir offs';
       btn.dataset.key = r.key;
       btn.addEventListener('mouseenter', () => { apiGetOffs(r.key).catch(()=>{}); });
-    
+      
       right.appendChild(btn);
       item.append(trio, right);
-    } else {
-      item.append(trio);
-    }
-    list.appendChild(item);
-
-  });
+);
 
   box.innerHTML = '';
   box.appendChild(list);
   
-  if (isAdmin()) {
-    box.onclick = (e) => {
-      const btn = e.target.closest('.btn-offs');
-      if (!btn) return;
-      const key = btn.dataset.key;
-      openOffsModal(key);
-    };
-  }
+
+  box.onclick = (e) => {
+    const btn = e.target.closest('.btn-offs');
+    if (!btn) return;
+    const key = btn.dataset.key;
+    openOffsModal(key);
+  };
 }
 
 // Optimistic update (déplacement local d’une clé)
@@ -776,6 +770,7 @@ async function openOffsModal(defKey){
     list.textContent = 'Impossible de charger les offs.';
   } finally {
     addBtn.disabled = false;
+    addBtn.hidden = !isAdmin(); // ← cache le bouton aux non-admins
   }
 }
 
