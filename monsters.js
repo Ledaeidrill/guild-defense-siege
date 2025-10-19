@@ -5203,13 +5203,13 @@ window.MONSTERS = [
     "element": "Fire",
     "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0098_1_2.png",
     "name": "Pavé",
-    "unawakened_name": "choco knight pave",
+    "unawakened_name": "choco knight",
     "second_awaken": false,
     "natural_stars": 4,
     "aliases": [
       "feu",
       "fire",
-      "choco knight pave"
+      "choco knight"
     ]
   },
   {
