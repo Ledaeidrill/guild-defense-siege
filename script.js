@@ -907,7 +907,7 @@ function renderOffsList(target, offs){
 function openOffPicker(defKey, offsListEl, onClose){
   // --- Crée une nouvelle modale au-dessus (z-index > modal principale)
   const modal = document.createElement('div');
-  modal.className = 'modal';
+  modal.className = 'modal modal--picker';
   modal.style.zIndex = '2000'; // au-dessus
   modal.setAttribute('aria-hidden','false');
 
