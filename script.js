@@ -89,17 +89,25 @@ async function detectAdmin(){
   }catch{ IS_ADMIN = false; }
 }
 
-// Ouvre le modal pour une DEF précise (clé) et charge ses offs
+// =====================
+// Offs Modal (version finale unique)
+// =====================
 async function openOffsModal(defKey){
   if (offsTitle) offsTitle.textContent = 'Offenses — ' + (defKey || '');
   showOffsModal();
 
-  // détection admin à l’ouverture (évite stocker quoi que ce soit)
+  // 1) Détection admin côté serveur (via ?admin=...)
   await detectAdmin();
 
+  // 2) Nettoie un éventuel bouton "+ Ajouter" d'une ouverture précédente
+  const prevAdd = document.getElementById('offsAddWrap');
+  if (prevAdd) prevAdd.remove();
+
+  // 3) Placeholder + clé portée par le DOM
   offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Chargement…</div></div>';
   offsListEl.dataset.defKey = defKey || '';
 
+  // 4) Charge les offs puis rend la liste
   try{
     const res = await apiGetOffs(defKey);
     if (!res?.ok) throw new Error(res?.error || 'Erreur');
@@ -108,18 +116,19 @@ async function openOffsModal(defKey){
     offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Impossible de charger les offenses.</div></div>';
   }
 
-  // Si admin → ajoute le bouton “+ Ajouter off” sous la liste
+  // 5) Si admin → affiche le bouton "+ Ajouter une offense"
   if (IS_ADMIN){
     const addWrap = document.createElement('div');
-    addWrap.style.display='flex';
-    addWrap.style.justifyContent='center';
+    addWrap.id = 'offsAddWrap';
+    addWrap.style.display = 'flex';
+    addWrap.style.justifyContent = 'center';
     addWrap.style.marginTop = '10px';
 
     const addBtn = document.createElement('button');
     addBtn.className = 'btn btn--primary';
     addBtn.type = 'button';
     addBtn.textContent = '+ Ajouter une offense';
-    addBtn.onclick = () => openOffPicker(defKey, offsListEl, () => { /* no-op */ });
+    addBtn.onclick = () => openOffPicker(defKey, offsListEl, () => { /* optionnel */ });
 
     addWrap.appendChild(addBtn);
     offsListEl.parentElement.appendChild(addWrap);
@@ -827,24 +836,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // =====================
 // Offs Modal
 // =====================
-// Ouvre le modal pour une DEF précise (clé) et charge ses offs
-async function openOffsModal(defKey){
-  if (offsTitle) offsTitle.textContent = 'Offenses — ' + (defKey || '');
-  showOffsModal();
-  await refreshAdminUI();
-
-  // placeholder
-  offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Chargement…</div></div>';
-  offsListEl.dataset.defKey = defKey || '';
-
-  try{
-    const res = await apiGetOffs(defKey);
-    if (!res?.ok) throw new Error(res?.error || 'Erreur');
-    renderOffsList(offsListEl, res.offs || []);
-  }catch(e){
-    offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Impossible de charger les offenses.</div></div>';
-  }
-}
 
 function renderOffsList(target, offs){
   target.innerHTML = '';
@@ -920,7 +911,7 @@ function renderOffsList(target, offs){
 
 // Mini-picker Off (3 max)
 function openOffPicker(defKey, offsListEl, onClose){
-  const rootBody = document.querySelector('.modal-body');
+  const rootBody = document.querySelector('.modal__body');
   if (!rootBody) return;
 
   // Section picker
