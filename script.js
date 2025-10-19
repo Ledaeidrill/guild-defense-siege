@@ -19,42 +19,6 @@ const offsCache = new Map(); // key -> { ts, data: {ok:true, offs:[...] } }
 // Clés tout juste traitées, on les masque 5 s pour éviter un flash si un fetch arrive avant l’invalidation serveur
 const recentlyHandled = new Set();
 
-// ===== Modal Offs (markup existant dans index.html) =====
-const offsModal = qs('#offsModal');
-const closeOffsBtn = qs('#closeOffs');
-const offsTitle = qs('#offsTitle');
-const offsListEl = qs('#offsList');
-const offsForm = qs('#offsForm');
-const enterAdminBtn = qs('#enterAdmin');
-const adminBadge = qs('#adminBadge');
-const btnVoirOffsGlobal = qs('#btnVoirOffs');
-
-let IS_ADMIN = false; // piloté par ?admin=... dans l'URL (ADMIN_TOKEN_PARAM)
-
-function showOffsModal(){ offsModal?.setAttribute('aria-hidden','false'); }
-function hideOffsModal(){ offsModal?.setAttribute('aria-hidden','true'); }
-closeOffsBtn?.addEventListener('click', hideOffsModal);
-offsModal?.addEventListener('click', (e)=>{ if (e.target === offsModal) hideOffsModal(); });
-
-async function refreshAdminUI(){
-  IS_ADMIN = !!ADMIN_TOKEN_PARAM;                 // simple: token en query string
-  if (adminBadge) adminBadge.hidden = !IS_ADMIN;
-  if (offsForm) offsForm.hidden = !IS_ADMIN;
-  if (enterAdminBtn) enterAdminBtn.textContent = IS_ADMIN ? 'Admin (URL)' : 'Admin mode';
-}
-enterAdminBtn?.addEventListener('click', ()=> {
-  alert(IS_ADMIN ? 'Mode admin via ?admin=... déjà actif.' : 'Pour activer admin: ajoute ?admin=VOTRE_TOKEN à l’URL.');
-});
-
-btnVoirOffsGlobal?.addEventListener('click', async () => {
-  // Ouverture “globale” (sans clé précise)
-  if (offsTitle) offsTitle.textContent = 'Offenses';
-  showOffsModal();
-  offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Choisis d’abord une défense traitée, puis clique “Voir offs”.</div></div>';
-  await refreshAdminUI();
-});
-
-
 // =====================
 // HELPERS DOM & STRINGS
 // =====================
@@ -102,6 +66,41 @@ function ensureTrioArray(trio, key){
 function esc(s){
   return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 }
+
+// ===== Modal Offs (markup existant dans index.html) =====
+const offsModal = qs('#offsModal');
+const closeOffsBtn = qs('#closeOffs');
+const offsTitle = qs('#offsTitle');
+const offsListEl = qs('#offsList');
+const offsForm = qs('#offsForm');
+const enterAdminBtn = qs('#enterAdmin');
+const adminBadge = qs('#adminBadge');
+const btnVoirOffsGlobal = qs('#btnVoirOffs');
+
+let IS_ADMIN = false; // piloté par ?admin=... dans l'URL (ADMIN_TOKEN_PARAM)
+
+function showOffsModal(){ offsModal?.setAttribute('aria-hidden','false'); }
+function hideOffsModal(){ offsModal?.setAttribute('aria-hidden','true'); }
+closeOffsBtn?.addEventListener('click', hideOffsModal);
+offsModal?.addEventListener('click', (e)=>{ if (e.target === offsModal) hideOffsModal(); });
+
+async function refreshAdminUI(){
+  IS_ADMIN = !!ADMIN_TOKEN_PARAM;                 // simple: token en query string
+  if (adminBadge) adminBadge.hidden = !IS_ADMIN;
+  if (offsForm) offsForm.hidden = !IS_ADMIN;
+  if (enterAdminBtn) enterAdminBtn.textContent = IS_ADMIN ? 'Admin (URL)' : 'Admin mode';
+}
+enterAdminBtn?.addEventListener('click', ()=> {
+  alert(IS_ADMIN ? 'Mode admin via ?admin=... déjà actif.' : 'Pour activer admin: ajoute ?admin=VOTRE_TOKEN à l’URL.');
+});
+
+btnVoirOffsGlobal?.addEventListener('click', async () => {
+  // Ouverture “globale” (sans clé précise)
+  if (offsTitle) offsTitle.textContent = 'Offenses';
+  showOffsModal();
+  offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Choisis d’abord une défense traitée, puis clique “Voir offs”.</div></div>';
+  await refreshAdminUI();
+});
 
 // =====================
 // COLLABS — mapping explicite + résolution par élément/alias
