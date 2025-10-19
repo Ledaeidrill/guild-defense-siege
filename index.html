@@ -95,30 +95,40 @@
 <button id="btnVoirOffs" class="btn" type="button">Voir offs</button>
   
 <div id="offsModal" class="modal" aria-hidden="true">
-  <div id="offsModal" class="modal" aria-hidden="true">
-    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="offsTitle">
-      <div class="modal__header">
-        <h3 id="offsTitle">Offenses</h3>
-        <button class="modal__close" id="closeOffs" type="button" aria-label="Fermer">&times;</button>
-      </div>
+  <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="offsTitle">
+    <div class="modal__header">
+      <h3 id="offsTitle">Offenses</h3>
+      <button class="modal__close" id="closeOffs" type="button" aria-label="Fermer">&times;</button>
+    </div>
     <div class="modal__body">
       <div class="adminBar">
-        <button id="enterAdmin" class="btn btn--ghost">Admin mode</button>
+        <button id="enterAdmin" class="btn btn--ghost" type="button">Admin mode</button>
         <span id="adminBadge" class="badge" hidden>Admin</span>
       </div>
       <div id="offsList" class="offsList"></div>
       <form id="offsForm" class="offsForm" hidden>
         <h4>Ajouter une offense</h4>
-        <label>Nom<input name="offense" required placeholder="ex: Leo Tesarion Juno"></label>
-        <label>Contre<input name="vs_def" placeholder="ex: Carcano Miles Abelio"></label>
-        <label>Notes<textarea name="notes" rows="2"></textarea></label>
-        <label>Lien<input name="link" placeholder="url vidéo"></label>
-        <label>Tags<input name="tags" placeholder="safe,gwo,…"></label>
+        <label>Nom
+          <input name="offense" required placeholder="ex: Leo Tesarion Juno" />
+        </label>
+        <label>Contre
+          <input name="vs_def" placeholder="ex: Carcano Miles Abelio" />
+        </label>
+        <label>Notes
+          <textarea name="notes" rows="2"></textarea>
+        </label>
+        <label>Lien
+          <input name="link" placeholder="url vidéo" />
+        </label>
+        <label>Tags
+          <input name="tags" placeholder="safe,gwo,…" />
+        </label>
         <button type="submit" class="btn btn--primary">Ajouter</button>
       </form>
     </div>
   </div>
 </div>
+
 
 </body>
 </html>
