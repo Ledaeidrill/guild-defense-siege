@@ -861,9 +861,9 @@ function renderOffsList(target, offs){
       const v = renderMergedVisual(m);
       const card = document.createElement('div');
       card.className = 'pick def-pick';
+      card.title = v.title; // accessibilité au hover
       card.innerHTML = `
         ${v.htmlIcon}
-        <div class="pname">${esc(v.label)}</div>
       `;
       trioWrap.appendChild(card);
     });
@@ -911,10 +911,43 @@ function renderOffsList(target, offs){
 
 // Mini-picker Off (3 max)
 function openOffPicker(defKey, offsListEl, onClose){
-  const rootBody = document.querySelector('.modal__body');
-  if (!rootBody) return;
+  // --- Crée une nouvelle modale au-dessus (z-index > modal principale)
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.zIndex = '2000'; // au-dessus
+  modal.setAttribute('aria-hidden','false');
 
-  // Section picker
+  const dialog = document.createElement('div');
+  dialog.className = 'modal__dialog';
+  dialog.setAttribute('role','dialog');
+  dialog.setAttribute('aria-modal','true');
+  dialog.setAttribute('aria-labelledby','pickerTitle');
+
+  const header = document.createElement('div');
+  header.className = 'modal__header';
+  header.innerHTML = `
+    <h3 id="pickerTitle">Ajouter une offense</h3>
+    <button class="modal__close" type="button" aria-label="Fermer">&times;</button>
+  `;
+  const closeBtn = header.querySelector('.modal__close');
+
+  const body = document.createElement('div');
+  body.className = 'modal__body';
+
+  dialog.append(header, body);
+  modal.appendChild(dialog);
+  document.body.appendChild(modal);
+
+  function closePicker(){
+    modal.setAttribute('aria-hidden','true');
+    modal.remove();
+    if (typeof onClose === 'function') onClose();
+  }
+  closeBtn.addEventListener('click', closePicker);
+  modal.addEventListener('click', (e)=>{ if(e.target===modal) closePicker(); });
+  window.addEventListener('keydown', function esc(e){ if(e.key==='Escape'){ closePicker(); window.removeEventListener('keydown', esc);} });
+
+  // --- Contenu du picker (mêmes specs que "Demander une défense")
   const wrap = document.createElement('div');
   wrap.className = 'picker';
 
@@ -923,32 +956,31 @@ function openOffPicker(defKey, offsListEl, onClose){
   pickTitle.textContent = 'Sélectionne 3 monstres (glisser pour réordonner)';
   wrap.appendChild(pickTitle);
 
-  // Zone picks
-  const picksBox = document.createElement('div'); picksBox.className = 'off-picks'; wrap.appendChild(picksBox);
+  const picksBox = document.createElement('div');
+  picksBox.className = 'off-picks';
+  wrap.appendChild(picksBox);
   let offPicks = [];
 
-  // Barre recherche
+  // Recherche
   const row = document.createElement('div'); row.className='row field';
   const lab = document.createElement('label'); lab.textContent='Recherche';
   const inp = document.createElement('input'); inp.placeholder='Rechercher un monstre'; inp.autocomplete='off';
   row.append(lab, inp); wrap.appendChild(row);
 
-  // Grille
+  // Grille triée + merge identique
   const gwrap = document.createElement('div'); gwrap.className='picker-grid';
   const grid = document.createElement('div'); grid.className='monster-grid';
   gwrap.appendChild(grid); wrap.appendChild(gwrap);
 
-  // Actions
+  // Actions (Valider + spinner)
   const actions = document.createElement('div'); actions.className='picker-actions';
   const validate = document.createElement('button'); validate.className='btn-primary'; validate.type='button'; validate.textContent='Valider off';
-  actions.append(validate);
+  const spinner = document.createElement('span'); spinner.className='btn-spinner'; spinner.style.marginLeft='8px';
+  actions.append(validate, spinner);
   wrap.appendChild(actions);
 
-  // Insertion sous la liste
-  rootBody.appendChild(wrap);
-  wrap.scrollIntoView({ behavior:'smooth', block:'start' });
+  body.appendChild(wrap);
 
-  // Rendu picks
   function renderOffPicks(){
     picksBox.innerHTML='';
     offPicks.forEach((p, index) => {
@@ -963,7 +995,7 @@ function openOffPicker(defKey, offsListEl, onClose){
       div.append(btn,img,label); picksBox.appendChild(div);
     });
 
-    // Drag & drop
+    // Drag & drop (réordonner)
     picksBox.querySelectorAll('.pick').forEach(el => {
       el.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', el.dataset.index); el.classList.add('dragging'); });
       el.addEventListener('dragend', () => el.classList.remove('dragging'));
@@ -981,7 +1013,6 @@ function openOffPicker(defKey, offsListEl, onClose){
     });
   }
 
-  // Grille filtres
   function renderPickerGrid(){
     const q = (inp.value||'').trim().toLowerCase();
     grid.innerHTML='';
@@ -1006,43 +1037,43 @@ function openOffPicker(defKey, offsListEl, onClose){
     grid.appendChild(frag);
   }
 
-  inp.addEventListener('input', () => { renderPickerGrid(); });
+  inp.addEventListener('input', renderPickerGrid);
   renderPickerGrid(); renderOffPicks();
 
-  // Actions
+  // Anti-spam + visuel de chargement
   let _offSubmitting = false;
   validate.onclick = async () => {
-    if (_offSubmitting) return;              // anti double clic
+    if (_offSubmitting) return;
     if (offPicks.length !== 3) { toast('Sélectionne exactement 3 monstres.'); return; }
-  
+
     _offSubmitting = true;
     validate.disabled = true;
     validate.textContent = 'Validation…';
-  
+    spinner.style.display = 'inline-block';
+
     const [a,b,c] = offPicks.map(x => x.name);
     try {
       const resp = await apiAddOff({ key:defKey, o1:a, o2:b, o3:c });
       if (!resp?.ok) { toast(resp?.error || 'Erreur ajout off'); return; }
-      toast(resp?.message || 'Offense ajoutée ✅');
-      wrap.remove();
-      if (typeof onClose === 'function') onClose();
-      
-      // MAJ immédiate du cache + de la liste sans re-fetch
+
+      // Met à jour la liste visible + cache
       const ent = offsCache.get(defKey);
       if (ent?.data?.ok) {
         ent.data.offs = (ent.data.offs || []).concat([{ trio: [a, b, c] }]);
         ent.ts = Date.now();
         renderOffsList(offsListEl, ent.data.offs);
       } else {
-        // fallback si pas en cache
         const res = await apiGetOffs(defKey, { force: true });
         if (res?.ok) renderOffsList(offsListEl, res.offs || []);
       }
+      toast('Offense ajoutée ✅');
+      closePicker();
     } catch (e) {
       console.error(e);
       toast('Impossible d’ajouter l’offense.');
     } finally {
       _offSubmitting = false;
+      spinner.style.display = 'none';
       validate.disabled = false;
       validate.textContent = 'Valider off';
     }
