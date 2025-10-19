@@ -239,6 +239,7 @@ const MAP_SW_TO_COLLAB = (() => {
 // Résout *par élément* un monstre dont le (name | unawakened_name | aliases) matche une des clés
 function findByElementAndAnyName(element, candidates, excludeId){
   const wants = new Set(candidates.map(nrm));
+  const el = nrm(element);
   const matchAny = (val) => wants.has(nrm(val || ''));
 
   return (window.MONSTERS || []).find(x => {
