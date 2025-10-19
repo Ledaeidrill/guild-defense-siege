@@ -82,8 +82,7 @@ function hideOffsModal(){
   qsa('#offsAddWrap, [data-role="offs-add"]').forEach(el => el.remove());  // remove add bar
 }
 closeOffsBtn?.addEventListener('click', hideOffsModal);
-offsModal?.addEventListener('click', (e)=>{
-  offsModal?.addEventListener('click', (e) => {
+offsModal?.addEventListener('click', (e) => {
   if (e.target === offsModal) hideOffsModal(); // clic sur le backdrop
 });
 
@@ -1016,6 +1015,16 @@ function openOffPicker(defKey, offsListEl, onClose){
   // Grille triée + merge identique
   const gwrap = document.createElement('div'); gwrap.className='picker-grid';
   const grid = document.createElement('div'); grid.className='monster-grid';
+  // Délégation de clics sur la grille (fiable même après rerender)
+  grid.addEventListener('click', (e) => {
+    const el = e.target.closest('.card');
+    if (!el || !el.__data) return;
+    const m = el.__data;
+    if (offPicks.find(p => p.id === m.id)) return;
+    if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
+    offPicks.push(m);
+    renderOffPicks();
+  });
   gwrap.appendChild(grid); wrap.appendChild(gwrap);
 
   // Actions (Valider + spinner)
@@ -1071,18 +1080,27 @@ function openOffPicker(defKey, offsListEl, onClose){
       .filter(m => !q || [m.name, m.unawakened_name, m.element, ...(m.aliases||[])].some(s => (s||'').toLowerCase().includes(q)))
       .sort(monsterComparator)
       .forEach(m => {
-        const card = document.createElement('div'); card.className='card'; card.title=m.name;
-        const v = renderMergedVisual(m);
-        card.innerHTML = `
-          ${v.htmlIcon}
-          <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
-        `;
-        card.onclick = () => {
-          if (offPicks.find(p => p.id===m.id)) return;
-          if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
-          offPicks.push(m); renderOffPicks();
-        };
-        frag.appendChild(card);
+      const card = document.createElement('div'); 
+      card.className = 'card'; 
+      card.title = m.name;
+      
+      // ⬇️ on mémorise le monstre sur la carte
+      card.__data = m;
+      
+      const v = renderMergedVisual(m);
+      card.innerHTML = `
+        ${v.htmlIcon}
+        <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
+      `;
+      
+      // (tu peux laisser ce onClick si tu veux, mais on ajoute aussi une délégation juste après)
+      card.onclick = () => {
+        if (offPicks.find(p => p.id===m.id)) return;
+        if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
+        offPicks.push(m); renderOffPicks();
+      };
+      
+      frag.appendChild(card);
       });
     grid.appendChild(frag);
   }
@@ -1123,7 +1141,6 @@ function openOffPicker(defKey, offsListEl, onClose){
       toast('Impossible d’ajouter l’offense.');
     } finally {
       _offSubmitting = false;
-      spinner.style.display = 'none';
       validate.classList.remove('sending');
       validate.disabled = false;
       validate.textContent = 'Valider off';
