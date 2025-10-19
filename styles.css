@@ -358,14 +358,20 @@ textarea{ min-height:100px; border-radius:12px; }
   padding-bottom:4px;       /* un peu d’air pour la scrollbar */
 }
 .off-picks .pick{
-  width:auto;
-  padding:6px;
-  flex-direction:row;       /* image + label côte à côte */
-  gap:8px;
+  width:86px;
+  padding:8px 6px 6px;
+  flex-direction:column;     /* nom sous l’image */
+  gap:0;
 }
 .off-picks .pick img{
-  width:40px;
-  height:40px;
+  width: var(--pick-icon);   /* 60px */
+  height: var(--pick-icon);
+  border-radius:7px;
+}
+.off-picks .pick .pname{
+  font-size:10px; line-height:11px;
+  margin-top:4px; text-align:center;
+  max-width:76px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 
 /* Chaque offense listée = 3 icônes alignées sur une ligne */
