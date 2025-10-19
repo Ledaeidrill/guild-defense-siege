@@ -36,14 +36,23 @@ function toast(msg) {
 
 function fixIconUrl(src){
   if (!src) return src;
+  // 1) Chemin absolu swarfarm ancien
   if (src.startsWith('https://swarfarm.com/unit_icon_')) {
     return src.replace('https://swarfarm.com/', 'https://swarfarm.com/static/herders/images/monsters/');
   }
+  // 2) Chemin absolu déjà bon
+  if (src.startsWith('https://')) return src;
+  // 3) Chemin relatif "/unit_icon_XXXX.png"
   if (src.startsWith('/unit_icon_')) {
     return 'https://swarfarm.com/static/herders/images/monsters' + src;
   }
+  // 4) Chemin relatif "/static/herders/images/monsters/..."
   if (src.startsWith('/static/herders/images/monsters/')) {
     return 'https://swarfarm.com' + src;
+  }
+  // 5) Nom de fichier nu "unit_icon_XXXX.png"
+  if (/^unit_icon_\d+_/.test(src)) {
+    return 'https://swarfarm.com/static/herders/images/monsters/' + src;
   }
   return src;
 }
@@ -322,9 +331,10 @@ function releaseKey(m){
   if (m.family_id != null)  return m.family_id;
   return m.id || 0;
 }
+
 function stars(m){
-  // natural_stars d’abord, sinon base_stars, sinon 0
-  return (m.natural_stars != null ? m.natural_stars : (m.base_stars != null ? m.base_stars : 0));
+  return (m.natural_stars != null ? m.natural_stars
+       : (m.base_stars     != null ? m.base_stars : 0));
 }
 
 // Comparateur global demandé
@@ -337,16 +347,16 @@ function monsterComparator(a, b){
   const a2 = !!a.second_awaken, b2 = !!b.second_awaken;
   if (a2 !== b2) return a2 ? -1 : 1;
 
-  // 3) Étoiles (desc): 5★ -> 4★ -> 3★
+  // 3) ★ desc : 5★ -> 4★ -> 3★
   const sa = stars(a), sb = stars(b);
   if (sa !== sb) return sb - sa;
 
-  // 4) Ordre de sortie (desc): plus récent -> plus ancien
+  // 4) plus récent -> plus ancien
   const ra = releaseKey(a), rb = releaseKey(b);
   if (ra !== rb) return rb - ra;
 
-  // 5) Nom (alpha)
-  return a.name.localeCompare(b.name, 'en', { sensitivity:'base' });
+  // 5) nom
+  return a.name.localeCompare(b.name,'en',{sensitivity:'base'});
 }
 
 function renderGrid() {
