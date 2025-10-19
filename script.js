@@ -240,7 +240,6 @@ const MAP_SW_TO_COLLAB = (() => {
 function findByElementAndAnyName(element, candidates, excludeId){
   const wants = new Set(candidates.map(nrm));
   const matchAny = (val) => wants.has(nrm(val || ''));
-  };
 
   return (window.MONSTERS || []).find(x => {
     if (excludeId && x.id === excludeId) return false;
