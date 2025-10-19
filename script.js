@@ -184,13 +184,11 @@ const MAP_COLLAB_TO_SW = {
 };
 
 function resolveSwFamilyForCollab(mon) {
-  const names = new Set([
-    nrm(mon.name),
-    nrm(mon.unawakened_name || ''),
-    ...(mon.aliases || []).map(nrm),
-  ]);
+  const a = nrm(mon.name);
+  const u = nrm(mon.unawakened_name || '');
   for (const [collabName, sw] of Object.entries(MAP_COLLAB_TO_SW)) {
-    if (names.has(nrm(collabName))) return sw;
+    const key = nrm(collabName);
+    if (a === key || u === key) return sw;   // strict equality only
   }
   return null;
 }
@@ -240,12 +238,8 @@ const MAP_SW_TO_COLLAB = (() => {
 
 // Résout *par élément* un monstre dont le (name | unawakened_name | aliases) matche une des clés
 function findByElementAndAnyName(element, candidates, excludeId){
-  const wants = candidates.map(nrm);
-  const el = nrm(element);
-
-  const matchAny = (val) => {
-    const v = nrm(val || '');
-    return v && wants.some(w => v === w || v.includes(w) || w.includes(v));
+  const wants = new Set(candidates.map(nrm));
+  const matchAny = (val) => wants.has(nrm(val || ''));
   };
 
   return (window.MONSTERS || []).find(x => {
@@ -484,13 +478,22 @@ function renderGrid() {
   if (!grid) return;
   grid.innerHTML = '';
   const frag = document.createDocumentFragment();
+  const seenPairs = new Set(); // SW-family + element
 
   (window.MONSTERS || [])
     .filter(m => matchesQuery(m, q))
-    .filter(m => !shouldHideInGrid(m)) // ⬅️ cache le doublon SW
+    .filter(m => !shouldHideInGrid(m))
     .sort(monsterComparator)
-    .forEach(m => frag.appendChild(makeCard(m)));
-  
+    .forEach(m => {
+      const duo = findMappedPair(m);
+      if (duo) {
+        const key = `${duo.sw.family_id || nrm(duo.sw.name)}|${nrm(duo.sw.element)}`;
+        if (seenPairs.has(key)) return;      // already rendered this pair
+        seenPairs.add(key);
+      }
+      frag.appendChild(makeCard(m));
+    });
+
   grid.appendChild(frag);
 }
 
