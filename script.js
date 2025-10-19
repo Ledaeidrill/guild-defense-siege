@@ -73,7 +73,6 @@ const closeOffsBtn= qs('#closeOffs');
 const offsTitle   = qs('#offsTitle');
 const offsListEl  = qs('#offsList');
 
-const ADMIN_TOKEN_PARAM = new URL(location.href).searchParams.get('admin');
 let IS_ADMIN = false;
 
 function showOffsModal(){ offsModal?.setAttribute('aria-hidden','false'); }
