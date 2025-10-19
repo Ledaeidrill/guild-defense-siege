@@ -211,6 +211,12 @@ textarea{ min-height:100px; border-radius:12px; }
   .btn-primary.sending .btn-spinner{ animation: none; }
 }
 
+/* Pour le picker : le spinner est juste à côté du bouton */
+.btn-primary.sending + .btn-spinner{
+  display:inline-block;
+  animation: spin .8s linear infinite;
+}
+
 /* =========================================
    Listes Stats / Handled
 ========================================= */
@@ -325,6 +331,9 @@ textarea{ min-height:100px; border-radius:12px; }
 .modal__body{padding:16px; overflow:auto}   /* ⬅️ scroll interne */
 .modal__close{background:transparent;border:0;color:#aaa;font-size:24px;cursor:pointer}
 
+/* La modale du picker peut être plus large que la modale "Voir offs" */
+.modal--picker .modal__dialog{ max-width: 980px; }
+
 .btn{padding:8px 14px;border-radius:10px;border:1px solid #444;background:#1b1b1b;cursor:pointer}
 .btn--primary{background:#2a5bd7;border-color:#2a5bd7}
 .btn--ghost{background:transparent;border-color:#555}
@@ -386,5 +395,20 @@ textarea{ min-height:100px; border-radius:12px; }
   display:inline-block;
   animation: spin .8s linear infinite;
 }
+
+/* Barre d’actions du picker */
+.picker-actions{
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  padding: 12px 0;
+  margin-top: 10px;
+  border-top: 1px solid #223244; /* séparation visuelle */
+  background: linear-gradient(180deg, rgba(15,21,32,0), rgba(15,21,32,.95) 35%, #101826 100%);
+}
+
+/* Champ recherche du picker un peu plus court */
+.picker .field input{ max-width: 540px; }
 
 
