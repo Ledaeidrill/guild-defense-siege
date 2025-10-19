@@ -19,6 +19,42 @@ const offsCache = new Map(); // key -> { ts, data: {ok:true, offs:[...] } }
 // Clés tout juste traitées, on les masque 5 s pour éviter un flash si un fetch arrive avant l’invalidation serveur
 const recentlyHandled = new Set();
 
+// ===== Modal Offs (markup existant dans index.html) =====
+const offsModal = qs('#offsModal');
+const closeOffsBtn = qs('#closeOffs');
+const offsTitle = qs('#offsTitle');
+const offsListEl = qs('#offsList');
+const offsForm = qs('#offsForm');
+const enterAdminBtn = qs('#enterAdmin');
+const adminBadge = qs('#adminBadge');
+const btnVoirOffsGlobal = qs('#btnVoirOffs');
+
+let IS_ADMIN = false; // piloté par ?admin=... dans l'URL (ADMIN_TOKEN_PARAM)
+
+function showOffsModal(){ offsModal?.setAttribute('aria-hidden','false'); }
+function hideOffsModal(){ offsModal?.setAttribute('aria-hidden','true'); }
+closeOffsBtn?.addEventListener('click', hideOffsModal);
+offsModal?.addEventListener('click', (e)=>{ if (e.target === offsModal) hideOffsModal(); });
+
+async function refreshAdminUI(){
+  IS_ADMIN = !!ADMIN_TOKEN_PARAM;                 // simple: token en query string
+  if (adminBadge) adminBadge.hidden = !IS_ADMIN;
+  if (offsForm) offsForm.hidden = !IS_ADMIN;
+  if (enterAdminBtn) enterAdminBtn.textContent = IS_ADMIN ? 'Admin (URL)' : 'Admin mode';
+}
+enterAdminBtn?.addEventListener('click', ()=> {
+  alert(IS_ADMIN ? 'Mode admin via ?admin=... déjà actif.' : 'Pour activer admin: ajoute ?admin=VOTRE_TOKEN à l’URL.');
+});
+
+btnVoirOffsGlobal?.addEventListener('click', async () => {
+  // Ouverture “globale” (sans clé précise)
+  if (offsTitle) offsTitle.textContent = 'Offenses';
+  showOffsModal();
+  offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Choisis d’abord une défense traitée, puis clique “Voir offs”.</div></div>';
+  await refreshAdminUI();
+});
+
+
 // =====================
 // HELPERS DOM & STRINGS
 // =====================
@@ -768,77 +804,64 @@ document.addEventListener('DOMContentLoaded', () => {
 // =====================
 // Offs Modal
 // =====================
+// Ouvre le modal pour une DEF précise (clé) et charge ses offs
 async function openOffsModal(defKey){
-  const container = document.createElement('div');
+  if (offsTitle) offsTitle.textContent = 'Offenses — ' + (defKey || '');
+  showOffsModal();
+  await refreshAdminUI();
 
-  // Titre + liste existante
-  const title = document.createElement('div');
-  title.className = 'picker-title';
-  title.textContent = 'Offenses connues :';
-  container.appendChild(title);
+  // placeholder
+  offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Chargement…</div></div>';
+  offsListEl.dataset.defKey = defKey || '';
 
-  const list = document.createElement('div');
-  list.className = 'offs-list';
-  list.textContent = 'Chargement…';
-  container.appendChild(list);
-
-  // Footer avec bouton +
-  const addBtn = document.createElement('button');
-  addBtn.className = 'btn-plus';
-  addBtn.type = 'button';
-  addBtn.textContent = '+ Ajouter off';
-  addBtn.disabled = true;
-  addBtn.onclick = () => { 
-    addBtn.disabled = true; 
-    openOffPicker(defKey, list, () => { addBtn.disabled = false; });
-  };
-
-  // Ouvrir la modale tout de suite
-  openModal({ title: 'Offenses — ' + defKey, bodyNode: container, footerNode: addBtn });
-
-  // Charger existants (hit cache si préfetch au hover)
-  try {
+  try{
     const res = await apiGetOffs(defKey);
     if (!res?.ok) throw new Error(res?.error || 'Erreur');
-    renderOffsList(list, res.offs || []);
-    list.dataset.defKey = defKey; // utile pour "Supprimer"
-  } catch (e) {
-    list.textContent = 'Impossible de charger les offs.';
-  } finally {
-    addBtn.disabled = false;
-    addBtn.hidden = !isAdmin(); // ← cache le bouton aux non-admins
+    renderOffsList(offsListEl, res.offs || []);
+  }catch(e){
+    offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Impossible de charger les offenses.</div></div>';
   }
 }
 
 function renderOffsList(target, offs){
   target.innerHTML = '';
-  if (!offs.length) {
+  if (!offs.length){
     const p = document.createElement('p');
     p.className = 'hint';
     p.textContent = 'Aucune offense enregistrée pour le moment.';
     target.appendChild(p);
     return;
   }
+
   offs.forEach(o => {
-    const card = document.createElement('div'); card.className = 'off-card';
-    const trio = document.createElement('div'); trio.className = 'off-trio';
+    const item = document.createElement('div');
+    item.className = 'offsItem';
+
+    // Trio rendu avec tes cartes .pick.def-pick + duo si merge
+    const trioWrap = document.createElement('div');
+    trioWrap.style.display = 'flex';
+    trioWrap.style.gap = '16px';
+    trioWrap.style.alignItems = 'center';
     (o.trio || []).forEach(name => {
       const m = findMonsterByName(name) || { name, icon: '' };
-      const wrap = document.createElement('div'); wrap.className = 'pick def-pick';
       const v = renderMergedVisual(m);
-      wrap.innerHTML = `
+      const card = document.createElement('div');
+      card.className = 'pick def-pick';
+      card.innerHTML = `
         ${v.htmlIcon}
         <div class="pname">${esc(v.label)}</div>
       `;
-      trio.appendChild(wrap);
+      trioWrap.appendChild(card);
     });
-    if (isAdmin()) {
+
+    // Bouton Supprimer (admin)
+    if (IS_ADMIN) {
       const del = document.createElement('button');
       del.className = 'btn-ghost';
       del.type = 'button';
       del.textContent = 'Supprimer';
       del.style.marginLeft = '12px';
-    
+
       del.onclick = async () => {
         const defKey = target.dataset.defKey || '';
         const trio = (o.trio || []).map(x => String(x||'').trim());
@@ -847,7 +870,7 @@ function renderOffsList(target, offs){
           del.disabled = true; del.textContent = 'Suppression…';
           const resp = await apiDelOff({ key: defKey, o1: trio[0], o2: trio[1], o3: trio[2] });
           if (!resp?.ok) { toast(resp?.error || 'Suppression impossible'); del.disabled=false; del.textContent='Supprimer'; return; }
-          // Refresh liste (cache local invalidé)
+          // Refresh liste (invalide cache)
           offsCache.delete(defKey);
           const res = await apiGetOffs(defKey, { force: true });
           if (res?.ok) renderOffsList(target, res.offs || []);
@@ -862,13 +885,13 @@ function renderOffsList(target, offs){
       const row = document.createElement('div');
       row.style.display = 'flex';
       row.style.alignItems = 'center';
-      row.style.justifyContent = 'center';
-      row.append(trio, del);
-      card.replaceChildren(row);
+      row.append(trioWrap, del);
+      item.appendChild(row);
     } else {
-      card.appendChild(trio);
+      item.appendChild(trioWrap);
     }
-    target.appendChild(card);
+
+    target.appendChild(item);
   });
 }
 
