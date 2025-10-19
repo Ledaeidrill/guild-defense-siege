@@ -365,3 +365,21 @@ textarea{ min-height:100px; border-radius:12px; }
 /* Taille 60px pour les grosses cartes (déf/offs) */
 .def-pick .duo-hsplit{ width:60px; height:60px; }
 .def-pick .duo-hsplit img{ border-radius:10px; }
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:999}
+.modal[aria-hidden="false"]{display:flex}
+.modal__dialog{background:#111;border:1px solid #333;border-radius:14px;max-width:780px;width:92%;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.modal__header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #2a2a2a}
+.modal__body{padding:16px}
+.modal__close{background:transparent;border:0;color:#aaa;font-size:24px;cursor:pointer}
+.btn{padding:8px 14px;border-radius:10px;border:1px solid #444;background:#1b1b1b;cursor:pointer}
+.btn--primary{background:#2a5bd7;border-color:#2a5bd7}
+.btn--ghost{background:transparent;border-color:#555}
+.badge{margin-left:8px;padding:2px 8px;border-radius:999px;background:#1f6b3a;border:1px solid #2a8b4d;color:#cfe}
+.offsList{display:grid;gap:8px;margin:10px 0 18px}
+.offsItem{border:1px solid #2a2a2a;border-radius:12px;padding:10px}
+.offsItem h5{margin:0 0 2px;font-size:15px}
+.offsItem .meta{font-size:12px;color:#aaa}
+.offsForm label{display:block;margin:8px 0}
+.offsForm input,.offsForm textarea{width:100%;padding:8px;border-radius:8px;border:1px solid #333;background:#0f0f0f;color:#eee}
+
