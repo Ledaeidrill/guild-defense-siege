@@ -75,7 +75,6 @@ const offsListEl = qs('#offsList');
 const offsForm = qs('#offsForm');
 const enterAdminBtn = qs('#enterAdmin');
 const adminBadge = qs('#adminBadge');
-const btnVoirOffsGlobal = qs('#btnVoirOffs');
 
 let IS_ADMIN = false; // piloté par ?admin=... dans l'URL (ADMIN_TOKEN_PARAM)
 
@@ -92,14 +91,6 @@ async function refreshAdminUI(){
 }
 enterAdminBtn?.addEventListener('click', ()=> {
   alert(IS_ADMIN ? 'Mode admin via ?admin=... déjà actif.' : 'Pour activer admin: ajoute ?admin=VOTRE_TOKEN à l’URL.');
-});
-
-btnVoirOffsGlobal?.addEventListener('click', async () => {
-  // Ouverture “globale” (sans clé précise)
-  if (offsTitle) offsTitle.textContent = 'Offenses';
-  showOffsModal();
-  offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Choisis d’abord une défense traitée, puis clique “Voir offs”.</div></div>';
-  await refreshAdminUI();
 });
 
 // =====================
