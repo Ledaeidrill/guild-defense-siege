@@ -621,45 +621,57 @@ function renderHandled(data){
   if (!box) return;
   const rows = Array.isArray(data?.handled) ? data.handled : [];
 
-  if (!rows.length) { box.innerHTML = 'Aucune défense traitée pour le moment.'; return; }
+  if (!rows.length) { 
+    box.innerHTML = 'Aucune défense traitée pour le moment.'; 
+    return; 
+  }
 
   const list = document.createElement('div');
   list.className = 'def-list';
 
-  rows.filter(r => !recentlyHandled.has(r.key)).forEach(r => {
-    const item = document.createElement('div'); item.className = 'def-item';
-    const trio = document.createElement('div'); trio.className = 'def-trio';
+  rows
+    .filter(r => !recentlyHandled.has(r.key))
+    .forEach(r => {
+      const item = document.createElement('div'); 
+      item.className = 'def-item';
 
-    ensureTrioArray(r.trio, r.key).forEach(name => {
-      const m = findMonsterByName(name) || { name, icon: '' };
-      const card = document.createElement('div'); card.className = 'pick def-pick';
-      const v = renderMergedVisual(m);
-      card.innerHTML = `
-        ${v.htmlIcon}
-        <div class="pname">${esc(v.label)}</div>
-      `;
-      trio.appendChild(card);
-    });
-    
-    if (isAdmin()) {
+      const trio = document.createElement('div'); 
+      trio.className = 'def-trio';
+
+      ensureTrioArray(r.trio, r.key).forEach(name => {
+        const m = findMonsterByName(name) || { name, icon: '' };
+        const card = document.createElement('div'); 
+        card.className = 'pick def-pick';
+        const v = renderMergedVisual(m);
+        card.innerHTML = `
+          ${v.htmlIcon}
+          <div class="pname">${esc(v.label)}</div>
+        `;
+        trio.appendChild(card);
+      });
+
+      // "Voir offs" pour tout le monde
       const right = document.createElement('div');
-      right.style.display='flex'; right.style.gap='10px'; right.style.alignItems='center';
-      
+      right.style.display='flex'; 
+      right.style.gap='10px'; 
+      right.style.alignItems='center';
+
       const btn = document.createElement('button');
       btn.className = 'btn-ghost btn-offs';
       btn.type = 'button';
       btn.textContent = 'Voir offs';
       btn.dataset.key = r.key;
       btn.addEventListener('mouseenter', () => { apiGetOffs(r.key).catch(()=>{}); });
-      
+
       right.appendChild(btn);
       item.append(trio, right);
-    };
+      list.appendChild(item);
+    });
 
   box.innerHTML = '';
   box.appendChild(list);
-  
 
+  // Handler de clic (pour tous)
   box.onclick = (e) => {
     const btn = e.target.closest('.btn-offs');
     if (!btn) return;
