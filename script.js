@@ -849,9 +849,7 @@ function renderOffsList(target, offs){
 
     // Trio rendu avec tes cartes .pick.def-pick + duo si merge
     const trioWrap = document.createElement('div');
-    trioWrap.style.display = 'flex';
-    trioWrap.style.gap = '16px';
-    trioWrap.style.alignItems = 'center';
+    trioWrap.className = 'off-trio';
     (o.trio || []).forEach(name => {
       const m = findMonsterByName(name) || { name, icon: '' };
       const v = renderMergedVisual(m);
