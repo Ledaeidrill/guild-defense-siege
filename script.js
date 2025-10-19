@@ -82,7 +82,10 @@ function hideOffsModal(){
   qsa('#offsAddWrap, [data-role="offs-add"]').forEach(el => el.remove());  // remove add bar
 }
 closeOffsBtn?.addEventListener('click', hideOffsModal);
-offsModal?.addEventListener('click', (e)=>{ if (e.target === offsModal) hideOffsModal(); });
+offsModal?.addEventListener('click', (e)=>{
+  offsModal?.addEventListener('click', (e) => {
+  if (e.target === offsModal) hideOffsModal(); // clic sur le backdrop
+});
 
 // Vérifie côté serveur si le token admin est valide (recommandé)
 function detectAdmin(){
@@ -101,7 +104,6 @@ async function openOffsModal(defKey){
 
   // 2) Nettoie TOUS les anciens boutons "+ Ajouter"
   qsa('#offsAddWrap, [data-role="offs-add"]').forEach(el => el.remove());
-  ;
   
   // 3) Placeholder + clé portée par le DOM
   offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Chargement…</div></div>';
