@@ -195,6 +195,17 @@ function resolveSwFamilyForCollab(mon) {
   return null;
 }
 
+// Déduire le nom collab à partir d’un monstre SW (par son nom/aliases)
+function resolveCollabForSw(mon) {
+  const hitSw = Object.keys(MAP_SW_TO_COLLAB).find(sw =>
+    nrm(sw) === nrm(mon.name) ||
+    nrm(sw) === nrm(mon.unawakened_name || '') ||
+    (mon.aliases || []).some(a => nrm(a) === nrm(sw))
+  );
+  return hitSw ? { swFamily: hitSw, collabName: MAP_SW_TO_COLLAB[hitSw] } : null;
+}
+
+
 // Helpers de normalisation (accents/ponctuation/casse)
 const nrm = (s) =>
   (s ?? '')
@@ -237,28 +248,21 @@ function findByElementAndAnyName(element, candidates, excludeId) {
 
 // Renvoie le duo { sw, collab } pour le même élément, ou null si pas de pair
 function findMappedPair(mon) {
-  // Cas 1 : mon est un collab
+  // Cas 1 : le monstre est un collab → retrouver la famille SW correspondante
   const swFamily = resolveSwFamilyForCollab(mon);
   if (swFamily) {
     const swMon = findByElementAndAnyName(mon.element, [swFamily], mon.id);
     if (swMon) return { sw: swMon, collab: mon };
   }
 
-  // Cas 2 : mon est la version SW
-  const aliasSet = new Set([
-    nrm(mon.name),
-    nrm(mon.unawakened_name),
-    ...(mon.aliases || []).map(nrm),
-  ]);
-  for (const [swFamily, collabName] of Object.entries(MAP_SW_TO_COLLAB)) {
-    if (aliasSet.has(nrm(swFamily))) {
-      const collabMon = findByElementAndAnyName(mon.element, [collabName], mon.id);
-      if (collabMon) return { sw: mon, collab: collabMon };
-    }
+  // Cas 2 : le monstre est la version SW → retrouver le collab correspondant
+  const hit = resolveCollabForSw(mon);
+  if (hit) {
+    const collabMon = findByElementAndAnyName(mon.element, [hit.collabName], mon.id);
+    if (collabMon) return { sw: mon, collab: collabMon };
   }
 
-  // Sinon : pas de pair (TEKKEN ou monstre hors mapping)
-  return null;
+  return null; // pas de pair (ex : TEKKEN)
 }
 
 function shouldHideInGrid(mon){
@@ -386,12 +390,26 @@ function matchesQuery(m, qRaw){
   const q = normalize(qRaw);
   if (!q) return true;
   const tokens = q.split(/\s+/);
+
+  // Synonymes : autorise la recherche croisée SW<->COLLAB
+  const extra = [];
+  const duo = findMappedPair(m);
+  if (duo) {
+    if (m.id === duo.sw.id) extra.push(duo.collab.name); // taper "Ryu" trouve "Striker" caché
+    else                    extra.push(duo.sw.name);     // taper "Striker" trouve "Ryu" affiché
+  } else {
+    const s1 = resolveSwFamilyForCollab(m); if (s1) extra.push(s1);
+    const s2 = resolveCollabForSw(m);       if (s2) extra.push(s2.collabName);
+  }
+
   const hay = new Set([
     normalize(m.name),
     normalize(m.unawakened_name),
     normalize(m.element),
     ...(m.aliases||[]).map(normalize),
+    ...extra.map(normalize),
   ]);
+
   return tokens.every(t => { for (const h of hay) if (h.includes(t)) return true; return false; });
 }
 
