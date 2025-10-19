@@ -324,7 +324,10 @@ textarea{ min-height:100px; border-radius:12px; }
 .btn--ghost{background:transparent;border-color:#555}
 .badge{margin-left:8px;padding:2px 8px;border-radius:999px;background:#1f6b3a;border:1px solid #2a8b4d;color:#cfe}
 
-.offsList{display:grid;gap:8px;margin:10px 0 18px}
+.offsList{
+  display:grid;gap:8px;margin:10px 0 12px;
+  max-height:56vh;overflow:auto;padding-right:6px;scrollbar-gutter:stable;
+}
 .offsItem{border:1px solid #2a2a2a;border-radius:12px;padding:10px}
 .offsItem h5{margin:0 0 2px;font-size:15px}
 .offsItem .meta{font-size:12px;color:#aaa}
