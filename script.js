@@ -983,10 +983,14 @@ function openOffPicker(defKey, offsListEl, onClose){
       const btn = document.createElement('button'); btn.className='close'; btn.type='button'; btn.title='Retirer'; btn.textContent='✕';
       btn.onclick = () => { offPicks.splice(index,1); renderOffPicks(); };
 
-      const img = document.createElement('img'); img.src=fixIconUrl(p.icon||''); img.alt=p.name; img.loading='lazy';
-      const label = document.createElement('div'); label.className='pname'; label.textContent=p.name;
-
-      div.append(btn,img,label); picksBox.appendChild(div);
+      const v = renderMergedVisual(p); // ⬅️ récupère l’icône fusionnée + label
+      div.innerHTML = `
+        <button class="close" type="button" title="Retirer">✕</button>
+        ${v.htmlIcon}
+        <div class="pname">${esc(v.label)}</div>
+      `;
+      // rebrancher l'action du bouton
+      div.querySelector('.close').onclick = () => { offPicks.splice(index,1); renderOffPicks(); };
     });
 
     // Drag & drop (réordonner)
