@@ -654,7 +654,7 @@ function renderHandled(data){
       
       right.appendChild(btn);
       item.append(trio, right);
-    );
+    };
 
   box.innerHTML = '';
   box.appendChild(list);
