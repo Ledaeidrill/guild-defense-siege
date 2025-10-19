@@ -197,14 +197,20 @@ function resolveSwFamilyForCollab(mon) {
 
 // Déduire le nom collab à partir d’un monstre SW (par son nom/aliases)
 function resolveCollabForSw(mon) {
-  const hitSw = Object.keys(MAP_SW_TO_COLLAB).find(sw =>
-    nrm(sw) === nrm(mon.name) ||
-    nrm(sw) === nrm(mon.unawakened_name || '') ||
-    (mon.aliases || []).some(a => nrm(a) === nrm(sw))
-  );
-  return hitSw ? { swFamily: hitSw, collabName: MAP_SW_TO_COLLAB[hitSw] } : null;
-}
+  const fields = [
+    nrm(mon.name),
+    nrm(mon.unawakened_name || ''),
+    ...(mon.aliases || []).map(nrm),
+  ].filter(Boolean);
 
+  for (const [swFamily, collabName] of Object.entries(MAP_SW_TO_COLLAB)) {
+    const key = nrm(swFamily);
+    // match strict OU sous-chaîne dans les deux sens
+    const hit = fields.some(a => a === key || a.includes(key) || key.includes(a));
+    if (hit) return { swFamily, collabName };
+  }
+  return null;
+}
 
 // Helpers de normalisation (accents/ponctuation/casse)
 const nrm = (s) =>
@@ -233,16 +239,22 @@ const MAP_SW_TO_COLLAB = (() => {
 })();
 
 // Résout *par élément* un monstre dont le (name | unawakened_name | aliases) matche une des clés
-function findByElementAndAnyName(element, candidates, excludeId) {
-  const want = new Set(candidates.map(nrm));
+function findByElementAndAnyName(element, candidates, excludeId){
+  const wants = candidates.map(nrm);
   const el = nrm(element);
-  return (window.MONSTERS || []).find((x) => {
-    if (excludeId && x.id === excludeId) return false; // évite self-merge
+
+  const matchAny = (val) => {
+    const v = nrm(val || '');
+    return v && wants.some(w => v === w || v.includes(w) || w.includes(v));
+  };
+
+  return (window.MONSTERS || []).find(x => {
+    if (excludeId && x.id === excludeId) return false;
     if (nrm(x.element) !== el) return false;
-    if (want.has(nrm(x.name))) return true;
-    if (x.unawakened_name && want.has(nrm(x.unawakened_name))) return true;
-    const aliases = (x.aliases || []).map(nrm);
-    return aliases.some((a) => want.has(a));
+    if (matchAny(x.name)) return true;
+    if (matchAny(x.unawakened_name)) return true;
+    const aliases = (x.aliases || []);
+    return aliases.some(a => matchAny(a));
   }) || null;
 }
 
