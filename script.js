@@ -76,7 +76,11 @@ const offsListEl  = qs('#offsList');
 let IS_ADMIN = false;
 
 function showOffsModal(){ offsModal?.setAttribute('aria-hidden','false'); }
-function hideOffsModal(){ offsModal?.setAttribute('aria-hidden','true'); }
+function hideOffsModal(){
+  offsModal?.setAttribute('aria-hidden','true');
+  if (offsListEl) offsListEl.innerHTML = '';                // reset list
+  qsa('#offsAddWrap, [data-role="offs-add"]').forEach(el => el.remove());  // remove add bar
+}
 closeOffsBtn?.addEventListener('click', hideOffsModal);
 offsModal?.addEventListener('click', (e)=>{ if (e.target === offsModal) hideOffsModal(); });
 
@@ -95,10 +99,10 @@ async function openOffsModal(defKey){
   // 1) Détection admin côté serveur (via ?admin=...)
   await detectAdmin();
 
-  // 2) Nettoie un éventuel bouton "+ Ajouter" d'une ouverture précédente
-  const prevAdd = document.getElementById('offsAddWrap');
-  if (prevAdd) prevAdd.remove();
-
+  // 2) Nettoie TOUS les anciens boutons "+ Ajouter"
+  qsa('#offsAddWrap, [data-role="offs-add"]').forEach(el => el.remove());
+  ;
+  
   // 3) Placeholder + clé portée par le DOM
   offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Chargement…</div></div>';
   offsListEl.dataset.defKey = defKey || '';
@@ -116,6 +120,7 @@ async function openOffsModal(defKey){
   if (IS_ADMIN){
     const addWrap = document.createElement('div');
     addWrap.id = 'offsAddWrap';
+    addWrap.setAttribute('data-role', 'offs-add');
     addWrap.style.display = 'flex';
     addWrap.style.justifyContent = 'center';
     addWrap.style.marginTop = '10px';
