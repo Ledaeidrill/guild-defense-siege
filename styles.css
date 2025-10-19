@@ -314,9 +314,15 @@ textarea{ min-height:100px; border-radius:12px; }
 ========================================= */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:999}
 .modal[aria-hidden="false"]{display:flex}
-.modal__dialog{background:#111;border:1px solid #333;border-radius:14px;max-width:780px;width:92%;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.modal__dialog{
+  background:#111;border:1px solid #333;border-radius:14px;
+  max-width:780px;width:92%;box-shadow:0 10px 40px rgba(0,0,0,.5);
+  max-height:90vh;            /* ⬅️ ne dépasse jamais l’écran */
+  display:flex;               /* ⬅️ permet au body de prendre le reste */
+  flex-direction:column;
+}
 .modal__header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #2a2a2a}
-.modal__body{padding:16px}
+.modal__body{padding:16px; overflow:auto}   /* ⬅️ scroll interne */
 .modal__close{background:transparent;border:0;color:#aaa;font-size:24px;cursor:pointer}
 
 .btn{padding:8px 14px;border-radius:10px;border:1px solid #444;background:#1b1b1b;cursor:pointer}
@@ -333,3 +339,10 @@ textarea{ min-height:100px; border-radius:12px; }
 .offsItem .meta{font-size:12px;color:#aaa}
 .offsForm label{display:block;margin:8px 0}
 .offsForm input,.offsForm textarea{width:100%;padding:8px;border-radius:8px;border:1px solid #333;background:#0f0f0f;color:#eee}
+
+.picker-grid{
+  border-radius:12px; background:#0f1824; padding:8px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.35);
+  max-height:52vh; overflow:auto;
+}
+
