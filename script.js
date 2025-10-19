@@ -1043,7 +1043,7 @@ function openOffPicker(defKey, offsListEl, onClose){
     _offSubmitting = true;
     validate.disabled = true;
     validate.textContent = 'Validation…';
-    spinner.style.display = 'inline-block';
+    spinner.style.display = 'sending';
 
     const [a,b,c] = offPicks.map(x => x.name);
     try {
@@ -1068,6 +1068,7 @@ function openOffPicker(defKey, offsListEl, onClose){
     } finally {
       _offSubmitting = false;
       spinner.style.display = 'none';
+      validate.classList.remove('sending');
       validate.disabled = false;
       validate.textContent = 'Valider off';
     }
