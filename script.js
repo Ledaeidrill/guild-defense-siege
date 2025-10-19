@@ -183,6 +183,18 @@ const MAP_COLLAB_TO_SW = {
   // 'Jin': null, etc.
 };
 
+function resolveSwFamilyForCollab(mon) {
+  const names = new Set([
+    nrm(mon.name),
+    nrm(mon.unawakened_name || ''),
+    ...(mon.aliases || []).map(nrm),
+  ]);
+  for (const [collabName, sw] of Object.entries(MAP_COLLAB_TO_SW)) {
+    if (names.has(nrm(collabName))) return sw;
+  }
+  return null;
+}
+
 // Helpers de normalisation (accents/ponctuation/casse)
 const nrm = (s) =>
   (s ?? '')
@@ -226,7 +238,7 @@ function findByElementAndAnyName(element, candidates, excludeId) {
 // Renvoie le duo { sw, collab } pour le même élément, ou null si pas de pair
 function findMappedPair(mon) {
   // Cas 1 : mon est un collab
-  const swFamily = MAP_COLLAB_TO_SW_LC[nrm(mon.name)];
+  const swFamily = resolveSwFamilyForCollab(mon);
   if (swFamily) {
     const swMon = findByElementAndAnyName(mon.element, [swFamily], mon.id);
     if (swMon) return { sw: swMon, collab: mon };
@@ -265,7 +277,7 @@ function renderMergedVisual(mon){
       htmlIcon: `<img src="${fixIconUrl(mon.icon||'')}" alt="${esc(mon.name)}" loading="lazy">`,
     };
   }
-  const label = `${duo.sw.name} / ${duo.collab.name.toUpperCase()}`;
+  const label = `${duo.sw.name} / ${duo.collab.name}`;
   return {
     label,
     title: label,
