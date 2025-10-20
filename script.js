@@ -113,6 +113,17 @@ const pickPreferred = (bucket) => {
   })[0];
 };
 
+function initCollabPairsWhenReady(){
+  const ready = Array.isArray(window.MONSTERS) && window.MONSTERS.length > 0
+             && typeof MAP_SW_TO_COLLAB !== 'undefined';
+  if (!ready) { setTimeout(initCollabPairsWhenReady, 50); return; }
+
+  buildStrictCollabPairs();
+
+  // si une vue "merge" est visible (catalogue), tu peux re-render ici si besoin
+  // ex: if (!pageStats.classList.contains('hidden')) renderGrid();
+}
+
 // =====================
 // Offs Modal (version finale unique)
 // =====================
@@ -239,28 +250,26 @@ function resolveCollabForSw(mon) {
 }
 
 // === Strict collab merge (basé SEULEMENT sur COLLAB_MAP) ===
-// Map: monsterId -> { sw, collab }
+
 const _pairById = new Map();
 
-// Trouve un monstre par NOM EXACT (sans alias ni unawakened)
-function findByExactName(name){
-  const q = (name||'').trim().toLowerCase();
-  if (!q) return null;
-  return (window.MONSTERS||[]).find(m => (m.name||'').toLowerCase() === q) || null;
-}
-
-// Construit la table id->pair UNIQUEMENT depuis COLLAB_MAP
 function buildStrictCollabPairs(){
   _pairById.clear();
-  const cmap = MAP_SW_TO_COLLAB; // ✅ ta map explicite SW → collab
+
+  // ✅ utilise bien TA map explicite SW -> collab
+  const cmap = (typeof MAP_SW_TO_COLLAB !== 'undefined' ? MAP_SW_TO_COLLAB : {});
+
   for (const [swName, collabName] of Object.entries(cmap)) {
-    const sw     = findByExactName(swName);
-    const collab = findByExactName(collabName);
+    const sw     = findByMapName(swName);
+    const collab = findByMapName(collabName);
     if (sw && collab) {
       _pairById.set(sw.id,     { sw, collab });
       _pairById.set(collab.id, { sw, collab });
     }
   }
+
+  // petit log de vérif (tu peux retirer après)
+  console.debug('[collab] pairs built:', _pairById.size / 2);
 }
 
 // Helpers de normalisation (accents/ponctuation/casse)
@@ -273,6 +282,23 @@ const nrm = (s) =>
     .replace(/[’'"]/g, '')               // retire apostrophes/quotes/points
     .trim()
     .toLowerCase();
+
+function findByMapName(name){
+  const k = nrm(name);
+  if (!k) return null;
+  const list = window.MONSTERS || [];
+
+  // 1) nom affiché exact (normalisé)
+  let hit = list.find(x => nrm(x.name) === k);
+  if (hit) return hit;
+
+  // 2) certains noms de MAP peuvent être des non-éveillés
+  hit = list.find(x => nrm(x.unawakened_name) === k);
+  if (hit) return hit;
+
+  // 3) filet: un alias EXACT (normalisé)
+  return list.find(x => (x.aliases || []).some(a => nrm(a) === k)) || null;
+}
 
 // mapping collab -> SW en lowercase/normalisé
 const MAP_COLLAB_TO_SW_LC = Object.fromEntries(
@@ -951,6 +977,7 @@ tabDone?.addEventListener('click', async () => {
 document.addEventListener('DOMContentLoaded', async () => {
   await detectAdmin(); // ← on connaît le vrai statut admin ici
   buildStrictCollabPairs();
+  initCollabPairsWhenReady();
   fetchStats().then(d => { if (!pageStats.classList.contains('hidden')) renderStats(d); });
   fetchHandled().then(d => { if (!pageDone.classList.contains('hidden')) renderHandled(d); });
 });
