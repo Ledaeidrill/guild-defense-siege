@@ -65,7 +65,11 @@ function ensureTrioArray(trio, key){
 }
 
 function esc(s){
-  return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  s = (s || '').normalize('NFC');           // affichage propre (compose les diacritiques)
+  return s.replace(/[&<>"'’]/g, c => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;',
+    "'":'&#39;', '’':'&#39;'               // ← apostrophe droite ET typographique
+  }[c]));
 }
 
 // ===== Modal Offs (markup existant dans index.html) =====
