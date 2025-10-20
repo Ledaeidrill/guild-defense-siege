@@ -238,6 +238,31 @@ function resolveCollabForSw(mon) {
   return null;
 }
 
+// === Strict collab merge (basé SEULEMENT sur COLLAB_MAP) ===
+// Map: monsterId -> { sw, collab }
+const _pairById = new Map();
+
+// Trouve un monstre par NOM EXACT (sans alias ni unawakened)
+function findByExactName(name){
+  const q = (name||'').trim().toLowerCase();
+  if (!q) return null;
+  return (window.MONSTERS||[]).find(m => (m.name||'').toLowerCase() === q) || null;
+}
+
+// Construit la table id->pair UNIQUEMENT depuis COLLAB_MAP
+function buildStrictCollabPairs(){
+  _pairById.clear();
+  const cmap = (window.COLLAB_MAP || {});     // ta liste explicite: { "Ryu": "Striker", ... }
+  for (const [swName, collabName] of Object.entries(cmap)) {
+    const sw     = findByExactName(swName);
+    const collab = findByExactName(collabName);
+    if (sw && collab) {
+      _pairById.set(sw.id,     { sw, collab });
+      _pairById.set(collab.id, { sw, collab });
+    }
+  }
+}
+
 // Helpers de normalisation (accents/ponctuation/casse)
 const nrm = (s) =>
   (s ?? '')
@@ -280,23 +305,9 @@ function findByElementAndAnyName(element, candidates, excludeId){
   }) || null;
 }
 
-// Renvoie le duo { sw, collab } pour le même élément, ou null si pas de pair
-function findMappedPair(mon) {
-  // Cas 1 : le monstre est un collab → retrouver la famille SW correspondante
-  const swFamily = resolveSwFamilyForCollab(mon);
-  if (swFamily) {
-    const swMon = findByElementAndAnyName(mon.element, [swFamily], mon.id);
-    if (swMon) return { sw: swMon, collab: mon };
-  }
-
-  // Cas 2 : le monstre est la version SW → retrouver le collab correspondant
-  const hit = resolveCollabForSw(mon);
-  if (hit) {
-    const collabMon = findByElementAndAnyName(mon.element, [hit.collabName], mon.id);
-    if (collabMon) return { sw: mon, collab: collabMon };
-  }
-
-  return null; // pas de pair (ex : TEKKEN)
+// Remplace TOUT le contenu précédent de findMappedPair par :
+function findMappedPair(mon){
+  return _pairById.get(mon.id) || null; // ✅ seulement si la paire vient de COLLAB_MAP
 }
 
 function shouldHideInGrid(mon){
@@ -939,6 +950,7 @@ tabDone?.addEventListener('click', async () => {
 // Préfetch à l’ouverture de la page pour masquer la latence au premier clic
 document.addEventListener('DOMContentLoaded', async () => {
   await detectAdmin(); // ← on connaît le vrai statut admin ici
+  buildStrictCollabPairs();
   fetchStats().then(d => { if (!pageStats.classList.contains('hidden')) renderStats(d); });
   fetchHandled().then(d => { if (!pageDone.classList.contains('hidden')) renderHandled(d); });
 });
