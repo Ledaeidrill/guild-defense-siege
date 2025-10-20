@@ -996,20 +996,23 @@ function renderOffsList(target, offs){
         }
       };
 
-  // ligne + zone actions à droite
-  const row = document.createElement('div');
-  row.style.display = 'flex';
-  row.style.alignItems = 'center';
-  row.style.gap = '12px';
-
-  const actions = document.createElement('div');
-  actions.style.marginLeft = 'auto';   // ← pousse complètement à droite
-  actions.appendChild(del);
-
-  row.append(trioWrap, actions);
-  item.appendChild(row);
-} else {
-  item.appendChild(trioWrap);
+    // ligne + zone actions à droite
+    const row = document.createElement('div');
+    row.style.display = 'flex';
+    row.style.alignItems = 'center';
+    row.style.gap = '12px';
+  
+    const actions = document.createElement('div');
+    actions.style.marginLeft = 'auto';   // ← pousse complètement à droite
+    actions.appendChild(del);
+  
+    row.append(trioWrap, actions);
+    item.appendChild(row);
+  } else {
+    item.appendChild(trioWrap);
+  }
+  target.appendChild(item);
+  });
 }
 
 // Mini-picker Off (3 max)
