@@ -650,7 +650,7 @@ sendBtn?.addEventListener('click', async () => {
     });
 
     if (json.already_handled) {
-      toast(json.message || 'Défense déjà traitée — va voir ingame les replays et runes.');
+      toast(json.message || 'Défense déjà traitée — va voir les offenses');
       picks = []; renderPicks(); if (qs('#notes')) qs('#notes').value='';
       return;
     }
