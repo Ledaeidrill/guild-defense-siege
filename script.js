@@ -475,7 +475,7 @@ function makeCard(m){
   card.onclick = () => addPick(m);
 
   // 👉 rendu fusionné SW|COLLAB si applicable
-  const v = renderMergedVisual(m, { mergeCollab:false });
+  const v = renderMergedVisual(m);
   card.innerHTML = `
     ${v.htmlIcon}
     <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
@@ -755,7 +755,7 @@ function renderStats(data){
     const el = (r.els && r.els[i]) || '';
     const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
     const card = document.createElement('div'); card.className = 'pick def-pick';
-    const v = renderMergedVisual(m, { mergeCollab:false });
+    const v = renderMergedVisual(m);
     card.innerHTML = `
       ${v.htmlIcon}
       <div class="pname">${esc(v.label)}</div>
@@ -843,7 +843,7 @@ function renderHandled(data){
       const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
       const card = document.createElement('div'); 
       card.className = 'pick def-pick';
-      const v = renderMergedVisual(m, { mergeCollab:false });
+      const v = renderMergedVisual(m);
       card.innerHTML = `
         ${v.htmlIcon}
         <div class="pname">${esc(v.label)}</div>
@@ -1157,7 +1157,7 @@ function openOffPicker(defKey, offsListEl, onClose){
       card.title = m.name;
       card.__data = m;
   
-      const v = renderMergedVisual(m, { mergeCollab:false });
+      const v = renderMergedVisual(m);
       card.innerHTML = `
         ${v.htmlIcon}
         <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
