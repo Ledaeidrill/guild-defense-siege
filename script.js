@@ -956,10 +956,10 @@ function renderOffsList(target, offs){
 
 // Mini-picker Off (3 max)
 function openOffPicker(defKey, offsListEl, onClose){
-  // --- Crée une nouvelle modale au-dessus (z-index > modal principale)
+  // --- Modale au-dessus
   const modal = document.createElement('div');
   modal.className = 'modal modal--picker';
-  modal.style.zIndex = '2000'; // au-dessus
+  modal.style.zIndex = '2000';
   modal.setAttribute('aria-hidden','false');
 
   const dialog = document.createElement('div');
@@ -970,18 +970,15 @@ function openOffPicker(defKey, offsListEl, onClose){
 
   const header = document.createElement('div');
   header.className = 'modal__header';
-  header.innerHTML = `
-    <h3 id="pickerTitle">Ajouter une offense</h3>
-    <button class="modal__close" type="button" aria-label="Fermer">&times;</button>
-  `;
-  const closeBtn = header.querySelector('.modal__close');
+  const h = document.createElement('div');
+  h.className = 'modal__title'; h.id = 'pickerTitle';
+  h.textContent = 'Ajouter une offense';
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'btn-ghost'; closeBtn.type = 'button'; closeBtn.textContent = 'Fermer';
+  header.append(h, closeBtn);
 
-  const body = document.createElement('div');
-  body.className = 'modal__body';
-
-  dialog.append(header, body);
-  modal.appendChild(dialog);
-  document.body.appendChild(modal);
+  const body = document.createElement('div'); body.className = 'modal__body';
+  dialog.append(header, body); modal.appendChild(dialog); document.body.appendChild(modal);
 
   function closePicker(){
     modal.setAttribute('aria-hidden','true');
@@ -989,21 +986,17 @@ function openOffPicker(defKey, offsListEl, onClose){
     if (typeof onClose === 'function') onClose();
   }
   closeBtn.addEventListener('click', closePicker);
-  modal.addEventListener('click', (e)=>{ if(e.target===modal) closePicker(); });
-  window.addEventListener('keydown', function esc(e){ if(e.key==='Escape'){ closePicker(); window.removeEventListener('keydown', esc);} });
+  modal.addEventListener('click', (e) => { if (e.target === modal) closePicker(); });
+  document.addEventListener('keydown', function esc(e){ if(e.key==='Escape'){ closePicker(); document.removeEventListener('keydown', esc); } });
 
-  // --- Contenu du picker (mêmes specs que "Demander une défense")
-  const wrap = document.createElement('div');
-  wrap.className = 'picker';
+  // --- Contenu
+  const wrap = document.createElement('div'); wrap.className = 'picker'; body.appendChild(wrap);
 
-  const pickTitle = document.createElement('div');
-  pickTitle.className = 'picker-title';
+  const pickTitle = document.createElement('div'); pickTitle.className = 'picker-title';
   pickTitle.textContent = 'Sélectionne 3 monstres';
   wrap.appendChild(pickTitle);
 
-  const picksBox = document.createElement('div');
-  picksBox.className = 'off-picks';
-  wrap.appendChild(picksBox);
+  const picksBox = document.createElement('div'); picksBox.className = 'picks'; wrap.appendChild(picksBox);
   let offPicks = [];
 
   // Recherche
@@ -1012,65 +1005,131 @@ function openOffPicker(defKey, offsListEl, onClose){
   const inp = document.createElement('input'); inp.placeholder='Rechercher un monstre'; inp.autocomplete='off';
   row.append(lab, inp); wrap.appendChild(row);
 
-  // Grille triée + merge identique
+  // Grille
   const gwrap = document.createElement('div'); gwrap.className='picker-grid';
   const grid = document.createElement('div'); grid.className='monster-grid';
-  // Délégation de clics sur la grille (fiable même après rerender)
-  grid.addEventListener('click', (e) => {
-    const el = e.target.closest('.card');
-    if (!el || !el.__data) return;
-    const m = el.__data;
-    if (offPicks.find(p => p.id === m.id)) return;
-    if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
-    offPicks.push(m);
-    renderOffPicks();
-  });
   gwrap.appendChild(grid); wrap.appendChild(gwrap);
 
   // Actions (Valider + spinner)
   const actions = document.createElement('div'); actions.className='picker-actions';
-  const validate = document.createElement('button'); validate.className='btn-primary'; validate.type='button'; validate.textContent='Valider off';
+  const validate = document.createElement('button');
+  validate.className = 'btn-primary'; validate.type='button'; validate.textContent='Valider off';
   const spinner = document.createElement('span'); spinner.className='btn-spinner'; spinner.style.marginLeft='8px';
-  actions.append(validate, spinner);
-  wrap.appendChild(actions);
+  actions.append(validate, spinner); wrap.appendChild(actions);
 
-  body.appendChild(wrap);
-
+  // ====== RENDER PICKS ======
   function renderOffPicks(){
     picksBox.innerHTML='';
     offPicks.forEach((p, index) => {
       const div = document.createElement('div'); div.className='pick'; div.dataset.index = index; div.draggable = true;
 
-      const btn = document.createElement('button'); btn.className='close'; btn.type='button'; btn.title='Retirer'; btn.textContent='✕';
-      btn.onclick = () => { offPicks.splice(index,1); renderOffPicks(); };
+      // bouton retirer
+      const close = document.createElement('button'); close.className = 'close'; close.type='button'; close.title='Retirer'; close.textContent='✕';
+      close.onclick = () => { offPicks.splice(index,1); renderOffPicks(); };
 
-      const v = renderMergedVisual(p); // ⬅️ récupère l’icône fusionnée + label
+      const v = renderMergedVisual(p);
       div.innerHTML = `
         <button class="close" type="button" title="Retirer">✕</button>
         ${v.htmlIcon}
         <div class="pname">${esc(v.label)}</div>
       `;
-      // rebrancher l'action du bouton
-      div.querySelector('.close').onclick = () => { offPicks.splice(index,1); renderOffPicks(); };
-    });
+      div.querySelector('.close').onclick = close.onclick;
 
-    // Drag & drop (réordonner)
-    picksBox.querySelectorAll('.pick').forEach(el => {
-      el.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', el.dataset.index); el.classList.add('dragging'); });
-      el.addEventListener('dragend', () => el.classList.remove('dragging'));
-      el.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect='move'; });
-      el.addEventListener('drop', e => {
+      // DnD
+      div.addEventListener('dragstart', e => { e.dataTransfer.effectAllowed='move'; e.dataTransfer.setData('text/plain', div.dataset.index); div.classList.add('dragging'); });
+      div.addEventListener('dragend',   () => div.classList.remove('dragging'));
+      div.addEventListener('dragover',  e => { e.preventDefault(); e.dataTransfer.dropEffect='move'; });
+      div.addEventListener('drop', e => {
         e.preventDefault();
-        const src = parseInt(e.dataTransfer.getData('text/plain'));
-        const dst = parseInt(el.dataset.index);
-        if (!Number.isNaN(src) && !Number.isNaN(dst) && src!==dst) {
+        const src = parseInt(e.dataTransfer.getData('text/plain'),10);
+        const dst = parseInt(div.dataset.index,10);
+        if (!Number.isNaN(src) && !Number.isNaN(dst) && src!==dst){
           const mv = offPicks.splice(src,1)[0];
           offPicks.splice(dst,0,mv);
           renderOffPicks();
         }
       });
+
+      picksBox.appendChild(div);
     });
   }
+
+  // ====== RENDER GRID (CLICK DIRECT SUR LA CARTE) ======
+  function renderPickerGrid(){
+    const q = (inp.value||'').trim().toLowerCase();
+    grid.textContent = '';
+    const frag = document.createDocumentFragment();
+
+    const list = (window.MONSTERS||[])
+      .filter(m => !q || [m.name, m.unawakened_name, m.element, ...(m.aliases||[])]
+        .some(s => (s||'').toLowerCase().includes(q)))
+      .sort(monsterComparator);
+
+    for (const m of list) {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.title = m.name;
+      card.__data = m; // stash
+
+      const v = renderMergedVisual(m);
+      card.innerHTML = `
+        ${v.htmlIcon}
+        <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
+      `;
+
+      // ✅ Clique fiable
+      card.addEventListener('click', () => {
+        if (offPicks.some(p => p.id === m.id)) return;
+        if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
+        offPicks.push(m);
+        renderOffPicks();
+      });
+
+      frag.appendChild(card);
+    }
+    grid.appendChild(frag);
+  }
+
+  inp.addEventListener('input', renderPickerGrid);
+  renderPickerGrid(); renderOffPicks();
+
+  // ====== Validation
+  let _offSubmitting = false;
+  validate.onclick = async () => {
+    if (_offSubmitting) return;
+    if (offPicks.length !== 3) { toast('Sélectionne exactement 3 monstres.'); return; }
+
+    _offSubmitting = true;
+    validate.disabled = true;
+    validate.classList.add('sending'); // spinner ON
+    validate.textContent = 'Validation…';
+
+    const [a,b,c] = offPicks.map(x => x.name);
+    try {
+      const resp = await apiAddOff({ key:defKey, o1:a, o2:b, o3:c });
+      if (!resp?.ok) { toast(resp?.error || 'Erreur ajout off'); return; }
+
+      // mise à jour locale
+      const ent = offsCache.get(defKey);
+      if (ent?.data?.ok) {
+        ent.data.offs = (ent.data.offs || []).concat([{ trio: [a, b, c] }]);
+        ent.ts = Date.now();
+        renderOffsList(offsListEl, ent.data.offs);
+      } else {
+        const res = await apiGetOffs(defKey, { force: true });
+        if (res?.ok) renderOffsList(offsListEl, res.offs || []);
+      }
+
+      toast('Offense ajoutée ✅'); closePicker();
+    } catch (err) {
+      console.error(err); toast('Erreur réseau');
+    } finally {
+      validate.classList.remove('sending'); // spinner OFF
+      validate.disabled = false;
+      validate.textContent = 'Valider off';
+    }
+  };
+}
 
 function renderPickerGrid(){
   const q = (inp.value || '').trim().toLowerCase();
