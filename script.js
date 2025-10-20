@@ -252,7 +252,7 @@ function findByExactName(name){
 // Construit la table id->pair UNIQUEMENT depuis COLLAB_MAP
 function buildStrictCollabPairs(){
   _pairById.clear();
-  const cmap = (window.COLLAB_MAP || {});     // ta liste explicite: { "Ryu": "Striker", ... }
+  const cmap = MAP_SW_TO_COLLAB; // ✅ ta map explicite SW → collab
   for (const [swName, collabName] of Object.entries(cmap)) {
     const sw     = findByExactName(swName);
     const collab = findByExactName(collabName);
