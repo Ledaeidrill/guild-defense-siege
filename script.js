@@ -1072,38 +1072,43 @@ function openOffPicker(defKey, offsListEl, onClose){
     });
   }
 
-  function renderPickerGrid(){
-    const q = (inp.value||'').trim().toLowerCase();
-    grid.innerHTML='';
-    const frag = document.createDocumentFragment();
-    (window.MONSTERS||[])
-      .filter(m => !q || [m.name, m.unawakened_name, m.element, ...(m.aliases||[])].some(s => (s||'').toLowerCase().includes(q)))
-      .sort(monsterComparator)
-      .forEach(m => {
-      const card = document.createElement('div'); 
-      card.className = 'card'; 
-      card.title = m.name;
-      
-      // ⬇️ on mémorise le monstre sur la carte
-      card.__data = m;
-      
-      const v = renderMergedVisual(m);
-      card.innerHTML = `
-        ${v.htmlIcon}
-        <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
-      `;
-      
-      // (tu peux laisser ce onClick si tu veux, mais on ajoute aussi une délégation juste après)
-      card.onclick = () => {
-        if (offPicks.find(p => p.id===m.id)) return;
-        if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
-        offPicks.push(m); renderOffPicks();
-      };
-      
-      frag.appendChild(card);
-      });
-    grid.appendChild(frag);
+function renderPickerGrid(){
+  const q = (inp.value || '').trim().toLowerCase();
+  grid.textContent = ''; // clean
+
+  const frag = document.createDocumentFragment();
+
+  const list = (window.MONSTERS || [])
+    .filter(m => !q || [m.name, m.unawakened_name, m.element, ...(m.aliases||[])]
+      .some(s => (s || '').toLowerCase().includes(q)))
+    .sort(monsterComparator);
+
+  for (const m of list) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.title = m.name;
+    card.dataset.id = m.id;      // utile si tu veux une délégation plus tard
+    card.__data = m;             // accès direct au monstre si besoin
+
+    const v = renderMergedVisual(m);
+    card.innerHTML = `
+      ${v.htmlIcon}
+      <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
+    `;
+
+    // ✅ Clique fiable (pas de délégation globale)
+    card.addEventListener('click', () => {
+      if (offPicks.some(p => p.id === m.id)) return;
+      if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
+      offPicks.push(m);
+      renderOffPicks();
+    });
+
+    frag.appendChild(card);
   }
+
+  grid.appendChild(frag);
+}
 
   inp.addEventListener('input', renderPickerGrid);
   renderPickerGrid(); renderOffPicks();
