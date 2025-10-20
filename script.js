@@ -346,8 +346,9 @@ async function apiGetOffs(key, { force = false } = {}){
 }
 async function apiAddOff({ key, o1, o1el, o2, o2el, o3, o3el, note = '', by = '' }){
   return apiPost({
-    mode:'add_off', admin_token: ADMIN_TOKEN_PARAM,
-    key, o1, o1el, o2, o2el, o3, o3el, note, by 
+    mode: 'add_off',
+    admin_token: ADMIN_TOKEN_PARAM,   // 
+    key, o1, o1el, o2, o2el, o3, o3el, note, by
   });
 }
 async function apiDelOff({ key, o1, o1el, o2, o2el, o3, o3el }){
@@ -535,15 +536,19 @@ function addPick(m) {
   if (search) search.value = '';
   if (typeof requestIdleCallback === 'function') { requestIdleCallback(renderGrid, { timeout: 200 }); } else { renderGrid(); }
 }
+
 function removePick(id) {
   picks = picks.filter(p => p.id !== id);
   renderPicks();
 }
+
 function renderPicks() {
   const zone = qs('#picks');
   if (!zone) return;
+
   zone.innerHTML = '';
   const frag = document.createDocumentFragment();
+
   picks.forEach((p, index) => {
     const div = document.createElement('div');
     div.className = 'pick';
@@ -551,26 +556,32 @@ function renderPicks() {
     div.dataset.index = index;
     div.draggable = true;
 
+    // bouton retirer
     const btn = document.createElement('button');
     btn.className = 'close';
     btn.type = 'button';
     btn.title = 'Retirer';
     btn.textContent = '✕';
-    btn.setAttribute('data-id', p.id);
+    btn.onclick = () => { picks.splice(index, 1); renderPicks(); };
 
-    const img = document.createElement('img');
-    img.src = fixIconUrl(p.icon); img.alt = p.name; img.loading = 'lazy';
+    // ✅ visuel fusionné SW|Collab
+    const v = renderMergedVisual(p);
 
-    const label = document.createElement('div');
-    label.className = 'pname';
-    label.textContent = p.name;
+    div.innerHTML = `
+      <button class="close" type="button" title="Retirer">✕</button>
+      ${v.htmlIcon}
+      <div class="pname" title="${esc(v.title)}">${esc(v.label)}</div>
+    `;
+    // ré-associe le click du bouton close inséré via innerHTML
+    div.querySelector('.close').onclick = btn.onclick;
 
-    div.append(btn, img, label);
     frag.appendChild(div);
   });
+
   zone.appendChild(frag);
   enableDragAndDrop(zone);
 }
+
 qs('#picks')?.addEventListener('click', (e) => {
   const btn = e.target.closest('.close');
   if (!btn) return;
@@ -1047,9 +1058,9 @@ function openOffPicker(defKey, offsListEl, onClose){
   // Actions (Valider + spinner)
   const actions = document.createElement('div'); actions.className='picker-actions';
   const validate = document.createElement('button');
-  validate.className = 'btn-primary'; validate.type='button'; validate.textContent='Valider off';
-  const spinner = document.createElement('span'); spinner.className='btn-spinner'; spinner.style.marginLeft='8px';
-  actions.append(validate, spinner); wrap.appendChild(actions);
+  validate.className = 'btn-primary'; validate.type='button';
+  validate.innerHTML = 'Valider off <span class="btn-spinner"></span>'; // ⬅️ spinner DANS le bouton
+  actions.appendChild(validate); wrap.appendChild(actions);
 
   // ====== RENDER PICKS ======
   function renderOffPicks(){
@@ -1142,7 +1153,7 @@ function openOffPicker(defKey, offsListEl, onClose){
     const [e1,e2,e3]= offPicks.map(x => x.element || '');
     try {
       const resp = await apiAddOff({
-        key:defKey,
+        key: defKey,
         o1:a, o1el:e1,
         o2:b, o2el:e2,
         o3:c, o3el:e3,
