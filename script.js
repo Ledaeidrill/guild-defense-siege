@@ -113,17 +113,6 @@ const pickPreferred = (bucket) => {
   })[0];
 };
 
-function initCollabPairsWhenReady(){
-  const ready = Array.isArray(window.MONSTERS) && window.MONSTERS.length > 0
-             && typeof MAP_SW_TO_COLLAB !== 'undefined';
-  if (!ready) { setTimeout(initCollabPairsWhenReady, 50); return; }
-
-  buildStrictCollabPairs();
-
-  // si une vue "merge" est visible (catalogue), tu peux re-render ici si besoin
-  // ex: if (!pageStats.classList.contains('hidden')) renderGrid();
-}
-
 // =====================
 // Offs Modal (version finale unique)
 // =====================
@@ -131,43 +120,47 @@ async function openOffsModal(defKey){
   if (offsTitle) offsTitle.textContent = 'Offenses — ' + (defKey || '');
   showOffsModal();
 
-  // 1) Détection admin côté serveur (via ?admin=...)
-  await detectAdmin();
-
-  // 2) Nettoie TOUS les anciens boutons "+ Ajouter"
-  qsa('#offsAddWrap, [data-role="offs-add"]').forEach(el => el.remove());
-  
-  // 3) Placeholder + clé portée par le DOM
+  // 1) placeholder
   offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Chargement…</div></div>';
   offsListEl.dataset.defKey = defKey || '';
 
-  // 4) Charge les offs puis rend la liste
+  // 2) fire-and-forget: admin + offs en parallèle
+  const pAdmin = detectAdmin().catch(()=>{});
+  const pOffs  = apiGetOffs(defKey);
+
+  // 3) on affiche les offs dès que possible
   try{
-    const res = await apiGetOffs(defKey);
+    const res = await pOffs;
     if (!res?.ok) throw new Error(res?.error || 'Erreur');
     renderOffsList(offsListEl, res.offs || []);
   }catch(e){
     offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Impossible de charger les offenses.</div></div>';
   }
 
-  // 5) Si admin → affiche le bouton "+ Ajouter une offense"
-  if (IS_ADMIN){
-    const addWrap = document.createElement('div');
-    addWrap.id = 'offsAddWrap';
-    addWrap.setAttribute('data-role', 'offs-add');
-    addWrap.style.display = 'flex';
-    addWrap.style.justifyContent = 'center';
-    addWrap.style.marginTop = '10px';
+  // 4) quand on sait si on est admin → on affiche le bouton
+  try {
+    await pAdmin;
+    if (IS_ADMIN){
+      // supprime d’éventuels restes
+      qsa('#offsAddWrap, [data-role="offs-add"]').forEach(el => el.remove());
 
-    const addBtn = document.createElement('button');
-    addBtn.className = 'btn btn--primary';
-    addBtn.type = 'button';
-    addBtn.textContent = '+ Ajouter une offense';
-    addBtn.onclick = () => openOffPicker(defKey, offsListEl, () => { /* optionnel */ });
+      const addWrap = document.createElement('div');
+      addWrap.id = 'offsAddWrap';
+      addWrap.setAttribute('data-role', 'offs-add');
+      addWrap.style.display = 'flex';
+      addWrap.style.justifyContent = 'center';
+      addWrap.style.marginTop = '10px';
 
-    addWrap.appendChild(addBtn);
-    offsListEl.parentElement.appendChild(addWrap);
-  }
+      const addBtn = document.createElement('button');
+      addBtn.className = 'btn btn--primary';
+      addBtn.type = 'button';
+      addBtn.textContent = '+ Ajouter une offense';
+      addBtn.onclick = () => openOffPicker(defKey, offsListEl, () => {});
+
+      addWrap.appendChild(addBtn);
+      offsListEl.parentElement.appendChild(addWrap);
+    }
+  } catch {}
 }
 
 // =====================
@@ -221,33 +214,6 @@ const MAP_COLLAB_TO_SW = {
   // TEKKEN 8 → pas d’équivalent SW (DON’T MERGE)
   // 'Jin': null, etc.
 };
-
-function resolveSwFamilyForCollab(mon) {
-  const a = nrm(mon.name);
-  const u = nrm(mon.unawakened_name || '');
-  for (const [collabName, sw] of Object.entries(MAP_COLLAB_TO_SW)) {
-    const key = nrm(collabName);
-    if (a === key || u === key) return sw;   // strict equality only
-  }
-  return null;
-}
-
-// Déduire le nom collab à partir d’un monstre SW (par son nom/aliases)
-function resolveCollabForSw(mon) {
-  const fields = [
-    nrm(mon.name),
-    nrm(mon.unawakened_name || ''),
-    ...(mon.aliases || []).map(nrm),
-  ].filter(Boolean);
-
-  for (const [swFamily, collabName] of Object.entries(MAP_SW_TO_COLLAB)) {
-    const key = nrm(swFamily);
-    // match strict OU sous-chaîne dans les deux sens
-    const hit = fields.some(a => a === key || a.includes(key) || key.includes(a));
-    if (hit) return { swFamily, collabName };
-  }
-  return null;
-}
 
 // === Strict collab merge (basé SEULEMENT sur COLLAB_MAP) ===
 
@@ -315,22 +281,6 @@ const MAP_SW_TO_COLLAB = (() => {
   return m;
 })();
 
-// Résout *par élément* un monstre dont le (name | unawakened_name | aliases) matche une des clés
-function findByElementAndAnyName(element, candidates, excludeId){
-  const wants = new Set(candidates.map(nrm));
-  const el = nrm(element);
-  const matchAny = (val) => wants.has(nrm(val || ''));
-
-  return (window.MONSTERS || []).find(x => {
-    if (excludeId && x.id === excludeId) return false;
-    if (nrm(x.element) !== el) return false;
-    if (matchAny(x.name)) return true;
-    if (matchAny(x.unawakened_name)) return true;
-    const aliases = (x.aliases || []);
-    return aliases.some(a => matchAny(a));
-  }) || null;
-}
-
 // Remplace TOUT le contenu précédent de findMappedPair par :
 function findMappedPair(mon){
   return _pairById.get(mon.id) || null; // ✅ seulement si la paire vient de COLLAB_MAP
@@ -351,8 +301,8 @@ function renderMergedVisual(m, opts){
     // === rendu fusionné (collab mix) ===
     const htmlIcon = `
       <div class="duo-hsplit">
-        <img class="left"  src="${duo.sw.icon}"     alt="${esc(duo.sw.name)}">
-        <img class="right" src="${duo.collab.icon}" alt="${esc(duo.collab.name)}">
+        <img loading="lazy" class="left"  src="${duo.sw.icon}"     alt="${esc(duo.sw.name)}">
+        <img loading="lazy" class="right" src="${duo.collab.icon}" alt="${esc(duo.collab.name)}">
       </div>`;
     const label = `${duo.sw.name} / ${duo.collab.name}`;
     const title = `${duo.sw.name} ↔ ${duo.collab.name}`;
@@ -360,7 +310,7 @@ function renderMergedVisual(m, opts){
   }
 
   // === rendu simple (PAS de fusion) ===
-  const htmlIcon = `<img src="${m.icon}" alt="${esc(m.name)}">`;
+  const htmlIcon = `<img loading="lazy" src="${m.icon}" alt="${esc(m.name)}">`;
   const label = m.name;
   const title = m.name;
   return { htmlIcon, label, title };
@@ -448,10 +398,23 @@ const MONS_BY_NAME = (() => {
 })();
 const findMonsterByName = (n) => MONS_BY_NAME.get((n||'').toLowerCase()) || null;
 
+// Pré-calculs pour la recherche (évite de ré-normaliser à chaque input)
+(function prepareMonsterSearchIndex(){
+  for (const m of (window.MONSTERS || [])) {
+    if (m.__n) continue;
+    m.__n = {
+      name: normalize(m.name),
+      unaw: normalize(m.unawakened_name),
+      elem: normalize(m.element),
+      aliases: (m.aliases || []).map(normalize),
+    };
+  }
+})();
+
 // ==> Utiliser le rendu fusionné aussi pour les cartes "déf/offs"
 function cardHtmlByName(name){
   const d = findMonsterByName(name) || { name, icon:'', element:'' };
-  const v = renderMergedVisual(d, { mergeCollab:false });
+  const v = renderMergedVisual(d);
   return `
     <div class="pick def-pick" title="${esc(v.title)}">
       ${v.htmlIcon}
@@ -478,28 +441,26 @@ const search = qs('#search');
 function matchesQuery(m, qRaw){
   const q = normalize(qRaw);
   if (!q) return true;
-  const tokens = q.split(/\s+/);
 
-  // Synonymes : autorise la recherche croisée SW<->COLLAB
+  const tokens = q.split(/\s+/);
+  const n = m.__n || { name:'', unaw:'', elem:'', aliases:[] };
+
+  // Synonymes stricts via ta table de paires
   const extra = [];
   const duo = findMappedPair(m);
   if (duo) {
-    if (m.id === duo.sw.id) extra.push(duo.collab.name); // taper "Ryu" trouve "Striker" caché
-    else                    extra.push(duo.sw.name);     // taper "Striker" trouve "Ryu" affiché
-  } else {
-    const s1 = resolveSwFamilyForCollab(m); if (s1) extra.push(s1);
-    const s2 = resolveCollabForSw(m);       if (s2) extra.push(s2.collabName);
+    extra.push(normalize(m.id === duo.sw.id ? duo.collab.name : duo.sw.name));
   }
 
-  const hay = new Set([
-    normalize(m.name),
-    normalize(m.unawakened_name),
-    normalize(m.element),
-    ...(m.aliases||[]).map(normalize),
-    ...extra.map(normalize),
-  ]);
+  // Haystack sans Set (évite des allocs)
+  const hay = [n.name, n.unaw, n.elem, ...n.aliases, ...extra];
 
-  return tokens.every(t => { for (const h of hay) if (h.includes(t)) return true; return false; });
+  for (const t of tokens) {
+    let ok = false;
+    for (let i=0;i<hay.length;i++){ if (hay[i].includes(t)) { ok = true; break; } }
+    if (!ok) return false;
+  }
+  return true;
 }
 
 const ELEMENT_ORDER = ['Fire','Water','Wind','Light','Dark'];
@@ -582,7 +543,7 @@ function renderGrid() {
 
 // Débounce recherche (léger)
 let _searchTimer;
-search?.addEventListener('input', () => { clearTimeout(_searchTimer); _searchTimer = setTimeout(renderGrid, 100); });
+search?.addEventListener('input', () => { clearTimeout(_searchTimer); _searchTimer = setTimeout(renderGrid, 150); });
 renderGrid();
 
 // =====================
@@ -625,7 +586,7 @@ function renderPicks() {
     btn.onclick = () => { picks.splice(index, 1); renderPicks(); };
 
     // ✅ visuel fusionné SW|Collab
-    const v = renderMergedVisual(p, { mergeCollab:false });
+    const v = renderMergedVisual(p);
 
     div.innerHTML = `
       <button class="close" type="button" title="Retirer">✕</button>
@@ -792,7 +753,7 @@ function renderStats(data){
     const el = (r.els && r.els[i]) || '';
     const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
     const card = document.createElement('div'); card.className = 'pick def-pick';
-    const v = renderMergedVisual(m, { mergeCollab:false });
+    const v = renderMergedVisual(m,);
     card.innerHTML = `
       ${v.htmlIcon}
       <div class="pname">${esc(v.label)}</div>
@@ -851,6 +812,17 @@ function renderStats(data){
       updateHandledUIIfVisible();
     };
   }
+  // Prefetch Offs au survol d'une ligne (une seule liaison)
+  if (!box.__prefetchBound) {
+    box.__prefetchBound = true;
+    box.addEventListener('pointerenter', (e) => {
+      const row = e.target.closest('.def-row');
+      if (!row) return;
+      const btn = row.querySelector('.act-handle'); // le bouton contient la clé
+      const key = btn?.dataset?.key;
+      if (key) { apiGetOffs(key).catch(()=>{}); }   // réchauffe offsCache (TTL 60s)
+    }, { passive:true });
+  }
 }
 
 function renderHandled(data){
@@ -880,7 +852,7 @@ function renderHandled(data){
       const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
       const card = document.createElement('div'); 
       card.className = 'pick def-pick';
-      const v = renderMergedVisual(m, { mergeCollab:false });
+      const v = renderMergedVisual(m,);
       card.innerHTML = `
         ${v.htmlIcon}
         <div class="pname">${esc(v.label)}</div>
@@ -975,12 +947,12 @@ tabDone?.addEventListener('click', async () => {
 
 // Préfetch à l’ouverture de la page pour masquer la latence au premier clic
 document.addEventListener('DOMContentLoaded', async () => {
-  await detectAdmin(); // ← on connaît le vrai statut admin ici
-  buildStrictCollabPairs();
-  initCollabPairsWhenReady();
+  await detectAdmin();
+  buildStrictCollabPairs();   // ← suffit
   fetchStats().then(d => { if (!pageStats.classList.contains('hidden')) renderStats(d); });
   fetchHandled().then(d => { if (!pageDone.classList.contains('hidden')) renderHandled(d); });
 });
+
 
 // =====================
 // Offs Modal
@@ -1008,7 +980,7 @@ function renderOffsList(target, offs){
     names.forEach((name, i) => {
       const el = els[i];
       const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
-      const v  = renderMergedVisual(m, { mergeCollab:false });
+      const v  = renderMergedVisual(m);
       const card = document.createElement('div');
       card.className = 'pick def-pick';
       card.title = v.title;
@@ -1141,7 +1113,7 @@ function openOffPicker(defKey, offsListEl, onClose){
       const close = document.createElement('button'); close.className = 'close'; close.type='button'; close.title='Retirer'; close.textContent='✕';
       close.onclick = () => { offPicks.splice(index,1); renderOffPicks(); };
 
-      const v = renderMergedVisual(p, { mergeCollab:false });
+      const v = renderMergedVisual(p);
       div.innerHTML = `
         <button class="close" type="button" title="Retirer">✕</button>
         ${v.htmlIcon}
@@ -1196,7 +1168,7 @@ function openOffPicker(defKey, offsListEl, onClose){
       card.title = m.name;
       card.__data = m;
   
-      const v = renderMergedVisual(m, { mergeCollab:false });
+      const v = renderMergedVisual(m);
       card.innerHTML = `
         ${v.htmlIcon}
         <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
