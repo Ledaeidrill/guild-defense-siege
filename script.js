@@ -1157,7 +1157,7 @@ function openOffPicker(defKey, offsListEl, onClose){
       card.title = m.name;
       card.__data = m;
   
-      const v = renderMergedVisual(m);
+      const v = renderMergedVisual(m, { mergeCollab:false });
       card.innerHTML = `
         ${v.htmlIcon}
         <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
