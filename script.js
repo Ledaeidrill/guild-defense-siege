@@ -1027,17 +1027,6 @@ function openOffPicker(defKey, offsListEl, onClose){
   });
   gwrap.appendChild(grid); wrap.appendChild(gwrap);
 
-  // Délégation de clics (fiable même après re-render de la grille)
-  grid.addEventListener('click', (e) => {
-    const el = e.target.closest('.card');
-    if (!el || !el.__data) return;
-    const m = el.__data;
-    if (offPicks.find(p => p.id === m.id)) return;
-    if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
-    offPicks.push(m);
-    renderOffPicks();
-  });
-
   // Actions (Valider + spinner)
   const actions = document.createElement('div'); actions.className='picker-actions';
   const validate = document.createElement('button'); validate.className='btn-primary'; validate.type='button'; validate.textContent='Valider off';
@@ -1128,7 +1117,7 @@ function openOffPicker(defKey, offsListEl, onClose){
     _offSubmitting = true;
     validate.disabled = true;
     validate.textContent = 'Validation…';
-    spinner.style.display = 'sending';
+    validate.classList.add('sending');
 
     const [a,b,c] = offPicks.map(x => x.name);
     try {
