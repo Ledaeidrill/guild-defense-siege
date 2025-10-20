@@ -958,54 +958,59 @@ function renderOffsList(target, offs){
       const card = document.createElement('div');
       card.className = 'pick def-pick';
       card.title = v.title;
-      card.innerHTML = `${v.htmlIcon}`;
+      card.innerHTML = `
+        ${v.htmlIcon}
+        <div class="pname">${esc(v.label)}</div>
+      `;
       trioWrap.appendChild(card);
     });
-
+    
     // Bouton Supprimer (admin)
-    if (IS_ADMIN) {
-      const del = document.createElement('button');
-      del.className = 'btn-ghost';
-      del.type = 'button';
-      del.textContent = 'Supprimer';
-      del.style.marginLeft = '12px';
+    // Bouton Supprimer (admin)
+if (IS_ADMIN) {
+  const del = document.createElement('button');
+  del.className = 'btn-ghost';
+  del.type = 'button';
+  del.textContent = 'Supprimer';
 
-      del.onclick = async () => {
-        const defKey = target.dataset.defKey || '';
-        const trio = (o.trio || []).map(x => String(x||'').trim());
-        if (trio.length !== 3) return;
-        try {
-          del.disabled = true; del.textContent = 'Suppression…';
-          const resp = await apiDelOff({
-            key: defKey, 
-            o1: trio[0], o1el: o.o1el || '', 
-            o2: trio[1], o2el: o.o2el || '', 
-            o3: trio[2], o3el: o.o3el || '' 
-          });
-          if (!resp?.ok) { toast(resp?.error || 'Suppression impossible'); del.disabled=false; del.textContent='Supprimer'; return; }
-          // Refresh liste (invalide cache)
-          offsCache.delete(defKey);
-          const res = await apiGetOffs(defKey, { force: true });
-          if (res?.ok) renderOffsList(target, res.offs || []);
-          toast('Offense supprimée ✅');
-        } catch (e) {
-          console.error(e);
-          toast('Erreur pendant la suppression');
-          del.disabled=false; del.textContent='Supprimer';
-        }
-      };
-
-      const row = document.createElement('div');
-      row.style.display = 'flex';
-      row.style.alignItems = 'center';
-      row.append(trioWrap, del);
-      item.appendChild(row);
-    } else {
-      item.appendChild(trioWrap);
+  del.onclick = async () => {
+    const defKey = target.dataset.defKey || '';
+    const trio = (o.trio || []).map(x => String(x||'').trim());
+    if (trio.length !== 3) return;
+    try {
+      del.disabled = true; del.textContent = 'Suppression…';
+      const resp = await apiDelOff({
+        key: defKey, 
+        o1: trio[0], o1el: o.o1el || '', 
+        o2: trio[1], o2el: o.o2el || '', 
+        o3: trio[2], o3el: o.o3el || '' 
+      });
+      if (!resp?.ok) { toast(resp?.error || 'Suppression impossible'); del.disabled=false; del.textContent='Supprimer'; return; }
+      offsCache.delete(defKey);
+      const res = await apiGetOffs(defKey, { force: true });
+      if (res?.ok) renderOffsList(target, res.offs || []);
+      toast('Offense supprimée ✅');
+    } catch (e) {
+      console.error(e);
+      toast('Erreur pendant la suppression');
+      del.disabled=false; del.textContent='Supprimer';
     }
+  };
 
-    target.appendChild(item);
-  });
+  // ligne + zone actions à droite
+  const row = document.createElement('div');
+  row.style.display = 'flex';
+  row.style.alignItems = 'center';
+  row.style.gap = '12px';
+
+  const actions = document.createElement('div');
+  actions.style.marginLeft = 'auto';   // ← pousse complètement à droite
+  actions.appendChild(del);
+
+  row.append(trioWrap, actions);
+  item.appendChild(row);
+} else {
+  item.appendChild(trioWrap);
 }
 
 // Mini-picker Off (3 max)
