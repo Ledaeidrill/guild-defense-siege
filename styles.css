@@ -478,3 +478,31 @@ textarea{ min-height:100px; border-radius:12px; }
 /* pousse la zone actions (Supprimer) complètement à droite */
 .off-actions{ margin-left:auto; }
 .off-actions .btn-delete{ white-space:nowrap; }
+
+/* === Uniformiser la taille des vignettes dans le PICKER === */
+
+/* Zone "Ta sélection" (les 3 picks en haut) */
+.picker .picks .pick img,
+.picker .picks .pick .icon,
+.picker .picks .pick .unit-icon {
+  width: 72px !important;
+  height: 72px !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Cartes de la grille de résultats (en dessous) */
+.picker .monster-grid .card img,
+.picker .monster-grid .card .icon,
+.picker .monster-grid .card .unit-icon {
+  width: 72px !important;
+  height: 72px !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
