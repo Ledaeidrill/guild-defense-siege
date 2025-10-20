@@ -99,6 +99,20 @@ async function detectAdmin(){
   }
 }
 
+// clé famille + élément
+const famKey = (m) => `${m.family_id}::${m.element}`;
+
+// choisir le représentant : 2A > éveillé > base (tie-break id)
+const pickPreferred = (bucket) => {
+  return bucket.slice().sort((a, b) => {
+    const p2 = (b.second_awaken === true) - (a.second_awaken === true);
+    if (p2) return p2;
+    const p1 = (b.awaken_level || 0) - (a.awaken_level || 0);
+    if (p1) return p1;
+    return (b.com2us_id || 0) - (a.com2us_id || 0);
+  })[0];
+};
+
 // =====================
 // Offs Modal (version finale unique)
 // =====================
@@ -288,7 +302,7 @@ function findMappedPair(mon) {
 function shouldHideInGrid(mon){
   const duo = findMappedPair(mon);
   if (!duo) return false;            // pas de pair → on affiche
-  return mon.id === duo.sw.id;       // si c’est la version SW → on cache
+  return mon.id === duo.collab.id;       // si c’est la version SW → on cache
 }
 
 // Rend l’icône + libellé fusionnés
@@ -1119,37 +1133,47 @@ function openOffPicker(defKey, offsListEl, onClose){
     const q = (inp.value||'').trim().toLowerCase();
     grid.textContent = '';
     const frag = document.createDocumentFragment();
-
-    const list = (window.MONSTERS||[])
+  
+    // 1) filtre recherche inchangé
+    const raw = (window.MONSTERS||[])
       .filter(m => !q || [m.name, m.unawakened_name, m.element, ...(m.aliases||[])]
-        .some(s => (s||'').toLowerCase().includes(q)))
-      .sort(monsterComparator);
-
+        .some(s => (s||'').toLowerCase().includes(q)));
+  
+    // 2) regrouper par (family_id, element) pour éviter les doublons
+    const buckets = new Map();
+    for (const m of raw) {
+      const k = famKey(m);
+      const arr = buckets.get(k);
+      if (arr) arr.push(m); else buckets.set(k, [m]);
+    }
+  
+    // 3) garder un représentant par bucket (2A > éveillé > base), puis trier
+    const list = [...buckets.values()].map(pickPreferred).sort(monsterComparator);
+  
     for (const m of list) {
       const card = document.createElement('div');
       card.className = 'card';
       card.title = m.name;
       card.__data = m;
-
+  
       const v = renderMergedVisual(m);
       card.innerHTML = `
         ${v.htmlIcon}
         <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
       `;
-
+  
       card.addEventListener('click', () => {
         if (offPicks.some(p => p.id === m.id)) return;
         if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
         offPicks.push(m);
         renderOffPicks();
-      
-        // → vider la recherche automatiquement
+  
+        // reset recherche + grille
         inp.value = '';
-        // re-render la grille complète
         renderPickerGrid();
-        // (optionnel) remettre le focus sur la recherche
         inp.focus();
       });
+  
       frag.appendChild(card);
     }
     grid.appendChild(frag);
