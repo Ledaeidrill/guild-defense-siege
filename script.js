@@ -544,7 +544,6 @@ function renderGrid() {
 // Débounce recherche (léger)
 let _searchTimer;
 search?.addEventListener('input', () => { clearTimeout(_searchTimer); _searchTimer = setTimeout(renderGrid, 150); });
-renderGrid();
 
 // =====================
 // SÉLECTION (drag & drop)
@@ -948,10 +947,13 @@ tabDone?.addEventListener('click', async () => {
 // Préfetch à l’ouverture de la page pour masquer la latence au premier clic
 document.addEventListener('DOMContentLoaded', async () => {
   await detectAdmin();
-  buildStrictCollabPairs();   // ← suffit
+  buildStrictCollabPairs();          // construit _pairById (SW ↔ collab)
+  renderGrid();                      // ← RENDRE LA GRILLE APRÈS la construction
+
   fetchStats().then(d => { if (!pageStats.classList.contains('hidden')) renderStats(d); });
   fetchHandled().then(d => { if (!pageDone.classList.contains('hidden')) renderHandled(d); });
 });
+
 
 
 // =====================
