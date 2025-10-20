@@ -352,22 +352,6 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 133,
-    "com2us_id": 13215,
-    "family_id": 13200,
-    "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0013_4_1.png",
-    "name": "Chacha",
-    "unawakened_name": "howl",
-    "second_awaken": false,
-    "natural_stars": 2,
-    "aliases": [
-      "ténèbres",
-      "dark",
-      "howl"
-    ]
-  },
-  {
     "id": 1760,
     "com2us_id": 13235,
     "family_id": 13200,
@@ -380,7 +364,9 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "howl chacha"
+      "howl chacha",
+      "chacha",
+      "howl"
     ]
   },
   {
@@ -4716,22 +4702,6 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 27,
-    "com2us_id": 13212,
-    "family_id": 13200,
-    "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0013_1_1.png",
-    "name": "Lala",
-    "unawakened_name": "howl",
-    "second_awaken": false,
-    "natural_stars": 2,
-    "aliases": [
-      "feu",
-      "fire",
-      "howl"
-    ]
-  },
-  {
     "id": 1757,
     "com2us_id": 13232,
     "family_id": 13200,
@@ -4744,7 +4714,9 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "howl lala"
+      "howl lala",
+      "lala",
+      "howl"
     ]
   },
   {
@@ -6249,13 +6221,12 @@ window.MONSTERS = [
     "element": "Light",
     "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0111_1_4.png",
     "name": "Altaïr",
-    "unawakened_name": "altair",
+    "unawakened_name": "",
     "second_awaken": false,
     "natural_stars": 5,
     "aliases": [
       "lumière",
       "light",
-      "altair",
       "dual blade",
       "double lame"
     ]
@@ -8827,22 +8798,6 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 152,
-    "com2us_id": 13214,
-    "family_id": 13200,
-    "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0013_3_1.png",
-    "name": "Shushu",
-    "unawakened_name": "howl",
-    "second_awaken": false,
-    "natural_stars": 2,
-    "aliases": [
-      "lumière",
-      "light",
-      "howl"
-    ]
-  },
-  {
     "id": 1759,
     "com2us_id": 13234,
     "family_id": 13200,
@@ -8855,7 +8810,9 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "howl shushu"
+      "howl shushu",
+      "shushu",
+      "howl"
     ]
   },
   {
@@ -10772,22 +10729,6 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 62,
-    "com2us_id": 13211,
-    "family_id": 13200,
-    "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0013_0_1.png",
-    "name": "Lulu",
-    "unawakened_name": "howl",
-    "second_awaken": false,
-    "natural_stars": 2,
-    "aliases": [
-      "eau",
-      "water",
-      "howl"
-    ]
-  },
-  {
     "id": 1756,
     "com2us_id": 13231,
     "family_id": 13200,
@@ -10800,7 +10741,9 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "howl lulu"
+      "howl lulu",
+      "lulu",
+      "howl"
     ]
   },
   {
@@ -12699,22 +12642,6 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 102,
-    "com2us_id": 13213,
-    "family_id": 13200,
-    "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0013_2_1.png",
-    "name": "Chichi",
-    "unawakened_name": "howl",
-    "second_awaken": false,
-    "natural_stars": 2,
-    "aliases": [
-      "vent",
-      "wind",
-      "howl"
-    ]
-  },
-  {
     "id": 1758,
     "com2us_id": 13233,
     "family_id": 13200,
@@ -12727,7 +12654,9 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "howl chichi"
+      "howl chichi",
+      "chichi",
+      "howl"
     ]
   },
   {
