@@ -512,7 +512,7 @@ function makeCard(m){
   card.onclick = () => addPick(m);
 
   // 👉 rendu fusionné SW|COLLAB si applicable
-  const v = renderMergedVisual(m, { mergeCollab:false });
+  const v = renderMergedVisual(m);
   card.innerHTML = `
     ${v.htmlIcon}
     <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
