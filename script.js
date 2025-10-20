@@ -609,16 +609,26 @@ sendBtn?.addEventListener('click', async () => {
   if (inFlight) return;
   if (picks.length !== 3) return toast('Sélectionne exactement 3 monstres.');
 
-  const player   = qs('#player')?.value || '';
-  const notes    = qs('#notes') ?.value || '';
-  const monsters_el = picks.map(p => p.element || '');
+  const player = qs('#player')?.value || '';
+  const notes  = qs('#notes')?.value  || '';
+
+  // ➜ construits ICI les deux tableaux
+  const monsters    = picks.map(p => p.name);
+  const monsters_el = picks.map(p => p.element || ''); // pour collabs
 
   try {
     inFlight = true;
     sendBtn.disabled = true;
     sendBtn.classList.add('sending');
 
-    const json = await apiPost({ mode:'submit', token: TOKEN, player, monsters, monsters_el, notes });
+    const json = await apiPost({
+      mode: 'submit',
+      token: TOKEN,
+      player,
+      monsters,
+      monsters_el,
+      notes
+    });
 
     if (json.already_handled) {
       toast(json.message || 'Défense déjà traitée — va voir ingame les counters.');
@@ -630,7 +640,7 @@ sendBtn?.addEventListener('click', async () => {
     toast('Défense enregistrée ✅');
     picks = []; renderPicks(); if (qs('#notes')) qs('#notes').value='';
 
-    // On invalide le cache côté front pour forcer un refresh silencieux des stats
+    // Forcer un refresh silencieux des stats
     cache.stats.ts = 0;
     void fetchStats().then(updateStatsUIIfVisible);
   } catch (e) {
