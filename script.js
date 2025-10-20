@@ -1091,7 +1091,7 @@ function openOffPicker(defKey, offsListEl, onClose){
       div.innerHTML = `
         <button class="close" type="button" title="Retirer">✕</button>
         ${v.htmlIcon}
-        <div class="pname">${esc(p.name || v.label)}</div>
+        <div class="pname">${esc(v.label)}</div>
       `;
       div.querySelector('.close').onclick = close.onclick;
 
@@ -1134,7 +1134,7 @@ function openOffPicker(defKey, offsListEl, onClose){
       const v = renderMergedVisual(m);
       card.innerHTML = `
         ${v.htmlIcon}
-        <span class="name" title="${esc(v.title)}">${esc(m.name || v.label)}</span>
+        <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
       `;
 
       card.addEventListener('click', () => {
