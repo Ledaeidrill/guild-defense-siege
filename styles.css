@@ -432,3 +432,49 @@ textarea{ min-height:100px; border-radius:12px; }
   overflow:hidden; 
   text-overflow:ellipsis;   /* nom tronqué proprement */
 }
+
+/* === Offenses modal layout === */
+.off-row{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:12px;
+  border-radius:16px;
+  background:#111419;            /* adapte si besoin à ton thème */
+  border:1px solid rgba(255,255,255,0.06);
+}
+
+.off-mons{
+  display:flex;
+  gap:16px;
+}
+
+.off-mon{
+  width:72px;                    /* même largeur que l’icône pour caler le texte */
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.off-mon img{
+  width:72px;
+  height:72px;
+  border-radius:12px;
+  display:block;
+}
+
+.off-mon-name{
+  margin-top:6px;
+  font-size:12px;
+  line-height:1.2;
+  text-align:center;
+  color:#cfd8dc;                 /* lisible en dark */
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:72px;
+}
+
+/* pousse la zone actions (Supprimer) complètement à droite */
+.off-actions{ margin-left:auto; }
+.off-actions .btn-delete{ white-space:nowrap; }
