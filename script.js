@@ -1138,7 +1138,6 @@ function openOffPicker(defKey, offsListEl, onClose){
       `;
 
       card.addEventListener('click', () => {
-      card.addEventListener('click', () => {
         if (offPicks.some(p => p.id === m.id)) return;
         if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
         offPicks.push(m);
