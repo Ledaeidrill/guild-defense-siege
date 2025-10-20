@@ -87,8 +87,13 @@ offsModal?.addEventListener('click', (e) => {
 });
 
 // Vérifie côté serveur si le token admin est valide (recommandé)
-function detectAdmin(){
-  IS_ADMIN = !!ADMIN_TOKEN_PARAM; // pas d'appel réseau
+async function detectAdmin(){
+  try {
+    const res = await apiPost({ mode: 'whoami', admin_token: ADMIN_TOKEN_PARAM });
+    IS_ADMIN = !!res?.is_admin;
+  } catch {
+    IS_ADMIN = false;
+  }
 }
 
 // =====================
