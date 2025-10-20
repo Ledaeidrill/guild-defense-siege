@@ -344,11 +344,17 @@ async function apiGetOffs(key, { force = false } = {}){
   if (res?.ok) offsCache.set(key, { ts: Date.now(), data: res });
   return res;
 }
-async function apiAddOff({ key, o1, o2, o3, note = '', by = '' }){
-  return apiPost({ mode:'add_off', admin_token: ADMIN_TOKEN_PARAM, key, o1, o2, o3, note, by });
+async function apiAddOff({ key, o1, o1el, o2, o2el, o3, o3el, note = '', by = '' }){
+  return apiPost({
+    mode:'add_off', admin_token: ADMIN_TOKEN_PARAM,
+    key, o1, o1el, o2, o2el, o3, o3el, note, by 
+  });
 }
-async function apiDelOff({ key, o1, o2, o3 }){
-  return apiPost({ mode:'del_off', admin_token: ADMIN_TOKEN_PARAM, key, o1, o2, o3 });
+async function apiDelOff({ key, o1, o1el, o2, o2el, o3, o3el }){
+  return apiPost({
+    mode:'del_off', admin_token: ADMIN_TOKEN_PARAM,
+    key, o1, o1el, o2, o2el, o3, o3el
+  });
 }
 
 // =====================
@@ -391,6 +397,16 @@ function cardHtmlByName(name){
       <div class="pname">${esc(v.label)}</div>
     </div>`;
 }
+
+// === Lookups rapides (nom+élément) ===
+const MONS_BY_NAME_EL = new Map(
+  (window.MONSTERS || []).map(x => [
+    `${(x.name||'').toLowerCase()}|${(x.element||'').toLowerCase()}`, x
+  ])
+);
+const findByNameEl = (n, el) =>
+  MONS_BY_NAME_EL.get(`${(n||'').toLowerCase()}|${(el||'').toLowerCase()}`) || null;
+
 
 // =====================
 // GRILLE
@@ -595,14 +611,14 @@ sendBtn?.addEventListener('click', async () => {
 
   const player   = qs('#player')?.value || '';
   const notes    = qs('#notes') ?.value || '';
-  const monsters = picks.map(p => p.name);
+  const monsters_el = picks.map(p => p.element || '');
 
   try {
     inFlight = true;
     sendBtn.disabled = true;
     sendBtn.classList.add('sending');
 
-    const json = await apiPost({ mode:'submit', token: TOKEN, player, monsters, notes });
+    const json = await apiPost({ mode:'submit', token: TOKEN, player, monsters, monsters_el, notes });
 
     if (json.already_handled) {
       toast(json.message || 'Défense déjà traitée — va voir ingame les counters.');
@@ -901,15 +917,16 @@ function renderOffsList(target, offs){
     // Trio rendu avec tes cartes .pick.def-pick + duo si merge
     const trioWrap = document.createElement('div');
     trioWrap.className = 'off-trio';
-    (o.trio || []).forEach(name => {
-      const m = findMonsterByName(name) || { name, icon: '' };
-      const v = renderMergedVisual(m);
+    const names = o.trio || [];
+    const els   = [o.o1el || '', o.o2el || '', o.o3el || ''];
+    names.forEach((name, i) => {
+      const el = els[i];
+      const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
+      const v  = renderMergedVisual(m);
       const card = document.createElement('div');
       card.className = 'pick def-pick';
-      card.title = v.title; // accessibilité au hover
-      card.innerHTML = `
-        ${v.htmlIcon}
-      `;
+      card.title = v.title;
+      card.innerHTML = `${v.htmlIcon}`;
       trioWrap.appendChild(card);
     });
 
@@ -927,7 +944,12 @@ function renderOffsList(target, offs){
         if (trio.length !== 3) return;
         try {
           del.disabled = true; del.textContent = 'Suppression…';
-          const resp = await apiDelOff({ key: defKey, o1: trio[0], o2: trio[1], o3: trio[2] });
+          const resp = await apiDelOff({
+            key: defKey, 
+            o1: trio[0], o1el: o.o1el || '', 
+            o2: trio[1], o2el: o.o2el || '', 
+            o3: trio[2], o3el: o.o3el || '' 
+          });
           if (!resp?.ok) { toast(resp?.error || 'Suppression impossible'); del.disabled=false; del.textContent='Supprimer'; return; }
           // Refresh liste (invalide cache)
           offsCache.delete(defKey);
@@ -1104,15 +1126,23 @@ function openOffPicker(defKey, offsListEl, onClose){
     validate.classList.add('sending'); // spinner ON
     validate.textContent = 'Validation…';
 
-    const [a,b,c] = offPicks.map(x => x.name);
+    const [a,b,c]   = offPicks.map(x => x.name);
+    const [e1,e2,e3]= offPicks.map(x => x.element || '');
     try {
-      const resp = await apiAddOff({ key:defKey, o1:a, o2:b, o3:c });
+      const resp = await apiAddOff({
+        key:defKey,
+        o1:a, o1el:e1,
+        o2:b, o2el:e2,
+        o3:c, o3e1:e3,
+      });
       if (!resp?.ok) { toast(resp?.error || 'Erreur ajout off'); return; }
 
       // mise à jour locale
       const ent = offsCache.get(defKey);
       if (ent?.data?.ok) {
-        ent.data.offs = (ent.data.offs || []).concat([{ trio: [a, b, c] }]);
+        ent.data.offs = (ent.data.offs || []).concat([{
+          trio: [a, b, c], o1el:e1, o2el:e2, o3el:e3
+        }]);
         ent.ts = Date.now();
         renderOffsList(offsListEl, ent.data.offs);
       } else {
