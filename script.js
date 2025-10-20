@@ -302,7 +302,7 @@ function findMappedPair(mon) {
 function shouldHideInGrid(mon){
   const duo = findMappedPair(mon);
   if (!duo) return false;            // pas de pair → on affiche
-  return mon.id === duo.collab.id;       // si c’est la version SW → on cache
+  return mon.id === duo.collab.id;       // si c’est la version collab → on cache
 }
 
 // Rend l’icône + libellé fusionnés
@@ -414,7 +414,7 @@ const findMonsterByName = (n) => MONS_BY_NAME.get((n||'').toLowerCase()) || null
 // ==> Utiliser le rendu fusionné aussi pour les cartes "déf/offs"
 function cardHtmlByName(name){
   const d = findMonsterByName(name) || { name, icon:'', element:'' };
-  const v = renderMergedVisual(d);
+  const v = renderMergedVisual(d, { mergeCollab:false });
   return `
     <div class="pick def-pick" title="${esc(v.title)}">
       ${v.htmlIcon}
@@ -475,7 +475,7 @@ function makeCard(m){
   card.onclick = () => addPick(m);
 
   // 👉 rendu fusionné SW|COLLAB si applicable
-  const v = renderMergedVisual(m);
+  const v = renderMergedVisual(m, { mergeCollab:false }););
   card.innerHTML = `
     ${v.htmlIcon}
     <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
@@ -588,7 +588,7 @@ function renderPicks() {
     btn.onclick = () => { picks.splice(index, 1); renderPicks(); };
 
     // ✅ visuel fusionné SW|Collab
-    const v = renderMergedVisual(p);
+    const v = renderMergedVisual(p, { mergeCollab:false });
 
     div.innerHTML = `
       <button class="close" type="button" title="Retirer">✕</button>
@@ -755,7 +755,7 @@ function renderStats(data){
     const el = (r.els && r.els[i]) || '';
     const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
     const card = document.createElement('div'); card.className = 'pick def-pick';
-    const v = renderMergedVisual(m);
+    const v = renderMergedVisual(m), { mergeCollab:false };
     card.innerHTML = `
       ${v.htmlIcon}
       <div class="pname">${esc(v.label)}</div>
@@ -843,7 +843,7 @@ function renderHandled(data){
       const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
       const card = document.createElement('div'); 
       card.className = 'pick def-pick';
-      const v = renderMergedVisual(m);
+      const v = renderMergedVisual(m, { mergeCollab:false });
       card.innerHTML = `
         ${v.htmlIcon}
         <div class="pname">${esc(v.label)}</div>
@@ -969,7 +969,7 @@ function renderOffsList(target, offs){
     names.forEach((name, i) => {
       const el = els[i];
       const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
-      const v  = renderMergedVisual(m);
+      const v  = renderMergedVisual(m, { mergeCollab:false });
       const card = document.createElement('div');
       card.className = 'pick def-pick';
       card.title = v.title;
@@ -1102,7 +1102,7 @@ function openOffPicker(defKey, offsListEl, onClose){
       const close = document.createElement('button'); close.className = 'close'; close.type='button'; close.title='Retirer'; close.textContent='✕';
       close.onclick = () => { offPicks.splice(index,1); renderOffPicks(); };
 
-      const v = renderMergedVisual(p);
+      const v = renderMergedVisual(p, { mergeCollab:false });
       div.innerHTML = `
         <button class="close" type="button" title="Retirer">✕</button>
         ${v.htmlIcon}
