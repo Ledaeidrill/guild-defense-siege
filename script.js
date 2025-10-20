@@ -588,7 +588,7 @@ function renderPicks() {
     btn.onclick = () => { picks.splice(index, 1); renderPicks(); };
 
     // ✅ visuel fusionné SW|Collab
-    const v = renderMergedVisual(p, { mergeCollab:false });
+    const v = renderMergedVisual(p);
 
     div.innerHTML = `
       <button class="close" type="button" title="Retirer">✕</button>
@@ -1102,7 +1102,7 @@ function openOffPicker(defKey, offsListEl, onClose){
       const close = document.createElement('button'); close.className = 'close'; close.type='button'; close.title='Retirer'; close.textContent='✕';
       close.onclick = () => { offPicks.splice(index,1); renderOffPicks(); };
 
-      const v = renderMergedVisual(p, { mergeCollab:false });
+      const v = renderMergedVisual(p);
       div.innerHTML = `
         <button class="close" type="button" title="Retirer">✕</button>
         ${v.htmlIcon}
