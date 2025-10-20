@@ -717,16 +717,17 @@ function renderStats(data){
     const item = document.createElement('div'); item.className = 'def-item';
 
     const trioDiv = document.createElement('div'); trioDiv.className = 'def-trio';
-    trio.forEach(name => {
-      const m = findMonsterByName(name) || { name, icon: '' };
-      const card = document.createElement('div'); card.className = 'pick def-pick';
-      const v = renderMergedVisual(m);
-      card.innerHTML = `
-        ${v.htmlIcon}
-        <div class="pname">${esc(v.label)}</div>
-      `;
-      trioDiv.append(card);
-    });
+    trio.forEach((name, i) => {
+    const el = (r.els && r.els[i]) || '';
+    const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
+    const card = document.createElement('div'); card.className = 'pick def-pick';
+    const v = renderMergedVisual(m);
+    card.innerHTML = `
+      ${v.htmlIcon}
+      <div class="pname">${esc(v.label)}</div>
+    `;
+    trioDiv.append(card);
+  });
 
     const right = document.createElement('div'); right.style.display='flex'; right.style.gap='10px'; right.style.alignItems='center';
     const count = document.createElement('div'); count.className = 'def-count'; count.textContent = r.count ?? 0;
@@ -802,18 +803,19 @@ function renderHandled(data){
 
       const trio = document.createElement('div'); 
       trio.className = 'def-trio';
-
-      ensureTrioArray(r.trio, r.key).forEach(name => {
-        const m = findMonsterByName(name) || { name, icon: '' };
-        const card = document.createElement('div'); 
-        card.className = 'pick def-pick';
-        const v = renderMergedVisual(m);
-        card.innerHTML = `
-          ${v.htmlIcon}
-          <div class="pname">${esc(v.label)}</div>
-        `;
-        trio.appendChild(card);
-      });
+      
+      ensureTrioArray(r.trio, r.key).forEach((name, i) => {
+      const el = (r.els && r.els[i]) || '';
+      const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
+      const card = document.createElement('div'); 
+      card.className = 'pick def-pick';
+      const v = renderMergedVisual(m);
+      card.innerHTML = `
+        ${v.htmlIcon}
+        <div class="pname">${esc(v.label)}</div>
+      `;
+      trio.appendChild(card);
+    });
 
       // "Voir offs" pour tout le monde
       const right = document.createElement('div');
@@ -1143,7 +1145,7 @@ function openOffPicker(defKey, offsListEl, onClose){
         key:defKey,
         o1:a, o1el:e1,
         o2:b, o2el:e2,
-        o3:c, o3e1:e3,
+        o3:c, o3el:e3,
       });
       if (!resp?.ok) { toast(resp?.error || 'Erreur ajout off'); return; }
 
