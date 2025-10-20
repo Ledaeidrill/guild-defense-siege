@@ -4514,13 +4514,13 @@ window.MONSTERS = [
     "element": "Fire",
     "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0082_3_2.png",
     "name": "Kai'en",
-    "unawakened_name": "vagabond kaien",
+    "unawakened_name": "vagabond",
     "second_awaken": true,
     "natural_stars": 3,
     "aliases": [
       "feu",
       "fire",
-      "vagabond kaien"
+      "vagabond"
     ]
   },
   {
