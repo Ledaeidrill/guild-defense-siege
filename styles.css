@@ -415,3 +415,20 @@ textarea{ min-height:100px; border-radius:12px; }
 
 .monster-grid .card { cursor: pointer; }
 
+/* Picker — forcer la sélection en horizontal */
+.modal--picker .picks{ 
+  display:flex !important; 
+  flex-direction:row !important; 
+  gap:8px; 
+  flex-wrap:nowrap; 
+  overflow-x:auto;          /* au cas où la place manque */
+}
+.modal--picker .picks .pick{ 
+  flex:0 0 auto;            /* chaque vignette garde sa largeur */
+  width:auto;               
+}
+.modal--picker .picks .pick .pname{
+  white-space:nowrap; 
+  overflow:hidden; 
+  text-overflow:ellipsis;   /* nom tronqué proprement */
+}
