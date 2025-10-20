@@ -306,26 +306,27 @@ function shouldHideInGrid(mon){
 }
 
 // Rend l’icône + libellé fusionnés
-function renderMergedVisual(mon){
-  const duo = findMappedPair(mon);
-  if (!duo) {
-    return {
-      label: mon.name,
-      title: mon.name,
-      htmlIcon: `<img src="${fixIconUrl(mon.icon||'')}" alt="${esc(mon.name)}" loading="lazy">`,
-    };
+function renderMergedVisual(m, opts){
+  const mergeCollab = !(opts && opts.mergeCollab === false); // par défaut: fusion ON
+  const duo = mergeCollab ? findMappedPair(m) : null;
+
+  if (duo){
+    // === rendu fusionné (collab mix) ===
+    const htmlIcon = `
+      <div class="duo-hsplit">
+        <img class="left"  src="${duo.sw.icon}"     alt="${esc(duo.sw.name)}">
+        <img class="right" src="${duo.collab.icon}" alt="${esc(duo.collab.name)}">
+      </div>`;
+    const label = `${duo.sw.name} / ${duo.collab.name}`;
+    const title = `${duo.sw.name} ↔ ${duo.collab.name}`;
+    return { htmlIcon, label, title };
   }
-  const label = `${duo.sw.name} / ${duo.collab.name}`;
-  return {
-    label,
-    title: label,
-    htmlIcon: `
-      <div class="duo-hsplit" aria-label="${esc(label)}" title="${esc(label)}">
-        <img class="left"  src="${fixIconUrl(duo.sw.icon||'')}"     alt="${esc(duo.sw.name)}"     loading="lazy">
-        <img class="right" src="${fixIconUrl(duo.collab.icon||'')}" alt="${esc(duo.collab.name)}" loading="lazy">
-      </div>
-    `,
-  };
+
+  // === rendu simple (PAS de fusion) ===
+  const htmlIcon = `<img src="${m.icon}" alt="${esc(m.name)}">`;
+  const label = m.name;
+  const title = m.name;
+  return { htmlIcon, label, title };
 }
 
 // =====================
@@ -474,7 +475,7 @@ function makeCard(m){
   card.onclick = () => addPick(m);
 
   // 👉 rendu fusionné SW|COLLAB si applicable
-  const v = renderMergedVisual(m);
+  const v = renderMergedVisual(m, { mergeCollab:false });
   card.innerHTML = `
     ${v.htmlIcon}
     <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
@@ -587,7 +588,7 @@ function renderPicks() {
     btn.onclick = () => { picks.splice(index, 1); renderPicks(); };
 
     // ✅ visuel fusionné SW|Collab
-    const v = renderMergedVisual(p);
+    const v = renderMergedVisual(p, { mergeCollab:false });
 
     div.innerHTML = `
       <button class="close" type="button" title="Retirer">✕</button>
@@ -754,7 +755,7 @@ function renderStats(data){
     const el = (r.els && r.els[i]) || '';
     const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
     const card = document.createElement('div'); card.className = 'pick def-pick';
-    const v = renderMergedVisual(m);
+    const v = renderMergedVisual(m, { mergeCollab:false });
     card.innerHTML = `
       ${v.htmlIcon}
       <div class="pname">${esc(v.label)}</div>
@@ -842,7 +843,7 @@ function renderHandled(data){
       const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
       const card = document.createElement('div'); 
       card.className = 'pick def-pick';
-      const v = renderMergedVisual(m);
+      const v = renderMergedVisual(m, { mergeCollab:false });
       card.innerHTML = `
         ${v.htmlIcon}
         <div class="pname">${esc(v.label)}</div>
@@ -1101,7 +1102,7 @@ function openOffPicker(defKey, offsListEl, onClose){
       const close = document.createElement('button'); close.className = 'close'; close.type='button'; close.title='Retirer'; close.textContent='✕';
       close.onclick = () => { offPicks.splice(index,1); renderOffPicks(); };
 
-      const v = renderMergedVisual(p);
+      const v = renderMergedVisual(p, { mergeCollab:false });
       div.innerHTML = `
         <button class="close" type="button" title="Retirer">✕</button>
         ${v.htmlIcon}
@@ -1156,7 +1157,7 @@ function openOffPicker(defKey, offsListEl, onClose){
       card.title = m.name;
       card.__data = m;
   
-      const v = renderMergedVisual(m);
+      const v = renderMergedVisual(m, { mergeCollab:false });
       card.innerHTML = `
         ${v.htmlIcon}
         <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
