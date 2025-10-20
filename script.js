@@ -1075,7 +1075,7 @@ function openOffPicker(defKey, offsListEl, onClose){
   const actions = document.createElement('div'); actions.className='picker-actions';
   const validate = document.createElement('button');
   validate.className = 'btn-primary'; validate.type='button';
-  validate.innerHTML = 'Valider off <span class="btn-spinner"></span>'; // ⬅️ spinner DANS le bouton
+  validate.innerHTML = 'Valider off <span class="btn-spinner"></span>';
   actions.appendChild(validate); wrap.appendChild(actions);
 
   // ====== RENDER PICKS ======
@@ -1084,7 +1084,6 @@ function openOffPicker(defKey, offsListEl, onClose){
     offPicks.forEach((p, index) => {
       const div = document.createElement('div'); div.className='pick'; div.dataset.index = index; div.draggable = true;
 
-      // bouton retirer
       const close = document.createElement('button'); close.className = 'close'; close.type='button'; close.title='Retirer'; close.textContent='✕';
       close.onclick = () => { offPicks.splice(index,1); renderOffPicks(); };
 
@@ -1115,7 +1114,7 @@ function openOffPicker(defKey, offsListEl, onClose){
     });
   }
 
-  // ====== RENDER GRID (CLICK DIRECT SUR LA CARTE) ======
+  // ====== RENDER GRID ======
   function renderPickerGrid(){
     const q = (inp.value||'').trim().toLowerCase();
     grid.textContent = '';
@@ -1130,7 +1129,7 @@ function openOffPicker(defKey, offsListEl, onClose){
       const card = document.createElement('div');
       card.className = 'card';
       card.title = m.name;
-      card.__data = m; // stash
+      card.__data = m;
 
       const v = renderMergedVisual(m);
       card.innerHTML = `
@@ -1138,7 +1137,6 @@ function openOffPicker(defKey, offsListEl, onClose){
         <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
       `;
 
-      // ✅ Clique fiable
       card.addEventListener('click', () => {
         if (offPicks.some(p => p.id === m.id)) return;
         if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
@@ -1162,7 +1160,7 @@ function openOffPicker(defKey, offsListEl, onClose){
 
     _offSubmitting = true;
     validate.disabled = true;
-    validate.classList.add('sending'); // spinner ON
+    validate.classList.add('sending');
     validate.textContent = 'Validation…';
 
     const [a,b,c]   = offPicks.map(x => x.name);
@@ -1193,9 +1191,10 @@ function openOffPicker(defKey, offsListEl, onClose){
     } catch (err) {
       console.error(err); toast('Erreur réseau');
     } finally {
-      validate.classList.remove('sending'); // spinner OFF
+      validate.classList.remove('sending');
       validate.disabled = false;
       validate.textContent = 'Valider off';
     }
   };
 }
+
