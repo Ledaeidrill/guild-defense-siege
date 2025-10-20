@@ -964,38 +964,37 @@ function renderOffsList(target, offs){
       `;
       trioWrap.appendChild(card);
     });
-    
-    // Bouton Supprimer (admin)
-    // Bouton Supprimer (admin)
-if (IS_ADMIN) {
-  const del = document.createElement('button');
-  del.className = 'btn-ghost';
-  del.type = 'button';
-  del.textContent = 'Supprimer';
 
-  del.onclick = async () => {
-    const defKey = target.dataset.defKey || '';
-    const trio = (o.trio || []).map(x => String(x||'').trim());
-    if (trio.length !== 3) return;
-    try {
-      del.disabled = true; del.textContent = 'Suppression…';
-      const resp = await apiDelOff({
-        key: defKey, 
-        o1: trio[0], o1el: o.o1el || '', 
-        o2: trio[1], o2el: o.o2el || '', 
-        o3: trio[2], o3el: o.o3el || '' 
-      });
-      if (!resp?.ok) { toast(resp?.error || 'Suppression impossible'); del.disabled=false; del.textContent='Supprimer'; return; }
-      offsCache.delete(defKey);
-      const res = await apiGetOffs(defKey, { force: true });
-      if (res?.ok) renderOffsList(target, res.offs || []);
-      toast('Offense supprimée ✅');
-    } catch (e) {
-      console.error(e);
-      toast('Erreur pendant la suppression');
-      del.disabled=false; del.textContent='Supprimer';
-    }
-  };
+    // Bouton Supprimer (admin)
+    if (IS_ADMIN) {
+      const del = document.createElement('button');
+      del.className = 'btn-ghost';
+      del.type = 'button';
+      del.textContent = 'Supprimer';
+    
+      del.onclick = async () => {
+        const defKey = target.dataset.defKey || '';
+        const trio = (o.trio || []).map(x => String(x||'').trim());
+        if (trio.length !== 3) return;
+        try {
+          del.disabled = true; del.textContent = 'Suppression…';
+          const resp = await apiDelOff({
+            key: defKey, 
+            o1: trio[0], o1el: o.o1el || '', 
+            o2: trio[1], o2el: o.o2el || '', 
+            o3: trio[2], o3el: o.o3el || '' 
+          });
+          if (!resp?.ok) { toast(resp?.error || 'Suppression impossible'); del.disabled=false; del.textContent='Supprimer'; return; }
+          offsCache.delete(defKey);
+          const res = await apiGetOffs(defKey, { force: true });
+          if (res?.ok) renderOffsList(target, res.offs || []);
+          toast('Offense supprimée ✅');
+        } catch (e) {
+          console.error(e);
+          toast('Erreur pendant la suppression');
+          del.disabled=false; del.textContent='Supprimer';
+        }
+      };
 
   // ligne + zone actions à droite
   const row = document.createElement('div');
