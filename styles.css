@@ -413,4 +413,5 @@ textarea{ min-height:100px; border-radius:12px; }
 /* Champ recherche du picker un peu plus court */
 .picker .field input{ max-width: 540px; }
 
+.monster-grid .card { cursor: pointer; }
 
