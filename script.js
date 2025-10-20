@@ -3,8 +3,9 @@
 // =====================
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwSwLs7MdkDR_PgubrCEL7GQvpCL8D0gGYlQ2JSCMHYY4xQ1YKvpTSMN6aDsmCt6xXCvA/exec';
 const TOKEN = 'Chaos_Destiny';
-const ADMIN_TOKEN_PARAM = new URL(location.href).searchParams.get('admin');
-const isAdmin = () => !!ADMIN_TOKEN_PARAM;
+const ADMIN_TOKEN_PARAM = new URL(location.href).searchParams.get('admin') || '';
+let IS_ADMIN = false;                        // état unique d’admin pour TOUTE l’app
+const isAdmin = () => IS_ADMIN;              // on ne lit plus l’URL directement
 
 // Cache mémoire (masque la latence du réseau)
 const CACHE_TTL_MS = 60000; // 60 s
@@ -72,8 +73,6 @@ const offsModal   = qs('#offsModal');
 const closeOffsBtn= qs('#closeOffs');
 const offsTitle   = qs('#offsTitle');
 const offsListEl  = qs('#offsList');
-
-let IS_ADMIN = false;
 
 function showOffsModal(){ offsModal?.setAttribute('aria-hidden','false'); }
 function hideOffsModal(){
@@ -919,7 +918,8 @@ tabDone?.addEventListener('click', async () => {
 });
 
 // Préfetch à l’ouverture de la page pour masquer la latence au premier clic
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  await detectAdmin(); // ← on connaît le vrai statut admin ici
   fetchStats().then(d => { if (!pageStats.classList.contains('hidden')) renderStats(d); });
   fetchHandled().then(d => { if (!pageDone.classList.contains('hidden')) renderHandled(d); });
 });
