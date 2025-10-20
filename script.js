@@ -755,7 +755,7 @@ function renderStats(data){
     const el = (r.els && r.els[i]) || '';
     const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
     const card = document.createElement('div'); card.className = 'pick def-pick';
-    const v = renderMergedVisual(m), { mergeCollab:false });
+    const v = renderMergedVisual(m, { mergeCollab:false });
     card.innerHTML = `
       ${v.htmlIcon}
       <div class="pname">${esc(v.label)}</div>
