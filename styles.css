@@ -14,21 +14,28 @@ body {
 }
 
 /* =========================================
-   Thème & variables
+   Palette / Theme vars
 ========================================= */
 :root{
-  --panel-width: 1700px;
-  --icon: 44px;
-  --pick-icon: 60px;
-  --border: #2b3b4a;
-  --bg1: #0b0f14;
-  --bg2: #0f1520;
-  --bg3: #101826;
-  --txt: #e8eef5;
-  --muted: #b9c3cf;
-  --accent: #2a71ff;
-  --accent-2: #1b55d6;
-  --hint: rgba(232,238,245,.85);
+  --bg:   #0b0f14;
+  --bg2:  #0e141c;
+  --bg3:  #111823;
+  --panel:#0f1722;
+  --border:#1f2a37;
+
+  --txt:#e8eef5;
+  --muted:#9fb2c7;
+
+  --accent:#2a71ff;
+  --accent-2:#1f57c8;
+  --accent-3:#17429a;
+
+  --green:#2aa153;
+  --red:#d64545;
+  --yellow:#f2b827;
+
+  --chip-bg:#142033;
+
   --shadow-1: 0 8px 24px rgba(0,0,0,.35);
   --inset-1: inset 0 0 0 1px rgba(255,255,255,.06);
 }
@@ -36,160 +43,63 @@ body {
 /* =========================================
    Accessibilité
 ========================================= */
-.sr-only {
-  position:absolute !important;
-  width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
-  clip:rect(0,0,0,0);white-space:nowrap;border:0;
-}
-
-/* =========================================
-   Header / Nav
-========================================= */
-header{
-  padding:14px 16px;
-  border-bottom:1px solid var(--border);
-  background: var(--bg2);
-  position: sticky; top:0; z-index:20;
-}
-h1{ margin:0 0 8px 0; font-size:20px; }
-nav button{
-  margin-right:8px; padding:8px 12px;
-  border:1px solid var(--border);
-  background: var(--bg3);
-  color: var(--txt);
-  border-radius:12px;
-  cursor:pointer;
-  transition: transform .05s ease, filter .1s ease, background .15s ease, border-color .15s ease;
-}
-nav button:hover{ filter: brightness(1.05); }
-nav button:active{ transform: translateY(1px); }
-nav button.active{ background: #234567; border-color:#2f5577; color:#fff; }
-
-/* =========================================
-   Layout
-========================================= */
-main{ padding:16px; max-width:min(var(--panel-width),95vw); margin:0 auto; }
-.row{ margin:12px 0; }
-.hidden{ display:none !important; }
-
-/* Toast / hint */
-#toast{
-  margin-top:8px; font-size:13px; min-height:34px;
-  opacity:0; transition: opacity .2s ease;
-}
-#toast.show{ opacity:1; }
-.hint{ opacity:.85; margin:8px 0 10px; font-size:16px; font-weight:500; text-align:center; color: var(--hint); }
-
-/* =========================================
-   Champs & focus
-========================================= */
-.field label{ display:block; font-size:12px; opacity:.85; margin:0 0 6px 2px; }
-.field input, textarea{
-  width:100%; padding:10px 12px;
-  border-radius:10px; border:1px solid var(--border);
-  background: var(--bg2); color: var(--txt); outline:none;
-  transition: border-color .12s ease, box-shadow .12s ease, background .12s ease;
-}
-.field input:focus, textarea:focus{
+:focus, textarea:focus{
   border-color:#3e5a78;
   box-shadow:0 0 0 2px rgba(46,110,255,.15);
 }
-.field.narrow{ max-width:120px; margin-left:0; margin-right:auto; }
-@media (max-width:640px){ .field.narrow{ max-width:100%; } }
-#search{ max-width:220px; }
 
 /* =========================================
-   Panneau + zones scroll
+   Badges / chips
 ========================================= */
-.panel{
-  border:1px solid var(--border);
-  border-radius:12px;
-  background: var(--bg2);
-  padding:10px;
+.badge{
+  display:inline-flex; align-items:center; gap:6px;
+  height:24px; padding:0 10px;
+  border-radius:999px; background:var(--chip-bg);
+  border:1px solid #1f2b40; color:#cfe;
+  font-size:12px; line-height:1; letter-spacing:.2px;
 }
-.grid-wrap{
-  border-radius:14px;background:#0f1824;
-  box-shadow:0 0 0 1px rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.35);
-  padding:8px;overflow:hidden; /* clippe les coins */
-}
-.grid-scroll{
-  max-height:68vh;
-  overflow:auto;
-  padding:8px 12px 8px 8px;
-  scrollbar-gutter: stable both-edges;
-  will-change: scroll-position;
-}
-
-/* Scrollbar */
-body::-webkit-scrollbar{ width:8px }
-body::-webkit-scrollbar-track{ background:transparent }
-body::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.12); border-radius:6px }
-body::-webkit-scrollbar-thumb:hover{ background:rgba(255,255,255,.20) }
-body{ scrollbar-width:thin; scrollbar-color:rgba(255,255,255,.12) transparent }
 
 /* =========================================
-   Grille monstres
+   Cards / panneaux
 ========================================= */
-.monster-grid{
-  width:100%;
-  display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
-  gap:6px 8px; align-content:start; box-sizing:border-box;
-  contain: layout paint;
-}
 .card{
-  position:relative; display:flex; flex-direction:column; align-items:center; gap:4px;
-  padding:4px 3px;
-  border:1px solid transparent; border-radius:9px;
-  background: var(--bg3); cursor:pointer;
-  transition: border-color .12s ease, transform .06s ease;
-}
-.card:hover{ border-color:#33506e; }
-.card:active{ transform: translateY(1px); }
-.card img{
-  width: var(--icon); height: var(--icon);
-  border-radius:7px; object-fit:cover; background: var(--bg1);
-}
-.name{
-  width: var(--icon); max-width: var(--icon);
-  font-size:10.5px; line-height:1.05; text-align:center;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  background:#0f1722; border:1px solid var(--border);
+  border-radius:14px; box-shadow: var(--shadow-1);
 }
 
 /* =========================================
-   Sélection
+   Header
 ========================================= */
-.picks-title{ margin-bottom:6px; opacity:.9; }
-#picks{
-  display:flex; flex-wrap:wrap; gap:10px; min-height:58px; margin-top:6px; width:100%;
+header{
+  position: sticky; top: 0; z-index: 50;
+  background: linear-gradient(180deg,#0c1118 0%, rgba(15,21,32,.95) 35%, #101826 100%);
+  border-bottom:1px solid #0e2038;
+  backdrop-filter: blur(6px);
 }
-.pick{
-  position:relative; display:flex; flex-direction:column; align-items:center;
-  width:86px; padding:8px 6px 6px;
-  border:1px solid var(--border); border-radius:10px; background: var(--bg3);
+.container{
+  max-width: 1200px; margin-inline: auto;
+  padding: 12px 16px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
 }
-.pick img{
-  width: var(--pick-icon); height: var(--pick-icon);
-  border-radius:7px; object-fit:cover; background: var(--bg1);
+.brand{ display:flex; align-items:center; gap:10px; }
+.brand__logo{
+  width:28px; height:28px; border-radius:6px;
+  background: linear-gradient(135deg,#2a71ff,#1f57c8);
+  box-shadow:0 6px 18px rgba(42,113,255,.25);
 }
-.pick .pname{
-  font-size:10px; line-height:11px; margin-top:4px; text-align:center;
-  max-width:76px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-}
-.pick .close{
-  position:absolute; top:4px; right:4px; width:18px; height:18px;
-  border:none; border-radius:50%;
-  background: var(--bg2); color:#cfd8e3; opacity:.6; cursor:pointer;
-  line-height:18px; font-size:12px; z-index:10;
-  transition: opacity .1s ease, transform .06s ease, filter .1s ease;
-}
-.pick .close:hover{ opacity:.9; filter: brightness(1.05); }
-.pick .close:active{ transform: translateY(1px); }
+.brand__title{ font-weight:700; letter-spacing:.3px; }
 
 /* =========================================
-   Zone notes + bouton
+   Barre d’outils / actions
 ========================================= */
-textarea{ min-height:100px; border-radius:12px; }
+.toolbar{
+  display:flex; flex-wrap:wrap; gap:10px;
+  align-items:center; justify-content:flex-end;
+}
+
+/* =========================================
+   Boutons
+========================================= */
 .btn-primary{
   appearance:none; border:none;
   background: linear-gradient(180deg, var(--accent), var(--accent-2));
@@ -206,117 +116,78 @@ textarea{ min-height:100px; border-radius:12px; }
   display:none; vertical-align:middle; margin-left:8px;
 }
 .btn-primary.sending .btn-spinner{ display:inline-block; animation: spin .8s linear infinite; }
-@keyframes spin{ to{ transform: rotate(360deg); } }
-@media (prefers-reduced-motion: reduce) {
-  .btn-primary.sending .btn-spinner{ animation: none; }
-}
+@keyframes spin{ to{ transform: rotate(360deg) } }
 
-/* Pour le picker : le spinner est juste à côté du bouton */
-.btn-primary.sending + .btn-spinner{
-  display:inline-block;
-  animation: spin .8s linear infinite;
-}
-
-/* =========================================
-   Listes Stats / Handled
-========================================= */
-.def-list{ display:flex; flex-direction:column; gap:12px; width:100%; margin:12px auto 0; max-width:940px; }
-.def-row{ display:flex; align-items:center; gap:10px; width:100%; }
-.def-item{
-  flex:1; display:flex; align-items:center; justify-content:space-between; gap:20px;
-  border:1px solid var(--border); background: var(--bg2);
-  border-radius:12px; padding:14px 16px; box-shadow: 0 6px 18px rgba(0,0,0,.22);
-}
-.def-trio{ display:flex; gap:16px; align-items:center; }
-.def-pick{ width:110px; padding:8px 6px 6px; }
-.def-pick img{ width:60px; height:60px; border-radius:10px; }
-.def-pick .pname{ font-size:12px; line-height:13px; margin-top:6px; max-width:100px; }
-.def-count{
-  min-width:48px; text-align:center; font-weight:800; font-size:16px; color:#fff;
-  background:#234567; border:1px solid #2f5577; border-radius:10px; padding:10px 14px;
-  box-shadow: var(--inset-1);
-}
 .btn-ghost{
   appearance:none; border:1px solid var(--border);
   background: var(--bg3); color: var(--txt);
   padding:6px 10px; border-radius:10px; cursor:pointer; font-size:12px; white-space:nowrap;
   transition: filter .08s ease, border-color .12s ease, transform .06s ease;
 }
-.btn-ghost:hover{ border-color:#3a4c60; filter: brightness(1.05); }
+.btn-ghost:hover{ filter: brightness(1.06); border-color:#2a3b52; }
 .btn-ghost:active{ transform: translateY(1px); }
+.btn-ghost[disabled]{ opacity:.6; cursor:default; }
+
+/* Variante locale (liste offs admin) */
+.btn--primary{ background:#2a5bd7; border-color:#2a5bd7 }
+.btn--ghost{ background:transparent; border-color:#555 }
 
 /* =========================================
-   Skeletons (optionnel)
+   Nav (catégories)
 ========================================= */
-.skeleton{ position:relative; overflow:hidden; }
-.skeleton::after{
-  content:''; position:absolute; inset:0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
-  transform: translateX(-100%); animation: shimmer 1.2s infinite;
+nav{
+  display:flex; gap:8px; align-items:center; flex-wrap:wrap; padding: 10px 0;
 }
-@keyframes shimmer{ to { transform: translateX(100%); } }
-@media (prefers-reduced-motion: reduce) {
-  .skeleton::after{ animation: none; }
+nav button{
+  padding:8px 12px; font-weight:600; color:#bcd;
+  background:#0f1722; border:1px solid var(--border);
+  background: var(--bg3);
+  color: var(--txt);
+  border-radius:12px;
+  cursor:pointer;
+  transition: transform .05s ease, filter .1s ease, background .15s ease, border-color .15s ease;
 }
+nav button:hover{ filter: brightness(1.05); }
+nav button:active{ transform: translateY(1px); }
+nav button.active{ background: #234567; border-color:#2f5577; color:#fff; }
 
 /* =========================================
-   Responsive / adaptatifs
+   Layout
 ========================================= */
-@media (max-height:900px){
-  .grid-scroll{ max-height:58vh; }
-  :root{ --icon:40px; }
-  .monster-grid{ grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap:6px 7px; }
-  .card img{ width: var(--icon); height: var(--icon); }
-  .name{ font-size:10px; }
-}
-@media (max-width:1280px){
-  main{ max-width:94vw; }
-  .grid-scroll{ max-height:60vh; }
-  .monster-grid{ grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); }
+main{ padding: 16px; }
+.grid{
+  display:grid; gap:14px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
 }
 
 /* =========================================
-   Duo / Duo horizontal SW|COLLAB
+   Carte monstre
 ========================================= */
-.duo {
-  position: relative;
-  width: var(--icon);
-  height: var(--icon);
+.monster{
+  position:relative; background: #0f1722; border:1px solid var(--border);
+  border-radius:14px; overflow:hidden; box-shadow: var(--shadow-1);
 }
-.duo img {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  border-radius: 7px; object-fit: cover;
+.monster__media{
+  height: 160px; background:#0b1320; display:flex; align-items:center; justify-content:center;
+  border-bottom:1px solid #0e2038;
 }
-.duo img.top { transform: translate(20%, -20%) scale(0.8); box-shadow: 0 0 0 1px rgba(0,0,0,.5); border-radius: 7px; }
-.duo img.base { filter: brightness(.95); }
-.name .alt { opacity:.8; }
-
-.duo-hsplit{
-  position:relative;
-  width: var(--icon);
-  height: var(--icon);
+.monster__media img{ width:100%; height:100%; object-fit:contain; }
+.monster__body{ padding: 12px; }
+.monster__name{ font-weight:700; letter-spacing:.3px; }
+.monster__aliases{
+  margin-top:6px; display:flex; flex-wrap:wrap; gap:6px;
 }
-.duo-hsplit img{
-  position:absolute; inset:0;
-  width:100%; height:100%; object-fit:cover;
-  border-radius:7px;
-}
-.duo-hsplit .left{  clip-path: inset(0 50% 0 0); }
-.duo-hsplit .right{ clip-path: inset(0 0 0 50%); }
-.duo-hsplit::after{
-  content:""; position:absolute; top:0; bottom:0; left:50%;
-  width:1px; background:rgba(255,255,255,.9);
+.alias{
+  padding:2px 8px; background:#0e1a2a; border:1px solid #15263d; border-radius:999px; color:#b7c8db; font-size:11px;
 }
 
-/* Taille 60px pour les grosses cartes (déf/offs) */
-.def-pick .duo-hsplit{ width:60px; height:60px; }
-.def-pick .duo-hsplit img{ border-radius:10px; }
+/* CTA dans la carte */
+.monster__actions{
+  display:flex; gap:8px; align-items:center; justify-content:space-between; padding: 10px 12px 12px;
+}
 
 /* =========================================
-   MODALE Offs (version alignée à ton HTML)
-   - HTML attendu : .modal > .modal__dialog > .modal__header/.modal__body
+   Modal générique
 ========================================= */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:999}
 .modal[aria-hidden="false"]{display:flex}
@@ -328,87 +199,150 @@ textarea{ min-height:100px; border-radius:12px; }
   flex-direction:column;
 }
 .modal__header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #2a2a2a}
-.modal__body{padding:16px; overflow:auto}   /* ⬅️ scroll interne */
-.modal__close{background:transparent;border:0;color:#aaa;font-size:24px;cursor:pointer}
+.modal__body{padding:16px; overflow:auto}   /* ⬅️ scroll interne, header/footer fixes */
+.modal__footer{display:flex;gap:8px;justify-content:flex-end;padding:12px 16px;border-top:1px solid #2a2a2a}
+.modal__title{font-weight:700}
 
-/* La modale du picker peut être plus large que la modale "Voir offs" */
-.modal--picker .modal__dialog{ max-width: 980px; }
-
-.btn{padding:8px 14px;border-radius:10px;border:1px solid #444;background:#1b1b1b;cursor:pointer}
-.btn--primary{background:#2a5bd7;border-color:#2a5bd7}
-.btn--ghost{background:transparent;border-color:#555}
-.badge{margin-left:8px;padding:2px 8px;border-radius:999px;background:#1f6b3a;border:1px solid #2a8b4d;color:#cfe}
-
+/* =========================================
+   Modal “Offs” (liste des offenses)
+========================================= */
 .offsList{
   display:grid;gap:8px;margin:10px 0 12px;
-  max-height:56vh;overflow:auto;padding-right:6px;scrollbar-gutter:stable;
+  grid-template-columns: 1fr 1fr;
 }
-.offsItem{border:1px solid #2a2a2a;border-radius:12px;padding:10px}
-.offsItem h5{margin:0 0 2px;font-size:15px}
-.offsItem .meta{font-size:12px;color:#aaa}
-.offsForm label{display:block;margin:8px 0}
-.offsForm input,.offsForm textarea{width:100%;padding:8px;border-radius:8px;border:1px solid #333;background:#0f0f0f;color:#eee}
+.offsList__item{
+  border:1px solid var(--border); border-radius:12px; background:#0f1722;
+  padding:8px 10px; display:flex; align-items:center; justify-content:space-between; gap:8px;
+}
+.offsList__names{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.offsList__names .alias{ background:#0e1a2a; border-color:#15263d; color:#b7c8db; }
+.offsList__actions{ display:flex; gap:6px; }
 
-.picker-grid{
-  border-radius:12px; background:#0f1824; padding:8px;
-  box-shadow:0 0 0 1px rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.35);
-  max-height:52vh; overflow:auto;
-}
-
-/* Picks du PICKER : une seule ligne + scroll horizontal */
-.off-picks{
-  display:flex;
-  flex-wrap:nowrap;
-  gap:10px;
-  align-items:center;
-  min-height:58px;
-  margin:8px 0;
-  overflow:auto;            /* scroll horizontal si besoin */
-  padding-bottom:4px;       /* un peu d’air pour la scrollbar */
-}
-.off-picks .pick{
-  width:86px;
-  padding:8px 6px 6px;
-  flex-direction:column;     /* nom sous l’image */
-  gap:0;
-}
-.off-picks .pick img{
-  width: var(--pick-icon);   /* 60px */
-  height: var(--pick-icon);
-  border-radius:7px;
-}
-.off-picks .pick .pname{
-  font-size:10px; line-height:11px;
-  margin-top:4px; text-align:center;
-  max-width:76px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+.admin-tools{
+  display:flex; align-items:center; gap:8px; justify-content:space-between;
+  padding: 10px; border:1px dashed #2b3a52; border-radius:12px; background:#0f1320;
 }
 
-/* Chaque offense listée = 3 icônes alignées sur une ligne */
-.off-trio{
-  display:flex;
-  gap:12px;
-  align-items:center;
+/* =========================================
+   Off picker (pour proposer une offense)
+========================================= */
+.picker{
+  display:flex; flex-direction:column; gap:12px;
+}
+.picker .field{
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  background:#0f1722; border:1px solid var(--border); border-radius:12px; padding:8px 10px;
+}
+.picker .field input{
+  flex:1 1 auto;
+  background:transparent; border:none; outline:none; color:#dfe9f6; font-size:14px;
+}
+.picker .grid{
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+.pick{
+  display:flex; align-items:center; gap:8px;
+  border:1px dashed #2a3b52; background:#0e1522; border-radius:10px; padding:8px; cursor:grab;
+}
+.pick.dragging{ opacity:.6; }
+.pick img{ width:34px; height:34px; object-fit:contain; }
+.pick__name{ font-weight:600; }
+
+.picks{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:6px 0;
+}
+.picks .slot{
+  width:42px; height:42px; display:grid; place-items:center;
+  border:1px dashed #2a3b52; background:#0e1522; border-radius:10px;
+}
+.picks .slot.filled{
+  border-style:solid; border-color:#2a3b52; background:#102036;
+}
+.picks .slot img{ width:36px; height:36px; object-fit:contain; border-radius:8px; }
+
+/* State message sous le champ */
+.picker .hint{ color:#9fb2c7; font-size:12px; }
+
+/* =========================================
+   Formulaires / inputs
+========================================= */
+input[type="text"], .input{
+  background:#0e1522; color:#e8eef5;
+  border:1px solid #253349; border-radius:10px; padding:8px 10px;
+  outline:none;
+  transition: border-color .12s ease, box-shadow .12s ease, filter .12s ease;
+}
+input::placeholder{ color:#89a0b8; }
+
+textarea{
+  background:#0e1522; color:#e8eef5;
+  border:1px solid #253349; border-radius:10px; padding:8px 10px;
+  min-height:80px; resize:vertical;
 }
 
-/* Afficher le spinner quand le bouton a .sending et que le spinner est son frère immédiat */
-.btn-primary.sending + .btn-spinner{
-  display:inline-block;
-  animation: spin .8s linear infinite;
+/* =========================================
+   Listes “stats” et “handled”
+========================================= */
+.list{
+  display:grid; gap:10px;
+}
+.list__item{
+  padding:10px 12px; border-radius:12px; background:#0f1722; border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+}
+.list__left{ display:flex; align-items:center; gap:10px; }
+.list__name{ font-weight:700; }
+.list__meta{ color:#9fb2c7; font-size:12px; }
+.list__actions{ display:flex; gap:8px; }
+
+/* =========================================
+   Empty states
+========================================= */
+.empty{
+  text-align:center; color:#9fb2c7; padding: 28px 10px;
 }
 
-/* Barre d’actions du picker */
-.picker-actions{
-  position: sticky;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  padding: 12px 0;
-  margin-top: 10px;
-  border-top: 1px solid #223244; /* séparation visuelle */
-  background: linear-gradient(180deg, rgba(15,21,32,0), rgba(15,21,32,.95) 35%, #101826 100%);
+/* =========================================
+   Footer
+========================================= */
+footer{
+  margin-top: 24px; padding: 24px 16px; border-top:1px solid #0e2038; color:#9fb2c7;
+  text-align:center;
 }
 
-/* Champ recherche du picker un peu plus court */
-.picker .field input{ max-width: 540px; }
+/* =========================================
+   Images / helpers
+========================================= */
+img{ display:block; }
+.hide{ display:none !important; }
 
+/* =========================================
+   Scrollbars (webkit)
+========================================= */
+*::-webkit-scrollbar{ width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb{
+  background:#253349; border:2px solid #0e1522; border-radius:999px;
+}
+*::-webkit-scrollbar-track{
+  background:transparent; border-radius:999px;
+}
 
+/* =========================================
+   Utilitaires
+========================================= */
+.row{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.gap-6{ gap:6px; } .gap-8{ gap:8px; } .gap-10{ gap:10px; }
+.mt-8{ margin-top:8px; } .mt-12{ margin-top:12px; } .mt-16{ margin-top:16px; }
+.mx-auto{ margin-inline:auto; }
+
+/* =========================================
+   Grilles/off canvas plus courts (petits écrans)
+========================================= */
+@media (max-width: 720px){
+  .grid{ grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+  .offsList{ grid-template-columns: 1fr; }
+  .picker .grid{ grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .container{ padding: 10px; }
+  main{ padding: 12px; }
+  .picker .field input{ max-width: 540px; }
+}
