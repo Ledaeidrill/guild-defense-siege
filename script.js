@@ -1226,21 +1226,20 @@ function openOffPicker(defKey, offsListEl, onClose){
       const v = renderMergedVisual(m);
       card.innerHTML = `
         ${v.htmlIcon}
-        <span class="name" title="${esc(v.title)}">${esc(p.name || v.label)}</span>
+        <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
       `;
-  
       card.addEventListener('click', () => {
         if (offPicks.some(p => p.id === m.id)) return;
         if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
         offPicks.push(m);
         renderOffPicks();
-  
-        // reset recherche + grille
-        inp.value = '';
-        renderPickerGrid();
-        inp.focus();
-      });
-  
+      
+        // ⤵️ NE rafraîchit la grille que si l’utilisateur avait saisi quelque chose
+        if ((inp.value || '').trim() !== '') {
+          inp.value = '';
+          renderPickerGrid();
+        }
+      });  
       frag.appendChild(card);
     }
     grid.appendChild(frag);
