@@ -1249,13 +1249,12 @@ function openOffPicker(defKey, offsListEl, onClose){
         if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
         offPicks.push(m);
         renderOffPicks();
-      
-        // ⤵️ NE rafraîchit la grille que si l’utilisateur avait saisi quelque chose
+        
+        // Ne refresh la grille QUE si l'utilisateur avait saisi quelque chose
         if ((inp.value || '').trim() !== '') {
           inp.value = '';
           renderPickerGrid();
-        }
-      });  
+        } 
       frag.appendChild(card);
     }
     grid.appendChild(frag);
