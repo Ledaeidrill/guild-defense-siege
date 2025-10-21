@@ -217,30 +217,6 @@ const MAP_COLLAB_TO_SW = {
 
 // === Strict collab merge (basé SEULEMENT sur COLLAB_MAP) ===
 
-function firstRepByFamily(fid){
-  const pool = (window.MONSTERS||[]).filter(x => x.family_id === fid);
-  if (!pool.length) return null;
-  // priorité 2A > éveillé > plus grand com2us_id
-  return pool.sort((a,b) =>
-    (b.second_awaken===true) - (a.second_awaken===true) ||
-    (b.awaken_level||0) - (a.awaken_level||0) ||
-    (b.com2us_id||0) - (a.com2us_id||0)
-  )[0];
-}
-
-function getFamilyNames(mon){
-  const fid = mon.family_id;
-  if (PAIR_COLL2SW.has(fid)) {
-    const sw = firstRepByFamily(PAIR_COLL2SW.get(fid));
-    return sw ? { swName: sw.name, collabName: mon.name } : null;
-  }
-  if (PAIR_SW2COLL.has(fid)) {
-    const co = firstRepByFamily(PAIR_SW2COLL.get(fid));
-    return co ? { swName: mon.name, collabName: co.name } : null;
-  }
-  return null; // famille non mappée (ex: TEKKEN)
-}
-
 const _pairById = new Map();
 
 function buildStrictCollabPairs(){
@@ -385,13 +361,11 @@ function renderMergedVisual(m, opts){
     const title = `${duo.sw.name} ↔ ${duo.collab.name}`;
     return { htmlIcon, label, title };
   }
-
-  // Pas de pair "par élément" ⇒ on affiche l'icône simple,
-  // mais on améliore le TITLE (hover) au niveau *famille* si la famille est mappée.
-  const fam = getFamilyNames(m); // ← nouveau helper
   const htmlIcon = `<img loading="lazy" src="${fixIconUrl(m.icon)}" alt="${esc(m.name)}">`;
-  const label = m.name; // on garde l’étiquette simple pour la carte
-  const title = fam ? `${fam.swName} / ${fam.collabName}` : m.name;
+
+  // === rendu simple (PAS de fusion) ===
+  const label = m.name;
+  const title = m.name;
   return { htmlIcon, label, title };
 }
 
@@ -1320,4 +1294,3 @@ function openOffPicker(defKey, offsListEl, onClose){
     }
   };
 }
-
