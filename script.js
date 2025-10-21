@@ -351,19 +351,38 @@ function renderMergedVisual(m, opts){
   const mergeCollab = !(opts && opts.mergeCollab === false);
   const duo = mergeCollab ? findMappedPair(m) : null;
 
+  // 1) Titre unifié
+  const unifiedTitle = duo
+    ? `${duo.sw.name} / ${duo.collab.name}`
+    : m.name;
+
   if (duo){
     const htmlIcon = `
-      <div class="duo-hsplit">
-        <img loading="lazy" class="left"  src="${fixIconUrl(duo.sw.icon)}"     alt="${esc(duo.sw.name)}">
-        <img loading="lazy" class="right" src="${fixIconUrl(duo.collab.icon)}" alt="${esc(duo.collab.name)}">
+      <div class="duo-hsplit" title="${esc(unifiedTitle)}" aria-label="${esc(unifiedTitle)}">
+        <img loading="lazy"
+             class="left"
+             src="${fixIconUrl(duo.sw.icon)}"
+             alt="${esc(duo.sw.name)}"
+             title="${esc(unifiedTitle)}">
+        <img loading="lazy"
+             class="right"
+             src="${fixIconUrl(duo.collab.icon)}"
+             alt="${esc(duo.collab.name)}"
+             title="${esc(unifiedTitle)}">
       </div>`;
-    const label = `${duo.sw.name} / ${duo.collab.name}`; // 2 noms sur la carte
-    const title = `${duo.sw.name} / ${duo.collab.name}`; // tooltip aussi en "/"
+    const label = `${duo.sw.name} / ${duo.collab.name}`;
+    const title = unifiedTitle;                // ← à réutiliser plus loin pour le nom
     return { htmlIcon, label, title };
   }
 
-  const htmlIcon = `<img loading="lazy" src="${fixIconUrl(m.icon)}" alt="${esc(m.name)}">`;
-  return { htmlIcon, label: m.name, title: m.name };
+  // Cas non-duo
+  const htmlIcon = `<img loading="lazy"
+                         src="${fixIconUrl(m.icon)}"
+                         alt="${esc(m.name)}"
+                         title="${esc(unifiedTitle)}">`;
+  const label = m.name;
+  const title = unifiedTitle;
+  return { htmlIcon, label, title };
 }
 
 // =====================
@@ -466,9 +485,9 @@ function cardHtmlByName(name){
   const d = findMonsterByName(name) || { name, icon:'', element:'' };
   const v = renderMergedVisual(d);
   return `
-    <div class="pick def-pick" title="${esc(v.title)}">
-      ${v.htmlIcon}
-      <div class="pname">${esc(v.label)}</div>
+    <div class="monster-card" title="${esc(vis.title)}" aria-label="${esc(vis.title)}">
+      ${vis.htmlIcon}
+      <div class="name" title="${esc(vis.title)}">${esc(vis.label)}</div>
     </div>`;
 }
 
