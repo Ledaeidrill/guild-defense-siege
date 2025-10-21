@@ -348,7 +348,7 @@ function shouldHideInGrid(mon){
 
 // Rend l’icône + libellé fusionnés
 function renderMergedVisual(m, opts){
-  const mergeCollab = !(opts && opts.mergeCollab === false); // par défaut: fusion ON
+  const mergeCollab = !(opts && opts.mergeCollab === false);
   const duo = mergeCollab ? findMappedPair(m) : null;
 
   if (duo){
@@ -357,16 +357,13 @@ function renderMergedVisual(m, opts){
         <img loading="lazy" class="left"  src="${fixIconUrl(duo.sw.icon)}"     alt="${esc(duo.sw.name)}">
         <img loading="lazy" class="right" src="${fixIconUrl(duo.collab.icon)}" alt="${esc(duo.collab.name)}">
       </div>`;
-    const label = `${duo.sw.name} / ${duo.collab.name}`;
-    const title = `${duo.sw.name} ↔ ${duo.collab.name}`;
+    const label = `${duo.sw.name} / ${duo.collab.name}`; // 2 noms sur la carte
+    const title = `${duo.sw.name} / ${duo.collab.name}`; // tooltip aussi en "/"
     return { htmlIcon, label, title };
   }
-  const htmlIcon = `<img loading="lazy" src="${fixIconUrl(m.icon)}" alt="${esc(m.name)}">`;
 
-  // === rendu simple (PAS de fusion) ===
-  const label = m.name;
-  const title = m.name;
-  return { htmlIcon, label, title };
+  const htmlIcon = `<img loading="lazy" src="${fixIconUrl(m.icon)}" alt="${esc(m.name)}">`;
+  return { htmlIcon, label: m.name, title: m.name };
 }
 
 // =====================
@@ -805,7 +802,7 @@ function renderStats(data){
     const el = (r.els && r.els[i]) || '';
     const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
     const card = document.createElement('div'); card.className = 'pick def-pick';
-    const v = renderMergedVisual(m,);
+    const v = renderMergedVisual(m);
     card.innerHTML = `
       ${v.htmlIcon}
       <div class="pname">${esc(v.label)}</div>
@@ -904,7 +901,7 @@ function renderHandled(data){
       const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
       const card = document.createElement('div'); 
       card.className = 'pick def-pick';
-      const v = renderMergedVisual(m,);
+      const v = renderMergedVisual(m);
       card.innerHTML = `
         ${v.htmlIcon}
         <div class="pname">${esc(v.label)}</div>
