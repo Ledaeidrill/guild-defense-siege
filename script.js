@@ -640,7 +640,7 @@ function renderPicks() {
     div.innerHTML = `
       <button class="close" type="button" title="Retirer">✕</button>
       ${v.htmlIcon}
-      <div class="pname" title="${esc(v.title)}">${esc(p.name || v.label)}</div>
+      <div class="pname" title="${esc(v.title)}">${esc(v.label)}</div>
     `;
     // ré-associe le click du bouton close inséré via innerHTML
     div.querySelector('.close').onclick = btn.onclick;
