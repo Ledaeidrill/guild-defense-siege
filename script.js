@@ -219,45 +219,68 @@ const MAP_COLLAB_TO_SW = {
 
 const _pairById = new Map();
 
-function findAllByMapName(name){
-  const k = nrm(name);
-  if (!k) return [];
-  const list = window.MONSTERS || [];
-  return list.filter(x =>
-    nrm(x.name) === k ||
-    nrm(x.unawakened_name) === k ||
-    (x.aliases || []).some(a => nrm(a) === k)
-  );
-}
-
-function groupByElement(list){
-  const m = new Map();
-  for (const x of list){
-    const el = (x.element || '').toLowerCase(); // ← normalisé
-    const arr = m.get(el);
-    if (arr) arr.push(x); else m.set(el, [x]);
-  }
-  return m;
-}
-
 function buildStrictCollabPairs(){
   _pairById.clear();
+
+  const list = window.MONSTERS || [];
+  const toKey = (s) => (s ?? '')
+    .toString()
+    .normalize('NFKD')               // sépare diacritiques
+    .replace(/\p{Diacritic}/gu,'')   // retire diacritiques
+    .replace(/\s+/g,' ')             // espace unique
+    .trim()
+    .toLowerCase();
+
+  // === 1) Index stricts "nom ➜ family_id" et "unawakened_name ➜ family_id"
+  // (on n’utilise PAS aliases ici, pour éviter les collisions "Dragon", "Guardian", etc.)
+  const name2fid = new Map();
+  const unaw2fid = new Map();
+  const push1 = (map, k, fid) => { const s = map.get(k); if (s) s.add(fid); else map.set(k, new Set([fid])); };
+
+  for (const m of list){
+    const kn = toKey(m.name);
+    if (kn) push1(name2fid, kn, m.family_id);
+    const ku = toKey(m.unawakened_name);
+    if (ku) push1(unaw2fid, ku, m.family_id);
+  }
+
+  const resolveFamilyId = (label) => {
+    const k = toKey(label);
+    const a = name2fid.get(k) || new Set();
+    const b = unaw2fid.get(k) || new Set();
+    const union = new Set([...a, ...b]);
+    if (union.size === 1) return [...union][0];
+    console.warn('[COLLAB MAP] Ambiguous / missing label:', label, '→ fids:', [...union]);
+    return null;
+  };
+
+  // === 2) Construit les paires "famille collab ↔ famille SW" par élément
   const cmap = (typeof MAP_SW_TO_COLLAB !== 'undefined' ? MAP_SW_TO_COLLAB : {});
-
   for (const [swName, collabName] of Object.entries(cmap)) {
-    const swList = findAllByMapName(swName);
-    const coList = findAllByMapName(collabName);
-    if (!swList.length || !coList.length) continue;
+    const swFid  = resolveFamilyId(swName);
+    const coFid  = resolveFamilyId(collabName);
+    if (!swFid || !coFid) continue;
 
-    const swBy = groupByElement(swList);
-    const coBy = groupByElement(coList);
+    // buckets par (famille, élément)
+    const swByEl = new Map();
+    const coByEl = new Map();
+    for (const m of list) {
+      if (m.family_id === swFid) {
+        const el = (m.element||'').toLowerCase();
+        const arr = swByEl.get(el); if (arr) arr.push(m); else swByEl.set(el,[m]);
+      }
+      if (m.family_id === coFid) {
+        const el = (m.element||'').toLowerCase();
+        const arr = coByEl.get(el); if (arr) arr.push(m); else coByEl.set(el,[m]);
+      }
+    }
 
-    // associer TOUTES les variantes pour chaque élément commun
-    for (const [el, swArr] of swBy.entries()){
-      const coArr = coBy.get(el);
+    // associer TOUTES les variantes par élément commun
+    for (const [el, swArr] of swByEl.entries()){
+      const coArr = coByEl.get(el);
       if (!coArr || !coArr.length) continue;
-      for (const sw of swArr) {
-        for (const co of coArr) {
+      for (const sw of swArr){
+        for (const co of coArr){
           const pair = { sw, collab: co };
           _pairById.set(sw.id, pair);
           _pairById.set(co.id, pair);
@@ -265,9 +288,9 @@ function buildStrictCollabPairs(){
       }
     }
   }
-  console.debug('[collab] pairs built (all variants by element):', _pairById.size);
-}
 
+  console.debug('[collab] pairs built (by family_id):', _pairById.size);
+}
 
 // Helpers de normalisation (accents/ponctuation/casse)
 const nrm = (s) =>
