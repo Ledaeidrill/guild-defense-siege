@@ -154,7 +154,7 @@ body{ scrollbar-width:thin; scrollbar-color:rgba(255,255,255,.12) transparent }
 }
 .name{
   width: var(--icon); max-width: var(--icon);
-  font-size:10.5px; line-height:1.05; text-align:center;
+  font-size:10.5px; :1.25; text-align:center;
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 
@@ -499,7 +499,10 @@ textarea{ min-height:100px; border-radius:12px; }
   border-radius: 12px;
 }
 
-/* (Déjà OK chez toi) Défenses/Offenses listées : .def-pick a déjà : 
-   .def-pick .duo-hsplit{ width:60px; height:60px } 
-   .def-pick .duo-hsplit img{ border-radius:10px } 
-*/
+/* Empêche les lettres basses d’être rognées partout */
+.pick .pname,
+.def-pick .pname,
+.off-mon-name{
+  line-height: 1.25;
+  padding-bottom: 0.15em;
+}
