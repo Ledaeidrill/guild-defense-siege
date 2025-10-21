@@ -219,24 +219,55 @@ const MAP_COLLAB_TO_SW = {
 
 const _pairById = new Map();
 
+function findAllByMapName(name){
+  const k = nrm(name);
+  if (!k) return [];
+  const list = window.MONSTERS || [];
+  return list.filter(x =>
+    nrm(x.name) === k ||
+    nrm(x.unawakened_name) === k ||
+    (x.aliases || []).some(a => nrm(a) === k)
+  );
+}
+
+function groupByElement(list){
+  const m = new Map();
+  for (const x of list){
+    const el = (x.element || '').toLowerCase(); // ← normalisé
+    const arr = m.get(el);
+    if (arr) arr.push(x); else m.set(el, [x]);
+  }
+  return m;
+}
+
 function buildStrictCollabPairs(){
   _pairById.clear();
-
-  // ✅ utilise bien TA map explicite SW -> collab
   const cmap = (typeof MAP_SW_TO_COLLAB !== 'undefined' ? MAP_SW_TO_COLLAB : {});
 
   for (const [swName, collabName] of Object.entries(cmap)) {
-    const sw     = findByMapName(swName);
-    const collab = findByMapName(collabName);
-    if (sw && collab) {
-      _pairById.set(sw.id,     { sw, collab });
-      _pairById.set(collab.id, { sw, collab });
+    const swList = findAllByMapName(swName);
+    const coList = findAllByMapName(collabName);
+    if (!swList.length || !coList.length) continue;
+
+    const swBy = groupByElement(swList);
+    const coBy = groupByElement(coList);
+
+    // associer TOUTES les variantes pour chaque élément commun
+    for (const [el, swArr] of swBy.entries()){
+      const coArr = coBy.get(el);
+      if (!coArr || !coArr.length) continue;
+      for (const sw of swArr) {
+        for (const co of coArr) {
+          const pair = { sw, collab: co };
+          _pairById.set(sw.id, pair);
+          _pairById.set(co.id, pair);
+        }
+      }
     }
   }
-
-  // petit log de vérif (tu peux retirer après)
-  console.debug('[collab] pairs built:', _pairById.size / 2);
+  console.debug('[collab] pairs built (all variants by element):', _pairById.size);
 }
+
 
 // Helpers de normalisation (accents/ponctuation/casse)
 const nrm = (s) =>
@@ -298,19 +329,18 @@ function renderMergedVisual(m, opts){
   const duo = mergeCollab ? findMappedPair(m) : null;
 
   if (duo){
-    // === rendu fusionné (collab mix) ===
     const htmlIcon = `
       <div class="duo-hsplit">
-        <img loading="lazy" class="left"  src="${duo.sw.icon}"     alt="${esc(duo.sw.name)}">
-        <img loading="lazy" class="right" src="${duo.collab.icon}" alt="${esc(duo.collab.name)}">
+        <img loading="lazy" class="left"  src="${fixIconUrl(duo.sw.icon)}"     alt="${esc(duo.sw.name)}">
+        <img loading="lazy" class="right" src="${fixIconUrl(duo.collab.icon)}" alt="${esc(duo.collab.name)}">
       </div>`;
     const label = `${duo.sw.name} / ${duo.collab.name}`;
     const title = `${duo.sw.name} ↔ ${duo.collab.name}`;
     return { htmlIcon, label, title };
   }
+  const htmlIcon = `<img loading="lazy" src="${fixIconUrl(m.icon)}" alt="${esc(m.name)}">`;
 
   // === rendu simple (PAS de fusion) ===
-  const htmlIcon = `<img loading="lazy" src="${m.icon}" alt="${esc(m.name)}">`;
   const label = m.name;
   const title = m.name;
   return { htmlIcon, label, title };
@@ -590,7 +620,7 @@ function renderPicks() {
     div.innerHTML = `
       <button class="close" type="button" title="Retirer">✕</button>
       ${v.htmlIcon}
-      <div class="pname" title="${esc(v.title)}">${esc(v.label)}</div>
+      <div class="pname" title="${esc(v.title)}">${esc(p.name || v.label)}</div>
     `;
     // ré-associe le click du bouton close inséré via innerHTML
     div.querySelector('.close').onclick = btn.onclick;
@@ -1173,7 +1203,7 @@ function openOffPicker(defKey, offsListEl, onClose){
       const v = renderMergedVisual(m);
       card.innerHTML = `
         ${v.htmlIcon}
-        <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
+        <span class="name" title="${esc(v.title)}">${esc(p.name || v.label)}</span>
       `;
   
       card.addEventListener('click', () => {
