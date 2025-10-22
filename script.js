@@ -121,9 +121,9 @@ async function openOffsModal(defKey){
   showOffsModal();
 
   // 1) Loader animé + key
-  const loader = makeDotsLoader(offsListEl, 120);   // ← wraps la liste
-  offsListEl.replaceChildren();                     // vide la liste avant de loader
-  loader.show(120);                                 // “Chargement . .. ...”
+  const loader = makeDotsLoader('Chargement');
+  offsListEl.replaceChildren(loader.el);
+  loader.show(120);
   offsListEl.dataset.defKey = defKey || '';
 
   // 2) Bouton “+ Ajouter” (inchangé)
@@ -558,50 +558,41 @@ const findByNameEl = (n, el) =>
   MONS_BY_NAME_EL.get(`${(n||'').toLowerCase()}|${(el||'').toLowerCase()}`) || null;
 
 // === Loader "Chargement." → ".." → "..." (points animés) ===
-function makeDotsLoader(label = 'Chargement', className = 'loading-block') {
+function makeDotsLoader(label = 'Chargement', className = 'grid-loading') {
   const el = document.createElement('div');
   el.className = className;
   const spanText  = document.createElement('span');
   const spanDots  = document.createElement('span');
+  spanDots.className = 'dots';         // ← important pour ton CSS
   spanText.textContent = label;
   el.append(spanText, spanDots);
 
   let t = 0, timer = null;
-
-  function tick(){
-    t = (t + 1) % 4;              // 0,1,2,3 → 3 = pas de points (petit souffle)
-    spanDots.textContent = '.'.repeat(Math.min(t, 3));
-  }
+  function tick(){ t = (t + 1) % 4; spanDots.textContent = '.'.repeat(Math.min(t, 3)); }
 
   let showTimer = null;
-  function show(delayMs = 180) {  // délai pour éviter les flashs
+  function show(delayMs = 180) {
     hide();
     showTimer = setTimeout(() => {
-      // démarre vide, puis . .. ...
       t = 0; spanDots.textContent = '';
-      timer = setInterval(tick, 320); // cadence des points
+      timer = setInterval(tick, 320);
       el.style.display = 'flex';
     }, Math.max(0, delayMs));
   }
-
   function hide() {
     if (showTimer) { clearTimeout(showTimer); showTimer = null; }
     if (timer)     { clearInterval(timer);   timer = null; }
     el.style.display = 'none';
   }
-
-  hide(); // caché par défaut
+  hide();
   return { el, show, hide };
 }
-
 
 // =====================
 // GRILLE
 // =====================
 const grid   = qs('#monster-grid');
 const search = qs('#search');
-
-const gridLoader = makeDotsLoader(qs('.grid-scroll'));   // ← la fenêtre scrollée
 
 function renderGrid() {
   const box = document.querySelector('.grid-scroll'); // conteneur de la grille
@@ -1131,9 +1122,9 @@ tabStats?.addEventListener('click', async () => {
   activateTab(tabStats, pageStats);
   const box = document.getElementById('stats');
   if (!box) return;
-  const loader = makeDotsLoader(box, 140);
-  box.replaceChildren();       // vide la zone
-  loader.show(120);            // “Chargement . .. ...” (après 120 ms)
+  const loader = makeDotsLoader('Chargement');
+  box.replaceChildren(loader.el);
+  loader.show(120);
   const fresh = await fetchStats();  // réseau + SWR
   loader.hide();
   renderStats(fresh);
@@ -1143,8 +1134,8 @@ tabDone?.addEventListener('click', async () => {
   activateTab(tabDone, pageDone);
   const box = document.getElementById('done');
   if (!box) return;
-  const loader = makeDotsLoader(box, 140);
-  box.replaceChildren();       // vide la zone
+  const loader = makeDotsLoader('Chargement');
+  box.replaceChildren(loader.el);
   loader.show(120);
   const fresh = await fetchHandled();
   loader.hide();
@@ -1160,21 +1151,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Si l’onglet est affiché, on montre le loader le temps du fetch
   if (!pageStats.classList.contains('hidden')) {
     const box = document.getElementById('stats');
-    const loader = makeDotsLoader(box, 140);
-    box.replaceChildren();
+    const loader = makeDotsLoader('Chargement');
+    box.replaceChildren(loader.el);
     loader.show(120);
     const d = await fetchStats();
     loader.hide();
     renderStats(d);
   } else {
-    // sinon, prefetch silencieux
     fetchStats().catch(()=>{});
   }
-
+  
   if (!pageDone.classList.contains('hidden')) {
     const box = document.getElementById('done');
-    const loader = makeDotsLoader(box, 140);
-    box.replaceChildren();
+    const loader = makeDotsLoader('Chargement');
+    box.replaceChildren(loader.el);
     loader.show(120);
     const d = await fetchHandled();
     loader.hide();
@@ -1182,7 +1172,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   } else {
     fetchHandled().catch(()=>{});
   }
-
 });
 
 // =====================
@@ -1345,8 +1334,6 @@ function openOffPicker(defKey, offsListEl, onClose){
 
   gwrap.appendChild(grid);   // ← insère la grille dans le conteneur
   wrap.appendChild(gwrap);   // ← insère le conteneur dans la modale (avant la barre d’actions)
-
-  const pickerLoader = makeDotsLoader(gwrap, 180);
 
 // ====== RENDER GRID (Offense picker)
 function renderPickerGrid(){
