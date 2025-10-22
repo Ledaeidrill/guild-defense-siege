@@ -603,7 +603,7 @@ const search = qs('#search');
 const gridLoader = makeDotsLoader(qs('.grid-scroll'));   // ← la fenêtre scrollée
 
 function renderGrid() {
-  gridLoader.show(200);                                   // n’apparait que si c’est un peu long
+  gridLoader.show(20);                                   // n’apparait que si c’est un peu long
   const q = (search?.value||'').trim();
   if (!grid) return;
   grid.innerHTML = '';
