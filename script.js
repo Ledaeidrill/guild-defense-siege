@@ -1211,19 +1211,28 @@ function openOffPicker(defKey, offsListEl, onClose){
     });
   }
 
-// ====== RENDER GRID ======
+// ====== RENDER GRID (Offense picker) — aligné sur la grille Défense
 function renderPickerGrid(){
-  // on utilise les variables fermées 'grid' et 'inp' définies plus haut
-  const q = (inp.value || '').trim().toLowerCase();
-
-  const list = q
-    ? (window.MONSTERS || []).filter(x => (x.name || '').toLowerCase().includes(q))
-    : (window.MONSTERS || []);
-
+  const q = (inp.value || '').trim();   // on garde la même logique que renderGrid()
   grid.innerHTML = '';
+
   const frag = document.createDocumentFragment();
+  const seenPairs = new Set();          // dédup SW/Collab (même mécanisme que Défense)
+
+  const list = (window.MONSTERS || [])
+    .filter(m => matchesQuery(m, q))        // ✅ même filtre que Défense
+    .filter(m => !shouldHideInGrid(m))      // ✅ cache les doublons collab
+    .sort(monsterComparator);               // ✅ même comparateur
 
   for (const d of list) {
+    // dédup d’un duo déjà rendu (copié de renderGrid)
+    const duo = findMappedPair(d);
+    if (duo) {
+      const key = `${duo.sw.family_id || nrm(duo.sw.name)}|${nrm(duo.sw.element)}`;
+      if (seenPairs.has(key)) continue;
+      seenPairs.add(key);
+    }
+
     const card = document.createElement('div');
     card.className = 'card';
     card.__data = d;
@@ -1239,11 +1248,9 @@ function renderPickerGrid(){
     card.addEventListener('click', () => {
       if (offPicks.some(p => p.id === d.id)) return;
       if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
-
       offPicks.push(d);
       renderOffPicks();
 
-      // si une recherche était saisie, on reset et on rerend
       if ((inp.value || '').trim() !== '') {
         inp.value = '';
         renderPickerGrid();
