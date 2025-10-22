@@ -603,3 +603,12 @@ textarea{ min-height:100px; border-radius:12px; }
   display:flex; flex-wrap:wrap; gap:10px;
   min-height:58px; margin-top:6px; width:100%;
 }
+
+/* ====== Loader à points (grille) ====== */
+.grid-loading{
+  display:flex; align-items:center; justify-content:center;
+  min-height: 150px; text-align:center; color: var(--hint);
+  opacity:.9; padding: 16px;
+}
+.grid-loading .dots{ display:inline-block; width: 1.6em; text-align:left; }
+
