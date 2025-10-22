@@ -1293,7 +1293,7 @@ function openOffPicker(defKey, offsListEl, onClose){
   const grid = document.createElement('div'); 
   grid.className='monster-grid';
   
-  gwrap.style.flex = '0 0 auto';
+  gwrap.style.flex = '1 1 auto';
   gwrap.style.minHeight = '80px';
   gwrap.style.height = '60vh';                  // ← fixe (pas de rétrécissement)
   gwrap.style.removeProperty('height');
