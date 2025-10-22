@@ -806,6 +806,71 @@ sendBtn?.addEventListener('click', async () => {
 });
 
 // =====================
+// DATA LAYER (fetch + cache mémoire)
+// =====================
+function isFresh(ts){ return (Date.now() - ts) < CACHE_TTL_MS; }
+
+async function fetchStats(force = false){
+  // 0) instant LS
+  if (!force && !cache.stats.data){
+    const ls = swrGetLS('stats', 5*60*1000); // 5 min
+    if (ls?.ok){ cache.stats.data = ls; cache.stats.ts = Date.now(); }
+  }
+
+  // 1) mémoire fraîche
+  if (!force && cache.stats.data && isFresh(cache.stats.ts)) return cache.stats.data;
+  if (cache.stats.inflight) return cache.stats.inflight;
+
+  // 2) réseau dédupliqué
+  const p = apiPostDedup({ mode:'stats', token: TOKEN })
+    .then(res => {
+      cache.stats.inflight = null;
+      if (!res?.ok) throw new Error(res?.error || 'Erreur stats');
+      cache.stats.data = res; cache.stats.ts = Date.now();
+      swrSetLS('stats', res);      // SWR: on persiste
+      return res;
+    })
+    .catch(err => {
+      cache.stats.inflight = null;
+      console.error('[fetchStats]', err);
+      return cache.stats.data || { ok:true, stats: [] }; // fallback
+    });
+
+  cache.stats.inflight = p;
+  return p;
+}
+
+async function fetchHandled(force = false){
+  // 0) instant LS
+  if (!force && !cache.handled.data){
+    const ls = swrGetLS('handled', 5*60*1000);
+    if (ls?.ok){ cache.handled.data = ls; cache.handled.ts = Date.now(); }
+  }
+
+  // 1) mémoire fraîche
+  if (!force && cache.handled.data && isFresh(cache.handled.ts)) return cache.handled.data;
+  if (cache.handled.inflight) return cache.handled.inflight;
+
+  // 2) réseau dédupliqué
+  const p = apiPostDedup({ mode:'handled', token: TOKEN })
+    .then(res => {
+      cache.handled.inflight = null;
+      if (!res?.ok) throw new Error(res?.error || 'Erreur handled');
+      cache.handled.data = res; cache.handled.ts = Date.now();
+      swrSetLS('handled', res);    // SWR
+      return res;
+    })
+    .catch(err => {
+      cache.handled.inflight = null;
+      console.error('[fetchHandled]', err);
+      return cache.handled.data || { ok:true, handled: [] };
+    });
+
+  cache.handled.inflight = p;
+  return p;
+}
+
+// =====================
 // RENDER LAYER (séparée)
 // =====================
 function renderStats(data){
