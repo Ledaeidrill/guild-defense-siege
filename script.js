@@ -1211,29 +1211,25 @@ function openOffPicker(defKey, offsListEl, onClose){
     });
   }
 
-  // ====== RENDER GRID ======
+// ====== RENDER GRID ======
 function renderPickerGrid(){
-  const grid = picker.querySelector('.monster-grid');
-  const inp  = picker.querySelector('#search');
-
+  // on utilise les variables fermées 'grid' et 'inp' définies plus haut
   const q = (inp.value || '').trim().toLowerCase();
 
-  // 1) Construire la liste filtrée (adapte si tu as déjà un filtre ailleurs)
   const list = q
-    ? MONSTERS.filter(x => (x.name||'').toLowerCase().includes(q))
-    : MONSTERS;
+    ? (window.MONSTERS || []).filter(x => (x.name || '').toLowerCase().includes(q))
+    : (window.MONSTERS || []);
 
-  // 2) (Re)rendu
   grid.innerHTML = '';
   const frag = document.createDocumentFragment();
 
-  for (const d of list) {                 // ← d = monstre courant
+  for (const d of list) {
     const card = document.createElement('div');
     card.className = 'card';
     card.__data = d;
 
-    const v = renderMergedVisual(d);      // ← visuels + titres unifiés
-    card.title = v.title;                 // tooltip SW / Collab
+    const v = renderMergedVisual(d);
+    card.title = v.title;
 
     card.innerHTML = `
       ${v.htmlIcon}
@@ -1247,7 +1243,7 @@ function renderPickerGrid(){
       offPicks.push(d);
       renderOffPicks();
 
-      // Ne refresh la grille QUE si l'utilisateur avait saisi quelque chose
+      // si une recherche était saisie, on reset et on rerend
       if ((inp.value || '').trim() !== '') {
         inp.value = '';
         renderPickerGrid();
@@ -1260,7 +1256,7 @@ function renderPickerGrid(){
   grid.appendChild(frag);
 }
 
-  inp.addEventListener('input', renderPickerGrid);
+  inp.addEventListener('aria-label', renderPickerGrid);
   renderPickerGrid(); renderOffPicks();
 
   // ====== Validation
