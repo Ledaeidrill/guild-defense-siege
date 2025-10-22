@@ -601,7 +601,7 @@ textarea{ min-height:100px; border-radius:12px; }
 /* 5) Zone de sélection toujours visible */
 #picks, .picks{
   display:flex; flex-wrap:wrap; gap:10px;
-  min-height:72px; margin-top:6px; width:100%;
+  min-height:85px; margin-top:6px; width:100%;
 }
 
 /* ====== Loader à points (grille) ====== */
