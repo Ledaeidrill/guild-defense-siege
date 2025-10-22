@@ -6,6 +6,8 @@ const TOKEN = 'Chaos_Destiny';
 const ADMIN_TOKEN_PARAM = new URL(location.href).searchParams.get('admin') || '';
 let IS_ADMIN = false;                        // état unique d’admin pour TOUTE l’app
 const isAdmin = () => IS_ADMIN;              // on ne lit plus l’URL directement
+let _firstGrid = true;
+const nextFrame = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
 // Cache mémoire (masque la latence du réseau)
 const CACHE_TTL_MS = 60000; // 60 s
@@ -594,15 +596,19 @@ function makeDotsLoader(label = 'Chargement', className = 'grid-loading') {
 const grid   = qs('#monster-grid');
 const search = qs('#search');
 
-function renderGrid() {
-  const box = document.querySelector('.grid-scroll'); // conteneur de la grille
+async function renderGrid() {
+  const box = document.querySelector('.grid-scroll');
   const loader = makeDotsLoader('Chargement');
   box.replaceChildren(loader.el);
-  loader.show(180);
-  
+
+  // 0 ms au premier rendu (on force une frame visible), 180 ms ensuite
+  loader.show(_firstGrid ? 0 : 180);
+  if (_firstGrid) { await nextFrame(); }   // laisse le temps au browser d’afficher le loader
+
   const q = (search?.value||'').trim();
   if (!grid) return;
   grid.innerHTML = '';
+
   const frag = document.createDocumentFragment();
   const seenPairs = new Set();
 
@@ -619,13 +625,14 @@ function renderGrid() {
       }
       frag.appendChild(makeCard(m));
     });
-  
+
   const gridEl = document.createElement('div');
   gridEl.className = 'monster-grid';
   gridEl.appendChild(frag);
 
   loader.hide();
   box.replaceChildren(gridEl);
+  _firstGrid = false;
 }
 
 function matchesQuery(m, qRaw){
