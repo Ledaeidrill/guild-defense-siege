@@ -485,9 +485,9 @@ function cardHtmlByName(name){
   const d = findMonsterByName(name) || { name, icon:'', element:'' };
   const v = renderMergedVisual(d);
   return `
-    <div class="monster-card" title="${esc(vis.title)}" aria-label="${esc(vis.title)}">
-      ${vis.htmlIcon}
-      <div class="name" title="${esc(vis.title)}">${esc(vis.label)}</div>
+    <div class="monster-card" title="${esc(v.title)}" aria-label="${esc(v.title)}">
+      ${v.htmlIcon}
+      <div class="name" title="${esc(v.title)}">${esc(v.label)}</div>
     </div>`;
 }
 
@@ -1232,14 +1232,13 @@ function openOffPicker(defKey, offsListEl, onClose){
   
     // 3) garder un représentant par bucket (2A > éveillé > base), puis trier
     const list = [...buckets.values()].map(pickPreferred).sort(monsterComparator);
-  
+    
+    const v = renderMergedVisual(m);
     for (const m of list) {
       const card = document.createElement('div');
       card.className = 'card';
       card.title = v.name;
       card.__data = m;
-  
-      const v = renderMergedVisual(m);
       card.innerHTML = `
         ${v.htmlIcon}
         <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
