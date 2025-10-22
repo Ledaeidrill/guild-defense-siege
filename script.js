@@ -120,50 +120,48 @@ async function openOffsModal(defKey){
   if (offsTitle) offsTitle.textContent = 'Offenses — ' + (defKey || '');
   showOffsModal();
 
-  // 1) Placeholder + key
-  offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Chargement…</div></div>';
+  // 1) Loader animé + key
+  const loader = makeDotsLoader(offsListEl, 120);   // ← wraps la liste
+  offsListEl.replaceChildren();                     // vide la liste avant de loader
+  loader.show(120);                                 // “Chargement . .. ...”
   offsListEl.dataset.defKey = defKey || '';
 
-  // 2) Créer le bouton d’ajout IMMÉDIATEMENT (anti-flash)
-  //    (caché par défaut; visible instant si admin_token dans l’URL)
+  // 2) Bouton “+ Ajouter” (inchangé)
   qsa('#offsAddWrap, [data-role="offs-add"]').forEach(el => el.remove());
-
   const addWrap = document.createElement('div');
   addWrap.id = 'offsAddWrap';
   addWrap.setAttribute('data-role', 'offs-add');
   addWrap.style.display = 'flex';
   addWrap.style.justifyContent = 'center';
   addWrap.style.marginTop = '10px';
-  addWrap.style.minHeight = '48px'; // réserve la place (anti-saut visuel)
-
+  addWrap.style.minHeight = '48px';
   const addBtn = document.createElement('button');
   addBtn.className = 'btn btn--primary';
   addBtn.type = 'button';
   addBtn.textContent = '+ Ajouter une offense';
-  addBtn.hidden = true; // par défaut : caché
-  if (ADMIN_TOKEN_PARAM && ADMIN_TOKEN_PARAM.trim()) addBtn.hidden = false; // hint local sûr
-
+  addBtn.hidden = !(ADMIN_TOKEN_PARAM && ADMIN_TOKEN_PARAM.trim());
   addBtn.onclick = () => openOffPicker(defKey, offsListEl, () => {});
   addWrap.appendChild(addBtn);
-  // On place le bouton TÔT (sous la liste) pour réserver l’espace
   offsListEl.parentElement.appendChild(addWrap);
 
-  // 3) Lancer admin + offs en parallèle
+  // 3) admin + offs en parallèle
   const pAdmin = detectAdmin().catch(() => false);
   const pOffs  = apiGetOffs(defKey);
 
-  // 4) Afficher la liste dès que possible
+  // 4) Afficher la liste quand prête
   try{
     const res = await pOffs;
     if (!res?.ok) throw new Error(res?.error || 'Erreur');
+    loader.hide();
     renderOffsList(offsListEl, res.offs || []);
   }catch(e){
+    loader.hide();
     offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Impossible de charger les offenses.</div></div>';
   }
 
-  // 5) Quand la réponse admin arrive → (dé)masquer le bouton
+  // 5) Afficher / cacher le bouton selon admin
   try{
-    const _ = await pAdmin; // detectAdmin met à jour IS_ADMIN
+    await pAdmin;
     addBtn.hidden = !IS_ADMIN;
   }catch{
     addBtn.hidden = true;
@@ -606,7 +604,11 @@ const search = qs('#search');
 const gridLoader = makeDotsLoader(qs('.grid-scroll'));   // ← la fenêtre scrollée
 
 function renderGrid() {
-  gridLoader.show(0);                                   // n’apparait que si c’est un peu long
+  const box = document.querySelector('.grid-scroll'); // conteneur de la grille
+  const loader = makeDotsLoader('Chargement');
+  box.replaceChildren(loader.el);
+  loader.show(180);
+  
   const q = (search?.value||'').trim();
   if (!grid) return;
   grid.innerHTML = '';
@@ -628,7 +630,11 @@ function renderGrid() {
     });
 
   grid.appendChild(frag);
-  gridLoader.hide();                                      // ← on retire le loader
+  loader.hide();
+  const grid = document.createElement('div');
+  grid.className = 'monster-grid';
+  // grid.append(...cards);    // ajoute tes cartes
+  box.replaceChildren(grid);
 }
 
 function matchesQuery(m, qRaw){
@@ -1123,15 +1129,25 @@ tabReport?.addEventListener('click', () => activateTab(tabReport, pageReport));
 
 tabStats?.addEventListener('click', async () => {
   activateTab(tabStats, pageStats);
-  if (cache.stats.data) renderStats(cache.stats.data); // Rendu instantané
-  const fresh = await fetchStats(); // Refresh silencieux
+  const box = document.getElementById('stats');
+  if (!box) return;
+  const loader = makeDotsLoader(box, 140);
+  box.replaceChildren();       // vide la zone
+  loader.show(120);            // “Chargement . .. ...” (après 120 ms)
+  const fresh = await fetchStats();  // réseau + SWR
+  loader.hide();
   renderStats(fresh);
 });
 
 tabDone?.addEventListener('click', async () => {
   activateTab(tabDone, pageDone);
-  if (cache.handled.data) renderHandled(cache.handled.data);
+  const box = document.getElementById('done');
+  if (!box) return;
+  const loader = makeDotsLoader(box, 140);
+  box.replaceChildren();       // vide la zone
+  loader.show(120);
   const fresh = await fetchHandled();
+  loader.hide();
   renderHandled(fresh);
 });
 
@@ -1140,12 +1156,34 @@ document.addEventListener('DOMContentLoaded', async () => {
   await detectAdmin();
   buildStrictCollabPairs();          // construit _pairById (SW ↔ collab)
   renderGrid();                      // ← RENDRE LA GRILLE APRÈS la construction
+  
+  // Si l’onglet est affiché, on montre le loader le temps du fetch
+  if (!pageStats.classList.contains('hidden')) {
+    const box = document.getElementById('stats');
+    const loader = makeDotsLoader(box, 140);
+    box.replaceChildren();
+    loader.show(120);
+    const d = await fetchStats();
+    loader.hide();
+    renderStats(d);
+  } else {
+    // sinon, prefetch silencieux
+    fetchStats().catch(()=>{});
+  }
 
-  fetchStats().then(d => { if (!pageStats.classList.contains('hidden')) renderStats(d); });
-  fetchHandled().then(d => { if (!pageDone.classList.contains('hidden')) renderHandled(d); });
+  if (!pageDone.classList.contains('hidden')) {
+    const box = document.getElementById('done');
+    const loader = makeDotsLoader(box, 140);
+    box.replaceChildren();
+    loader.show(120);
+    const d = await fetchHandled();
+    loader.hide();
+    renderHandled(d);
+  } else {
+    fetchHandled().catch(()=>{});
+  }
+
 });
-
-
 
 // =====================
 // Offs Modal
@@ -1312,7 +1350,10 @@ function openOffPicker(defKey, offsListEl, onClose){
 
 // ====== RENDER GRID (Offense picker)
 function renderPickerGrid(){
-  pickerLoader.show(0);                 // ← pareil : n’apparait que si c’est un peu long
+  const loader = makeDotsLoader('Chargement');
+  gwrap.replaceChildren(loader.el);
+  loader.show(180);
+  
   const q = (inp.value || '').trim();
   grid.innerHTML = '';
 
@@ -1347,7 +1388,11 @@ function renderPickerGrid(){
   }
 
   grid.appendChild(frag);
-  pickerLoader.hide();                    // ← retire le loader
+  loader.hide();
+  const grid = document.createElement('div');
+  grid.className = 'monster-grid';
+  // grid.append(...cards);
+  gwrap.replaceChildren(grid);
 }
 
   // Actions (Valider + spinner)
