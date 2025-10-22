@@ -519,7 +519,7 @@ textarea{ min-height:100px; border-radius:12px; }
 /* Défense : la fenêtre suit le contenu sans à-coups */
 .grid-scroll{
   max-height: 68vh;        /* limite haute */
-  min-height: 180px;       /* garde une zone visible quand il reste peu d’items */
+  min-height: 80px;       /* garde une zone visible quand il reste peu d’items */
   scrollbar-gutter: stable both-edges; /* évite le micro-shift lié à la scrollbar */
 }
 
