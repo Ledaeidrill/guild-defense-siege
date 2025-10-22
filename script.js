@@ -707,30 +707,6 @@ function monsterComparator(a, b){
   return a.name.localeCompare(b.name,'en',{sensitivity:'base'});
 }
 
-function renderGrid() {
-  const q = (search?.value||'').trim();
-  if (!grid) return;
-  grid.innerHTML = '';
-  const frag = document.createDocumentFragment();
-  const seenPairs = new Set(); // SW-family + element
-
-  (window.MONSTERS || [])
-    .filter(m => matchesQuery(m, q))
-    .filter(m => !shouldHideInGrid(m))
-    .sort(monsterComparator)
-    .forEach(m => {
-      const duo = findMappedPair(m);
-      if (duo) {
-        const key = `${duo.sw.family_id || nrm(duo.sw.name)}|${nrm(duo.sw.element)}`;
-        if (seenPairs.has(key)) return;      // already rendered this pair
-        seenPairs.add(key);
-      }
-      frag.appendChild(makeCard(m));
-    });
-
-  grid.appendChild(frag);
-}
-
 // Débounce recherche (léger)
 let _searchTimer;
 search?.addEventListener('input', () => { clearTimeout(_searchTimer); _searchTimer = setTimeout(renderGrid, 150); });
@@ -1333,7 +1309,7 @@ function openOffPicker(defKey, offsListEl, onClose){
 
 // ====== RENDER GRID (Offense picker)
 function renderPickerGrid(){
-  pickerLoader.show(200);                 // ← pareil : n’apparait que si c’est un peu long
+  pickerLoader.show(20);                 // ← pareil : n’apparait que si c’est un peu long
   const q = (inp.value || '').trim();
   grid.innerHTML = '';
 
@@ -1413,58 +1389,6 @@ function renderPickerGrid(){
       picksBox.appendChild(div);
     });
   }
-
-// ====== RENDER GRID (Offense picker) — aligné sur la grille Défense
-function renderPickerGrid(){
-  const q = (inp.value || '').trim();   // on garde la même logique que renderGrid()
-  grid.innerHTML = '';
-
-  const frag = document.createDocumentFragment();
-  const seenPairs = new Set();          // dédup SW/Collab (même mécanisme que Défense)
-
-  const list = (window.MONSTERS || [])
-    .filter(m => matchesQuery(m, q))        // ✅ même filtre que Défense
-    .filter(m => !shouldHideInGrid(m))      // ✅ cache les doublons collab
-    .sort(monsterComparator);               // ✅ même comparateur
-
-  for (const d of list) {
-    // dédup d’un duo déjà rendu (copié de renderGrid)
-    const duo = findMappedPair(d);
-    if (duo) {
-      const key = `${duo.sw.family_id || nrm(duo.sw.name)}|${nrm(duo.sw.element)}`;
-      if (seenPairs.has(key)) continue;
-      seenPairs.add(key);
-    }
-
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.__data = d;
-
-    const v = renderMergedVisual(d);
-    card.title = v.title;
-
-    card.innerHTML = `
-      ${v.htmlIcon}
-      <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
-    `;
-
-    card.addEventListener('click', () => {
-      if (offPicks.some(p => p.id === d.id)) return;
-      if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
-      offPicks.push(d);
-      renderOffPicks();
-
-      if ((inp.value || '').trim() !== '') {
-        inp.value = '';
-        renderPickerGrid();
-      }
-    });
-
-    frag.appendChild(card);
-  }
-
-  grid.appendChild(frag);
-}
 
   inp.addEventListener('input', renderPickerGrid);
   renderPickerGrid(); renderOffPicks();
