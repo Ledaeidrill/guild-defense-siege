@@ -506,3 +506,8 @@ textarea{ min-height:100px; border-radius:12px; }
   line-height: 1.25;
   padding-bottom: 0.15em;
 }
+
+/* Picker Offense : layout colonne + zone liste scrollable */
+.modal--picker .picker { display:flex; flex-direction:column; max-height:70vh; }
+.modal--picker .picker-grid { flex:1; min-height:280px; max-height:60vh; overflow:auto; }
+.modal--picker .picker-actions { position:sticky; bottom:0; padding:8px 0; background:inherit; }
