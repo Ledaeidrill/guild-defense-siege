@@ -1295,7 +1295,6 @@ function openOffPicker(defKey, offsListEl, onClose){
   
   gwrap.style.flex = '1 1 auto';
   gwrap.style.minHeight = '80px';
-  gwrap.style.height = '60vh';                  // ← fixe (pas de rétrécissement)
   gwrap.style.removeProperty('height');
   gwrap.style.overflow = 'auto';
   gwrap.style.scrollbarGutter = 'stable both-edges'; // ← évite le petit “coup” quand la barre apparaît/disparaît
