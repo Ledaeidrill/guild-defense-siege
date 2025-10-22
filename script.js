@@ -603,7 +603,7 @@ const search = qs('#search');
 const gridLoader = makeDotsLoader(qs('.grid-scroll'));   // ← la fenêtre scrollée
 
 function renderGrid() {
-  gridLoader.show(20);                                   // n’apparait que si c’est un peu long
+  gridLoader.show(0);                                   // n’apparait que si c’est un peu long
   const q = (search?.value||'').trim();
   if (!grid) return;
   grid.innerHTML = '';
@@ -1309,7 +1309,7 @@ function openOffPicker(defKey, offsListEl, onClose){
 
 // ====== RENDER GRID (Offense picker)
 function renderPickerGrid(){
-  pickerLoader.show(20);                 // ← pareil : n’apparait que si c’est un peu long
+  pickerLoader.show(0);                 // ← pareil : n’apparait que si c’est un peu long
   const q = (inp.value || '').trim();
   grid.innerHTML = '';
 
