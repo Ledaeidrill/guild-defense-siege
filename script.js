@@ -1212,53 +1212,53 @@ function openOffPicker(defKey, offsListEl, onClose){
   }
 
   // ====== RENDER GRID ======
-  function renderPickerGrid(){
-    const q = (inp.value||'').trim().toLowerCase();
-    grid.textContent = '';
-    const frag = document.createDocumentFragment();
-  
-    // 1) filtre recherche inchangé
-    const raw = (window.MONSTERS||[])
-      .filter(m => !q || [m.name, m.unawakened_name, m.element, ...(m.aliases||[])]
-        .some(s => (s||'').toLowerCase().includes(q)));
-  
-    // 2) regrouper par (family_id, element) pour éviter les doublons
-    const buckets = new Map();
-    for (const m of raw) {
-      const k = famKey(m);
-      const arr = buckets.get(k);
-      if (arr) arr.push(m); else buckets.set(k, [m]);
-    }
-  
-    // 3) garder un représentant par bucket (2A > éveillé > base), puis trier
-    const list = [...buckets.values()].map(pickPreferred).sort(monsterComparator);
-    
-    const v = renderMergedVisual(m);
-    for (const m of list) {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.title = v.name;
-      card.__data = m;
-      card.innerHTML = `
-        ${v.htmlIcon}
-        <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
-      `;
-      card.addEventListener('click', () => {
-        if (offPicks.some(p => p.id === m.id)) return;
-        if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
-        offPicks.push(m);
-        renderOffPicks();
-        
-        // Ne refresh la grille QUE si l'utilisateur avait saisi quelque chose
-        if ((inp.value || '').trim() !== '') {
-          inp.value = '';
-          renderPickerGrid();
-        } 
-      });
-      frag.appendChild(card);
-    }
-    grid.appendChild(frag);
+function renderPickerGrid(){
+  const grid = picker.querySelector('.monster-grid');
+  const inp  = picker.querySelector('#search');
+
+  const q = (inp.value || '').trim().toLowerCase();
+
+  // 1) Construire la liste filtrée (adapte si tu as déjà un filtre ailleurs)
+  const list = q
+    ? MONSTERS.filter(x => (x.name||'').toLowerCase().includes(q))
+    : MONSTERS;
+
+  // 2) (Re)rendu
+  grid.innerHTML = '';
+  const frag = document.createDocumentFragment();
+
+  for (const d of list) {                 // ← d = monstre courant
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.__data = d;
+
+    const v = renderMergedVisual(d);      // ← visuels + titres unifiés
+    card.title = v.title;                 // tooltip SW / Collab
+
+    card.innerHTML = `
+      ${v.htmlIcon}
+      <span class="name" title="${esc(v.title)}">${esc(v.label)}</span>
+    `;
+
+    card.addEventListener('click', () => {
+      if (offPicks.some(p => p.id === d.id)) return;
+      if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
+
+      offPicks.push(d);
+      renderOffPicks();
+
+      // Ne refresh la grille QUE si l'utilisateur avait saisi quelque chose
+      if ((inp.value || '').trim() !== '') {
+        inp.value = '';
+        renderPickerGrid();
+      }
+    });
+
+    frag.appendChild(card);
   }
+
+  grid.appendChild(frag);
+}
 
   inp.addEventListener('input', renderPickerGrid);
   renderPickerGrid(); renderOffPicks();
