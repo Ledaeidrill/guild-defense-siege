@@ -806,34 +806,6 @@ sendBtn?.addEventListener('click', async () => {
 });
 
 // =====================
-// DATA LAYER (fetch + cache mémoire)
-// =====================
-const inflightMap = new Map(); // key (payload string) -> Promise
-
-function swrGetLS(key, maxAgeMs){
-  try{
-    const raw = localStorage.getItem(key);
-    if (!raw) return null;
-    const { ts, data } = JSON.parse(raw);
-    if ((Date.now() - ts) > maxAgeMs) return null;
-    return data;
-  }catch{ return null; }
-}
-function swrSetLS(key, data){
-  try{ localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data })); }catch{}
-}
-
-// Wrap pour dédupliquer des POST identiques (même payload)
-async function apiPostDedup(payloadObj, opts){
-  const payload = JSON.stringify(payloadObj);
-  const k = payload; // stable key
-  if (inflightMap.has(k)) return inflightMap.get(k);
-  const p = apiPost(payloadObj, opts).finally(()=> inflightMap.delete(k));
-  inflightMap.set(k, p);
-  return p;
-}
-
-// =====================
 // RENDER LAYER (séparée)
 // =====================
 function renderStats(data){
