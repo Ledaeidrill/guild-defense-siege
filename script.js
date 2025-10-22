@@ -628,13 +628,13 @@ function renderGrid() {
       }
       frag.appendChild(makeCard(m));
     });
+  
+  const gridEl = document.createElement('div');
+  gridEl.className = 'monster-grid';
+  gridEl.appendChild(frag);
 
-  grid.appendChild(frag);
   loader.hide();
-  const grid = document.createElement('div');
-  grid.className = 'monster-grid';
-  // grid.append(...cards);    // ajoute tes cartes
-  box.replaceChildren(grid);
+  box.replaceChildren(gridEl);
 }
 
 function matchesQuery(m, qRaw){
@@ -1387,12 +1387,12 @@ function renderPickerGrid(){
     frag.appendChild(card);
   }
 
-  grid.appendChild(frag);
+  const gridEl = document.createElement('div');
+  gridEl.className = 'monster-grid';
+  gridEl.appendChild(frag);
+
   loader.hide();
-  const grid = document.createElement('div');
-  grid.className = 'monster-grid';
-  // grid.append(...cards);
-  gwrap.replaceChildren(grid);
+  gwrap.replaceChildren(gridEl);
 }
 
   // Actions (Valider + spinner)
