@@ -559,12 +559,74 @@ const MONS_BY_NAME_EL = new Map(
 const findByNameEl = (n, el) =>
   MONS_BY_NAME_EL.get(`${(n||'').toLowerCase()}|${(el||'').toLowerCase()}`) || null;
 
+// Loader "Chargement." -> ".." -> "..." (réutilisable)
+function makeDotsLoader(container, minHeight = 150){
+  let el = null, showTimer = null, tick = null;
+
+  function show(delay = 180){
+    clearTimeout(showTimer);
+    if (el) return;                               // déjà visible
+    showTimer = setTimeout(() => {
+      if (el) return;
+      el = document.createElement('div');
+      el.className = 'grid-loading';
+      el.setAttribute('role','status');
+      el.setAttribute('aria-live','polite');
+      el.style.minHeight = `${minHeight}px`;
+      el.innerHTML = `<span class="label">Chargement</span><span class="dots">.</span>`;
+      container.appendChild(el);
+
+      let i = 1;
+      tick = setInterval(() => {
+        i = (i % 3) + 1;                           // 1 -> 2 -> 3 -> 1…
+        el.querySelector('.dots').textContent = '.'.repeat(i);
+      }, 400);
+    }, delay);
+  }
+
+  function hide(){
+    clearTimeout(showTimer);
+    if (tick) clearInterval(tick);
+    tick = null; showTimer = null;
+    if (el) { el.remove(); el = null; }
+  }
+
+  return { show, hide };
+}
 
 // =====================
 // GRILLE
 // =====================
 const grid   = qs('#monster-grid');
 const search = qs('#search');
+
+const gridLoader = makeDotsLoader(qs('.grid-scroll'));   // ← la fenêtre scrollée
+
+function renderGrid() {
+  gridLoader.show(200);                                   // n’apparait que si c’est un peu long
+  const q = (search?.value||'').trim();
+  if (!grid) return;
+  grid.innerHTML = '';
+  const frag = document.createDocumentFragment();
+  const seenPairs = new Set();
+
+  (window.MONSTERS || [])
+    .filter(m => matchesQuery(m, q))
+    .filter(m => !shouldHideInGrid(m))
+    .sort(monsterComparator)
+    .forEach(m => {
+      const duo = findMappedPair(m);
+      if (duo) {
+        const key = `${duo.sw.family_id || nrm(duo.sw.name)}|${nrm(duo.sw.element)}`;
+        if (seenPairs.has(key)) return;
+        seenPairs.add(key);
+      }
+      frag.appendChild(makeCard(m));
+    });
+
+  grid.appendChild(frag);
+  gridLoader.hide();                                      // ← on retire le loader
+}
 
 function matchesQuery(m, qRaw){
   const q = normalize(qRaw);
@@ -1266,6 +1328,48 @@ function openOffPicker(defKey, offsListEl, onClose){
 
   gwrap.appendChild(grid);   // ← insère la grille dans le conteneur
   wrap.appendChild(gwrap);   // ← insère le conteneur dans la modale (avant la barre d’actions)
+
+  const pickerLoader = makeDotsLoader(gwrap, 180);
+
+// ====== RENDER GRID (Offense picker)
+function renderPickerGrid(){
+  pickerLoader.show(200);                 // ← pareil : n’apparait que si c’est un peu long
+  const q = (inp.value || '').trim();
+  grid.innerHTML = '';
+
+  const frag = document.createDocumentFragment();
+  const seenPairs = new Set();
+
+  const list = (window.MONSTERS || [])
+    .filter(m => matchesQuery(m, q))
+    .filter(m => !shouldHideInGrid(m))
+    .sort(monsterComparator);
+
+  for (const d of list) {
+    const duo = findMappedPair(d);
+    if (duo) {
+      const key = `${duo.sw.family_id || nrm(duo.sw.name)}|${nrm(duo.sw.element)}`;
+      if (seenPairs.has(key)) continue;
+      seenPairs.add(key);
+    }
+    const card = document.createElement('div');
+    card.className = 'card'; card.__data = d;
+    const v = renderMergedVisual(d);
+    card.title = v.title;
+    card.innerHTML = `${v.htmlIcon}<span class="name" title="${esc(v.title)}">${esc(v.label)}</span>`;
+    card.addEventListener('click', () => {
+      if (offPicks.some(p => p.id === d.id)) return;
+      if (offPicks.length >= 3) { toast('Tu as déjà 3 monstres.'); return; }
+      offPicks.push(d);
+      renderOffPicks();
+      if ((inp.value||'').trim() !== '') { inp.value=''; renderPickerGrid(); }
+    });
+    frag.appendChild(card);
+  }
+
+  grid.appendChild(frag);
+  pickerLoader.hide();                    // ← retire le loader
+}
 
   // Actions (Valider + spinner)
   const actions = document.createElement('div'); actions.className='picker-actions';
