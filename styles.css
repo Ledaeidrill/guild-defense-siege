@@ -561,3 +561,46 @@ textarea{ min-height:100px; border-radius:12px; }
   display:flex; flex-wrap:wrap; gap:10px;
   min-height:58px; margin-top:6px; width:100%;
 }
+
+/* === OFFENSE : modale ancrée en haut, liste stable === */
+
+/* 1) La modale du picker s’aligne en haut (plus de saut de recentrage) */
+.modal.modal--picker{
+  align-items: flex-start;   /* au lieu de center */
+  justify-content: center;   /* reste centré horizontalement */
+}
+.modal--picker .modal__dialog{
+  margin-top: 6vh;           /* “padding” visuel depuis le haut */
+}
+
+/* 2) Le body ne scrolle pas, c’est la grille qui scrolle */
+.modal--picker .modal__body{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;          /* important : pas de scroll sur le body */
+}
+
+/* 3) Conteneur interne du picker : hauteur bornée mais pas “figée” */
+.modal--picker .picker{
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh;          /* ne déborde pas l’écran */
+  /* pas de height fixe ⇒ la liste peut “se rapprocher” de l’input */
+}
+
+/* 4) La liste scrolle en elle-même, sans modifier la hauteur du reste */
+.modal--picker .picker-grid{
+  flex: 1;
+  min-height: 240px;         /* visible même avec peu de résultats */
+  max-height: 60vh;          /* scrolle si long */
+  overflow: auto;
+  scrollbar-gutter: stable both-edges; /* pas de micro-shift quand la barre apparaît */
+  min-width: 0;              /* par sécurité en flex */
+}
+
+/* 5) Zone de sélection toujours visible */
+#picks, .picks{
+  display:flex; flex-wrap:wrap; gap:10px;
+  min-height:58px; margin-top:6px; width:100%;
+}
+
