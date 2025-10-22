@@ -540,3 +540,32 @@ textarea{ min-height:100px; border-radius:12px; }
   display:flex; flex-wrap:wrap; gap:10px;
   min-height:58px; margin-top:6px; width:100%;
 }
+
+/* === MODALE OFFENSE : même comportement que Défense === */
+.modal--picker .modal__body{
+  display:flex;               /* le body devient flex-col */
+  flex-direction:column;
+  overflow:visible;           /* on laisse scroller la grille interne, pas le body */
+}
+
+.modal--picker .picker{
+  flex:1;                     /* le bloc interne prend la hauteur dispo */
+  display:flex;
+  flex-direction:column;
+  min-height:40vh;            /* assure une vraie zone visible */
+  max-height:70vh;            /* ne déborde pas l’écran */
+}
+
+.modal--picker .picker-grid{
+  flex:1;
+  min-height:240px;           /* visible même sans résultats */
+  max-height:60vh;            /* scrolle à l’intérieur si long */
+  overflow:auto;
+  scrollbar-gutter: stable both-edges;
+}
+
+/* Zone des picks bien visible */
+#picks, .picks{
+  display:flex; flex-wrap:wrap; gap:10px;
+  min-height:58px; margin-top:6px; width:100%;
+}
