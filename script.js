@@ -1230,6 +1230,9 @@ function openOffPicker(defKey, offsListEl, onClose){
 
   // --- Contenu
   const wrap = document.createElement('div'); wrap.className = 'picker'; body.appendChild(wrap);
+  wrap.style.display = 'flex';
+  wrap.style.flexDirection = 'column';
+  wrap.style.maxHeight = '70vh'; // évite que la modale déborde trop
 
   const pickTitle = document.createElement('div'); pickTitle.className = 'picker-title';
   pickTitle.textContent = 'Sélectionne 3 monstres';
@@ -1247,6 +1250,13 @@ function openOffPicker(defKey, offsListEl, onClose){
   // Grille
   const gwrap = document.createElement('div'); gwrap.className='picker-grid';
   const grid = document.createElement('div'); grid.className='monster-grid';
+  gwrap.style.flex = '1';
+  gwrap.style.minHeight = '280px'; // zone visible mini (adapter si tu veux)
+  gwrap.style.maxHeight = '60vh';  // limite haute
+  gwrap.style.overflow = 'auto';   // → la liste scrolle "en elle-même"
+  gwrap.style.border = '1px solid rgba(255,255,255,0.07)'; // optionnel, lisible
+  gwrap.style.borderRadius = '8px';
+  gwrap.style.padding = '6px';
   gwrap.appendChild(grid); wrap.appendChild(gwrap);
 
   // Actions (Valider + spinner)
