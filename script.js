@@ -559,40 +559,43 @@ const MONS_BY_NAME_EL = new Map(
 const findByNameEl = (n, el) =>
   MONS_BY_NAME_EL.get(`${(n||'').toLowerCase()}|${(el||'').toLowerCase()}`) || null;
 
-// Loader "Chargement." -> ".." -> "..." (réutilisable)
-function makeDotsLoader(container, minHeight = 150){
-  let el = null, showTimer = null, tick = null;
+// === Loader "Chargement." → ".." → "..." (points animés) ===
+function makeDotsLoader(label = 'Chargement', className = 'loading-block') {
+  const el = document.createElement('div');
+  el.className = className;
+  const spanText  = document.createElement('span');
+  const spanDots  = document.createElement('span');
+  spanText.textContent = label;
+  el.append(spanText, spanDots);
 
-  function show(delay = 180){
-    clearTimeout(showTimer);
-    if (el) return;                               // déjà visible
+  let t = 0, timer = null;
+
+  function tick(){
+    t = (t + 1) % 4;              // 0,1,2,3 → 3 = pas de points (petit souffle)
+    spanDots.textContent = '.'.repeat(Math.min(t, 3));
+  }
+
+  let showTimer = null;
+  function show(delayMs = 180) {  // délai pour éviter les flashs
+    hide();
     showTimer = setTimeout(() => {
-      if (el) return;
-      el = document.createElement('div');
-      el.className = 'grid-loading';
-      el.setAttribute('role','status');
-      el.setAttribute('aria-live','polite');
-      el.style.minHeight = `${minHeight}px`;
-      el.innerHTML = `<span class="label">Chargement</span><span class="dots">.</span>`;
-      container.appendChild(el);
-
-      let i = 1;
-      tick = setInterval(() => {
-        i = (i % 3) + 1;                           // 1 -> 2 -> 3 -> 1…
-        el.querySelector('.dots').textContent = '.'.repeat(i);
-      }, 400);
-    }, delay);
+      // démarre vide, puis . .. ...
+      t = 0; spanDots.textContent = '';
+      timer = setInterval(tick, 320); // cadence des points
+      el.style.display = 'flex';
+    }, Math.max(0, delayMs));
   }
 
-  function hide(){
-    clearTimeout(showTimer);
-    if (tick) clearInterval(tick);
-    tick = null; showTimer = null;
-    if (el) { el.remove(); el = null; }
+  function hide() {
+    if (showTimer) { clearTimeout(showTimer); showTimer = null; }
+    if (timer)     { clearInterval(timer);   timer = null; }
+    el.style.display = 'none';
   }
 
-  return { show, hide };
+  hide(); // caché par défaut
+  return { el, show, hide };
 }
+
 
 // =====================
 // GRILLE
