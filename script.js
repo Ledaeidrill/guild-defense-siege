@@ -1236,7 +1236,7 @@ function openOffPicker(defKey, offsListEl, onClose){
     for (const m of list) {
       const card = document.createElement('div');
       card.className = 'card';
-      card.title = m.name;
+      card.title = v.name;
       card.__data = m;
   
       const v = renderMergedVisual(m);
@@ -1255,6 +1255,7 @@ function openOffPicker(defKey, offsListEl, onClose){
           inp.value = '';
           renderPickerGrid();
         } 
+      });
       frag.appendChild(card);
     }
     grid.appendChild(frag);
