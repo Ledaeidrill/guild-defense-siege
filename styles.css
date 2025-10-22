@@ -556,14 +556,6 @@ textarea{ min-height:100px; border-radius:12px; }
   max-height:70vh;            /* ne déborde pas l’écran */
 }
 
-.modal--picker .picker-grid{
-  flex:1;
-  min-height:240px;           /* visible même sans résultats */
-  max-height:60vh;            /* scrolle à l’intérieur si long */
-  overflow:auto;
-  scrollbar-gutter: stable both-edges;
-}
-
 /* Zone des picks bien visible */
 #picks, .picks{
   display:flex; flex-wrap:wrap; gap:10px;
