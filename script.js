@@ -1248,16 +1248,19 @@ function openOffPicker(defKey, offsListEl, onClose){
   row.append(lab, inp); wrap.appendChild(row);
 
   // Grille
-  const gwrap = document.createElement('div'); gwrap.className='picker-grid';
-  const grid = document.createElement('div'); grid.className='monster-grid';
+  const gwrap = document.createElement('div'); 
+  gwrap.className='picker-grid';
+  const grid = document.createElement('div'); 
+  grid.className='monster-grid';
+  
   gwrap.style.flex = '1';
-  gwrap.style.minHeight = '280px'; // zone visible mini (adapter si tu veux)
-  gwrap.style.maxHeight = '60vh';  // limite haute
-  gwrap.style.overflow = 'auto';   // → la liste scrolle "en elle-même"
-  gwrap.style.border = '1px solid rgba(255,255,255,0.07)'; // optionnel, lisible
+  gwrap.style.minHeight = '280px';
+  gwrap.style.height = '60vh';                  // ← fixe (pas de rétrécissement)
+  gwrap.style.overflow = 'auto';
+  gwrap.style.scrollbarGutter = 'stable both-edges'; // ← évite le petit “coup” quand la barre apparaît/disparaît
+  gwrap.style.border = '1px solid rgba(255,255,255,0.07)';
   gwrap.style.borderRadius = '8px';
   gwrap.style.padding = '6px';
-  gwrap.appendChild(grid); wrap.appendChild(gwrap);
 
   // Actions (Valider + spinner)
   const actions = document.createElement('div'); actions.className='picker-actions';
