@@ -529,7 +529,7 @@ textarea{ min-height:100px; border-radius:12px; }
 }
 .modal--picker .picker-grid{
   flex: 1;
-  min-height: 240px;       /* empêche l’effondrement (liste "invisible") */
+  min-height: 100px;       /* empêche l’effondrement (liste "invisible") */
   max-height: 60vh;        /* scrolle dans la grille si besoin */
   overflow: auto;
   scrollbar-gutter: stable both-edges;
