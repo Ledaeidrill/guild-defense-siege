@@ -120,15 +120,39 @@ async function openOffsModal(defKey){
   if (offsTitle) offsTitle.textContent = 'Offenses — ' + (defKey || '');
   showOffsModal();
 
-  // 1) placeholder
+  // 1) Placeholder + key
   offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Chargement…</div></div>';
   offsListEl.dataset.defKey = defKey || '';
 
-  // 2) fire-and-forget: admin + offs en parallèle
-  const pAdmin = detectAdmin().catch(()=>{});
+  // 2) Créer le bouton d’ajout IMMÉDIATEMENT (anti-flash)
+  //    (caché par défaut; visible instant si admin_token dans l’URL)
+  qsa('#offsAddWrap, [data-role="offs-add"]').forEach(el => el.remove());
+
+  const addWrap = document.createElement('div');
+  addWrap.id = 'offsAddWrap';
+  addWrap.setAttribute('data-role', 'offs-add');
+  addWrap.style.display = 'flex';
+  addWrap.style.justifyContent = 'center';
+  addWrap.style.marginTop = '10px';
+  addWrap.style.minHeight = '48px'; // réserve la place (anti-saut visuel)
+
+  const addBtn = document.createElement('button');
+  addBtn.className = 'btn btn--primary';
+  addBtn.type = 'button';
+  addBtn.textContent = '+ Ajouter une offense';
+  addBtn.hidden = true; // par défaut : caché
+  if (ADMIN_TOKEN_PARAM && ADMIN_TOKEN_PARAM.trim()) addBtn.hidden = false; // hint local sûr
+
+  addBtn.onclick = () => openOffPicker(defKey, offsListEl, () => {});
+  addWrap.appendChild(addBtn);
+  // On place le bouton TÔT (sous la liste) pour réserver l’espace
+  offsListEl.parentElement.appendChild(addWrap);
+
+  // 3) Lancer admin + offs en parallèle
+  const pAdmin = detectAdmin().catch(() => false);
   const pOffs  = apiGetOffs(defKey);
 
-  // 3) on affiche les offs dès que possible
+  // 4) Afficher la liste dès que possible
   try{
     const res = await pOffs;
     if (!res?.ok) throw new Error(res?.error || 'Erreur');
@@ -137,32 +161,15 @@ async function openOffsModal(defKey){
     offsListEl.innerHTML = '<div class="offsItem"><div class="meta">Impossible de charger les offenses.</div></div>';
   }
 
-  // 4) quand on sait si on est admin → on affiche le bouton
-  try {
-    await pAdmin;
-    if (IS_ADMIN){
-      // supprime d’éventuels restes
-      qsa('#offsAddWrap, [data-role="offs-add"]').forEach(el => el.remove());
-
-      const addWrap = document.createElement('div');
-      addWrap.id = 'offsAddWrap';
-      addWrap.setAttribute('data-role', 'offs-add');
-      addWrap.style.display = 'flex';
-      addWrap.style.justifyContent = 'center';
-      addWrap.style.marginTop = '10px';
-
-      const addBtn = document.createElement('button');
-      addBtn.className = 'btn btn--primary';
-      addBtn.type = 'button';
-      addBtn.textContent = '+ Ajouter une offense';
-      addBtn.onclick = () => openOffPicker(defKey, offsListEl, () => {});
-
-      addWrap.appendChild(addBtn);
-      offsListEl.parentElement.appendChild(addWrap);
-    }
-  } catch {}
+  // 5) Quand la réponse admin arrive → (dé)masquer le bouton
+  try{
+    const _ = await pAdmin; // detectAdmin met à jour IS_ADMIN
+    addBtn.hidden = !IS_ADMIN;
+  }catch{
+    addBtn.hidden = true;
+  }
 }
-
+  
 // =====================
 // COLLABS — mapping explicite + résolution par élément/alias
 // =====================
