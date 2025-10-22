@@ -1263,7 +1263,7 @@ function renderPickerGrid(){
   grid.appendChild(frag);
 }
 
-  inp.addEventListener('aria-label', renderPickerGrid);
+  inp.addEventListener('input', renderPickerGrid);
   renderPickerGrid(); renderOffPicks();
 
   // ====== Validation
