@@ -612,3 +612,11 @@ textarea{ min-height:100px; border-radius:12px; }
 }
 .grid-loading .dots{ display:inline-block; width: 1.6em; text-align:left; }
 
+/* Offense picker grid: same behavior as Defense */
+.modal--picker .picker-grid{
+  flex: 0 0 auto;
+  min-height: 80px;
+  max-height: 60vh;
+  overflow: auto;
+  scrollbar-gutter: stable both-edges;
+}
