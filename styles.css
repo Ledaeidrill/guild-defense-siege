@@ -655,14 +655,26 @@ textarea{ min-height:100px; border-radius:12px; }
 /* cartes dans la zone de sélection : mêmes dimensions, pas de marge parasite */
 .modal--picker .picks .card{ margin:0; }
 
-:root{
-   --row-h: 80px;
+/* ——— Picker Offense : sélection comme en Défense (pas de cadre, pas de scroll) ——— */
+.modal--picker .picks{
+  display:flex;
+  flex-wrap:wrap;                 /* plusieurs lignes si besoin */
+  gap:10px;                       /* même espacement que Défense */
+  min-height:58px;                /* comme ta page Défense */
+  padding:0;
+  border:none;
+  background:transparent;         /* ← plus de “boîte” visible */
+  overflow:visible;               /* ← pas de scrollbar dans la sélection */
 }
 
+/* ——— Grille du picker : hauteur mini ≈ 1 ligne ; scrolle à l’intérieur ——— */
+:root{ --row-h: 76px; }           /* une ligne ≈ 75–76 px */
+
 .modal--picker .picker-grid{
-   flex: 1 1 auto;            
-   min-height: var(--row-h);
-   max-height: 60vh;
-   overflow: auto;
-   padding-bottom: 6px;
+  flex: 1 1 auto;
+  min-height: var(--row-h) !important;  /* force l’override des anciennes règles */
+  max-height: 60vh;
+  overflow: auto;
+  scrollbar-gutter: stable both-edges;
 }
+
