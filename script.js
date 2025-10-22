@@ -1264,6 +1264,9 @@ function openOffPicker(defKey, offsListEl, onClose){
   gwrap.style.borderRadius = '8px';
   gwrap.style.padding = '6px';
 
+  gwrap.appendChild(grid);   // ← insère la grille dans le conteneur
+  wrap.appendChild(gwrap);   // ← insère le conteneur dans la modale (avant la barre d’actions)
+
   // Actions (Valider + spinner)
   const actions = document.createElement('div'); actions.className='picker-actions';
   const validate = document.createElement('button');
