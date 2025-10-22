@@ -415,26 +415,78 @@ async function apiPost(payloadObj, { timeoutMs = 7000, retries = 1 } = {}){
   }
 }
 
-// Helpers Offs API
+// ===== Client-side request de-dup + SWR (localStorage) =====
+const inflightMap = new Map(); // key (payload string) -> Promise
+
+function swrGetLS(key, maxAgeMs){
+  try{
+    const raw = localStorage.getItem(key);
+    if (!raw) return null;
+    const { ts, data } = JSON.parse(raw);
+    if ((Date.now() - ts) > maxAgeMs) return null;
+    return data;
+  }catch{ return null; }
+}
+function swrSetLS(key, data){
+  try{ localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data })); }catch{}
+}
+
+// Wrap pour dédupliquer des POST identiques (même payload)
+async function apiPostDedup(payloadObj, opts){
+  const payload = JSON.stringify(payloadObj);
+  const k = payload; // stable key
+  if (inflightMap.has(k)) return inflightMap.get(k);
+  const p = apiPost(payloadObj, opts).finally(()=> inflightMap.delete(k));
+  inflightMap.set(k, p);
+  return p;
+}
+
+// Helpers Offs API (SWR + de-dup)
 async function apiGetOffs(key, { force = false } = {}){
+  // 0) LS instant
+  if (!force && !offsCache.has(key)){
+    const ls = swrGetLS('offs:'+key, 5*60*1000);
+    if (ls?.ok) offsCache.set(key, { ts: Date.now(), data: ls });
+  }
+
   const ent = offsCache.get(key);
   if (!force && ent && (Date.now() - ent.ts) < OFFS_CACHE_TTL) return ent.data;
-  const res = await apiPost({ mode:'get_offs', token: TOKEN, key });
-  if (res?.ok) offsCache.set(key, { ts: Date.now(), data: res });
+
+  const res = await apiPostDedup({ mode:'get_offs', token: TOKEN, key });
+  if (res?.ok){
+    offsCache.set(key, { ts: Date.now(), data: res });
+    swrSetLS('offs:'+key, res);
+  }
   return res;
 }
+
 async function apiAddOff({ key, o1, o1el, o2, o2el, o3, o3el, note = '', by = '' }){
-  return apiPost({
+  const res = await apiPostDedup({
     mode: 'add_off',
-    admin_token: ADMIN_TOKEN_PARAM,   // 
+    admin_token: ADMIN_TOKEN_PARAM,
     key, o1, o1el, o2, o2el, o3, o3el, note, by
-  });
+  }, { timeoutMs: 8000 });
+
+  // Invalidation locale (SWR)
+  if (res?.ok) {
+    offsCache.delete(key);
+    try { localStorage.removeItem('offs:'+key); } catch {}
+  }
+  return res;
 }
+
 async function apiDelOff({ key, o1, o1el, o2, o2el, o3, o3el }){
-  return apiPost({
+  const res = await apiPostDedup({
     mode:'del_off', admin_token: ADMIN_TOKEN_PARAM,
     key, o1, o1el, o2, o2el, o3, o3el
-  });
+  }, { timeoutMs: 8000 });
+
+  // Invalidation locale (SWR)
+  if (res?.ok) {
+    offsCache.delete(key);
+    try { localStorage.removeItem('offs:'+key); } catch {}
+  }
+  return res;
 }
 
 // =====================
@@ -756,43 +808,28 @@ sendBtn?.addEventListener('click', async () => {
 // =====================
 // DATA LAYER (fetch + cache mémoire)
 // =====================
-function isFresh(ts){ return (Date.now() - ts) < CACHE_TTL_MS; }
+const inflightMap = new Map(); // key (payload string) -> Promise
 
-async function fetchStats(force = false){
-  if (!force && cache.stats.data && isFresh(cache.stats.ts)) return cache.stats.data;
-  if (cache.stats.inflight) return cache.stats.inflight;
-
-  const p = apiPost({ mode: 'stats', token: TOKEN }).then(res => {
-    cache.stats.inflight = null;
-    if (!res?.ok) throw new Error(res?.error || 'Erreur stats');
-    cache.stats.data = res; cache.stats.ts = Date.now();
-    return res;
-  }).catch(err => {
-    cache.stats.inflight = null;
-    console.error('[fetchStats]', err);
-    return cache.stats.data || { ok:true, stats: [] }; // fallback cache/empty
-  });
-
-  cache.stats.inflight = p;
-  return p;
+function swrGetLS(key, maxAgeMs){
+  try{
+    const raw = localStorage.getItem(key);
+    if (!raw) return null;
+    const { ts, data } = JSON.parse(raw);
+    if ((Date.now() - ts) > maxAgeMs) return null;
+    return data;
+  }catch{ return null; }
+}
+function swrSetLS(key, data){
+  try{ localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data })); }catch{}
 }
 
-async function fetchHandled(force = false){
-  if (!force && cache.handled.data && isFresh(cache.handled.ts)) return cache.handled.data;
-  if (cache.handled.inflight) return cache.handled.inflight;
-
-  const p = apiPost({ mode: 'handled', token: TOKEN }).then(res => {
-    cache.handled.inflight = null;
-    if (!res?.ok) throw new Error(res?.error || 'Erreur handled');
-    cache.handled.data = res; cache.handled.ts = Date.now();
-    return res;
-  }).catch(err => {
-    cache.handled.inflight = null;
-    console.error('[fetchHandled]', err);
-    return cache.handled.data || { ok:true, handled: [] };
-  });
-
-  cache.handled.inflight = p;
+// Wrap pour dédupliquer des POST identiques (même payload)
+async function apiPostDedup(payloadObj, opts){
+  const payload = JSON.stringify(payloadObj);
+  const k = payload; // stable key
+  if (inflightMap.has(k)) return inflightMap.get(k);
+  const p = apiPost(payloadObj, opts).finally(()=> inflightMap.delete(k));
+  inflightMap.set(k, p);
   return p;
 }
 
