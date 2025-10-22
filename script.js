@@ -1217,6 +1217,7 @@ function openOffPicker(defKey, offsListEl, onClose){
   header.append(h, closeBtn);
 
   const body = document.createElement('div'); body.className = 'modal__body';
+  body.style.overflow = 'visible';   // on laisse la grille gérer son scroll
   dialog.append(header, body); modal.appendChild(dialog); document.body.appendChild(modal);
 
   function closePicker(){
@@ -1230,6 +1231,7 @@ function openOffPicker(defKey, offsListEl, onClose){
 
   // --- Contenu
   const wrap = document.createElement('div'); wrap.className = 'picker'; body.appendChild(wrap);
+  wrap.style.flex = '1';
   wrap.style.display = 'flex';
   wrap.style.flexDirection = 'column';
   wrap.style.maxHeight = '70vh'; // évite que la modale déborde trop
