@@ -529,7 +529,7 @@ textarea{ min-height:100px; border-radius:12px; }
 }
 .modal--picker .picker-grid{
   flex: 1;
-  min-height: 100px;       /* empêche l’effondrement (liste "invisible") */
+  min-height: 80px;       /* empêche l’effondrement (liste "invisible") */
   max-height: 60vh;        /* scrolle dans la grille si besoin */
   overflow: auto;
   scrollbar-gutter: stable both-edges;
@@ -591,7 +591,7 @@ textarea{ min-height:100px; border-radius:12px; }
 /* 4) La liste scrolle en elle-même, sans modifier la hauteur du reste */
 .modal--picker .picker-grid{
   flex: 1;
-  min-height: 100px;         /* visible même avec peu de résultats */
+  min-height: 80px;         /* visible même avec peu de résultats */
   max-height: 60vh;          /* scrolle si long */
   overflow: auto;
   scrollbar-gutter: stable both-edges; /* pas de micro-shift quand la barre apparaît */
