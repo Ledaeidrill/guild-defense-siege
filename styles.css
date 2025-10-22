@@ -633,3 +633,36 @@ textarea{ min-height:100px; border-radius:12px; }
   max-height: 60vh;
   overflow: auto;
 }
+
+/* === OFFENSE : rangée de sélection sans scroll, cartes visibles === */
+.modal--picker .picks{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:10px 12px;
+
+  /* la hauteur mini couvre une carte entière + un peu d'air */
+  min-height: calc(var(--icon) + 14px);
+  max-height: none;
+
+  overflow: visible;           /* ⬅️ pas de scrollbar */
+  padding: 6px 6px 2px 6px;    /* petit cadre propre */
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg2);
+}
+
+/* cartes dans la zone de sélection : mêmes dimensions, pas de marge parasite */
+.modal--picker .picks .card{ margin:0; }
+
+:root{
+   --row-h: 80px;
+}
+
+.modal--picker .picker-grid{
+   flex: 1 1 auto;            
+   min-height: var(--row-h);
+   max-height: 60vh;
+   overflow: auto;
+   padding-bottom: 6px;
+}
