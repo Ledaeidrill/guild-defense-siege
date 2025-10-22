@@ -1255,7 +1255,7 @@ function openOffPicker(defKey, offsListEl, onClose){
   header.append(h, closeBtn);
 
   const body = document.createElement('div'); body.className = 'modal__body';
-  body.style.overflow = 'visible';   // on laisse la grille gérer son scroll
+  body.style.overflow = 'hidden';   // on laisse la grille gérer son scroll
   dialog.append(header, body); modal.appendChild(dialog); document.body.appendChild(modal);
 
   function closePicker(){
@@ -1293,10 +1293,10 @@ function openOffPicker(defKey, offsListEl, onClose){
   const grid = document.createElement('div'); 
   grid.className='monster-grid';
   
-  gwrap.style.flex = '1';
-  gwrap.style.minHeight = '280px';
+  gwrap.style.flex = '0 0 auto';
+  gwrap.style.minHeight = '80px';
   gwrap.style.height = '60vh';                  // ← fixe (pas de rétrécissement)
-  gwrap.style.overflow = 'auto';
+  gwrap.style.overflow = 'height';
   gwrap.style.scrollbarGutter = 'stable both-edges'; // ← évite le petit “coup” quand la barre apparaît/disparaît
   gwrap.style.border = '1px solid rgba(255,255,255,0.07)';
   gwrap.style.borderRadius = '8px';
