@@ -74,6 +74,30 @@ function esc(s){
   }[c]));
 }
 
+// ===== JSONP (contourne CORS) =====
+function fetchJSONP(url, timeoutMs = 20000) {
+  return new Promise((resolve, reject) => {
+    const cb = 'jsonp_cb_' + Math.random().toString(36).slice(2);
+    const timer = setTimeout(() => {
+      cleanup();
+      reject(new Error('JSONP timeout'));
+    }, timeoutMs);
+
+    function cleanup() {
+      clearTimeout(timer);
+      try { delete window[cb]; } catch {}
+      if (script && script.parentNode) script.parentNode.removeChild(script);
+    }
+
+    window[cb] = (data) => { cleanup(); resolve(data); };
+
+    const script = document.createElement('script');
+    script.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + cb;
+    script.onerror = () => { cleanup(); reject(new Error('JSONP error')); };
+    document.head.appendChild(script);
+  });
+}
+
 // ===== Modal Offs (markup existant dans index.html) =====
 const offsModal   = qs('#offsModal');
 const closeOffsBtn= qs('#closeOffs');
@@ -877,34 +901,15 @@ function isFresh(ts){ return (Date.now() - ts) < CACHE_TTL_MS; }
 
 async function fetchStats(){
   const url = APPS_SCRIPT_URL + '?fn=stats&token=' + encodeURIComponent(TOKEN);
-  // timeout porté à 20 s pour les réseaux lents / throttling
-  const res = await fetch(url, { signal: AbortSignal.timeout ? AbortSignal.timeout(20000) : undefined })
-    .catch(() => null);
-  if (!res || !res.ok){
-    // on renvoie le cache s'il existe, évite de casser l'UI
-    return cache?.stats?.data || { top: [] };
-  }
-  const data = await res.json().catch(()=>({ top: [] }));
-  // on met à jour le cache si présent
-  try{
-    if (!cache.stats) cache.stats = {};
-    cache.stats.data = data;
-  }catch{}
+  const data = await fetchJSONP(url, 20000);   // JSONP → plus de CORS
+  try { (cache.stats ||= {}).data = data; } catch {}
   return data;
 }
 
 async function fetchHandled(){
   const url = APPS_SCRIPT_URL + '?fn=handled&token=' + encodeURIComponent(TOKEN);
-  const res = await fetch(url, { signal: AbortSignal.timeout ? AbortSignal.timeout(20000) : undefined })
-    .catch(() => null);
-  if (!res || !res.ok){
-    return cache?.handled?.data || { keys: [] };
-  }
-  const data = await res.json().catch(()=>({ keys: [] }));
-  try{
-    if (!cache.handled) cache.handled = {};
-    cache.handled.data = data;
-  }catch{}
+  const data = await fetchJSONP(url, 20000);
+  try { (cache.handled ||= {}).data = data; } catch {}
   return data;
 }
 
