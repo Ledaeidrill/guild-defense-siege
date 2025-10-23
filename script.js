@@ -321,20 +321,20 @@ function _haystack(m){
 }
 
 function findByMapName(name){
-  const k = nrm(name);
+  const k = _nrm(name);
   if (!k) return null;
   const list = window.MONSTERS || [];
 
   // 1) nom affiché exact (normalisé)
-  let hit = list.find(x => nrm(x.name) === k);
+  let hit = list.find(x =>_nrm(x.name) === k);
   if (hit) return hit;
 
   // 2) certains noms de MAP peuvent être des non-éveillés
-  hit = list.find(x => nrm(x.unawakened_name) === k);
+  hit = list.find(x =>_nrm(x.unawakened_name) === k);
   if (hit) return hit;
 
   // 3) filet: un alias EXACT (normalisé)
-  return list.find(x => (x.aliases || []).some(a => nrm(a) === k)) || null;
+  return list.find(x => (x.aliases || []).some(a =>_nrm(a) === k)) || null;
 }
 
 // mapping collab -> SW en lowercase/normalisé
@@ -1348,7 +1348,7 @@ function renderPickerGrid(){
   for (const d of list) {
     const duo = findMappedPair(d);
     if (duo) {
-      const key = `${duo.sw.family_id || nrm(duo.sw.name)}|${nrm(duo.sw.element)}`;
+      const key = `${duo.sw.family_id ||_nrm(duo.sw.name)}|${nrm(duo.sw.element)}`;
       if (seenPairs.has(key)) continue;
       seenPairs.add(key);
     }
