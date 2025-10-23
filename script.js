@@ -300,15 +300,25 @@ function buildStrictCollabPairs(){
 }
 
 // Helpers de normalisation (accents/ponctuation/casse)
-const nrm = (s) =>
-  (s ?? '')
-    .toString()
-    .normalize('NFD')                    // sépare accents
-    .replace(/\p{Diacritic}/gu, '')      // retire accents
-    .replace(/[\s._-]+/g, ' ')           // homogénéise séparateurs
-    .replace(/[’'"]/g, '')               // retire apostrophes/quotes/points
-    .trim()
-    .toLowerCase();
+function _nrm(s){
+  try{
+    if (typeof window.nrm === 'function') return window.nrm(s);
+  }catch{}
+  return String(s || '')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'') // sans accents
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')                     // espaces propres
+    .trim();
+}
+
+// Concatène les champs utiles d'un monstre pour la recherche
+function _haystack(m){
+  const parts = [
+    m?.name, m?.unawakened_name, m?.element,
+    ...(Array.isArray(m?.aliases) ? m.aliases : [])
+  ];
+  return _nrm(parts.filter(Boolean).join(' '));
+}
 
 function findByMapName(name){
   const k = nrm(name);
@@ -596,19 +606,34 @@ function makeDotsLoader(label = 'Chargement', className = 'grid-loading') {
 const grid   = qs('#monster-grid');
 const search = qs('#search');
 
+async function waitForImages(root, { maxWait = 900, minWait = 180, sample = 36 } = {}) {
+  const imgs = [...root.querySelectorAll('img')].slice(0, sample);
+  const decodeOne = (img) => {
+    if (img.complete && img.naturalWidth) return Promise.resolve();
+    if (typeof img.decode === 'function') return img.decode().catch(() => {});
+    return new Promise((res) => {
+      img.addEventListener('load', res,  { once: true });
+      img.addEventListener('error', res, { once: true });
+    });
+  };
+  const allDecoded = Promise.allSettled(imgs.map(decodeOne));
+  const capMax = new Promise((res) => setTimeout(res, maxWait));
+  const capMin = new Promise((res) => setTimeout(res, minWait));
+  await Promise.race([allDecoded, capMax]);
+  await capMin;
+}
+
 async function renderGrid() {
   const box = document.querySelector('.grid-scroll');
+
   const loader = makeDotsLoader('Chargement');
   box.replaceChildren(loader.el);
-
-  // 0 ms au premier rendu (on force une frame visible), 180 ms ensuite
   loader.show(_firstGrid ? 0 : 180);
-  if (_firstGrid) { await nextFrame(); }   // laisse le temps au browser d’afficher le loader
+  if (_firstGrid) {
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+  }
 
-  const q = (search?.value||'').trim();
-  if (!grid) return;
-  grid.innerHTML = '';
-
+  const q = (search?.value || '').trim();
   const frag = document.createDocumentFragment();
   const seenPairs = new Set();
 
@@ -619,7 +644,7 @@ async function renderGrid() {
     .forEach(m => {
       const duo = findMappedPair(m);
       if (duo) {
-        const key = `${duo.sw.family_id || nrm(duo.sw.name)}|${nrm(duo.sw.element)}`;
+        const key = `${duo.sw.family_id || _nrm(duo.sw.name)}|${_nrm(duo.sw.element)}`;
         if (seenPairs.has(key)) return;
         seenPairs.add(key);
       }
@@ -630,32 +655,20 @@ async function renderGrid() {
   gridEl.className = 'monster-grid';
   gridEl.appendChild(frag);
 
+  await waitForImages(gridEl, { maxWait: 900, minWait: 180, sample: 36 });
+
   loader.hide();
   box.replaceChildren(gridEl);
   _firstGrid = false;
 }
 
-function matchesQuery(m, qRaw){
-  const q = normalize(qRaw);
-  if (!q) return true;
-
-  const tokens = q.split(/\s+/);
-  const n = m.__n || { name:'', unaw:'', elem:'', aliases:[] };
-
-  // Synonymes stricts via ta table de paires
-  const extra = [];
-  const duo = findMappedPair(m);
-  if (duo) {
-    extra.push(normalize(m.id === duo.sw.id ? duo.collab.name : duo.sw.name));
-  }
-
-  // Haystack sans Set (évite des allocs)
-  const hay = [n.name, n.unaw, n.elem, ...n.aliases, ...extra];
-
-  for (const t of tokens) {
-    let ok = false;
-    for (let i=0;i<hay.length;i++){ if (hay[i].includes(t)) { ok = true; break; } }
-    if (!ok) return false;
+function matchesQuery(m, q){
+  const query = _nrm(q || '');
+  if (!query) return true;
+  const hay = _haystack(m);
+  const tokens = query.split(/\s+/).filter(Boolean);
+  for (const tok of tokens){
+    if (!hay.includes(tok)) return false;
   }
   return true;
 }
@@ -862,64 +875,37 @@ sendBtn?.addEventListener('click', async () => {
 // =====================
 function isFresh(ts){ return (Date.now() - ts) < CACHE_TTL_MS; }
 
-async function fetchStats(force = false){
-  // 0) instant LS
-  if (!force && !cache.stats.data){
-    const ls = swrGetLS('stats', 5*60*1000); // 5 min
-    if (ls?.ok){ cache.stats.data = ls; cache.stats.ts = Date.now(); }
+async function fetchStats(){
+  const url = APPS_SCRIPT_URL + '?fn=stats&token=' + encodeURIComponent(TOKEN);
+  // timeout porté à 20 s pour les réseaux lents / throttling
+  const res = await fetch(url, { signal: AbortSignal.timeout ? AbortSignal.timeout(20000) : undefined })
+    .catch(() => null);
+  if (!res || !res.ok){
+    // on renvoie le cache s'il existe, évite de casser l'UI
+    return cache?.stats?.data || { top: [] };
   }
-
-  // 1) mémoire fraîche
-  if (!force && cache.stats.data && isFresh(cache.stats.ts)) return cache.stats.data;
-  if (cache.stats.inflight) return cache.stats.inflight;
-
-  // 2) réseau dédupliqué
-  const p = apiPostDedup({ mode:'stats', token: TOKEN })
-    .then(res => {
-      cache.stats.inflight = null;
-      if (!res?.ok) throw new Error(res?.error || 'Erreur stats');
-      cache.stats.data = res; cache.stats.ts = Date.now();
-      swrSetLS('stats', res);      // SWR: on persiste
-      return res;
-    })
-    .catch(err => {
-      cache.stats.inflight = null;
-      console.error('[fetchStats]', err);
-      return cache.stats.data || { ok:true, stats: [] }; // fallback
-    });
-
-  cache.stats.inflight = p;
-  return p;
+  const data = await res.json().catch(()=>({ top: [] }));
+  // on met à jour le cache si présent
+  try{
+    if (!cache.stats) cache.stats = {};
+    cache.stats.data = data;
+  }catch{}
+  return data;
 }
 
-async function fetchHandled(force = false){
-  // 0) instant LS
-  if (!force && !cache.handled.data){
-    const ls = swrGetLS('handled', 5*60*1000);
-    if (ls?.ok){ cache.handled.data = ls; cache.handled.ts = Date.now(); }
+async function fetchHandled(){
+  const url = APPS_SCRIPT_URL + '?fn=handled&token=' + encodeURIComponent(TOKEN);
+  const res = await fetch(url, { signal: AbortSignal.timeout ? AbortSignal.timeout(20000) : undefined })
+    .catch(() => null);
+  if (!res || !res.ok){
+    return cache?.handled?.data || { keys: [] };
   }
-
-  // 1) mémoire fraîche
-  if (!force && cache.handled.data && isFresh(cache.handled.ts)) return cache.handled.data;
-  if (cache.handled.inflight) return cache.handled.inflight;
-
-  // 2) réseau dédupliqué
-  const p = apiPostDedup({ mode:'handled', token: TOKEN })
-    .then(res => {
-      cache.handled.inflight = null;
-      if (!res?.ok) throw new Error(res?.error || 'Erreur handled');
-      cache.handled.data = res; cache.handled.ts = Date.now();
-      swrSetLS('handled', res);    // SWR
-      return res;
-    })
-    .catch(err => {
-      cache.handled.inflight = null;
-      console.error('[fetchHandled]', err);
-      return cache.handled.data || { ok:true, handled: [] };
-    });
-
-  cache.handled.inflight = p;
-  return p;
+  const data = await res.json().catch(()=>({ keys: [] }));
+  try{
+    if (!cache.handled) cache.handled = {};
+    cache.handled.data = data;
+  }catch{}
+  return data;
 }
 
 // =====================
