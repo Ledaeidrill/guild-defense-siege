@@ -720,6 +720,21 @@ textarea{ min-height:100px; border-radius:12px; }
   padding-bottom: 8px;
 }
 
+/* === Offense picker: prevent overlap between selected cards and the search row === */
+.modal--picker .picks{
+  min-height: calc(var(--pick-icon, 60px) + 26px) !important; /* ~86px */
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 6px;           /* space under the picks row */
+  overflow: visible;           /* no vertical scroll here */
+}
+
+/* Make sure the search field spans the full line in the modal */
+.modal--picker .field{ width:100%; }
+.modal--picker .field input{
+  width:100%;
+  max-width: none !important;
+}
 
 
 
