@@ -622,50 +622,47 @@ const search = qs('#search');
 async function renderGrid() {
   const box = document.querySelector('.grid-scroll');
 
-  // 1) monter le loader maintenant
+  // 1) Monter le loader et le rendre visible
   const loader = makeDotsLoader('Chargement');
   box.replaceChildren(loader.el);
-  loader.show(0);                           // affichage immédiat
-  await new Promise(r => requestAnimationFrame(r)); // laisse le temps de peindre le loader
+  loader.show(_firstGrid ? 0 : 180);                     // immédiat au 1er rendu
 
-  // 2) construire la grille en mémoire
+  if (_firstGrid) {
+    // on laisse le navigateur peindre le loader au moins 1 frame
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+  }
+
+  // 2) Construire la grille en mémoire
+  const q = (search?.value || '').trim();
   const frag = document.createDocumentFragment();
-  // ... tes boucles qui remplissent frag ...
+  const seenPairs = new Set();
+
+  (window.MONSTERS || [])
+    .filter(m => matchesQuery(m, q))
+    .filter(m => !shouldHideInGrid(m))
+    .sort(monsterComparator)
+    .forEach(m => {
+      const duo = findMappedPair(m);
+      if (duo) {
+        const key = `${duo.sw.family_id || nrm(duo.sw.name)}|${nrm(duo.sw.element)}`;
+        if (seenPairs.has(key)) return;
+        seenPairs.add(key);
+      }
+      frag.appendChild(makeCard(m));
+    });
+
   const gridEl = document.createElement('div');
   gridEl.className = 'monster-grid';
   gridEl.appendChild(frag);
 
-  // 3) attendre que les premières icônes soient prêtes (ou timeout)
+  // 3) Attendre que les premières icônes soient prêtes (ou timeout)
   await waitForImages(gridEl, { maxWait: 900, minWait: 180, sample: 36 });
 
-  // 4) swap loader → grille
+  // 4) Swap loader → grille
   loader.hide();
   box.replaceChildren(gridEl);
-}
 
-function matchesQuery(m, qRaw){
-  const q = normalize(qRaw);
-  if (!q) return true;
-
-  const tokens = q.split(/\s+/);
-  const n = m.__n || { name:'', unaw:'', elem:'', aliases:[] };
-
-  // Synonymes stricts via ta table de paires
-  const extra = [];
-  const duo = findMappedPair(m);
-  if (duo) {
-    extra.push(normalize(m.id === duo.sw.id ? duo.collab.name : duo.sw.name));
-  }
-
-  // Haystack sans Set (évite des allocs)
-  const hay = [n.name, n.unaw, n.elem, ...n.aliases, ...extra];
-
-  for (const t of tokens) {
-    let ok = false;
-    for (let i=0;i<hay.length;i++){ if (hay[i].includes(t)) { ok = true; break; } }
-    if (!ok) return false;
-  }
-  return true;
+  _firstGrid = false;
 }
 
 const ELEMENT_ORDER = ['Fire','Water','Wind','Light','Dark'];
