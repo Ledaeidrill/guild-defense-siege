@@ -1290,8 +1290,11 @@ function openOffPicker(defKey, offsListEl, onClose){
   pickTitle.textContent = 'Sélectionne 3 monstres';
   wrap.appendChild(pickTitle);
 
-  const picksBox = document.createElement('div'); picksBox.className = 'picks'; wrap.appendChild(picksBox);
-  let offPicks = [];
+  const picksBox = document.createElement('div');
+  // on garde "picks" ET on ajoute "off-picks" pour réutiliser tes styles
+  picksBox.className = 'picks off-picks';
+  wrap.appendChild(picksBox);
+
 
   // Recherche
   const row = document.createElement('div'); row.className='row field';
