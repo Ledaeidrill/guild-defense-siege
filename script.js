@@ -361,11 +361,6 @@ function findByMapName(name){
   return list.find(x => (x.aliases || []).some(a =>_nrm(a) === k)) || null;
 }
 
-// mapping collab -> SW en lowercase/normalisé
-const MAP_COLLAB_TO_SW_LC = Object.fromEntries(
-  Object.entries(MAP_COLLAB_TO_SW).map(([k, v]) => [_nrm(k), v])
-);
-
 // SW (famille) -> collab (inverse)
 const MAP_SW_TO_COLLAB = (() => {
   const m = {};
@@ -559,19 +554,6 @@ const MONS_BY_NAME = (() => {
   return m;
 })();
 const findMonsterByName = (n) => MONS_BY_NAME.get((n||'').toLowerCase()) || null;
-
-// Pré-calculs pour la recherche (évite de ré-normaliser à chaque input)
-(function prepareMonsterSearchIndex(){
-  for (const m of (window.MONSTERS || [])) {
-    if (m.__n) continue;
-    m.__n = {
-      name: normalize(m.name),
-      unaw: normalize(m.unawakened_name),
-      elem: normalize(m.element),
-      aliases: (m.aliases || []).map(normalize),
-    };
-  }
-})();
 
 // ==> Utiliser le rendu fusionné aussi pour les cartes "déf/offs"
 function cardHtmlByName(name){
@@ -812,13 +794,6 @@ function renderPicks() {
   enableDragAndDrop(zone);
 }
 
-qs('#picks')?.addEventListener('click', (e) => {
-  const btn = e.target.closest('.close');
-  if (!btn) return;
-  e.preventDefault(); e.stopPropagation();
-  const id = Number(btn.getAttribute('data-id'));
-  removePick(id);
-});
 function enableDragAndDrop(container) {
   container.querySelectorAll('.pick').forEach(el => {
     el.addEventListener('dragstart', (e) => {
