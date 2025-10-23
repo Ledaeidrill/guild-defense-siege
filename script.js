@@ -74,6 +74,29 @@ function esc(s){
   }[c]));
 }
 
+// Attend que les images d'un container soient "décodées" (prêtes à peindre),
+async function waitForImages(root, { maxWait = 900, minWait = 180, sample = 36 } = {}) {
+  const imgs = [...root.querySelectorAll('img')].slice(0, sample);
+
+  const decodeOne = (img) => {
+    if (img.complete && img.naturalWidth) return Promise.resolve();
+    if (typeof img.decode === 'function') return img.decode().catch(() => {});
+    return new Promise((res) => {
+      img.addEventListener('load', res, { once: true });
+      img.addEventListener('error', res, { once: true });
+    });
+  };
+
+  const allDecoded = Promise.allSettled(imgs.map(decodeOne));
+  const capMax = new Promise((res) => setTimeout(res, maxWait));
+  const capMin = new Promise((res) => setTimeout(res, minWait));
+
+  // on attend soit toutes les (premières) images, soit le timeout max
+  await Promise.race([allDecoded, capMax]);
+  // mais on garantit aussi un affichage mini du loader
+  await capMin;
+}
+
 // ===== Modal Offs (markup existant dans index.html) =====
 const offsModal   = qs('#offsModal');
 const closeOffsBtn= qs('#closeOffs');
@@ -598,41 +621,26 @@ const search = qs('#search');
 
 async function renderGrid() {
   const box = document.querySelector('.grid-scroll');
+
+  // 1) monter le loader maintenant
   const loader = makeDotsLoader('Chargement');
   box.replaceChildren(loader.el);
+  loader.show(0);                           // affichage immédiat
+  await new Promise(r => requestAnimationFrame(r)); // laisse le temps de peindre le loader
 
-  // 0 ms au premier rendu (on force une frame visible), 180 ms ensuite
-  loader.show(_firstGrid ? 0 : 180);
-  if (_firstGrid) { await nextFrame(); }   // laisse le temps au browser d’afficher le loader
-
-  const q = (search?.value||'').trim();
-  if (!grid) return;
-  grid.innerHTML = '';
-
+  // 2) construire la grille en mémoire
   const frag = document.createDocumentFragment();
-  const seenPairs = new Set();
-
-  (window.MONSTERS || [])
-    .filter(m => matchesQuery(m, q))
-    .filter(m => !shouldHideInGrid(m))
-    .sort(monsterComparator)
-    .forEach(m => {
-      const duo = findMappedPair(m);
-      if (duo) {
-        const key = `${duo.sw.family_id || nrm(duo.sw.name)}|${nrm(duo.sw.element)}`;
-        if (seenPairs.has(key)) return;
-        seenPairs.add(key);
-      }
-      frag.appendChild(makeCard(m));
-    });
-
+  // ... tes boucles qui remplissent frag ...
   const gridEl = document.createElement('div');
   gridEl.className = 'monster-grid';
   gridEl.appendChild(frag);
 
+  // 3) attendre que les premières icônes soient prêtes (ou timeout)
+  await waitForImages(gridEl, { maxWait: 900, minWait: 180, sample: 36 });
+
+  // 4) swap loader → grille
   loader.hide();
   box.replaceChildren(gridEl);
-  _firstGrid = false;
 }
 
 function matchesQuery(m, qRaw){
