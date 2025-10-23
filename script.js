@@ -603,6 +603,7 @@ async function renderGrid() {
 
   // 0 ms au premier rendu (on force une frame visible), 180 ms ensuite
   loader.show(_firstGrid ? 0 : 180);
+  await new Promise(r => setTimeout(r, 800));
   if (_firstGrid) { await nextFrame(); }   // laisse le temps au browser d’afficher le loader
 
   const q = (search?.value||'').trim();
