@@ -621,19 +621,17 @@ const search = qs('#search');
 
 async function renderGrid() {
   const box = document.querySelector('.grid-scroll');
-
-  // 1) Monter le loader et le rendre visible
   const loader = makeDotsLoader('Chargement');
   box.replaceChildren(loader.el);
-  loader.show(_firstGrid ? 0 : 180);                     // immédiat au 1er rendu
 
-  if (_firstGrid) {
-    // on laisse le navigateur peindre le loader au moins 1 frame
-    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-  }
+  // 0 ms au premier rendu (on force une frame visible), 180 ms ensuite
+  loader.show(_firstGrid ? 0 : 180);
+  if (_firstGrid) { await nextFrame(); }   // laisse le temps au browser d’afficher le loader
 
-  // 2) Construire la grille en mémoire
-  const q = (search?.value || '').trim();
+  const q = (search?.value||'').trim();
+  if (!grid) return;
+  grid.innerHTML = '';
+
   const frag = document.createDocumentFragment();
   const seenPairs = new Set();
 
@@ -655,13 +653,8 @@ async function renderGrid() {
   gridEl.className = 'monster-grid';
   gridEl.appendChild(frag);
 
-  // 3) Attendre que les premières icônes soient prêtes (ou timeout)
-  await waitForImages(gridEl, { maxWait: 900, minWait: 180, sample: 36 });
-
-  // 4) Swap loader → grille
   loader.hide();
   box.replaceChildren(gridEl);
-
   _firstGrid = false;
 }
 
