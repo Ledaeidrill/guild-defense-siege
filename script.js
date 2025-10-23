@@ -252,6 +252,7 @@ const _pairById = new Map();
 
 function buildStrictCollabPairs(){
   _pairById.clear();
+  await new Promise(r => setTimeout(r, 0));
 
   const list = window.MONSTERS || [];
   const toKey = (s) => (s ?? '')
@@ -1118,6 +1119,14 @@ tabDone?.addEventListener('click', async () => {
 // Préfetch à l’ouverture de la page pour masquer la latence au premier clic
 document.addEventListener('DOMContentLoaded', async () => {
   await detectAdmin();
+  // --- NEW: loader tout de suite dans la fenêtre de grille
+  const box = document.querySelector('.grid-scroll');
+  if (box) {
+    const boot = makeDotsLoader('Chargement');
+    box.replaceChildren(boot.el);
+    boot.show(0);
+    await nextFrame();                 // <-- donne le temps de peindre le loader
+  }
   buildStrictCollabPairs();          // construit _pairById (SW ↔ collab)
   renderGrid();                      // ← RENDRE LA GRILLE APRÈS la construction
   
