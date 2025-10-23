@@ -339,7 +339,7 @@ function findByMapName(name){
 
 // mapping collab -> SW en lowercase/normalisé
 const MAP_COLLAB_TO_SW_LC = Object.fromEntries(
-  Object.entries(MAP_COLLAB_TO_SW).map(([k, v]) => [nrm(k), v])
+  Object.entries(MAP_COLLAB_TO_SW).map(([k, v]) => [_nrm(k), v])
 );
 
 // SW (famille) -> collab (inverse)
@@ -1348,7 +1348,7 @@ function renderPickerGrid(){
   for (const d of list) {
     const duo = findMappedPair(d);
     if (duo) {
-      const key = `${duo.sw.family_id ||_nrm(duo.sw.name)}|${nrm(duo.sw.element)}`;
+      const key = `${duo.sw.family_id ||_nrm(duo.sw.name)}|${_nrm(duo.sw.element)}`;
       if (seenPairs.has(key)) continue;
       seenPairs.add(key);
     }
