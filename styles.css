@@ -688,20 +688,38 @@ textarea{ min-height:100px; border-radius:12px; }
   width:100%;
 }
 
-/* La ligne de recherche reste fixe, avec un léger écart vers la grille */
-.picker .field{ margin: 0 0 8px; }
-.picker .field input{ max-width: 260px; }
+/* --- Offenses picker : fixes de layout --- */
 
-:root{ --row-h: 76px; } /* ~ hauteur d’une ligne visuelle d’icônes */
-
-.modal--picker .picker-grid{
-  flex: 1 1 auto;
-  min-height: var(--row-h);      /* visible même avec 1 seule ligne */
-  max-height: 60vh;
-  overflow: auto;                /* ← c’est la grille qui scrolle */
-  scrollbar-gutter: stable both-edges;
-  min-width: 0;
+/* Hauteur assurée pour la ligne de sélection 
+   (icône 60px + nom + marges = ~86px) */
+.modal--picker .picks {
+  min-height: calc(var(--pick-icon, 60px) + 26px) !important;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 6px;
+  overflow-x: auto; /* une ligne, scroll horizontal si besoin */
+  padding-bottom: 4px;
 }
+
+/* Évite que le champ "Recherche" soit contraint par d'anciens max-width */
+.modal--picker .field { width: 100%; }
+.modal--picker .field input {
+  width: 100%;
+  max-width: none !important; /* certains fichiers mettent 250px/540px */
+  display: block;
+}
+
+/* Grille un peu rapprochée et bouton sans grand "vide" */
+.modal--picker .picker-grid { 
+  padding: 6px 6px 8px; 
+  margin-bottom: 6px;      /* rapproche du bouton */
+}
+.modal--picker .picker-actions{
+  margin-top: 6px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 
 
 
