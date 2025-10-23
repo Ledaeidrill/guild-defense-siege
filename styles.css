@@ -678,3 +678,30 @@ textarea{ min-height:100px; border-radius:12px; }
   scrollbar-gutter: stable both-edges;
 }
 
+/* Sélection : un petit espace dessous pour ne pas coller la recherche */
+.modal--picker .picks{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  min-height:58px;
+  margin: 6px 0 8px;   /* ← espace sous la sélection */
+  width:100%;
+}
+
+/* La ligne de recherche reste fixe, avec un léger écart vers la grille */
+.picker .field{ margin: 0 0 8px; }
+.picker .field input{ max-width: 260px; }
+
+:root{ --row-h: 76px; } /* ~ hauteur d’une ligne visuelle d’icônes */
+
+.modal--picker .picker-grid{
+  flex: 1 1 auto;
+  min-height: var(--row-h);      /* visible même avec 1 seule ligne */
+  max-height: 60vh;
+  overflow: auto;                /* ← c’est la grille qui scrolle */
+  scrollbar-gutter: stable both-edges;
+  min-width: 0;
+}
+
+
+
