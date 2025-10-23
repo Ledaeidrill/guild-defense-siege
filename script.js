@@ -1294,7 +1294,7 @@ function openOffPicker(defKey, offsListEl, onClose){
   // on garde "picks" ET on ajoute "off-picks" pour réutiliser tes styles
   picksBox.className = 'picks off-picks';
   wrap.appendChild(picksBox);
-
+  let offPicks = [];
 
   // Recherche
   const row = document.createElement('div'); row.className='row field';
