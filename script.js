@@ -74,29 +74,6 @@ function esc(s){
   }[c]));
 }
 
-// Attend que les images d'un container soient "décodées" (prêtes à peindre),
-async function waitForImages(root, { maxWait = 900, minWait = 180, sample = 36 } = {}) {
-  const imgs = [...root.querySelectorAll('img')].slice(0, sample);
-
-  const decodeOne = (img) => {
-    if (img.complete && img.naturalWidth) return Promise.resolve();
-    if (typeof img.decode === 'function') return img.decode().catch(() => {});
-    return new Promise((res) => {
-      img.addEventListener('load', res, { once: true });
-      img.addEventListener('error', res, { once: true });
-    });
-  };
-
-  const allDecoded = Promise.allSettled(imgs.map(decodeOne));
-  const capMax = new Promise((res) => setTimeout(res, maxWait));
-  const capMin = new Promise((res) => setTimeout(res, minWait));
-
-  // on attend soit toutes les (premières) images, soit le timeout max
-  await Promise.race([allDecoded, capMax]);
-  // mais on garantit aussi un affichage mini du loader
-  await capMin;
-}
-
 // ===== Modal Offs (markup existant dans index.html) =====
 const offsModal   = qs('#offsModal');
 const closeOffsBtn= qs('#closeOffs');
@@ -656,6 +633,31 @@ async function renderGrid() {
   loader.hide();
   box.replaceChildren(gridEl);
   _firstGrid = false;
+}
+
+function matchesQuery(m, qRaw){
+  const q = normalize(qRaw);
+  if (!q) return true;
+
+  const tokens = q.split(/\s+/);
+  const n = m.__n || { name:'', unaw:'', elem:'', aliases:[] };
+
+  // Synonymes stricts via ta table de paires
+  const extra = [];
+  const duo = findMappedPair(m);
+  if (duo) {
+    extra.push(normalize(m.id === duo.sw.id ? duo.collab.name : duo.sw.name));
+  }
+
+  // Haystack sans Set (évite des allocs)
+  const hay = [n.name, n.unaw, n.elem, ...n.aliases, ...extra];
+
+  for (const t of tokens) {
+    let ok = false;
+    for (let i=0;i<hay.length;i++){ if (hay[i].includes(t)) { ok = true; break; } }
+    if (!ok) return false;
+  }
+  return true;
 }
 
 const ELEMENT_ORDER = ['Fire','Water','Wind','Light','Dark'];
