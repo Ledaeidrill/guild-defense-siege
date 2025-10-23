@@ -250,7 +250,7 @@ const MAP_COLLAB_TO_SW = {
 
 const _pairById = new Map();
 
-function buildStrictCollabPairs(){
+async function buildStrictCollabPairs(){
   _pairById.clear();
   await new Promise(r => setTimeout(r, 0));
 
@@ -1127,8 +1127,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     boot.show(0);
     await nextFrame();                 // <-- donne le temps de peindre le loader
   }
-  buildStrictCollabPairs();          // construit _pairById (SW ↔ collab)
-  renderGrid();                      // ← RENDRE LA GRILLE APRÈS la construction
+  await buildStrictCollabPairs();          // construit _pairById (SW ↔ collab)
+  await renderGrid();                      // ← RENDRE LA GRILLE APRÈS la construction
   
   // Si l’onglet est affiché, on montre le loader le temps du fetch
   if (!pageStats.classList.contains('hidden')) {
