@@ -705,7 +705,7 @@ textarea{ min-height:100px; border-radius:12px; }
 .modal--picker .field { width: 100%; }
 .modal--picker .field input {
   width: 100%;
-  max-width: none !important; /* certains fichiers mettent 250px/540px */
+  max-width: none
   display: block;
 }
 
