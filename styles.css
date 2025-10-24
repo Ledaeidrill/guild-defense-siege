@@ -730,15 +730,10 @@ textarea{ min-height:100px; border-radius:12px; }
 }
 
 /* Make sure the search field spans the full line in the modal */
-.modal--picker .picker .field{ 
-  display: flex; 
-  align-items: center; 
-  gap: 8px; 
-}
-
-.modal--picker .picker .field input{
-  flex: 0 0 180px !important;   /* fixed “length” */
-  width: auto !important;       /* ignore the 100% width */
+.modal--picker .field{ width:100%; }
+.modal--picker .field input{
+  width:100%;
+  max-width: 100px !important;
 }
 
 /* === Offense picker: freeze the search row, scroll only the grid === */
@@ -777,7 +772,3 @@ textarea{ min-height:100px; border-radius:12px; }
   padding-top: 12px;
   border-top: 1px solid #223244;
 }
-
-
-
-
