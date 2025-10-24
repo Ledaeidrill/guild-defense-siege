@@ -736,5 +736,43 @@ textarea{ min-height:100px; border-radius:12px; }
   max-width: none !important;
 }
 
+/* === Offense picker: freeze the search row, scroll only the grid === */
+
+/* Anchor the picker near the top to avoid vertical re-centering jumps */
+.modal.modal--picker{ align-items: flex-start; justify-content: center; }
+.modal--picker .modal__dialog{ margin-top: 6vh; }
+
+/* Body = flex column; no scroll here */
+.modal--picker .modal__body{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;                 /* grid will scroll, not the body */
+}
+
+/* Picker column: flexible height inside the dialog */
+.modal--picker .picker{
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh;                 /* don’t overflow the viewport */
+}
+
+/* Grid wrapper: takes remaining space and scrolls internally */
+.modal--picker .picker-grid{
+  flex: 1 1 auto;                   /* fills the column below the search row */
+  min-height: 100px;                /* visible even with few results */
+  max-height: 60vh;                 /* scroll if long */
+  overflow: auto;
+  scrollbar-gutter: stable both-edges;
+}
+
+/* Optional: keep the action bar non-sticky so it doesn’t overlay the grid */
+.modal--picker .picker-actions{
+  position: static;
+  background: transparent;
+  padding-top: 12px;
+  border-top: 1px solid #223244;
+}
+
+
 
 
