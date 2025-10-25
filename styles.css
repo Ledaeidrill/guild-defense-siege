@@ -756,13 +756,12 @@ textarea{ min-height:100px; border-radius:12px; }
   max-height: 70vh;                 /* don’t overflow the viewport */
 }
 
-/* Grid wrapper: takes remaining space and scrolls internally */
+/* Picker grid should not fill the whole column when results are short */
 .modal--picker .picker-grid{
-  flex: 0 1 auto !important;                   /* fills the column below the search row */
-  min-height: 100px;                /* visible even with few results */
-  max-height: 60vh;                 /* scroll if long */
+  flex: 0 1 auto !important;  /* stop stretching */
+  min-height: 86px;           /* ~one row */
+  max-height: 60vh;           /* cap height, then scroll */
   overflow: auto;
-  scrollbar-gutter: stable both-edges;
 }
 
 /* Optional: keep the action bar non-sticky so it doesn’t overlay the grid */
