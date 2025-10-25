@@ -388,29 +388,36 @@ function renderMergedVisual(m, opts){
   const mergeCollab = !(opts && opts.mergeCollab === false);
   const duo = mergeCollab ? findMappedPair(m) : null;
 
-  // 1) Titre unifié
-  const unifiedTitle = duo
-    ? `${duo.sw.name} / ${duo.collab.name}`
-    : m.name;
+  // Unified text used for title/aria
+  const unifiedTitle = duo ? `${duo.sw.name} / ${duo.collab.name}` : m.name;
 
   if (duo){
     const htmlIcon = `
       <div class="duo-hsplit" title="${esc(unifiedTitle)}" aria-label="${esc(unifiedTitle)}">
-        <img loading="lazy"
+        <img loading="lazy" decoding="async" fetchpriority="low"
              class="left"
              src="${fixIconUrl(duo.sw.icon)}"
-             alt="${esc(duo.sw.name)}"
-             title="${esc(unifiedTitle)}">
-        <img loading="lazy"
+             alt="${esc(duo.sw.name)}">
+        <img loading="lazy" decoding="async" fetchpriority="low"
              class="right"
              src="${fixIconUrl(duo.collab.icon)}"
-             alt="${esc(duo.collab.name)}"
-             title="${esc(unifiedTitle)}">
+             alt="${esc(duo.collab.name)}">
       </div>`;
-    const label = `${duo.sw.name} / ${duo.collab.name}`;
-    const title = unifiedTitle;                // ← à réutiliser plus loin pour le nom
+    const label = unifiedTitle;
+    const title = unifiedTitle;
     return { htmlIcon, label, title };
   }
+
+  const htmlIcon = `
+    <img loading="lazy" decoding="async" fetchpriority="low"
+         src="${fixIconUrl(m.icon)}"
+         alt="${esc(m.name)}"
+         title="${esc(m.name)}">`;
+
+  const label = m.name;
+  const title = m.name;
+  return { htmlIcon, label, title };
+}
 
   // Cas non-duo
   const htmlIcon = `<img loading="lazy"
@@ -607,13 +614,25 @@ function makeDotsLoader(label = 'Chargement', className = 'grid-loading') {
   return { el, show, hide };
 }
 
+// Build fast haystack once for all monsters
+(function buildHay() {
+  const list = window.MONSTERS || [];
+  for (const m of list) {
+    const parts = [m?.name, m?.unawakened_name, m?.element, ...(Array.isArray(m?.aliases) ? m.aliases : [])]
+      .filter(Boolean).join(' ');
+    m._hay = _nrm(parts);   // already strips accents + lowercases
+  }
+})();
+
+
 // =====================
 // GRILLE
 // =====================
 const grid   = qs('#monster-grid');
 const search = qs('#search');
 
-async function waitForImages(root, { maxWait = 900, minWait = 180, sample = 36 } = {}) {
+// Make decode wait "free" on fast paths
+async function waitForImages(root, { maxWait = 450, minWait = 0, sample = 8 } = {}) {
   const imgs = [...root.querySelectorAll('img')].slice(0, sample);
   const decodeOne = (img) => {
     if (img.complete && img.naturalWidth) return Promise.resolve();
@@ -623,6 +642,12 @@ async function waitForImages(root, { maxWait = 900, minWait = 180, sample = 36 }
       img.addEventListener('error', res, { once: true });
     });
   };
+  const allDecoded = Promise.allSettled(imgs.map(decodeOne));
+  const capMax = new Promise((res) => setTimeout(res, maxWait));
+  await Promise.race([allDecoded, capMax]);
+  if (minWait) await new Promise(r => setTimeout(r, minWait));
+}
+
   const allDecoded = Promise.allSettled(imgs.map(decodeOne));
   const capMax = new Promise((res) => setTimeout(res, maxWait));
   const capMin = new Promise((res) => setTimeout(res, minWait));
@@ -635,10 +660,7 @@ async function renderGrid() {
 
   const loader = makeDotsLoader('Chargement');
   box.replaceChildren(loader.el);
-  loader.show(_firstGrid ? 0 : 180);
-  if (_firstGrid) {
-    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-  }
+  loader.show(320);
 
   const q = (search?.value || '').trim();
   const frag = document.createDocumentFragment();
@@ -662,7 +684,7 @@ async function renderGrid() {
   gridEl.className = 'monster-grid';
   gridEl.appendChild(frag);
 
-  await waitForImages(gridEl, { maxWait: 900, minWait: 180, sample: 36 });
+  await waitForImages(gridEl, { maxWait: 450, minWait: 0, sample: 8 });
 
   loader.hide();
   box.replaceChildren(gridEl);
@@ -672,11 +694,9 @@ async function renderGrid() {
 function matchesQuery(m, q){
   const query = _nrm(q || '');
   if (!query) return true;
-  const hay = _haystack(m);
+  const hay = m._hay || _haystack(m);
   const tokens = query.split(/\s+/).filter(Boolean);
-  for (const tok of tokens){
-    if (!hay.includes(tok)) return false;
-  }
+  for (const tok of tokens){ if (!hay.includes(tok)) return false; }
   return true;
 }
 
@@ -1124,8 +1144,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (box) {
     const boot = makeDotsLoader('Chargement');
     box.replaceChildren(boot.el);
-    boot.show(0);
-    await nextFrame();                 // <-- donne le temps de peindre le loader
+    boot.show(300);
   }
   await buildStrictCollabPairs();          // construit _pairById (SW ↔ collab)
   await renderGrid();                      // ← RENDRE LA GRILLE APRÈS la construction
@@ -1324,7 +1343,7 @@ function openOffPicker(defKey, offsListEl, onClose){
 function renderPickerGrid(){
   const loader = makeDotsLoader('Chargement');
   gwrap.replaceChildren(loader.el);
-  loader.show(180);
+  loader.show(280);
   
   const q = (inp.value || '').trim();
   grid.innerHTML = '';
