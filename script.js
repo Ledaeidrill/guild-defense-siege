@@ -1429,7 +1429,16 @@ function renderPickerGrid(){
     });
   }
 
-  inp.addEventListener('input', renderPickerGrid);
+// Debounced search for the picker
+let _pickerTimer = null, _pickerGen = 0;
+inp.addEventListener('input', () => {
+  clearTimeout(_pickerTimer);
+  const gen = ++_pickerGen;
+  _pickerTimer = setTimeout(() => {
+    if (gen === _pickerGen) renderPickerGrid();
+  }, 120); // adjust delay if you want
+});
+  
   renderPickerGrid(); renderOffPicks();
 
   // ====== Validation
