@@ -672,7 +672,7 @@ textarea{ min-height:100px; border-radius:12px; }
 
 .modal--picker .picker-grid{
   flex: 1 1 auto;
-  min-height: var(--row-h) !important;  /* force l’override des anciennes règles */
+  min-height: var(--row-h);  /* force l’override des anciennes règles */
   max-height: 60vh;
   overflow: auto;
   scrollbar-gutter: stable both-edges;
@@ -758,7 +758,7 @@ textarea{ min-height:100px; border-radius:12px; }
 
 /* Grid wrapper: takes remaining space and scrolls internally */
 .modal--picker .picker-grid{
-  flex: 1 1 auto;                   /* fills the column below the search row */
+  flex: 0 1 auto !important;                   /* fills the column below the search row */
   min-height: 100px;                /* visible even with few results */
   max-height: 60vh;                 /* scroll if long */
   overflow: auto;
