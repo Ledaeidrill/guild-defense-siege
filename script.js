@@ -407,15 +407,19 @@ function renderMergedVisual(m, opts){
     const title = unifiedTitle;
     return { htmlIcon, label, title };
   }
+  
   // Cas non-duo
-  const htmlIcon = `<img loading="lazy"
-                         src="${fixIconUrl(m.icon)}"
-                         alt="${esc(m.name)}"
-                         title="${esc(unifiedTitle)}">`;
+  const htmlIcon = `
+    <img loading="lazy" decoding="async" fetchpriority="low"
+         src="${fixIconUrl(m.icon)}"
+         alt="${esc(m.name)}"
+         title="${esc(m.name)}">`;
+
   const label = m.name;
-  const title = unifiedTitle;
+  const title = m.name;
   return { htmlIcon, label, title };
 }
+
 
 // =====================
 // API helper (timeout + retry léger)
