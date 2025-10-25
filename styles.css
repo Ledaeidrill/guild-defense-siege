@@ -771,3 +771,7 @@ textarea{ min-height:100px; border-radius:12px; }
   padding-top: 12px;
   border-top: 1px solid #223244;
 }
+
+/* Faster large grids */
+.card{ contain: content; }
+.monster-grid{ content-visibility: auto; contain-intrinsic-size: 1200px 800px; }
