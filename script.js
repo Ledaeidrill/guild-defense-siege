@@ -624,7 +624,7 @@ const grid   = qs('#monster-grid');
 const search = qs('#search');
 
 // Make decode wait "free" on fast paths
-async function waitForImages(root, { maxWait = 450, minWait = 0, sample = 8 } = {}) {
+async function waitForImages(root, { maxWait = 900, minWait = 180, sample = 36 } = {}) {
   const imgs = [...root.querySelectorAll('img')].slice(0, sample);
   const decodeOne = (img) => {
     if (img.complete && img.naturalWidth) return Promise.resolve();
@@ -634,12 +634,6 @@ async function waitForImages(root, { maxWait = 450, minWait = 0, sample = 8 } = 
       img.addEventListener('error', res, { once: true });
     });
   };
-  const allDecoded = Promise.allSettled(imgs.map(decodeOne));
-  const capMax = new Promise((res) => setTimeout(res, maxWait));
-  await Promise.race([allDecoded, capMax]);
-  if (minWait) await new Promise(r => setTimeout(r, minWait));
-}
-
   const allDecoded = Promise.allSettled(imgs.map(decodeOne));
   const capMax = new Promise((res) => setTimeout(res, maxWait));
   const capMin = new Promise((res) => setTimeout(res, minWait));
