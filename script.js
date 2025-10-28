@@ -98,6 +98,34 @@ function fetchJSONP(url, timeoutMs = 20000) {
   });
 }
 
+// ===== JSONP GET helpers (build query + de-dup) =====
+function buildQuery(obj){
+  const out = [];
+  for (const [k,v] of Object.entries(obj || {})) {
+    if (v == null) continue;
+    if (Array.isArray(v)) {
+      for (const x of v) out.push(encodeURIComponent(k) + '=' + encodeURIComponent(x));
+    } else {
+      out.push(encodeURIComponent(k) + '=' + encodeURIComponent(v));
+    }
+  }
+  return out.join('&');
+}
+
+function apiGet(params, timeoutMs = 20000){
+  const qs = buildQuery(params);
+  const url = APPS_SCRIPT_URL + (APPS_SCRIPT_URL.includes('?') ? '&' : '?') + qs;
+  return fetchJSONP(url, timeoutMs);
+}
+
+function apiGetDedup(params, opts){
+  const k = JSON.stringify(params);
+  if (inflightMap.has(k)) return inflightMap.get(k);
+  const p = apiGet(params, (opts && opts.timeoutMs) || 20000).finally(()=> inflightMap.delete(k));
+  inflightMap.set(k, p);
+  return p;
+}
+
 // ===== Modal Offs (markup existant dans index.html) =====
 const offsModal   = qs('#offsModal');
 const closeOffsBtn= qs('#closeOffs');
@@ -484,11 +512,10 @@ async function apiGetOffs(key, { force = false } = {}){
     const ls = swrGetLS('offs:'+key, 5*60*1000);
     if (ls?.ok) offsCache.set(key, { ts: Date.now(), data: ls });
   }
-
   const ent = offsCache.get(key);
   if (!force && ent && (Date.now() - ent.ts) < OFFS_CACHE_TTL) return ent.data;
 
-  const res = await apiPostDedup({ mode:'get_offs', token: TOKEN, key });
+  const res = await apiGetDedup({ mode:'get_offs', token: TOKEN, key });
   if (res?.ok){
     offsCache.set(key, { ts: Date.now(), data: res });
     swrSetLS('offs:'+key, res);
@@ -497,13 +524,12 @@ async function apiGetOffs(key, { force = false } = {}){
 }
 
 async function apiAddOff({ key, o1, o1el, o2, o2el, o3, o3el, note = '', by = '' }){
-  const res = await apiPostDedup({
+  const res = await apiGetDedup({
     mode: 'add_off',
     admin_token: ADMIN_TOKEN_PARAM,
     key, o1, o1el, o2, o2el, o3, o3el, note, by
   }, { timeoutMs: 8000 });
 
-  // Invalidation locale (SWR)
   if (res?.ok) {
     offsCache.delete(key);
     try { localStorage.removeItem('offs:'+key); } catch {}
@@ -512,12 +538,11 @@ async function apiAddOff({ key, o1, o1el, o2, o2el, o3, o3el, note = '', by = ''
 }
 
 async function apiDelOff({ key, o1, o1el, o2, o2el, o3, o3el }){
-  const res = await apiPostDedup({
+  const res = await apiGetDedup({
     mode:'del_off', admin_token: ADMIN_TOKEN_PARAM,
     key, o1, o1el, o2, o2el, o3, o3el
   }, { timeoutMs: 8000 });
 
-  // Invalidation locale (SWR)
   if (res?.ok) {
     offsCache.delete(key);
     try { localStorage.removeItem('offs:'+key); } catch {}
@@ -835,22 +860,21 @@ sendBtn?.addEventListener('click', async () => {
   const player = qs('#player')?.value || '';
   const notes  = qs('#notes')?.value  || '';
 
-  // ➜ construits ICI les deux tableaux
   const monsters    = picks.map(p => p.name);
-  const monsters_el = picks.map(p => p.element || ''); // pour collabs
+  const monsters_el = picks.map(p => p.element || '');
 
   try {
     inFlight = true;
     sendBtn.disabled = true;
     sendBtn.classList.add('sending');
 
-    const json = await apiPost({
+    const json = await apiGet({
       mode: 'submit',
       token: TOKEN,
       player,
-      monsters,
-      monsters_el,
-      notes
+      notes,
+      monsters,        // sent as ?monsters=a&monsters=b&monsters=c
+      monsters_el
     });
 
     if (json.already_handled) {
@@ -863,7 +887,6 @@ sendBtn?.addEventListener('click', async () => {
     toast('Défense enregistrée ✅');
     picks = []; renderPicks(); if (qs('#notes')) qs('#notes').value='';
 
-    // Forcer un refresh silencieux des stats
     cache.stats.ts = 0;
     void fetchStats().then(updateStatsUIIfVisible);
   } catch (e) {
@@ -959,7 +982,7 @@ function renderStats(data){
       recentlyHandled.add(key);
       setTimeout(() => recentlyHandled.delete(key), 5000);
 
-      const resp = await apiPost({ mode:'handle', admin_token: ADMIN_TOKEN_PARAM, key });
+      const resp = await apiGet({ mode:'handle', admin_token: ADMIN_TOKEN_PARAM, key });
       if (!resp.ok) {
         toast(resp.error || 'Action admin impossible.');
         // rollback (rafraîchir depuis serveur)
