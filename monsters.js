@@ -332,7 +332,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "poison master"
+      "poison master",
+      "dhalsim"
     ]
   },
   {
@@ -348,7 +349,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "magic order elementalist"
+      "magic order elementalist",
+      "triss"
     ]
   },
   {
@@ -381,7 +383,9 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "blade dancer",
+      "danseuse aux lames"
     ]
   },
   {
@@ -541,7 +545,9 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "poison master",
+      "maître des poisons"
     ]
   },
   {
@@ -686,7 +692,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "pudding princess"
+      "pudding princess",
+      "pure vanilla cookie"
     ]
   },
   {
@@ -735,7 +742,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "steel commander"
+      "steel commander",
+      "ezio"
     ]
   },
   {
@@ -880,7 +888,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "magic order swordsinger"
+      "magic order swordsinger",
+      "ciri"
     ]
   },
   {
@@ -993,7 +1002,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "macaron guard"
+      "macaron guard",
+      "hollyberry cookie"
     ]
   },
   {
@@ -1073,7 +1083,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "slayer"
+      "slayer",
+      "m. bison"
     ]
   },
   {
@@ -1185,7 +1196,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "magic order enchantress"
+      "magic order enchantress",
+      "yennefer"
     ]
   },
   {
@@ -1602,7 +1614,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "gladiatrix"
+      "gladiatrix",
+      "kassandra"
     ]
   },
   {
@@ -1730,7 +1743,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "black tea bunny"
+      "black tea bunny",
+      "espresso cookie"
     ]
   },
   {
@@ -1841,7 +1855,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "slayer"
     ]
   },
   {
@@ -2419,7 +2434,9 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "exorcist association arbiter",
+      "juge de l'ordre exorciste"
     ]
   },
   {
@@ -2434,7 +2451,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "striker"
     ]
   },
   {
@@ -2450,7 +2468,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "desert warrior"
+      "desert warrior",
+      "bayek"
     ]
   },
   {
@@ -2531,7 +2550,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "mercenary queen"
+      "mercenary queen",
+      "eivor"
     ]
   },
   {
@@ -2709,7 +2729,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "choco knight"
+      "choco knight",
+      "madeleine cookie"
     ]
   },
   {
@@ -2725,7 +2746,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "magic order guardian"
+      "magic order guardian",
+      "geralt"
     ]
   },
   {
@@ -2741,7 +2763,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "striker"
+      "striker",
+      "ryu"
     ]
   },
   {
@@ -2789,7 +2812,8 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "blade dancer"
+      "blade dancer",
+      "chun-li"
     ]
   },
   {
@@ -3144,7 +3168,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "macaron guard"
+      "macaron guard",
+      "hollyberry cookie"
     ]
   },
   {
@@ -3224,7 +3249,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "desert warrior"
+      "desert warrior",
+      "bayek"
     ]
   },
   {
@@ -3368,7 +3394,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "blade dancer"
+      "blade dancer",
+      "chun-li"
     ]
   },
   {
@@ -3384,7 +3411,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "shadow claw"
+      "shadow claw",
+      "ken"
     ]
   },
   {
@@ -3607,7 +3635,9 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "blade dancer",
+      "danseuse aux lames"
     ]
   },
   {
@@ -3767,7 +3797,9 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "poison master",
+      "maître des poisons"
     ]
   },
   {
@@ -3783,7 +3815,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "striker"
+      "striker",
+      "ryu"
     ]
   },
   {
@@ -3848,7 +3881,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "magic order elementalist"
+      "magic order elementalist",
+      "triss"
     ]
   },
   {
@@ -3994,7 +4028,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "gladiatrix"
+      "gladiatrix",
+      "kassandra"
     ]
   },
   {
@@ -4170,7 +4205,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "black tea bunny"
+      "black tea bunny",
+      "espresso cookie"
     ]
   },
   {
@@ -4538,7 +4574,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "slayer"
+      "slayer",
+      "m. bison"
     ]
   },
   {
@@ -4586,7 +4623,9 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "shadow claw",
+      "griffes de l'ombre"
     ]
   },
   {
@@ -4796,7 +4835,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "pudding princess"
+      "pudding princess",
+      "pure vanilla cookie"
     ]
   },
   {
@@ -4827,7 +4867,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "slayer"
     ]
   },
   {
@@ -4860,7 +4901,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "magic order guardian"
+      "magic order guardian",
+      "geralt"
     ]
   },
   {
@@ -5150,7 +5192,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "steel commander"
+      "steel commander",
+      "ezio"
     ]
   },
   {
@@ -5181,7 +5224,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "choco knight"
+      "choco knight",
+      "madeleine cookie"
     ]
   },
   {
@@ -5390,7 +5434,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "magic order swordsinger"
+      "magic order swordsinger",
+      "ciri"
     ]
   },
   {
@@ -5437,7 +5482,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "striker"
     ]
   },
   {
@@ -5598,7 +5644,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "mercenary queen"
+      "mercenary queen",
+      "eivor"
     ]
   },
   {
@@ -5711,7 +5758,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "magic order enchantress"
+      "magic order enchantress",
+      "yennefer"
     ]
   },
   {
@@ -5791,7 +5839,8 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "poison master"
+      "poison master",
+      "dhalsim"
     ]
   },
   {
@@ -6179,7 +6228,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "desert warrior"
+      "desert warrior",
+      "bayek"
     ]
   },
   {
@@ -6260,7 +6310,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "magic order enchantress"
+      "magic order enchantress",
+      "yennefer"
     ]
   },
   {
@@ -6292,7 +6343,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "pudding princess"
+      "pudding princess",
+      "pure vanilla cookie"
     ]
   },
   {
@@ -6356,7 +6408,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "macaron guard"
+      "macaron guard",
+      "hollyberry cookie"
     ]
   },
   {
@@ -6372,7 +6425,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "gladiatrix"
+      "gladiatrix",
+      "kassandra"
     ]
   },
   {
@@ -6484,7 +6538,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "mercenary queen"
+      "mercenary queen",
+      "eivor"
     ]
   },
   {
@@ -6500,7 +6555,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "magic order swordsinger"
+      "magic order swordsinger",
+      "ciri"
     ]
   },
   {
@@ -6627,7 +6683,9 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "blade dancer",
+      "danseuse aux lames"
     ]
   },
   {
@@ -6676,7 +6734,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "slayer"
+      "slayer",
+      "m. bison"
     ]
   },
   {
@@ -6755,7 +6814,9 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "poison master",
+      "maître des poisons"
     ]
   },
   {
@@ -7286,7 +7347,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "dual blade"
+      "dual blade",
+      "altaïr"
     ]
   },
   {
@@ -7318,7 +7380,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "choco knight"
+      "choco knight",
+      "madeleine cookie"
     ]
   },
   {
@@ -7415,7 +7478,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "magic order elementalist"
+      "magic order elementalist",
+      "triss"
     ]
   },
   {
@@ -7495,7 +7559,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "poison master"
+      "poison master",
+      "dhalsim"
     ]
   },
   {
@@ -7607,7 +7672,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "steel commander"
+      "steel commander",
+      "ezio"
     ]
   },
   {
@@ -7752,7 +7818,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "black tea bunny"
+      "black tea bunny",
+      "espresso cookie"
     ]
   },
   {
@@ -7912,7 +7979,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "magic order guardian"
+      "magic order guardian",
+      "geralt"
     ]
   },
   {
@@ -7928,7 +7996,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "blade dancer"
+      "blade dancer",
+      "chun-li"
     ]
   },
   {
@@ -8103,7 +8172,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "slayer"
     ]
   },
   {
@@ -8617,7 +8687,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "striker"
     ]
   },
   {
@@ -8892,7 +8963,8 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "striker"
+      "striker",
+      "ryu"
     ]
   },
   {
@@ -9281,7 +9353,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "pudding princess"
+      "pudding princess",
+      "pure vanilla cookie"
     ]
   },
   {
@@ -9393,7 +9466,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "magic order guardian"
+      "magic order guardian",
+      "geralt"
     ]
   },
   {
@@ -9601,7 +9675,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "slayer"
+      "slayer",
+      "m. bison"
     ]
   },
   {
@@ -9617,7 +9692,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "mercenary queen"
+      "mercenary queen",
+      "eivor"
     ]
   },
   {
@@ -9712,7 +9788,9 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "blade dancer",
+      "danseuse aux lames"
     ]
   },
   {
@@ -9792,7 +9870,9 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "poison master",
+      "maître des poisons"
     ]
   },
   {
@@ -10051,7 +10131,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "choco knight"
+      "choco knight",
+      "madeleine cookie"
     ]
   },
   {
@@ -10356,7 +10437,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "magic order enchantress"
+      "magic order enchantress",
+      "yennefer"
     ]
   },
   {
@@ -10468,7 +10550,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "gladiatrix"
+      "gladiatrix",
+      "kassandra"
     ]
   },
   {
@@ -10581,7 +10664,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "poison master"
+      "poison master",
+      "dhalsim"
     ]
   },
   {
@@ -10629,7 +10713,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "blade dancer"
+      "blade dancer",
+      "chun-li"
     ]
   },
   {
@@ -10677,7 +10762,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "steel commander"
+      "steel commander",
+      "ezio"
     ]
   },
   {
@@ -10759,7 +10845,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "magic order elementalist"
+      "magic order elementalist",
+      "triss"
     ]
   },
   {
@@ -10790,7 +10877,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "slayer"
     ]
   },
   {
@@ -10839,7 +10927,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "macaron guard"
+      "macaron guard",
+      "hollyberry cookie"
     ]
   },
   {
@@ -11032,7 +11121,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "striker"
+      "striker",
+      "ryu"
     ]
   },
   {
@@ -11161,7 +11251,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "desert warrior"
+      "desert warrior",
+      "bayek"
     ]
   },
   {
@@ -11433,7 +11524,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "magic order swordsinger"
+      "magic order swordsinger",
+      "ciri"
     ]
   },
   {
@@ -11481,7 +11573,8 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "black tea bunny"
+      "black tea bunny",
+      "espresso cookie"
     ]
   },
   {
@@ -11512,7 +11605,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "striker"
     ]
   },
   {
@@ -12334,7 +12428,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "pudding princess"
+      "pudding princess",
+      "pure vanilla cookie"
     ]
   },
   {
@@ -12414,7 +12509,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "mercenary queen"
+      "mercenary queen",
+      "eivor"
     ]
   },
   {
@@ -12590,7 +12686,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "black tea bunny"
+      "black tea bunny",
+      "espresso cookie"
     ]
   },
   {
@@ -12687,7 +12784,9 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "blade dancer",
+      "danseuse aux lames"
     ]
   },
   {
@@ -12752,7 +12851,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "blade dancer"
+      "blade dancer",
+      "chun-li"
     ]
   },
   {
@@ -12831,7 +12931,9 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "poison master",
+      "maître des poisons"
     ]
   },
   {
@@ -12928,7 +13030,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "gladiatrix"
+      "gladiatrix",
+      "kassandra"
     ]
   },
   {
@@ -13283,7 +13386,9 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "black tortoise champion",
+      "lancier de la tortue noire"
     ]
   },
   {
@@ -13331,7 +13436,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "steel commander"
+      "steel commander",
+      "ezio"
     ]
   },
   {
@@ -13347,7 +13453,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "magic order guardian"
+      "magic order guardian",
+      "geralt"
     ]
   },
   {
@@ -13363,7 +13470,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "magic order enchantress"
+      "magic order enchantress",
+      "yennefer"
     ]
   },
   {
@@ -13540,7 +13648,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "macaron guard"
+      "macaron guard",
+      "hollyberry cookie"
     ]
   },
   {
@@ -13572,7 +13681,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "poison master"
+      "poison master",
+      "dhalsim"
     ]
   },
   {
@@ -13635,7 +13745,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "striker"
+      "striker",
+      "ryu"
     ]
   },
   {
@@ -13859,7 +13970,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "slayer"
     ]
   },
   {
@@ -14150,7 +14262,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "magic order elementalist"
+      "magic order elementalist",
+      "triss"
     ]
   },
   {
@@ -14309,7 +14422,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "choco knight"
+      "choco knight",
+      "madeleine cookie"
     ]
   },
   {
@@ -14565,7 +14679,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "striker"
     ]
   },
   {
@@ -14597,7 +14712,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "slayer"
+      "slayer",
+      "m. bison"
     ]
   },
   {
@@ -14710,7 +14826,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "desert warrior"
+      "desert warrior",
+      "bayek"
     ]
   },
   {
@@ -14967,7 +15084,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "lollipop warrior"
+      "lollipop warrior",
+      "gingerbrave"
     ]
   },
   {
@@ -14999,7 +15117,8 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "magic order swordsinger"
+      "magic order swordsinger",
+      "ciri"
     ]
   },
   {
