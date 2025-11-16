@@ -78,22 +78,24 @@ function esc(s){
 function fetchJSONP(url, timeoutMs = 20000) {
   return new Promise((resolve, reject) => {
     const cb = 'jsonp_cb_' + Math.random().toString(36).slice(2);
-    const timer = setTimeout(() => {
-      cleanup();
-      reject(new Error('JSONP timeout'));
-    }, timeoutMs);
-
+    const timer = setTimeout(() => { cleanup(); reject(new Error('JSONP timeout')); }, timeoutMs);
     function cleanup() {
       clearTimeout(timer);
       try { delete window[cb]; } catch {}
       if (script && script.parentNode) script.parentNode.removeChild(script);
     }
-
     window[cb] = (data) => { cleanup(); resolve(data); };
 
     const script = document.createElement('script');
-    script.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + cb;
-    script.onerror = () => { cleanup(); reject(new Error('JSONP error')); };
+    // ⬇️ log the exact URL used for JSONP
+    const full = url + (url.includes('?') ? '&' : '?') + 'callback=' + cb;
+    console.log('[JSONP] GET', full);
+    script.src = full;
+    script.onerror = () => {
+      console.error('[JSONP] error for', full);
+      cleanup();
+      reject(new Error('JSONP error'));
+    };
     document.head.appendChild(script);
   });
 }
@@ -905,17 +907,11 @@ sendBtn?.addEventListener('click', async () => {
 function isFresh(ts){ return (Date.now() - ts) < CACHE_TTL_MS; }
 
 async function fetchStats(){
-  const url = APPS_SCRIPT_URL + '?fn=stats&token=' + encodeURIComponent(TOKEN);
-  const data = await fetchJSONP(url, 20000);   // JSONP → plus de CORS
-  try { (cache.stats ||= {}).data = data; } catch {}
-  return data;
+  return apiGet({ fn: 'stats', token: TOKEN }, 20000);
 }
 
 async function fetchHandled(){
-  const url = APPS_SCRIPT_URL + '?fn=handled&token=' + encodeURIComponent(TOKEN);
-  const data = await fetchJSONP(url, 20000);
-  try { (cache.handled ||= {}).data = data; } catch {}
-  return data;
+  return apiGet({ fn: 'handled', token: TOKEN }, 20000);
 }
 
 // =====================
