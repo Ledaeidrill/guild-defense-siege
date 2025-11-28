@@ -132,6 +132,9 @@ function apiGet(params, timeoutMs = 20000){
   return fetchJSONP(url, timeoutMs);
 }
 
+// ===== Client-side request de-dup + SWR (localStorage) =====
+const inflightMap = new Map(); // key (payload string) -> Promise
+
 function apiGetDedup(params, opts){
   const k = JSON.stringify(params);
   if (inflightMap.has(k)) return inflightMap.get(k);
@@ -466,35 +469,15 @@ function renderMergedVisual(m, opts){
 // =====================
 // API helper (timeout + retry léger)
 // =====================
-async function apiPost(payloadObj, { timeoutMs = 7000, retries = 1 } = {}){
-  const payload = JSON.stringify(payloadObj);
-  const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), timeoutMs);
 
-  try {
-    const res = await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-      body: 'payload=' + encodeURIComponent(payload),
-      signal: controller.signal
-    });
-
-    const txt = await res.text();
-    try { return JSON.parse(txt); }
-    catch { return { ok:false, error:'Réponse invalide', raw: txt }; }
-  } catch (e) {
-    if (retries > 0) {
-      await new Promise(r => setTimeout(r, 250));
-      return apiPost(payloadObj, { timeoutMs, retries: retries - 1 });
-    }
-    return { ok:false, error: e?.name === 'AbortError' ? 'Timeout' : String(e) };
-  } finally {
-    clearTimeout(id);
-  }
+// Désactive tout POST côté front (évite les erreurs CORS par mégarde)
+async function apiPost() {
+  throw new Error('apiPost désactivé — utiliser apiGet/JSONP');
 }
 
-// ===== Client-side request de-dup + SWR (localStorage) =====
-const inflightMap = new Map(); // key (payload string) -> Promise
+async function apiPostDedup() {
+  throw new Error('apiPostDedup désactivé — utiliser apiGetDedup');
+}
 
 function swrGetLS(key, maxAgeMs){
   try{
@@ -507,16 +490,6 @@ function swrGetLS(key, maxAgeMs){
 }
 function swrSetLS(key, data){
   try{ localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data })); }catch{}
-}
-
-// Wrap pour dédupliquer des POST identiques (même payload)
-async function apiPostDedup(payloadObj, opts){
-  const payload = JSON.stringify(payloadObj);
-  const k = payload; // stable key
-  if (inflightMap.has(k)) return inflightMap.get(k);
-  const p = apiPost(payloadObj, opts).finally(()=> inflightMap.delete(k));
-  inflightMap.set(k, p);
-  return p;
 }
 
 // Helpers Offs API (SWR + de-dup)
@@ -1341,9 +1314,9 @@ function openOffPicker(defKey, offsListEl, onClose){
   // Grille
   const gwrap = document.createElement('div'); 
   gwrap.className='picker-grid';
-  const grid = document.createElement('div'); 
-  grid.className='monster-grid';
-  
+  const gridEl = document.createElement('div');
+  gridEl.className='monster-grid';
+
   gwrap.style.flex = '1 1 auto';
   gwrap.style.minHeight = '80px';
   gwrap.style.removeProperty('height');
@@ -1353,7 +1326,7 @@ function openOffPicker(defKey, offsListEl, onClose){
   gwrap.style.borderRadius = '8px';
   gwrap.style.padding = '6px';
 
-  gwrap.appendChild(grid);   // ← insère la grille dans le conteneur
+  gwrap.appendChild(gridEl);   // ← insère la grille dans le conteneur
   wrap.appendChild(gwrap);   // ← insère le conteneur dans la modale (avant la barre d’actions)
 
 // ====== RENDER GRID (Offense picker)
@@ -1363,7 +1336,6 @@ function renderPickerGrid(){
   loader.show(280);
   
   const q = (inp.value || '').trim();
-  grid.innerHTML = '';
 
   const frag = document.createDocumentFragment();
   const seenPairs = new Set();
