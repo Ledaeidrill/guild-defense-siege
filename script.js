@@ -75,28 +75,40 @@ function esc(s){
 }
 
 // ===== JSONP (contourne CORS) =====
-function fetchJSONP(url, timeoutMs = 20000) {
+function fetchJSONP(url, timeoutMs = 45000, retries = 1) {
   return new Promise((resolve, reject) => {
-    const cb = 'jsonp_cb_' + Math.random().toString(36).slice(2);
-    const timer = setTimeout(() => { cleanup(); reject(new Error('JSONP timeout')); }, timeoutMs);
-    function cleanup() {
-      clearTimeout(timer);
-      try { delete window[cb]; } catch {}
-      if (script && script.parentNode) script.parentNode.removeChild(script);
-    }
-    window[cb] = (data) => { cleanup(); resolve(data); };
+    let attempt = 0;
 
-    const script = document.createElement('script');
-    // ⬇️ log the exact URL used for JSONP
-    const full = url + (url.includes('?') ? '&' : '?') + 'callback=' + cb;
-    console.log('[JSONP] GET', full);
-    script.src = full;
-    script.onerror = () => {
-      console.error('[JSONP] error for', full);
-      cleanup();
-      reject(new Error('JSONP error'));
+    const tryOnce = () => {
+      const cb   = 'jsonp_cb_' + Math.random().toString(36).slice(2);
+      const bust = 'ts=' + Date.now() + Math.random().toString(36).slice(2);
+      const full = url + (url.includes('?') ? '&' : '?') + 'callback=' + cb + '&' + bust;
+
+      const timer = setTimeout(() => {
+        cleanup();
+        if (attempt < retries) { attempt++; tryOnce(); }
+        else reject(new Error('JSONP timeout'));
+      }, timeoutMs);
+
+      function cleanup() {
+        clearTimeout(timer);
+        try { delete window[cb]; } catch {}
+        if (script && script.parentNode) script.parentNode.removeChild(script);
+      }
+
+      window[cb] = (data) => { cleanup(); resolve(data); };
+
+      const script = document.createElement('script');
+      script.src = full;
+      script.onerror = () => {
+        cleanup();
+        if (attempt < retries) { attempt++; tryOnce(); }
+        else reject(new Error('JSONP error'));
+      };
+      document.head.appendChild(script);
     };
-    document.head.appendChild(script);
+
+    tryOnce();
   });
 }
 
@@ -907,11 +919,11 @@ sendBtn?.addEventListener('click', async () => {
 function isFresh(ts){ return (Date.now() - ts) < CACHE_TTL_MS; }
 
 async function fetchStats(){
-  return apiGet({ fn: 'stats', token: TOKEN }, 20000);
+  return apiGet({ fn: 'stats', token: TOKEN }, 45000);
 }
 
 async function fetchHandled(){
-  return apiGet({ fn: 'handled', token: TOKEN }, 20000);
+  return apiGet({ fn: 'handled', token: TOKEN }, 45000);
 }
 
 // =====================
