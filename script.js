@@ -74,6 +74,32 @@ function esc(s){
   }[c]));
 }
 
+// Force la variante d'un même "family_id" sur l'élément demandé
+function coerceToElement(m, el){
+  if (!m || !el) return m;
+  const wanted = String(el).trim().toLowerCase();
+  if ((m.element || '').toLowerCase() === wanted) return m;
+  const list = window.MONSTERS || [];
+  const alt = list.find(x => x.family_id === m.family_id &&
+                             (x.element || '').toLowerCase() === wanted);
+  return alt || m;
+}
+
+// Recherche robuste avec fallback + coercition d'élément
+function lookupMonster(name, el){
+  const n = (name || '').trim();
+  const e = (el   || '').trim();
+
+  let m = null;
+  if (e) m = findByNameEl(n, e);           // 1) nom + élément exacts
+  if (!m) m = findMonsterByName(n);        // 2) nom seul (map rapide)
+  if (!m && typeof findByMapName === 'function') {
+    m = findByMapName(n);                  // 3) alias / non-éveillé
+  }
+  if (m && e) m = coerceToElement(m, e);   // 4) recale l’élément si besoin
+  return m || { name:n, element:e, icon:'' };
+}
+
 // ===== JSONP (contourne CORS) =====
 function fetchJSONP(url, timeoutMs = 45000, retries = 1) {
   return new Promise((resolve, reject) => {
@@ -922,7 +948,7 @@ function renderStats(data){
     const trioDiv = document.createElement('div'); trioDiv.className = 'def-trio';
     trio.forEach((name, i) => {
     const el = (r.els && r.els[i]) || '';
-    const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
+    const m  = lookupMonster(name, el);
     const card = document.createElement('div'); card.className = 'pick def-pick';
     const v = renderMergedVisual(m);
     card.innerHTML = `
@@ -1020,7 +1046,7 @@ function renderHandled(data){
       
       ensureTrioArray(r.trio, r.key).forEach((name, i) => {
       const el = (r.els && r.els[i]) || '';
-      const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
+      const m  = lookupMonster(name, el);
       const card = document.createElement('div'); 
       card.className = 'pick def-pick';
       const v = renderMergedVisual(m);
@@ -1190,7 +1216,7 @@ function renderOffsList(target, offs){
     const els   = [o.o1el || '', o.o2el || '', o.o3el || ''];
     names.forEach((name, i) => {
       const el = els[i];
-      const m  = (el ? findByNameEl(name, el) : findMonsterByName(name)) || { name, element: el, icon: '' };
+      const m  = lookupMonster(name, el);
       const v  = renderMergedVisual(m);
       const card = document.createElement('div');
       card.className = 'pick def-pick';
