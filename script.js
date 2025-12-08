@@ -86,18 +86,19 @@ function coerceToElement(m, el){
 }
 
 // Recherche robuste avec fallback + coercition d'élément
-function lookupMonster(name, el){
+function lookupMonster(name, el, opts = {}) {
+  const { allowCoerce = false } = opts;   // ⬅️ default: don't coerce
   const n = (name || '').trim();
   const e = (el   || '').trim();
 
   let m = null;
-  if (e) m = findByNameEl(n, e);           // 1) nom + élément exacts
-  if (!m) m = findMonsterByName(n);        // 2) nom seul (map rapide)
+  if (e) m = findByNameEl(n, e);          // 1) exact name+element
+  if (!m) m = findMonsterByName(n);       // 2) name only
   if (!m && typeof findByMapName === 'function') {
-    m = findByMapName(n);                  // 3) alias / non-éveillé
+    m = findByMapName(n);                 // 3) alias / non-awakened
   }
-  if (m && e) m = coerceToElement(m, e);   // 4) recale l’élément si besoin
-  return m || { name:n, element:e, icon:'' };
+  if (m && e && allowCoerce) m = coerceToElement(m, e); // 4) only if explicitly allowed
+  return m || { name: n, element: e, icon: '' };
 }
 
 // ===== JSONP (contourne CORS) =====
@@ -948,7 +949,7 @@ function renderStats(data){
     const trioDiv = document.createElement('div'); trioDiv.className = 'def-trio';
     trio.forEach((name, i) => {
     const el = (r.els && r.els[i]) || '';
-    const m  = lookupMonster(name, el);
+    const m  = lookupMonster(name, el, { allowCoerce: false });
     const card = document.createElement('div'); card.className = 'pick def-pick';
     const v = renderMergedVisual(m);
     card.innerHTML = `
@@ -1046,7 +1047,7 @@ function renderHandled(data){
       
       ensureTrioArray(r.trio, r.key).forEach((name, i) => {
       const el = (r.els && r.els[i]) || '';
-      const m  = lookupMonster(name, el);
+      const m  = lookupMonster(name, el, { allowCoerce: false });
       const card = document.createElement('div'); 
       card.className = 'pick def-pick';
       const v = renderMergedVisual(m);
@@ -1216,7 +1217,7 @@ function renderOffsList(target, offs){
     const els   = [o.o1el || '', o.o2el || '', o.o3el || ''];
     names.forEach((name, i) => {
       const el = els[i];
-      const m  = lookupMonster(name, el);
+      const m  = lookupMonster(name, el, { allowCoerce: false });
       const v  = renderMergedVisual(m);
       const card = document.createElement('div');
       card.className = 'pick def-pick';
