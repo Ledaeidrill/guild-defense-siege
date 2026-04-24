@@ -316,7 +316,7 @@ const MAP_COLLAB_TO_SW = {
   // TEKKEN 8 
   'Jin Kazama': 'Kai',
   'Paul Phoenix': 'Duke',
-  'Nina Williams': 'Sasha',
+  'Nina Williams': 'Shasha',
   'Hwoarang': 'Taebaek',
   'Heihachi Mishima': 'Daimon',
 
