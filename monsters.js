@@ -2224,7 +2224,7 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "sasha"
+      "shasha"
     ]
   },
   {
@@ -2593,7 +2593,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "nina williams"
     ]
   },
   {
@@ -5344,7 +5345,7 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "sasha"
+      "shasha"
     ]
   },
   {
@@ -5843,7 +5844,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "nina williams"
     ]
   },
   {
@@ -8851,7 +8853,7 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "sasha"
+      "shasha"
     ]
   },
   {
@@ -9251,7 +9253,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "nina williams"
     ]
   },
   {
@@ -11776,7 +11779,7 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "sasha"
+      "shasha"
     ]
   },
   {
@@ -12291,7 +12294,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "nina williams"
     ]
   },
   {
@@ -14958,7 +14962,7 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "sasha"
+      "shasha"
     ]
   },
   {
@@ -15618,7 +15622,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "nina williams"
     ]
   },
   {
