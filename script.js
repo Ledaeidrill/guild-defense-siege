@@ -319,6 +319,13 @@ const MAP_COLLAB_TO_SW = {
   'Nina Williams': 'Sasha',
   'Hwoarang': 'Taebaek',
   'Heihachi Mishima': 'Daimon',
+
+  // Lord of the Rings
+  // 'Gandalf': '',
+  // 'Aragorn': '',
+  // 'Legolas': 'V',
+  // 'Gollum': '',
+  // 'Frodo': '',
 };
 
 // === Strict collab merge (basé SEULEMENT sur COLLAB_MAP) ===
