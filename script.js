@@ -300,12 +300,11 @@ const MAP_COLLAB_TO_SW = {
   'Triss': 'Magic Order Elementalist',
 
   // Jujutsu Kaisen
-  'Yuji Itadori': 'Exorcist Association Fighter',
-  'Satoru Gojo': 'Exorcist Association Resolver',
-  'Nobara Kugisaki': 'Exorcist Association Hunter',
-  'Megumi Fushiguro': 'Exorcist Association Conjurer',
-  'Ryomen Sukuna': 'Exorcist Association Arbiter',
-  'Ryōmen Sukuna': 'Exorcist Association Arbiter',
+  'Yuji Itadori': 'Rick',
+  'Satoru Gojo': 'Werner',
+  'Nobara Kugisaki': 'Aya',
+  'Megumi Fushiguro': 'Tetsuya',
+  'Ryomen Sukuna': 'Hayato',
 
   // Demon Slayer
   'Tanjiro Kamado': 'Azure Dragon Swordsman',
@@ -314,8 +313,12 @@ const MAP_COLLAB_TO_SW = {
   'Zenitsu Agatsuma': 'Qilin Slasher',
   'Inosuke Hashibira': 'White Tiger Blade Master',
 
-  // TEKKEN 8 → pas d’équivalent SW (DON’T MERGE)
-  // 'Jin': null, etc.
+  // TEKKEN 8 
+  'Jin Kazama': 'Kai',
+  'Paul Phoenix': 'Duke',
+  'Nina Williams': 'Sasha',
+  'Hwoarang': 'Taebaek',
+  'Heihachi Mishima': 'Daimon',
 };
 
 // === Strict collab merge (basé SEULEMENT sur COLLAB_MAP) ===
