@@ -106,7 +106,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "nobara kugisaki"
     ]
   },
   {
@@ -688,7 +689,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "paul phoenix"
     ]
   },
   {
@@ -1174,7 +1176,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "ryōmen sukuna"
     ]
   },
   {
@@ -1287,7 +1290,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "taebaek"
     ]
   },
   {
@@ -1495,7 +1499,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "kai"
     ]
   },
   {
@@ -1558,7 +1563,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "jin kazama"
     ]
   },
   {
@@ -2057,8 +2063,7 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "exorcist association conjurer",
-      "invocateur de l'ordre exorciste"
+      "tetsuya"
     ]
   },
   {
@@ -2218,7 +2223,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "sasha"
     ]
   },
   {
@@ -2234,8 +2240,7 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "exorcist association hunter",
-      "chasseur de l'ordre exorciste"
+      "aya"
     ]
   },
   {
@@ -2314,7 +2319,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "duke"
     ]
   },
   {
@@ -2426,7 +2432,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "yuji itadori"
     ]
   },
   {
@@ -2506,8 +2513,7 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "exorcist association arbiter",
-      "juge de l'ordre exorciste"
+      "hayato"
     ]
   },
   {
@@ -2556,8 +2562,7 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "exorcist association resolver",
-      "résolveur de l'ordre exorciste"
+      "werner"
     ]
   },
   {
@@ -2700,7 +2705,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "hwoarang"
     ]
   },
   {
@@ -2732,7 +2738,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "megumi fushiguro"
     ]
   },
   {
@@ -3056,7 +3063,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "ténèbres",
-      "dark"
+      "dark",
+      "satoru gojo"
     ]
   },
   {
@@ -3169,8 +3177,7 @@ window.MONSTERS = [
     "aliases": [
       "ténèbres",
       "dark",
-      "exorcist association fighter",
-      "combattant de l'ordre exorciste"
+      "rick"
     ]
   },
   {
@@ -3475,7 +3482,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "nobara kugisaki"
     ]
   },
   {
@@ -3958,7 +3966,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "heihachi mishima"
     ]
   },
   {
@@ -4087,7 +4096,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "paul phoenix"
     ]
   },
   {
@@ -4378,7 +4388,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "daimon"
     ]
   },
   {
@@ -4523,7 +4534,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "taebaek"
     ]
   },
   {
@@ -4651,7 +4663,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "kai"
     ]
   },
   {
@@ -4746,7 +4759,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "jin kazama"
     ]
   },
   {
@@ -5201,8 +5215,7 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "exorcist association conjurer",
-      "invocateur de l'ordre exorciste"
+      "tetsuya"
     ]
   },
   {
@@ -5330,7 +5343,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "sasha"
     ]
   },
   {
@@ -5362,8 +5376,7 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "exorcist association hunter",
-      "chasseur de l'ordre exorciste"
+      "aya"
     ]
   },
   {
@@ -5443,7 +5456,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "duke"
     ]
   },
   {
@@ -5701,7 +5715,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "yuji itadori"
     ]
   },
   {
@@ -5765,8 +5780,7 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "exorcist association resolver",
-      "résolveur de l'ordre exorciste"
+      "werner"
     ]
   },
   {
@@ -5973,7 +5987,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "hwoarang"
     ]
   },
   {
@@ -6086,7 +6101,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "megumi fushiguro"
     ]
   },
   {
@@ -6327,7 +6343,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "feu",
-      "fire"
+      "fire",
+      "satoru gojo"
     ]
   },
   {
@@ -6424,8 +6441,7 @@ window.MONSTERS = [
     "aliases": [
       "feu",
       "fire",
-      "exorcist association fighter",
-      "combattant de l'ordre exorciste"
+      "rick"
     ]
   },
   {
@@ -6782,7 +6798,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "nobara kugisaki"
     ]
   },
   {
@@ -7299,7 +7316,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "paul phoenix"
     ]
   },
   {
@@ -7993,7 +8011,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "taebaek"
     ]
   },
   {
@@ -8219,7 +8238,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "kai"
     ]
   },
   {
@@ -8266,7 +8286,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "jin kazama"
     ]
   },
   {
@@ -8637,8 +8658,7 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "exorcist association conjurer",
-      "invocateur de l'ordre exorciste"
+      "tetsuya"
     ]
   },
   {
@@ -8830,7 +8850,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "sasha"
     ]
   },
   {
@@ -8846,8 +8867,7 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "exorcist association hunter",
-      "chasseur de l'ordre exorciste"
+      "aya"
     ]
   },
   {
@@ -8894,7 +8914,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "duke"
     ]
   },
   {
@@ -9038,7 +9059,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "yuji itadori"
     ]
   },
   {
@@ -9118,8 +9140,7 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "exorcist association resolver",
-      "résolveur de l'ordre exorciste"
+      "werner"
     ]
   },
   {
@@ -9375,7 +9396,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "hwoarang"
     ]
   },
   {
@@ -9456,7 +9478,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "megumi fushiguro"
     ]
   },
   {
@@ -9632,7 +9655,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "lumière",
-      "light"
+      "light",
+      "satoru gojo"
     ]
   },
   {
@@ -9713,8 +9737,7 @@ window.MONSTERS = [
     "aliases": [
       "lumière",
       "light",
-      "exorcist association fighter",
-      "combattant de l'ordre exorciste"
+      "rick"
     ]
   },
   {
@@ -10003,7 +10026,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "nobara kugisaki"
     ]
   },
   {
@@ -10391,7 +10415,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "paul phoenix"
     ]
   },
   {
@@ -10825,7 +10850,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "taebaek"
     ]
   },
   {
@@ -10921,7 +10947,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "kai"
     ]
   },
   {
@@ -11033,7 +11060,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "jin kazama"
     ]
   },
   {
@@ -11522,8 +11550,7 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "exorcist association conjurer",
-      "invocateur de l'ordre exorciste"
+      "tetsuya"
     ]
   },
   {
@@ -11748,7 +11775,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "sasha"
     ]
   },
   {
@@ -11764,8 +11792,7 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "exorcist association hunter",
-      "chasseur de l'ordre exorciste"
+      "aya"
     ]
   },
   {
@@ -11845,7 +11872,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "duke"
     ]
   },
   {
@@ -12053,7 +12081,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "yuji itadori"
     ]
   },
   {
@@ -12199,8 +12228,7 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "exorcist association resolver",
-      "résolveur de l'ordre exorciste"
+      "werner"
     ]
   },
   {
@@ -12502,7 +12530,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "hwoarang"
     ]
   },
   {
@@ -12630,7 +12659,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "megumi fushiguro"
     ]
   },
   {
@@ -12822,7 +12852,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "eau",
-      "water"
+      "water",
+      "satoru gojo"
     ]
   },
   {
@@ -12919,8 +12950,7 @@ window.MONSTERS = [
     "aliases": [
       "eau",
       "water",
-      "exorcist association fighter",
-      "combattant de l'ordre exorciste"
+      "rick"
     ]
   },
   {
@@ -13161,7 +13191,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "nobara kugisaki"
     ]
   },
   {
@@ -13663,7 +13694,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "paul phoenix"
     ]
   },
   {
@@ -14247,7 +14279,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "taebaek"
     ]
   },
   {
@@ -14361,7 +14394,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "kai"
     ]
   },
   {
@@ -14392,7 +14426,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "jin kazama"
     ]
   },
   {
@@ -14730,8 +14765,7 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "exorcist association conjurer",
-      "invocateur de l'ordre exorciste"
+      "tetsuya"
     ]
   },
   {
@@ -14923,7 +14957,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "sasha"
     ]
   },
   {
@@ -14939,8 +14974,7 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "exorcist association hunter",
-      "chasseur de l'ordre exorciste"
+      "aya"
     ]
   },
   {
@@ -15068,7 +15102,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "duke"
     ]
   },
   {
@@ -15293,7 +15328,8 @@ window.MONSTERS = [
     "natural_stars": 4,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "yuji itadori"
     ]
   },
   {
@@ -15454,8 +15490,7 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "exorcist association resolver",
-      "résolveur de l'ordre exorciste"
+      "werner"
     ]
   },
   {
@@ -15710,7 +15745,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "hwoarang"
     ]
   },
   {
@@ -15822,7 +15858,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "megumi fushiguro"
     ]
   },
   {
@@ -16000,7 +16037,8 @@ window.MONSTERS = [
     "natural_stars": 5,
     "aliases": [
       "vent",
-      "wind"
+      "wind",
+      "satoru gojo"
     ]
   },
   {
@@ -16129,8 +16167,7 @@ window.MONSTERS = [
     "aliases": [
       "vent",
       "wind",
-      "exorcist association fighter",
-      "combattant de l'ordre exorciste"
+      "rick"
     ]
   },
   {
