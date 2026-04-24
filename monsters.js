@@ -48,6 +48,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2902,
+    "com2us_id": 34615,
+    "family_id": 34600,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0206_1_5.png",
+    "name": "Aragorn",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "ténèbres",
+      "dark"
+    ]
+  },
+  {
     "id": 2817,
     "com2us_id": 34115,
     "family_id": 34100,
@@ -77,6 +92,21 @@ window.MONSTERS = [
       "ténèbres",
       "dark",
       "sylph"
+    ]
+  },
+  {
+    "id": 2610,
+    "com2us_id": 31215,
+    "family_id": 31200,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0164_1_5.png",
+    "name": "Aya",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "ténèbres",
+      "dark"
     ]
   },
   {
@@ -583,6 +613,22 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2982,
+    "com2us_id": 35515,
+    "family_id": 35500,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0214_1_5.png",
+    "name": "Dr. Richard",
+    "unawakened_name": "dr plasma",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "ténèbres",
+      "dark",
+      "dr plasma"
+    ]
+  },
+  {
     "id": 1262,
     "com2us_id": 22715,
     "family_id": 22700,
@@ -615,19 +661,34 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 494,
-    "com2us_id": 11715,
+    "id": 2941,
+    "com2us_id": 11735,
     "family_id": 11700,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0006_4_3.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0212_3_5.png",
     "name": "Drogan",
     "unawakened_name": "inferno",
-    "second_awaken": false,
+    "second_awaken": true,
     "natural_stars": 3,
     "aliases": [
       "ténèbres",
       "dark",
       "inferno"
+    ]
+  },
+  {
+    "id": 2853,
+    "com2us_id": 33815,
+    "family_id": 33800,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0199_1_5.png",
+    "name": "Duke",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "ténèbres",
+      "dark"
     ]
   },
   {
@@ -747,86 +808,6 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 2570,
-    "com2us_id": 30815,
-    "family_id": 30800,
-    "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0162_1_5.png",
-    "name": "Exorcist Association Arbiter",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 5,
-    "aliases": [
-      "ténèbres",
-      "dark",
-      "ryōmen sukuna"
-    ]
-  },
-  {
-    "id": 2600,
-    "com2us_id": 31115,
-    "family_id": 31100,
-    "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0165_1_5.png",
-    "name": "Exorcist Association Conjurer",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 5,
-    "aliases": [
-      "ténèbres",
-      "dark",
-      "megumi fushiguro"
-    ]
-  },
-  {
-    "id": 2590,
-    "com2us_id": 31015,
-    "family_id": 31000,
-    "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0163_1_5.png",
-    "name": "Exorcist Association Fighter",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 5,
-    "aliases": [
-      "ténèbres",
-      "dark",
-      "yuji itadori"
-    ]
-  },
-  {
-    "id": 2610,
-    "com2us_id": 31215,
-    "family_id": 31200,
-    "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0164_1_5.png",
-    "name": "Exorcist Association Hunter",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 4,
-    "aliases": [
-      "ténèbres",
-      "dark",
-      "nobara kugisaki"
-    ]
-  },
-  {
-    "id": 2580,
-    "com2us_id": 30915,
-    "family_id": 30900,
-    "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0166_1_5.png",
-    "name": "Exorcist Association Resolver",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 5,
-    "aliases": [
-      "ténèbres",
-      "dark",
-      "satoru gojo"
-    ]
-  },
-  {
     "id": 2105,
     "com2us_id": 27415,
     "family_id": 27400,
@@ -906,6 +887,21 @@ window.MONSTERS = [
       "ténèbres",
       "dark",
       "pirate captain"
+    ]
+  },
+  {
+    "id": 2891,
+    "com2us_id": 34415,
+    "family_id": 34400,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0204_1_5.png",
+    "name": "Gandalf",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "ténèbres",
+      "dark"
     ]
   },
   {
@@ -1004,6 +1000,21 @@ window.MONSTERS = [
       "dark",
       "macaron guard",
       "hollyberry cookie"
+    ]
+  },
+  {
+    "id": 2922,
+    "com2us_id": 34815,
+    "family_id": 34800,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0207_1_5.png",
+    "name": "Gollum",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "ténèbres",
+      "dark"
     ]
   },
   {
@@ -1149,6 +1160,21 @@ window.MONSTERS = [
       "ténèbres",
       "dark",
       "low elemental"
+    ]
+  },
+  {
+    "id": 2570,
+    "com2us_id": 30815,
+    "family_id": 30800,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0162_1_5.png",
+    "name": "Hayato",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "ténèbres",
+      "dark"
     ]
   },
   {
@@ -1521,6 +1547,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2833,
+    "com2us_id": 33615,
+    "family_id": 33600,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0200_1_5.png",
+    "name": "Kai",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "ténèbres",
+      "dark"
+    ]
+  },
+  {
     "id": 504,
     "com2us_id": 17715,
     "family_id": 17700,
@@ -1745,6 +1786,21 @@ window.MONSTERS = [
       "dark",
       "black tea bunny",
       "espresso cookie"
+    ]
+  },
+  {
+    "id": 2912,
+    "com2us_id": 34715,
+    "family_id": 34700,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0205_1_5.png",
+    "name": "Legolas",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "ténèbres",
+      "dark"
     ]
   },
   {
@@ -2359,6 +2415,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2590,
+    "com2us_id": 31015,
+    "family_id": 31000,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0163_1_5.png",
+    "name": "Rick",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "ténèbres",
+      "dark"
+    ]
+  },
+  {
     "id": 1951,
     "com2us_id": 25915,
     "family_id": 25900,
@@ -2506,14 +2577,29 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 488,
-    "com2us_id": 10615,
+    "id": 2863,
+    "com2us_id": 33915,
+    "family_id": 33900,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0197_1_5.png",
+    "name": "Shasha",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "ténèbres",
+      "dark"
+    ]
+  },
+  {
+    "id": 2936,
+    "com2us_id": 10635,
     "family_id": 10600,
     "element": "Dark",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0002_4_1.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0211_3_5.png",
     "name": "Shumar",
     "unawakened_name": "hellhound",
-    "second_awaken": false,
+    "second_awaken": true,
     "natural_stars": 3,
     "aliases": [
       "ténèbres",
@@ -2603,6 +2689,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2843,
+    "com2us_id": 33715,
+    "family_id": 33700,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0198_1_5.png",
+    "name": "Taebaek",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "ténèbres",
+      "dark"
+    ]
+  },
+  {
     "id": 2644,
     "com2us_id": 31815,
     "family_id": 31800,
@@ -2620,6 +2721,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2600,
+    "com2us_id": 31115,
+    "family_id": 31100,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0165_1_5.png",
+    "name": "Tetsuya",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "ténèbres",
+      "dark"
+    ]
+  },
+  {
     "id": 920,
     "com2us_id": 20415,
     "family_id": 20400,
@@ -2633,6 +2749,22 @@ window.MONSTERS = [
       "ténèbres",
       "dark",
       "anubis"
+    ]
+  },
+  {
+    "id": 2876,
+    "com2us_id": 34215,
+    "family_id": 34200,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0202_1_5.png",
+    "name": "Theonia",
+    "unawakened_name": "justice",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "ténèbres",
+      "dark",
+      "justice"
     ]
   },
   {
@@ -2913,6 +3045,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2580,
+    "com2us_id": 30915,
+    "family_id": 30900,
+    "element": "Dark",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0166_1_5.png",
+    "name": "Werner",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "ténèbres",
+      "dark"
+    ]
+  },
+  {
     "id": 2711,
     "com2us_id": 32815,
     "family_id": 32800,
@@ -3124,6 +3271,22 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2873,
+    "com2us_id": 34212,
+    "family_id": 34200,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0202_1_2.png",
+    "name": "Agrenia",
+    "unawakened_name": "justice",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "feu",
+      "fire",
+      "justice"
+    ]
+  },
+  {
     "id": 2814,
     "com2us_id": 34112,
     "family_id": 34100,
@@ -3221,6 +3384,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2899,
+    "com2us_id": 34612,
+    "family_id": 34600,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0206_1_2.png",
+    "name": "Aragorn",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "feu",
+      "fire"
+    ]
+  },
+  {
     "id": 232,
     "com2us_id": 16212,
     "family_id": 16200,
@@ -3283,6 +3461,21 @@ window.MONSTERS = [
       "feu",
       "fire",
       "undine"
+    ]
+  },
+  {
+    "id": 2607,
+    "com2us_id": 31212,
+    "family_id": 31200,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0164_1_2.png",
+    "name": "Aya",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "feu",
+      "fire"
     ]
   },
   {
@@ -3754,6 +3947,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2823,
+    "com2us_id": 33512,
+    "family_id": 33500,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0201_1_2.png",
+    "name": "Daimon",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "feu",
+      "fire"
+    ]
+  },
+  {
     "id": 994,
     "com2us_id": 21112,
     "family_id": 21100,
@@ -3820,6 +4028,22 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2979,
+    "com2us_id": 35512,
+    "family_id": 35500,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0214_1_2.png",
+    "name": "Dr. Matteo",
+    "unawakened_name": "dr plasma",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "feu",
+      "fire",
+      "dr plasma"
+    ]
+  },
+  {
     "id": 230,
     "com2us_id": 18012,
     "family_id": 18000,
@@ -3849,6 +4073,21 @@ window.MONSTERS = [
       "feu",
       "fire",
       "horus"
+    ]
+  },
+  {
+    "id": 2850,
+    "com2us_id": 33812,
+    "family_id": 33800,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0199_1_2.png",
+    "name": "Duke",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "feu",
+      "fire"
     ]
   },
   {
@@ -3900,70 +4139,6 @@ window.MONSTERS = [
       "fire",
       "black tea bunny",
       "dame thé noir"
-    ]
-  },
-  {
-    "id": 2597,
-    "com2us_id": 31112,
-    "family_id": 31100,
-    "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0165_1_2.png",
-    "name": "Exorcist Association Conjurer",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 5,
-    "aliases": [
-      "feu",
-      "fire",
-      "megumi fushiguro"
-    ]
-  },
-  {
-    "id": 2587,
-    "com2us_id": 31012,
-    "family_id": 31000,
-    "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0163_1_2.png",
-    "name": "Exorcist Association Fighter",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 5,
-    "aliases": [
-      "feu",
-      "fire",
-      "yuji itadori"
-    ]
-  },
-  {
-    "id": 2607,
-    "com2us_id": 31212,
-    "family_id": 31200,
-    "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0164_1_2.png",
-    "name": "Exorcist Association Hunter",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 4,
-    "aliases": [
-      "feu",
-      "fire",
-      "nobara kugisaki"
-    ]
-  },
-  {
-    "id": 2577,
-    "com2us_id": 30912,
-    "family_id": 30900,
-    "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0166_1_2.png",
-    "name": "Exorcist Association Resolver",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 5,
-    "aliases": [
-      "feu",
-      "fire",
-      "satoru gojo"
     ]
   },
   {
@@ -4049,6 +4224,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2888,
+    "com2us_id": 34412,
+    "family_id": 34400,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0204_1_2.png",
+    "name": "Gandalf",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "feu",
+      "fire"
+    ]
+  },
+  {
     "id": 246,
     "com2us_id": 13512,
     "family_id": 13500,
@@ -4111,6 +4301,21 @@ window.MONSTERS = [
       "fire",
       "magic order guardian",
       "gardien de l'ordre mage"
+    ]
+  },
+  {
+    "id": 2919,
+    "com2us_id": 34812,
+    "family_id": 34800,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0207_1_2.png",
+    "name": "Gollum",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "feu",
+      "fire"
     ]
   },
   {
@@ -4530,6 +4735,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2830,
+    "com2us_id": 33612,
+    "family_id": 33600,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0200_1_2.png",
+    "name": "Kai",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "feu",
+      "fire"
+    ]
+  },
+  {
     "id": 1902,
     "com2us_id": 15232,
     "family_id": 15200,
@@ -4772,6 +4992,21 @@ window.MONSTERS = [
       "feu",
       "fire",
       "low elemental"
+    ]
+  },
+  {
+    "id": 2909,
+    "com2us_id": 34712,
+    "family_id": 34700,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0205_1_2.png",
+    "name": "Legolas",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "feu",
+      "fire"
     ]
   },
   {
@@ -5455,6 +5690,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2587,
+    "com2us_id": 31012,
+    "family_id": 31000,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0163_1_2.png",
+    "name": "Rick",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "feu",
+      "fire"
+    ]
+  },
+  {
     "id": 1863,
     "com2us_id": 25412,
     "family_id": 25400,
@@ -5568,6 +5818,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2860,
+    "com2us_id": 33912,
+    "family_id": 33900,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0197_1_2.png",
+    "name": "Shasha",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "feu",
+      "fire"
+    ]
+  },
+  {
     "id": 244,
     "com2us_id": 11212,
     "family_id": 11200,
@@ -5584,14 +5849,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 25,
-    "com2us_id": 10612,
+    "id": 2933,
+    "com2us_id": 10632,
     "family_id": 10600,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0002_1_1.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0211_3_2.png",
     "name": "Sieq",
     "unawakened_name": "hellhound",
-    "second_awaken": false,
+    "second_awaken": true,
     "natural_stars": 2,
     "aliases": [
       "feu",
@@ -5697,14 +5962,29 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 198,
-    "com2us_id": 11712,
+    "id": 2840,
+    "com2us_id": 33712,
+    "family_id": 33700,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0198_1_2.png",
+    "name": "Taebaek",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "feu",
+      "fire"
+    ]
+  },
+  {
+    "id": 2938,
+    "com2us_id": 11732,
     "family_id": 11700,
     "element": "Fire",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0006_1_3.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0212_3_2.png",
     "name": "Tagaros",
     "unawakened_name": "inferno",
-    "second_awaken": false,
+    "second_awaken": true,
     "natural_stars": 3,
     "aliases": [
       "feu",
@@ -5792,6 +6072,21 @@ window.MONSTERS = [
       "feu",
       "fire",
       "ifrit"
+    ]
+  },
+  {
+    "id": 2597,
+    "com2us_id": 31112,
+    "family_id": 31100,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0165_1_2.png",
+    "name": "Tetsuya",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "feu",
+      "fire"
     ]
   },
   {
@@ -6018,6 +6313,21 @@ window.MONSTERS = [
       "feu",
       "fire",
       "giant warrior"
+    ]
+  },
+  {
+    "id": 2577,
+    "com2us_id": 30912,
+    "family_id": 30900,
+    "element": "Fire",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0166_1_2.png",
+    "name": "Werner",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "feu",
+      "fire"
     ]
   },
   {
@@ -6298,6 +6608,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2901,
+    "com2us_id": 34614,
+    "family_id": 34600,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0206_1_4.png",
+    "name": "Aragorn",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "lumière",
+      "light"
+    ]
+  },
+  {
     "id": 2441,
     "com2us_id": 29814,
     "family_id": 29800,
@@ -6312,6 +6637,22 @@ window.MONSTERS = [
       "light",
       "magic order enchantress",
       "yennefer"
+    ]
+  },
+  {
+    "id": 2875,
+    "com2us_id": 34214,
+    "family_id": 34200,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0202_1_4.png",
+    "name": "Arella",
+    "unawakened_name": "justice",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "lumière",
+      "light",
+      "justice"
     ]
   },
   {
@@ -6427,6 +6768,21 @@ window.MONSTERS = [
       "light",
       "gladiatrix",
       "kassandra"
+    ]
+  },
+  {
+    "id": 2609,
+    "com2us_id": 31214,
+    "family_id": 31200,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0164_1_4.png",
+    "name": "Aya",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "lumière",
+      "light"
     ]
   },
   {
@@ -6900,6 +7256,22 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2981,
+    "com2us_id": 35514,
+    "family_id": 35500,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0214_1_4.png",
+    "name": "Dr. Albert",
+    "unawakened_name": "dr plasma",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "lumière",
+      "light",
+      "dr plasma"
+    ]
+  },
+  {
     "id": 2253,
     "com2us_id": 20834,
     "family_id": 20800,
@@ -6913,6 +7285,21 @@ window.MONSTERS = [
       "lumière",
       "light",
       "frankenstein"
+    ]
+  },
+  {
+    "id": 2852,
+    "com2us_id": 33814,
+    "family_id": 33800,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0199_1_4.png",
+    "name": "Duke",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "lumière",
+      "light"
     ]
   },
   {
@@ -7045,14 +7432,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 436,
-    "com2us_id": 11714,
+    "id": 2940,
+    "com2us_id": 11734,
     "family_id": 11700,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0006_3_3.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0212_3_4.png",
     "name": "Eludain",
     "unawakened_name": "inferno",
-    "second_awaken": false,
+    "second_awaken": true,
     "natural_stars": 3,
     "aliases": [
       "lumière",
@@ -7190,70 +7577,6 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 2599,
-    "com2us_id": 31114,
-    "family_id": 31100,
-    "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0165_1_4.png",
-    "name": "Exorcist Association Conjurer",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 4,
-    "aliases": [
-      "lumière",
-      "light",
-      "megumi fushiguro"
-    ]
-  },
-  {
-    "id": 2589,
-    "com2us_id": 31014,
-    "family_id": 31000,
-    "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0163_1_4.png",
-    "name": "Exorcist Association Fighter",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 4,
-    "aliases": [
-      "lumière",
-      "light",
-      "yuji itadori"
-    ]
-  },
-  {
-    "id": 2609,
-    "com2us_id": 31214,
-    "family_id": 31200,
-    "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0164_1_4.png",
-    "name": "Exorcist Association Hunter",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 5,
-    "aliases": [
-      "lumière",
-      "light",
-      "nobara kugisaki"
-    ]
-  },
-  {
-    "id": 2579,
-    "com2us_id": 30914,
-    "family_id": 30900,
-    "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0166_1_4.png",
-    "name": "Exorcist Association Resolver",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 5,
-    "aliases": [
-      "lumière",
-      "light",
-      "satoru gojo"
-    ]
-  },
-  {
     "id": 2104,
     "com2us_id": 27414,
     "family_id": 27400,
@@ -7385,6 +7708,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2890,
+    "com2us_id": 34414,
+    "family_id": 34400,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0204_1_4.png",
+    "name": "Gandalf",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "lumière",
+      "light"
+    ]
+  },
+  {
     "id": 1251,
     "com2us_id": 22614,
     "family_id": 22600,
@@ -7463,6 +7801,21 @@ window.MONSTERS = [
       "lumière",
       "light",
       "lizardman"
+    ]
+  },
+  {
+    "id": 2921,
+    "com2us_id": 34814,
+    "family_id": 34800,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0207_1_4.png",
+    "name": "Gollum",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "lumière",
+      "light"
     ]
   },
   {
@@ -7902,6 +8255,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2832,
+    "com2us_id": 33614,
+    "family_id": 33600,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0200_1_4.png",
+    "name": "Kai",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "lumière",
+      "light"
+    ]
+  },
+  {
     "id": 2124,
     "com2us_id": 27614,
     "family_id": 27600,
@@ -7998,6 +8366,21 @@ window.MONSTERS = [
       "light",
       "blade dancer",
       "chun-li"
+    ]
+  },
+  {
+    "id": 2911,
+    "com2us_id": 34714,
+    "family_id": 34700,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0205_1_4.png",
+    "name": "Legolas",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "lumière",
+      "light"
     ]
   },
   {
@@ -8644,6 +9027,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2589,
+    "com2us_id": 31014,
+    "family_id": 31000,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0163_1_4.png",
+    "name": "Rick",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "lumière",
+      "light"
+    ]
+  },
+  {
     "id": 1865,
     "com2us_id": 25414,
     "family_id": 25400,
@@ -8773,14 +9171,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 150,
-    "com2us_id": 10614,
+    "id": 2935,
+    "com2us_id": 10634,
     "family_id": 10600,
     "element": "Light",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0002_3_1.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0211_3_4.png",
     "name": "Shamar",
     "unawakened_name": "hellhound",
-    "second_awaken": false,
+    "second_awaken": true,
     "natural_stars": 2,
     "aliases": [
       "lumière",
@@ -8818,6 +9216,21 @@ window.MONSTERS = [
       "lumière",
       "light",
       "salamander"
+    ]
+  },
+  {
+    "id": 2862,
+    "com2us_id": 33914,
+    "family_id": 33900,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0197_1_4.png",
+    "name": "Shasha",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "lumière",
+      "light"
     ]
   },
   {
@@ -8951,6 +9364,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2842,
+    "com2us_id": 33714,
+    "family_id": 33700,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0198_1_4.png",
+    "name": "Taebaek",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "lumière",
+      "light"
+    ]
+  },
+  {
     "id": 1680,
     "com2us_id": 24514,
     "family_id": 24500,
@@ -9014,6 +9442,21 @@ window.MONSTERS = [
       "lumière",
       "light",
       "garuda"
+    ]
+  },
+  {
+    "id": 2599,
+    "com2us_id": 31114,
+    "family_id": 31100,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0165_1_4.png",
+    "name": "Tetsuya",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "lumière",
+      "light"
     ]
   },
   {
@@ -9175,6 +9618,21 @@ window.MONSTERS = [
       "lumière",
       "light",
       "horus"
+    ]
+  },
+  {
+    "id": 2579,
+    "com2us_id": 30914,
+    "family_id": 30900,
+    "element": "Light",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0166_1_4.png",
+    "name": "Werner",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "lumière",
+      "light"
     ]
   },
   {
@@ -9487,6 +9945,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2898,
+    "com2us_id": 34611,
+    "family_id": 34600,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0206_1_1.png",
+    "name": "Aragorn",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "eau",
+      "water"
+    ]
+  },
+  {
     "id": 627,
     "com2us_id": 17011,
     "family_id": 17000,
@@ -9516,6 +9989,21 @@ window.MONSTERS = [
       "eau",
       "water",
       "anubis"
+    ]
+  },
+  {
+    "id": 2606,
+    "com2us_id": 31211,
+    "family_id": 31200,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0164_1_1.png",
+    "name": "Aya",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "eau",
+      "water"
     ]
   },
   {
@@ -9876,6 +10364,37 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2978,
+    "com2us_id": 35511,
+    "family_id": 35500,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0214_1_1.png",
+    "name": "Dr. Felix",
+    "unawakened_name": "dr plasma",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "eau",
+      "water",
+      "dr plasma"
+    ]
+  },
+  {
+    "id": 2849,
+    "com2us_id": 33811,
+    "family_id": 33800,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0199_1_1.png",
+    "name": "Duke",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "eau",
+      "water"
+    ]
+  },
+  {
     "id": 2131,
     "com2us_id": 27711,
     "family_id": 27700,
@@ -9990,70 +10509,6 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 2596,
-    "com2us_id": 31111,
-    "family_id": 31100,
-    "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0165_1_1.png",
-    "name": "Exorcist Association Conjurer",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 4,
-    "aliases": [
-      "eau",
-      "water",
-      "megumi fushiguro"
-    ]
-  },
-  {
-    "id": 2586,
-    "com2us_id": 31011,
-    "family_id": 31000,
-    "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0163_1_1.png",
-    "name": "Exorcist Association Fighter",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 5,
-    "aliases": [
-      "eau",
-      "water",
-      "yuji itadori"
-    ]
-  },
-  {
-    "id": 2606,
-    "com2us_id": 31211,
-    "family_id": 31200,
-    "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0164_1_1.png",
-    "name": "Exorcist Association Hunter",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 5,
-    "aliases": [
-      "eau",
-      "water",
-      "nobara kugisaki"
-    ]
-  },
-  {
-    "id": 2576,
-    "com2us_id": 30911,
-    "family_id": 30900,
-    "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0166_1_1.png",
-    "name": "Exorcist Association Resolver",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 5,
-    "aliases": [
-      "eau",
-      "water",
-      "satoru gojo"
-    ]
-  },
-  {
     "id": 2101,
     "com2us_id": 27411,
     "family_id": 27400,
@@ -10084,6 +10539,21 @@ window.MONSTERS = [
       "eau",
       "water",
       "death knight"
+    ]
+  },
+  {
+    "id": 2881,
+    "com2us_id": 34311,
+    "family_id": 34300,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0203_1_1.png",
+    "name": "Frodo",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "eau",
+      "water"
     ]
   },
   {
@@ -10133,6 +10603,21 @@ window.MONSTERS = [
       "water",
       "choco knight",
       "madeleine cookie"
+    ]
+  },
+  {
+    "id": 2887,
+    "com2us_id": 34411,
+    "family_id": 34400,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0204_1_1.png",
+    "name": "Gandalf",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "eau",
+      "water"
     ]
   },
   {
@@ -10198,6 +10683,21 @@ window.MONSTERS = [
       "eau",
       "water",
       "taoist"
+    ]
+  },
+  {
+    "id": 2918,
+    "com2us_id": 34811,
+    "family_id": 34800,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0207_1_1.png",
+    "name": "Gollum",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "eau",
+      "water"
     ]
   },
   {
@@ -10522,6 +11022,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2829,
+    "com2us_id": 33611,
+    "family_id": 33600,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0200_1_1.png",
+    "name": "Kai",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "eau",
+      "water"
+    ]
+  },
+  {
     "id": 68,
     "com2us_id": 11111,
     "family_id": 11100,
@@ -10715,6 +11230,21 @@ window.MONSTERS = [
       "water",
       "blade dancer",
       "chun-li"
+    ]
+  },
+  {
+    "id": 2908,
+    "com2us_id": 34711,
+    "family_id": 34700,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0205_1_1.png",
+    "name": "Legolas",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "eau",
+      "water"
     ]
   },
   {
@@ -11158,6 +11688,22 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2872,
+    "com2us_id": 34211,
+    "family_id": 34200,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0202_1_1.png",
+    "name": "Neriope",
+    "unawakened_name": "justice",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "eau",
+      "water",
+      "justice"
+    ]
+  },
+  {
     "id": 2650,
     "com2us_id": 31911,
     "family_id": 31900,
@@ -11368,14 +11914,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 326,
-    "com2us_id": 11711,
+    "id": 2937,
+    "com2us_id": 11731,
     "family_id": 11700,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0006_0_3.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0212_3_1.png",
     "name": "Purian",
     "unawakened_name": "inferno",
-    "second_awaken": false,
+    "second_awaken": true,
     "natural_stars": 3,
     "aliases": [
       "eau",
@@ -11493,6 +12039,21 @@ window.MONSTERS = [
       "eau",
       "water",
       "centaur knight"
+    ]
+  },
+  {
+    "id": 2586,
+    "com2us_id": 31011,
+    "family_id": 31000,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0163_1_1.png",
+    "name": "Rick",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "eau",
+      "water"
     ]
   },
   {
@@ -11688,6 +12249,21 @@ window.MONSTERS = [
       "eau",
       "water",
       "magical archer"
+    ]
+  },
+  {
+    "id": 2859,
+    "com2us_id": 33911,
+    "family_id": 33900,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0197_1_1.png",
+    "name": "Shasha",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "eau",
+      "water"
     ]
   },
   {
@@ -11915,6 +12491,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2839,
+    "com2us_id": 33711,
+    "family_id": 33700,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0198_1_1.png",
+    "name": "Taebaek",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "eau",
+      "water"
+    ]
+  },
+  {
     "id": 298,
     "com2us_id": 19011,
     "family_id": 19000,
@@ -11996,14 +12587,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 60,
-    "com2us_id": 10611,
+    "id": 2932,
+    "com2us_id": 10631,
     "family_id": 10600,
     "element": "Water",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0002_0_1.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0211_3_1.png",
     "name": "Tarq",
     "unawakened_name": "hellhound",
-    "second_awaken": false,
+    "second_awaken": true,
     "natural_stars": 2,
     "aliases": [
       "eau",
@@ -12025,6 +12616,21 @@ window.MONSTERS = [
       "eau",
       "water",
       "mermaid"
+    ]
+  },
+  {
+    "id": 2596,
+    "com2us_id": 31111,
+    "family_id": 31100,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0165_1_1.png",
+    "name": "Tetsuya",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "eau",
+      "water"
     ]
   },
   {
@@ -12202,6 +12808,21 @@ window.MONSTERS = [
       "eau",
       "water",
       "bounty hunter"
+    ]
+  },
+  {
+    "id": 2576,
+    "com2us_id": 30911,
+    "family_id": 30900,
+    "element": "Water",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0166_1_1.png",
+    "name": "Werner",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "eau",
+      "water"
     ]
   },
   {
@@ -12400,14 +13021,14 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 378,
-    "com2us_id": 11713,
+    "id": 2939,
+    "com2us_id": 11733,
     "family_id": 11700,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0006_2_3.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0212_3_3.png",
     "name": "Anduril",
     "unawakened_name": "inferno",
-    "second_awaken": false,
+    "second_awaken": true,
     "natural_stars": 3,
     "aliases": [
       "vent",
@@ -12446,6 +13067,21 @@ window.MONSTERS = [
       "vent",
       "wind",
       "brownie magician"
+    ]
+  },
+  {
+    "id": 2900,
+    "com2us_id": 34613,
+    "family_id": 34600,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0206_1_3.png",
+    "name": "Aragorn",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "vent",
+      "wind"
     ]
   },
   {
@@ -12511,6 +13147,21 @@ window.MONSTERS = [
       "wind",
       "mercenary queen",
       "eivor"
+    ]
+  },
+  {
+    "id": 2608,
+    "com2us_id": 31213,
+    "family_id": 31200,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0164_1_3.png",
+    "name": "Aya",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "vent",
+      "wind"
     ]
   },
   {
@@ -12969,6 +13620,53 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2980,
+    "com2us_id": 35513,
+    "family_id": 35500,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0214_1_3.png",
+    "name": "Dr. Christoph",
+    "unawakened_name": "dr plasma",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "vent",
+      "wind",
+      "dr plasma"
+    ]
+  },
+  {
+    "id": 2874,
+    "com2us_id": 34213,
+    "family_id": 34200,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0202_1_3.png",
+    "name": "Driana",
+    "unawakened_name": "justice",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "vent",
+      "wind",
+      "justice"
+    ]
+  },
+  {
+    "id": 2851,
+    "com2us_id": 33813,
+    "family_id": 33800,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0199_1_3.png",
+    "name": "Duke",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "vent",
+      "wind"
+    ]
+  },
+  {
     "id": 390,
     "com2us_id": 17713,
     "family_id": 17700,
@@ -13148,70 +13846,6 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 2598,
-    "com2us_id": 31113,
-    "family_id": 31100,
-    "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0165_1_3.png",
-    "name": "Exorcist Association Conjurer",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 5,
-    "aliases": [
-      "vent",
-      "wind",
-      "megumi fushiguro"
-    ]
-  },
-  {
-    "id": 2588,
-    "com2us_id": 31013,
-    "family_id": 31000,
-    "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0163_1_3.png",
-    "name": "Exorcist Association Fighter",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 4,
-    "aliases": [
-      "vent",
-      "wind",
-      "yuji itadori"
-    ]
-  },
-  {
-    "id": 2608,
-    "com2us_id": 31213,
-    "family_id": 31200,
-    "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0164_1_3.png",
-    "name": "Exorcist Association Hunter",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 5,
-    "aliases": [
-      "vent",
-      "wind",
-      "nobara kugisaki"
-    ]
-  },
-  {
-    "id": 2578,
-    "com2us_id": 30913,
-    "family_id": 30900,
-    "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0166_1_3.png",
-    "name": "Exorcist Association Resolver",
-    "unawakened_name": "",
-    "second_awaken": false,
-    "natural_stars": 5,
-    "aliases": [
-      "vent",
-      "wind",
-      "satoru gojo"
-    ]
-  },
-  {
     "id": 2103,
     "com2us_id": 27413,
     "family_id": 27400,
@@ -13277,19 +13911,34 @@ window.MONSTERS = [
     ]
   },
   {
-    "id": 100,
-    "com2us_id": 10613,
+    "id": 2934,
+    "com2us_id": 10633,
     "family_id": 10600,
     "element": "Wind",
-    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0002_2_1.png",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0211_3_3.png",
     "name": "Gamir",
     "unawakened_name": "hellhound",
-    "second_awaken": false,
+    "second_awaken": true,
     "natural_stars": 2,
     "aliases": [
       "vent",
       "wind",
       "hellhound"
+    ]
+  },
+  {
+    "id": 2889,
+    "com2us_id": 34413,
+    "family_id": 34400,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0204_1_3.png",
+    "name": "Gandalf",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "vent",
+      "wind"
     ]
   },
   {
@@ -13356,6 +14005,21 @@ window.MONSTERS = [
       "vent",
       "wind",
       "onmyouji"
+    ]
+  },
+  {
+    "id": 2920,
+    "com2us_id": 34813,
+    "family_id": 34800,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0207_1_3.png",
+    "name": "Gollum",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "vent",
+      "wind"
     ]
   },
   {
@@ -13717,6 +14381,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2831,
+    "com2us_id": 33613,
+    "family_id": 33600,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0200_1_3.png",
+    "name": "Kai",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "vent",
+      "wind"
+    ]
+  },
+  {
     "id": 544,
     "com2us_id": 16913,
     "family_id": 16900,
@@ -13812,6 +14491,21 @@ window.MONSTERS = [
       "vent",
       "wind",
       "devil maiden"
+    ]
+  },
+  {
+    "id": 2910,
+    "com2us_id": 34713,
+    "family_id": 34700,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0205_1_3.png",
+    "name": "Legolas",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "vent",
+      "wind"
     ]
   },
   {
@@ -14588,6 +15282,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2588,
+    "com2us_id": 31013,
+    "family_id": 31000,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0163_1_3.png",
+    "name": "Rick",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "vent",
+      "wind"
+    ]
+  },
+  {
     "id": 1878,
     "com2us_id": 25613,
     "family_id": 25600,
@@ -14863,6 +15572,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2861,
+    "com2us_id": 33913,
+    "family_id": 33900,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0197_1_3.png",
+    "name": "Shasha",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 4,
+    "aliases": [
+      "vent",
+      "wind"
+    ]
+  },
+  {
     "id": 549,
     "com2us_id": 11813,
     "family_id": 11800,
@@ -14975,6 +15699,21 @@ window.MONSTERS = [
     ]
   },
   {
+    "id": 2841,
+    "com2us_id": 33713,
+    "family_id": 33700,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0198_1_3.png",
+    "name": "Taebaek",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "vent",
+      "wind"
+    ]
+  },
+  {
     "id": 91,
     "com2us_id": 10813,
     "family_id": 10800,
@@ -15069,6 +15808,21 @@ window.MONSTERS = [
       "vent",
       "wind",
       "phoenix"
+    ]
+  },
+  {
+    "id": 2598,
+    "com2us_id": 31113,
+    "family_id": 31100,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0165_1_3.png",
+    "name": "Tetsuya",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "vent",
+      "wind"
     ]
   },
   {
@@ -15232,6 +15986,21 @@ window.MONSTERS = [
       "vent",
       "wind",
       "viking"
+    ]
+  },
+  {
+    "id": 2578,
+    "com2us_id": 30913,
+    "family_id": 30900,
+    "element": "Wind",
+    "icon": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0166_1_3.png",
+    "name": "Werner",
+    "unawakened_name": "",
+    "second_awaken": false,
+    "natural_stars": 5,
+    "aliases": [
+      "vent",
+      "wind"
     ]
   },
   {
